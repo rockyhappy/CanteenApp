@@ -15,15 +15,15 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_login, container, false)
-        val button = view.findViewById<Button>(R.id.btn)
-
-        button.setOnClickListener {
-            // Replace FragmentA with FragmentB
-            val fragmentTransaction = parentFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.flFragment, ForgotPassward())
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
-        }
+//        val button = view.findViewById<Button>(R.id.btn)
+//
+//        button.setOnClickListener {
+//            // Replace FragmentA with FragmentB
+//            val fragmentTransaction = parentFragmentManager.beginTransaction()
+//            fragmentTransaction.replace(R.id.flFragment, ForgotPassward())
+//            fragmentTransaction.addToBackStack(null)
+//            fragmentTransaction.commit()
+//        }
 
         return view
     }

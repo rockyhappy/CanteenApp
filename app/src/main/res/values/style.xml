@@ -5,6 +5,9 @@
         <item name="android:letterSpacing">0.04</item>
         <item name="android:textColor">#FF6635</item>
     </style>
+    <style name="NoUnderline">
+        <item name="android:background">@null</item>
+    </style>
 
 
 </resources>
