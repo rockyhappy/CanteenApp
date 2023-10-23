@@ -18,9 +18,11 @@ class ForgotPassward : Fragment(R.layout.fragment_forgot_passward) {
         val view = inflater.inflate(R.layout.fragment_forgot_passward, container, false)
 
         val svgImageView = view.findViewById<SVGImageView>(R.id.svgImageView)
-        val svg = SVG.getFromResource(resources, R.raw.backbutton)
+        var svg = SVG.getFromResource(resources, R.raw.backbutton)
         svgImageView.setSVG(svg)
-
+        val svgImageView2 = view.findViewById<SVGImageView>(R.id.svgImageView2)
+        var svg2 = SVG.getFromResource(resources, R.raw.forgot_password_image)
+        svgImageView2.setSVG(svg2)
 
 
         return view
