@@ -3,4 +3,15 @@
     <string name="brunchbliss">
         BrunchBliss
     </string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome_bac">
+        Welcome back!
+    </string>
+    <string name="login_to_yo">
+        Login to your account
+    </string>
+    <string name="forgot_pass">
+        Forgot Password?
+    </string>
 </resources>
