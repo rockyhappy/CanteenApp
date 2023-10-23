@@ -5,8 +5,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.caverock.androidsvg.SVG
+import com.caverock.androidsvg.SVGImageView
 import com.example.myapplication.R
 
 class ForgotPassward : Fragment(R.layout.fragment_forgot_passward) {
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_forgot_passward, container, false)
+
+        val svgImageView = view.findViewById<SVGImageView>(R.id.svgImageView)
+        val svg = SVG.getFromResource(resources, R.raw.backbutton)
+        svgImageView.setSVG(svg)
+
+
+
+        return view
+    }
 }

@@ -4,16 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ForgotPassward">
+    tools:context=".fragments.ForgotPassward"
+    android:background="@color/white">
 
+
+    <com.caverock.androidsvg.SVGImageView
+        android:id="@+id/svgImageView"
+        android:layout_width="30dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginStart="45dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:elevation="5dp"
+        />
 
     <TextView
+        android:id="@+id/forgot_pass"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fragment forgot password"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:gravity="top"
+        android:text="Forgot Password"
+        android:textColor="@color/semiblack"
+        android:textSize="33dp"
+        android:textStyle="bold"
+        android:fontFamily="@font/roboto"
+        android:textAppearance="@style/forgot_pass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/don_t_worry"
+        android:layout_width="293dp"
+        android:layout_height="57dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="112dp"
+        android:fontFamily="@font/roboto"
+        android:gravity="center_horizontal|top"
+        android:text="@string/don_t_worry"
+        android:textAppearance="@style/don_t_worry"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.caverock.androidsvg.SVGImageView
+        android:id="@+id/svgImageView2"
+        android:layout_width="match_parent"
+        android:layout_height="302dp"
+        android:layout_marginTop="187dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
