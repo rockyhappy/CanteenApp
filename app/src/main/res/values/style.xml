@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="brunchbliss">
+        <item name="android:textSize">36sp</item>
+        <item name="android:letterSpacing">0.04</item>
+        <item name="android:textColor">#FF6635</item>
+    </style>
+</resources>
