@@ -1,5 +1,6 @@
 package com.example.myapplication.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import com.example.myapplication.R
+import com.example.myapplication.Registration
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
@@ -24,7 +26,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
-
+        val button= view.findViewById<Button>(R.id.button)
+        button.setOnClickListener {
+            startActivity(Intent(requireActivity(),Registration::class.java))
+        }
         return view
     }
 }
