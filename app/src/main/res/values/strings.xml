@@ -11,4 +11,7 @@
     <string name="login_to_yo">
         Login to your account
     </string>
+    <string name="forgot_pass">
+        Forgot Password?
+    </string>
 </resources>
