@@ -3,6 +3,7 @@ package com.example.myapplication
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.myapplication.databinding.ActivityLoginBinding
+import com.example.myapplication.fragments.ChoiceFragment
 import com.example.myapplication.fragments.ForgotPassward
 import com.example.myapplication.fragments.LoginFragment
 
@@ -18,7 +19,7 @@ class Login : AppCompatActivity() {
         val forgotPasswordFragment=ForgotPassward()
 
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.flFragment,loginFragment)
+            replace(R.id.flFragment,ChoiceFragment())
             commit()
         }
 

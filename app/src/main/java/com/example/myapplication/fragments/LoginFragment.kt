@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import com.caverock.androidsvg.SVG
+import com.caverock.androidsvg.SVGImageView
 import com.example.myapplication.R
 import com.example.myapplication.Registration
 
@@ -30,6 +32,19 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         button.setOnClickListener {
             startActivity(Intent(requireActivity(),Registration::class.java))
         }
+
+
+        val svgImageView = view.findViewById<SVGImageView>(R.id.svgImageView)
+        var svg = SVG.getFromResource(resources, R.raw.backbutton)
+        svgImageView.setSVG(svg)
+
+        svgImageView.setOnClickListener{
+            val fragmentTransaction = parentFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.flFragment, ChoiceFragment())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
+
         return view
     }
 }
