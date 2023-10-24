@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="reg">Register</string>
+
+    <string name="create">Create your new account</string>
+
+    <string name="name">Full Name</string>
+
+    <string name="emai">User@gmail.com</string>
+
+    <string name="button">Sign Up</string>
+
+    <string name="cont">Continue With</string>
+
+    <string name="option">Already have account ? <font color="#FA902D"><u>Sign In</u></font></string>
+
+    <string name="option2">By signing up, you agree to our<font color="#FA902D"><u>Terms of Service</u></font> and <font color="#FA902D"><u>Privacy Policy</u></font></string>
+
+    <string name="button2">Go to Home</string>
+
+    <string name="app_name">My Application</string>
+
+    <string name="brunchbliss">BrunchBliss</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="welcome_bac">Welcome back!</string>
+
+    <string name="login_to_yo">Login to your account</string>
+
+    <string name="forgot_pass">Forgot Password?</string>
+
+    <string name="don_t_worry">Don\'t worry! It happens, please enter your Email address to receive a verification code</string>
+
+    <string name="try_another"><u>Try another way</u></string>
+
+    <string name="please_ente">Please enter the 4 digit code sent to kavitayadav2701@gmail.com</string>
+
+    <string name="resend_code">Resend Code in 00:31sec</string>
+
+    <string name="your_new_pa">Your new password must be different from previously used password</string>
+
+    <string name="your_passwo">Your password has been successfully changed. Please use your new password to login!</string>
+
+    <string name="login_or_si">Login or sign up to explore delicious foods</string>
+
+</resources>
