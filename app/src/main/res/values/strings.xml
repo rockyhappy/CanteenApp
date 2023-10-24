@@ -1,4 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="reg">Register</string>
+
+    <string name="create">Create your new account</string>
+
+    <string name="name">Full Name</string>
+
+    <string name="emai">User@gmail.com</string>
+
+    <string name="button">Sign Up</string>
+
+    <string name="cont">Continue With</string>
+
+    <string name="option">Already have account ? <font color="#FA902D"><u>Sign In</u></font></string>
+
+    <string name="option2">By signing up, you agree to our<font color="#FA902D"><u>Terms of Service</u></font> and <font color="#FA902D"><u>Privacy Policy</u></font></string>
+
+    <string name="button2">Go to Home</string>
+
     <string name="app_name">My Application</string>
 
     <string name="brunchbliss">BrunchBliss</string>
@@ -22,4 +41,7 @@
     <string name="your_new_pa">Your new password must be different from previously used password</string>
 
     <string name="your_passwo">Your password has been successfully changed. Please use your new password to login!</string>
+
+    <string name="login_or_si">Login or sign up to explore delicious foods</string>
+
 </resources>
