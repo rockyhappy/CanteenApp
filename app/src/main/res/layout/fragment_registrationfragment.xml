@@ -5,139 +5,179 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Registration">
+    tools:context=".fragments.Registrationfragment">
 
     <TextView
-        android:id="@+id/reg"
-        android:layout_width="250dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="121dp"
+        android:id="@+id/forgot_pass"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:gravity="top"
+        android:text="Register"
+        android:textColor="@color/semiblack"
+        android:textSize="33dp"
+        android:textStyle="bold"
         android:fontFamily="@font/roboto"
-        android:text="@string/reg"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textFontWeight="700"
-        android:textSize="32sp"
+        android:textAppearance="@style/forgot_pass"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.602"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/create"
-        android:layout_width="205dp"
+        android:layout_width="wrap_content"
         android:layout_height="34dp"
-        android:layout_marginTop="168dp"
         android:fontFamily="@font/roboto"
         android:text="@string/create"
-        android:textColor="@color/grey"
+        android:textColor="#787878"
         android:textFontWeight="500"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.621"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="19sp"
+        app:layout_constraintEnd_toEndOf="@+id/forgot_pass"
+        app:layout_constraintStart_toStartOf="@+id/forgot_pass"
+        app:layout_constraintTop_toBottomOf="@+id/forgot_pass" />
 
-    <EditText
-        android:id="@+id/name"
-        android:layout_width="300dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginTop="215dp"
-        android:ems="10"
-        android:inputType="text"
-        android:drawableStart="@drawable/person"
-        android:text="@string/name"
-        android:background="@drawable/rounded_border"
-        android:textColor="@color/semiblack"
+        android:layout_marginTop="200dp"
+        android:layout_marginHorizontal="30dp"
+        android:background="@drawable/rectangle1"
+        app:hintEnabled="false"
         android:fontFamily="@font/roboto"
-        android:textFontWeight="500"
-        android:paddingStart="10dp"
-        android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.592"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="RtlSymmetry" />
+        app:startIconDrawable="@drawable/baseline_person_24"
+        app:startIconTint="@color/grey"
+        >
 
-    <EditText
-        android:id="@+id/emai"
-        android:layout_width="300dp"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email"
+            style="@style/NoUnderline"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="User Name"
+            android:imeOptions="actionNext"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            android:fontFamily="@font/roboto"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout2"
+        android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginTop="277dp"
-        android:ems="10"
-        android:inputType="text"
-        android:drawableStart="@drawable/email"
+        android:layout_marginTop="270dp"
+        android:layout_marginHorizontal="30dp"
+        android:background="@drawable/rectangle1"
+        app:hintEnabled="false"
         android:fontFamily="@font/roboto"
-        android:textFontWeight="500"
-        android:textSize="13sp"
-        android:paddingStart="10dp"
-        android:text="@string/emai"
-        android:background="@drawable/rounded_border"
-        android:textColor="@color/semiblack"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.594"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="RtlSymmetry" />
+        app:startIconDrawable="@drawable/baseline_mail_24"
+        app:startIconTint="@color/grey"
+        >
 
-    <EditText
-        android:id="@+id/passone"
-        android:layout_width="300dp"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email2"
+            style="@style/NoUnderline"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="User@gmail.com"
+            android:imeOptions="actionNext"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            android:fontFamily="@font/roboto"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout3"
+        android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginTop="340dp"
-        android:ems="10"
-        android:inputType="text"
-        android:drawableStart="@drawable/lock"
-        android:drawableEnd="@drawable/eyes"
-        android:fontFamily="@font/roboto"
-        android:textFontWeight="500"
-        android:textSize="13sp"
-        android:text="@strings/passone"
-        android:background="@drawable/rounded_border"
-        android:textColor="@color/semiblack"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
+        android:layout_marginHorizontal="30dp"
+        android:background="@drawable/rectangle1"
+        app:endIconMode="password_toggle"
+        app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.594"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="RtlSymmetry" />
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@drawable/ic_password_toggle"
+        app:startIconDrawable="@drawable/baseline_lock_24"
+        app:startIconTint="@color/grey"
+        app:endIconDrawable="@drawable/custom_password_toggle"
+        android:fontFamily="@font/roboto"
+        >
 
-    <EditText
-        android:id="@+id/passonec"
-        android:layout_width="300dp"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passkey"
+            style="@style/NoUnderline"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="New Password"
+            android:inputType="textPassword"
+            android:textColor="@color/grey"
+            android:textColorHint="@color/grey"
+            android:fontFamily="@font/roboto"/>
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout4"
+        android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginTop="400dp"
-        android:ems="10"
-        android:inputType="text"
-        android:drawableStart="@drawable/lock"
-        android:drawableEnd="@drawable/eyes"
-        android:fontFamily="@font/roboto"
-        android:textFontWeight="500"
-        android:textSize="13sp"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:text="@string/passonec"
-        android:background="@drawable/rounded_border"
-        android:textColor="@color/semiblack"
+        android:layout_marginTop="410dp"
+        android:layout_marginHorizontal="30dp"
+        android:background="@drawable/rectangle1"
+        app:endIconMode="password_toggle"
+        app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.594"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="RtlSymmetry" />
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@drawable/ic_password_toggle"
+        app:startIconDrawable="@drawable/baseline_lock_24"
+        app:startIconTint="@color/grey"
+        app:endIconDrawable="@drawable/custom_password_toggle"
+        android:fontFamily="@font/roboto"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passkey2"
+            style="@style/NoUnderline"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:textColor="@color/grey"
+            android:textColorHint="@color/grey"
+            android:fontFamily="@font/roboto"/>
+
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/button"
-        android:layout_width="300dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="474dp"
-        android:backgroundTint="#FA902D"
-        android:text="@string/button"
-        android:fontFamily="@font/roboto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="500dp"
+        android:text="Sign Up"
+        android:textColor="@color/black"
         android:textAllCaps="false"
-        android:background="@drawable/rounded_border"
+        android:fontFamily="@font/roboto"
+        android:background="@drawable/round_corner"
+        android:elevation="5dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.594"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -145,16 +185,15 @@
 
     <TextView
         android:id="@+id/option"
-        android:layout_width="175dp"
+        android:layout_width="wrap_content"
         android:layout_height="24dp"
-        android:layout_marginTop="644dp"
+        android:layout_marginTop="690dp"
         android:fontFamily="@font/roboto"
         android:text="@string/option"
         android:textColor="@color/grey"
         android:textFontWeight="500"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.577"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -162,37 +201,35 @@
         android:id="@+id/option2"
         android:layout_width="260dp"
         android:layout_height="38dp"
-        android:layout_marginTop="687dp"
+        android:layout_marginTop="740dp"
         android:textColor="@color/grey"
         android:fontFamily="@font/roboto"
         android:textFontWeight="500"
-        android:textSize="12sp"
+        android:textSize="14sp"
         android:gravity="center"
         android:text="@string/option2"
-
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.546"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/back"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
-        android:layout_marginTop="38dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.099"
+    <com.caverock.androidsvg.SVGImageView
+        android:id="@+id/svgImageView"
+        android:layout_width="37dp"
+        android:layout_height="32dp"
+        android:padding="5dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginStart="45dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back" />
-
+        android:elevation="5dp"
+        android:background="@drawable/ellipse"
+        />
     <ImageView
         android:id="@+id/media"
         android:layout_width="116dp"
         android:layout_height="32dp"
-        android:layout_marginTop="583dp"
+        android:layout_marginTop="640dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.549"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/media" />
@@ -201,9 +238,8 @@
         android:id="@+id/imageView"
         android:layout_width="321dp"
         android:layout_height="21dp"
-        android:layout_marginTop="548dp"
+        android:layout_marginTop="590dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/optiona" />
