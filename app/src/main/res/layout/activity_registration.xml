@@ -27,7 +27,7 @@
         android:id="@+id/create"
         android:layout_width="205dp"
         android:layout_height="34dp"
-        android:layout_marginTop="164dp"
+        android:layout_marginTop="168dp"
         android:fontFamily="@font/roboto_thin"
         android:text="@string/create"
         android:textColor="@color/grey"
@@ -35,7 +35,7 @@
 
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.601"
+        app:layout_constraintHorizontal_bias="0.689"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -181,6 +181,28 @@
         app:layout_constraintHorizontal_bias="0.546"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="38dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.099"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back" />
+
+    <ImageView
+        android:id="@+id/media"
+        android:layout_width="116dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="583dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.549"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/media" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
