@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Registration">
+
+    <TextView
+        android:id="@+id/reg"
+        android:layout_width="250dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="121dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/reg"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textFontWeight="700"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.602"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/create"
+        android:layout_width="205dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="168dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/create"
+        android:textColor="@color/grey"
+        android:textFontWeight="500"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.689"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="215dp"
+        android:ems="10"
+        android:inputType="text"
+        android:drawableStart="@drawable/person"
+        android:text="@string/name"
+        android:background="@drawable/rounded_border"
+        android:textColor="@color/light_grey"
+        android:fontFamily="@font/roboto"
+        android:textFontWeight="500"
+        android:paddingStart="10dp"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.592"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry" />
+
+    <EditText
+        android:id="@+id/emai"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="277dp"
+        android:ems="10"
+        android:inputType="text"
+        android:drawableStart="@drawable/email"
+        android:fontFamily="@font/roboto"
+        android:textFontWeight="500"
+        android:textSize="13sp"
+        android:paddingStart="10dp"
+        android:text="@string/emai"
+        android:background="@drawable/rounded_border"
+        android:textColor="@color/light_grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.594"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry" />
+
+    <EditText
+        android:id="@+id/passone"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="340dp"
+        android:ems="10"
+        android:inputType="text"
+        android:drawableStart="@drawable/lock"
+        android:drawableEnd="@drawable/eyes"
+        android:fontFamily="@font/roboto"
+        android:textFontWeight="500"
+        android:textSize="13sp"
+        android:text="@string/passone"
+        android:background="@drawable/rounded_border"
+        android:textColor="@color/light_grey"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.594"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry" />
+
+    <EditText
+        android:id="@+id/passonec"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="400dp"
+        android:ems="10"
+        android:inputType="text"
+        android:drawableStart="@drawable/lock"
+        android:drawableEnd="@drawable/eyes"
+        android:fontFamily="@font/roboto"
+        android:textFontWeight="500"
+        android:textSize="13sp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="@string/passonec"
+        android:background="@drawable/rounded_border"
+        android:textColor="@color/light_grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.594"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="474dp"
+        android:backgroundTint="#FA902D"
+        android:text="@string/button"
+        android:fontFamily="@font/roboto"
+        android:textAllCaps="false"
+        android:background="@drawable/rounded_border"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.594"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/cont"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="552dp"
+        android:text="@string/cont"
+
+        android:fontFamily="@font/roboto"
+        android:textFontWeight="500"
+        android:textColor="@color/grey"
+        android:textSize="16sp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.594"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/option"
+        android:layout_width="175dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="644dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/option"
+        android:textColor="@color/grey"
+        android:textFontWeight="500"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.577"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/option2"
+        android:layout_width="260dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="687dp"
+        android:textColor="@color/grey"
+        android:fontFamily="@font/roboto"
+        android:textFontWeight="500"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:text="@string/option2"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.546"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="38dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.099"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back" />
+
+    <ImageView
+        android:id="@+id/media"
+        android:layout_width="116dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="583dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.549"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/media" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

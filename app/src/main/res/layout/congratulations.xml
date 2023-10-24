@@ -60,6 +60,7 @@
         android:text="@string/button2"
         android:background="@drawable/rounded_border"
         android:textAllCaps="false"
+        android:fontFamily="@font/roboto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
