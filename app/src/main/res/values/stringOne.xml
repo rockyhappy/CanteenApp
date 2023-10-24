@@ -4,5 +4,9 @@
     <string name="create">Create your new account</string>
     <string name="name">Full Name</string>
     <string name="emai">User@gmail.com</string>
+    <string name="button">Sign Up</string>
+    <string name="cont">Continue With</string>
+    <string name="option">Already have account ? <font color="#FA902D"><u>Sign In</u></font></string>
+    <string name="option2">By signing up, you agree to our<font color="#FA902D"><u>Terms of Service</u></font> and <font color="#FA902D"><u>Privacy Policy</u></font></string>
 
 </resources>

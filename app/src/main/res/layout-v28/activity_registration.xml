@@ -115,5 +115,65 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="RtlSymmetry" />
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="474dp"
+        android:backgroundTint="#FA902D"
+        android:text="@string/button"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.594"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/cont"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="552dp"
+        android:text="@string/cont"
+        android:fontFamily="@font/roboto_thin"
+        android:textFontWeight="500"
+        android:textColor="@color/grey"
+        android:textSize="16sp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.594"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/option"
+        android:layout_width="175dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="644dp"
+        android:fontFamily="@font/roboto_thin"
+        android:text="@string/option"
+        android:textColor="@color/grey"
+        android:textFontWeight="500"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.577"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/option2"
+        android:layout_width="260dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="687dp"
+        android:textColor="@color/grey"
+        android:fontFamily="@font/roboto_thin"
+        android:textFontWeight="500"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:text="@string/option2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.546"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
