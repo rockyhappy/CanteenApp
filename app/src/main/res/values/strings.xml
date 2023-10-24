@@ -14,4 +14,10 @@
     <string name="forgot_pass">
         Forgot Password?
     </string>
+    <string name="don_t_worry">
+Don\'t worry! It happens, please enter your Email address to receive a verification code
+</string>
+    <string name="try_another">
+        <u>Try another way</u>
+</string>
 </resources>
