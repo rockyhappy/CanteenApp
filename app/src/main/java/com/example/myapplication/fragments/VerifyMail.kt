@@ -43,7 +43,7 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
         val button= view.findViewById<Button>(R.id.button)
         button.setOnClickListener {
             val fragmentTransaction = parentFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.flFragment, VerifyMail())
+            fragmentTransaction.replace(R.id.flFragment, NewPassword())
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }

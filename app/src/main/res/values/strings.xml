@@ -20,4 +20,6 @@
     <string name="resend_code">Resend Code in 00:31sec</string>
 
     <string name="your_new_pa">Your new password must be different from previously used password</string>
+
+    <string name="your_passwo">Your password has been successfully changed. Please use your new password to login!</string>
 </resources>

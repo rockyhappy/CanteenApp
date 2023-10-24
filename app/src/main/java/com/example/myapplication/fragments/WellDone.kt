@@ -5,56 +5,39 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.caverock.androidsvg.SVG
+import com.caverock.androidsvg.SVGImageView
 import com.example.myapplication.R
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [WellDone.newInstance] factory method to
- * create an instance of this fragment.
- */
 class WellDone : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_well_done, container, false)
+        val view= inflater.inflate(R.layout.fragment_well_done, container, false)
+
+
+        val svgImageView = view.findViewById<SVGImageView>(R.id.svgImageView)
+        var svg = SVG.getFromResource(resources, R.raw.backbutton)
+        svgImageView.setSVG(svg)
+        val svgImageView2 = view.findViewById<SVGImageView>(R.id.svgImageView2)
+        var svg2 = SVG.getFromResource(resources, R.raw.oval)
+        svgImageView2.setSVG(svg2)
+
+        val svgImageView3 = view.findViewById<SVGImageView>(R.id.svgImageView3)
+        var svg3 = SVG.getFromResource(resources, R.raw.welldone2)
+        svgImageView3.setSVG(svg3)
+
+
+        val svgImageView4 = view.findViewById<SVGImageView>(R.id.svgImageView4)
+        var svg4 = SVG.getFromResource(resources, R.raw.welldone1)
+        svgImageView4.setSVG(svg4)
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment WellDone.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            WellDone().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+
 }
