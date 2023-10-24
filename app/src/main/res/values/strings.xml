@@ -3,4 +3,7 @@
     <string name="brunchbliss">
         BrunchBliss
     </string>
+    <string name="email">User@gmail.com</string>
+    <string name="passone">Password</string>
+    <string name="passonec">Confirm Password</string>
 </resources>
