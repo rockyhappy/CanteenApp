@@ -20,7 +20,7 @@
 
     <TextView
         android:id="@+id/welcome_bac"
-        android:layout_width="219dp"
+        android:layout_width="wrap_content"
         android:layout_height="38dp"
         android:layout_marginTop="395dp"
         android:gravity="top"
@@ -35,7 +35,7 @@
     <TextView
         android:id="@+id/login_to_yo"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="22dp"
         android:layout_marginTop="435dp"
         android:gravity="top"
         android:text="@string/login_to_yo"
@@ -66,7 +66,7 @@
             style="@style/NoUnderline"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Email"
+            android:hint="Username"
             android:imeOptions="actionNext"
             android:maxLines="1"
             android:textColor="@color/black"
@@ -92,7 +92,6 @@
         app:startIconDrawable="@drawable/baseline_lock_24"
         app:startIconTint="@color/grey"
         app:endIconDrawable="@drawable/custom_password_toggle"
-        app:ednIconTint="@color/grey"
         android:fontFamily="@font/roboto"
         >
 
@@ -119,6 +118,7 @@
         android:layout_marginTop="618dp"
         android:layout_marginEnd="30dp"
         android:gravity="top"
+        android:fontFamily="@font/roboto"
         android:text="@string/forgot_pass"
         android:textAppearance="@style/forgot_pass"
         app:layout_constraintEnd_toEndOf="parent"
@@ -128,14 +128,54 @@
         android:id="@+id/rememberMeCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:padding="15dp"
-        android:text="Remember me"
-        android:textColor="@color/primary_color"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="624dp"
+        android:layout_marginTop="610dp"
         android:buttonTint="@color/primary_color"
+        android:text="Remember me"
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/primary_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="660dp"
+        android:text="Sign In"
+        android:textColor="@color/black"
+        android:textAllCaps="false"
+        android:fontFamily="@font/roboto"
+        android:background="@drawable/round_corner"
+        android:elevation="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="726dp"
+        android:text="Don't have an account?"
+        android:textColor="@color/grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.36"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/signIn"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="726dp"
+        android:text="Sign Up"
+        android:textColor="@color/primary_color"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,10 +12,20 @@
     <!-- res/values/styles.xml (for light mode) -->
     <style name="AppThem" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:statusBarColor">@color/primary_color</item>
+        <item name="android:background">@color/primary_color</item>
     </style>
 
     <!-- res/values-night/styles.xml (for dark mode) -->
     <style name="AppTheme" parent="Theme.AppCompat.DayNight">
         <item name="android:statusBarColor">@color/primary_color</item>
+    </style>
+
+
+    <style name="Base.MyApplication" parent="Theme.AppCompat">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="colorPrimaryDark">@color/primary_color</item>
+        <item name="colorAccent">@color/primary_color</item>
+        <item name="android:statusBarColor">@color/white</item>
     </style>
 </resources>
