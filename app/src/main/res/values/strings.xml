@@ -6,4 +6,6 @@
     <string name="email">User@gmail.com</string>
     <string name="passone">Password</string>
     <string name="passonec">Confirm Password</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
