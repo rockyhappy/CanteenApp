@@ -8,27 +8,16 @@
     tools:context=".Registration">
 
     <TextView
-        android:id="@+id/register"
+        android:id="@+id/reg"
         android:layout_width="121dp"
         android:layout_height="48dp"
         android:layout_marginTop="116dp"
-        android:text="@string/register"
+        android:text="Register"
+        android:textAlignment="center"
         android:textColor="@color/black"
-        android:textFontWeight="700"
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="56dp"
-        android:layout_height="29dp"
-        android:layout_marginTop="252dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
