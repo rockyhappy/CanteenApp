@@ -39,8 +39,8 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
         android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:layout_marginTop="210dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="200dp"
         android:layout_marginHorizontal="30dp"
         android:background="@drawable/rectangle1"
         app:hintEnabled="false"
@@ -69,8 +69,8 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout2"
         android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:layout_marginTop="290dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="270dp"
         android:layout_marginHorizontal="30dp"
         android:background="@drawable/rectangle1"
         app:hintEnabled="false"
@@ -99,8 +99,8 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout3"
         android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:layout_marginTop="370dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="340dp"
         android:layout_marginHorizontal="30dp"
         android:background="@drawable/rectangle1"
         app:endIconMode="password_toggle"
@@ -132,8 +132,8 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout4"
         android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:layout_marginTop="583dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="410dp"
         android:layout_marginHorizontal="30dp"
         android:background="@drawable/rectangle1"
         app:endIconMode="password_toggle"
@@ -162,18 +162,20 @@
 
 
     </com.google.android.material.textfield.TextInputLayout>
+
     <Button
         android:id="@+id/button"
-        android:layout_width="300dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="474dp"
-        android:backgroundTint="#FA902D"
-        android:text="@string/button"
-        android:fontFamily="@font/roboto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="500dp"
+        android:text="Change Password"
+        android:textColor="@color/black"
         android:textAllCaps="false"
-        android:background="@drawable/rounded_border"
+        android:fontFamily="@font/roboto"
+        android:background="@drawable/round_corner"
+        android:elevation="5dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.594"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -181,16 +183,15 @@
 
     <TextView
         android:id="@+id/option"
-        android:layout_width="175dp"
+        android:layout_width="wrap_content"
         android:layout_height="24dp"
-        android:layout_marginTop="644dp"
+        android:layout_marginTop="690dp"
         android:fontFamily="@font/roboto"
         android:text="@string/option"
         android:textColor="@color/grey"
         android:textFontWeight="500"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.577"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -198,16 +199,14 @@
         android:id="@+id/option2"
         android:layout_width="260dp"
         android:layout_height="38dp"
-        android:layout_marginTop="687dp"
+        android:layout_marginTop="720dp"
         android:textColor="@color/grey"
         android:fontFamily="@font/roboto"
         android:textFontWeight="500"
         android:textSize="12sp"
         android:gravity="center"
         android:text="@string/option2"
-
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.546"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -226,9 +225,8 @@
         android:id="@+id/media"
         android:layout_width="116dp"
         android:layout_height="32dp"
-        android:layout_marginTop="583dp"
+        android:layout_marginTop="640dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.549"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/media" />
@@ -237,9 +235,8 @@
         android:id="@+id/imageView"
         android:layout_width="321dp"
         android:layout_height="21dp"
-        android:layout_marginTop="548dp"
+        android:layout_marginTop="590dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/optiona" />
