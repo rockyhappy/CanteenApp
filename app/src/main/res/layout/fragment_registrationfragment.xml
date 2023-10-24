@@ -199,28 +199,29 @@
         android:id="@+id/option2"
         android:layout_width="260dp"
         android:layout_height="38dp"
-        android:layout_marginTop="720dp"
+        android:layout_marginTop="740dp"
         android:textColor="@color/grey"
         android:fontFamily="@font/roboto"
         android:textFontWeight="500"
-        android:textSize="12sp"
+        android:textSize="14sp"
         android:gravity="center"
         android:text="@string/option2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/back"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
-        android:layout_marginTop="38dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.099"
+    <com.caverock.androidsvg.SVGImageView
+        android:id="@+id/svgImageView"
+        android:layout_width="37dp"
+        android:layout_height="32dp"
+        android:padding="5dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginStart="45dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back" />
-
+        android:elevation="5dp"
+        android:background="@drawable/ellipse"
+        />
     <ImageView
         android:id="@+id/media"
         android:layout_width="116dp"
