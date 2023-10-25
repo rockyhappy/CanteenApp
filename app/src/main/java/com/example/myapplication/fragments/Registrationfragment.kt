@@ -17,6 +17,7 @@ import com.caverock.androidsvg.SVGImageView
 import com.example.myapplication.ApiService
 import com.example.myapplication.R
 import com.example.myapplication.SignUpRequest
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -35,10 +36,8 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_registrationfragment, container, false)
 
-        val svgImageView = view.findViewById<SVGImageView>(R.id.svgImageView)
-        var svg = SVG.getFromResource(resources, R.raw.backbutton)
-        svgImageView.setSVG(svg)
-        svgImageView.setOnClickListener{
+        val backButton:FloatingActionButton=view.findViewById(R.id.backButton)
+        backButton.setOnClickListener{
             val fragmentTransaction = parentFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.flFragment, ChoiceFragment())
             fragmentTransaction.addToBackStack(null)
