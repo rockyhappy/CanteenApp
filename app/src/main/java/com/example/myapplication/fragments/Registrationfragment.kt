@@ -107,14 +107,15 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
                     password = password1,
                     email = Email
                 )
-                lifecycleScope.launch {
-
-                    val response = RetrofitInstance.apiService.fetchData(signUpRequest)
-                    if (response.isSuccessful) {
-
-                    }
-
-                }
+                showToast("Response will be sent")
+//                lifecycleScope.launch {
+//
+//                    val response = RetrofitInstance.apiService.fetchData(signUpRequest)
+//                    if (response.isSuccessful) {
+//
+//                    }
+//
+//                }
             }
             else
             {
