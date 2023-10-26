@@ -11,7 +11,7 @@ import android.widget.TextView
 import com.caverock.androidsvg.SVG
 import com.caverock.androidsvg.SVGImageView
 import com.example.myapplication.R
-import com.example.myapplication.Registration
+
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
@@ -30,7 +30,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
         val button= view.findViewById<Button>(R.id.button)
         button.setOnClickListener {
-            startActivity(Intent(requireActivity(),Registration::class.java))
+            val fragmentTransaction = parentFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.flFragment, Registrationfragment())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
         }
 
 

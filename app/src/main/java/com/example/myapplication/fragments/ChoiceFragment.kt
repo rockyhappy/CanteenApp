@@ -10,7 +10,7 @@ import android.widget.Button
 import com.caverock.androidsvg.SVG
 import com.caverock.androidsvg.SVGImageView
 import com.example.myapplication.R
-import com.example.myapplication.Registration
+
 
 class ChoiceFragment : Fragment(R.layout.fragment_choice) {
     override fun onCreateView(
@@ -33,7 +33,10 @@ class ChoiceFragment : Fragment(R.layout.fragment_choice) {
         }
         val button2=view.findViewById<Button>(R.id.button2)
         button2.setOnClickListener {
-            startActivity(Intent(requireActivity(), Registration::class.java))
+            val fragmentTransaction = parentFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.flFragment, Registrationfragment())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
         }
         return view
     }
