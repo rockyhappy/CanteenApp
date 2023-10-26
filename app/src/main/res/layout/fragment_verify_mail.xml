@@ -8,17 +8,17 @@
     tools:context=".fragments.VerifyMail"
     android:background="@color/white">
 
-    <com.caverock.androidsvg.SVGImageView
-        android:id="@+id/svgImageView"
-        android:layout_width="37dp"
-        android:layout_height="32dp"
-        android:padding="5dp"
-        android:layout_marginTop="21dp"
-        android:layout_marginStart="45dp"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        app:fabCustomSize="38dp"
+        android:id="@+id/backButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:elevation="5dp"
-        android:background="@drawable/ellipse"
+        android:src="@drawable/baseline_arrow_back_24"
         />
 
     <TextView
@@ -101,20 +101,20 @@
 
     <EditText
         android:id="@+id/editText1"
-        android:layout_width="48dp"
+        style="@style/NoUnderline"
+        android:layout_width="38dp"
         android:layout_height="48dp"
         android:layout_marginTop="515dp"
         android:hint="*"
         android:paddingLeft="15dp"
-        style="@style/NoUnderline"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintHorizontal_bias="0.10"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textColor="@color/black"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
-        android:layout_width="48dp"
+        android:layout_width="38dp"
         android:layout_height="2dp"
         android:background="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/editText1"
@@ -123,19 +123,19 @@
 
     <EditText
         android:id="@+id/editText2"
-        android:layout_width="48dp"
+        style="@style/NoUnderline"
+        android:layout_width="38dp"
         android:layout_height="48dp"
         android:layout_marginTop="515dp"
         android:hint="*"
         android:paddingLeft="15dp"
-        style="@style/NoUnderline"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintHorizontal_bias="0.26"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textColor="@color/black"/>
+        app:layout_constraintTop_toTopOf="parent" />
     <View
-        android:layout_width="48dp"
+        android:layout_width="38dp"
         android:layout_height="2dp"
         android:background="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/editText2"
@@ -144,19 +144,19 @@
 
     <EditText
         android:id="@+id/editText3"
-        android:layout_width="48dp"
+        style="@style/NoUnderline"
+        android:layout_width="38dp"
         android:layout_height="48dp"
         android:layout_marginTop="515dp"
         android:hint="*"
         android:paddingLeft="15dp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintHorizontal_bias="0.42"
         app:layout_constraintStart_toStartOf="parent"
-        style="@style/NoUnderline"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textColor="@color/black"/>
+        app:layout_constraintTop_toTopOf="parent" />
     <View
-        android:layout_width="48dp"
+        android:layout_width="38dp"
         android:layout_height="2dp"
         android:background="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/editText3"
@@ -165,22 +165,64 @@
 
     <EditText
         android:id="@+id/editText4"
-        android:layout_width="48dp"
+        style="@style/NoUnderline"
+        android:layout_width="38dp"
         android:layout_height="48dp"
         android:layout_marginTop="515dp"
         android:hint="*"
         android:paddingLeft="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintStart_toStartOf="parent"
         android:textColor="@color/black"
-        app:layout_constraintTop_toTopOf="parent"
-        style="@style/NoUnderline"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.58"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <View
-        android:layout_width="48dp"
+        android:layout_width="38dp"
         android:layout_height="2dp"
         android:background="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/editText4"
         app:layout_constraintStart_toStartOf="@+id/editText4"
         app:layout_constraintTop_toBottomOf="@+id/editText4" />
+
+    <EditText
+        android:id="@+id/editText5"
+        style="@style/NoUnderline"
+        android:layout_width="38dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="515dp"
+        android:hint="*"
+        android:paddingLeft="15dp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.74"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <View
+        android:layout_width="38dp"
+        android:layout_height="2dp"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/editText5"
+        app:layout_constraintStart_toStartOf="@+id/editText5"
+        app:layout_constraintTop_toBottomOf="@+id/editText5" />
+
+    <EditText
+        android:id="@+id/editText6"
+        style="@style/NoUnderline"
+        android:layout_width="38dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="515dp"
+        android:hint="*"
+        android:paddingLeft="15dp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.90"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <View
+        android:layout_width="38dp"
+        android:layout_height="2dp"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/editText6"
+        app:layout_constraintStart_toStartOf="@+id/editText6"
+        app:layout_constraintTop_toBottomOf="@+id/editText6" />
 </androidx.constraintlayout.widget.ConstraintLayout>

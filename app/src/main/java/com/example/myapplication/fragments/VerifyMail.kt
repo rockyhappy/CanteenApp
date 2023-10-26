@@ -15,6 +15,7 @@ import android.widget.EditText
 import com.caverock.androidsvg.SVG
 import com.caverock.androidsvg.SVGImageView
 import com.example.myapplication.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
@@ -25,21 +26,19 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_verify_mail, container, false)
 
-        val svgImageView = view.findViewById<SVGImageView>(R.id.svgImageView)
-        var svg = SVG.getFromResource(resources, R.raw.backbutton)
-        svgImageView.setSVG(svg)
-        val svgImageView2 = view.findViewById<SVGImageView>(R.id.svgImageView2)
-        var svg2 = SVG.getFromResource(resources, R.raw.otp_verification)
-        svgImageView2.setSVG(svg2)
-
-
-        svgImageView.setOnClickListener{
+        /** This is the BackButton */
+        val backButton: FloatingActionButton =view.findViewById(R.id.backButton)
+        backButton.setOnClickListener{
             val fragmentTransaction = parentFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.flFragment, ForgotPassward())
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
-
+        /**This si the svg main Image*/
+        val svgImageView2 = view.findViewById<SVGImageView>(R.id.svgImageView2)
+        var svg2 = SVG.getFromResource(resources, R.raw.otp_verification)
+        svgImageView2.setSVG(svg2)
+        /**This passes to the new Password*/
         val button= view.findViewById<Button>(R.id.button)
         button.setOnClickListener {
             val fragmentTransaction = parentFragmentManager.beginTransaction()
@@ -48,20 +47,20 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
             fragmentTransaction.commit()
         }
 
-
+        /**This is the edit text for the otp*/
         var editText1=view.findViewById<EditText>(R.id.editText1)
         var editText2=view.findViewById<EditText>(R.id.editText2)
         var editText3=view.findViewById<EditText>(R.id.editText3)
         var editText4=view.findViewById<EditText>(R.id.editText4)
-        //GenericTextWatcher here works only for moving to next EditText when a number is entered
-        //first parameter is the current EditText and second parameter is next EditText
+
+
         editText1.addTextChangedListener(GenericTextWatcher(editText1, editText2))
         editText2.addTextChangedListener(GenericTextWatcher(editText2, editText3))
         editText3.addTextChangedListener(GenericTextWatcher(editText3, editText4))
         editText4.addTextChangedListener(GenericTextWatcher(editText4, null))
 
-        //GenericKeyEvent here works for deleting the element and to switch back to previous EditText
-        //first parameter is the current EditText and second parameter is previous EditText
+
+
         editText1.setOnKeyListener(GenericKeyEvent(editText1, null))
         editText2.setOnKeyListener(GenericKeyEvent(editText2, editText1))
         editText3.setOnKeyListener(GenericKeyEvent(editText3, editText2))
