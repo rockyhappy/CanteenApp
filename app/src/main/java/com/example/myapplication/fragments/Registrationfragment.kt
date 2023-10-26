@@ -2,27 +2,25 @@ package com.example.myapplication.fragments
 
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import com.caverock.androidsvg.SVG
-import com.caverock.androidsvg.SVGImageView
 import com.example.myapplication.ApiService
 import com.example.myapplication.R
 import com.example.myapplication.SignUpRequest
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 
 class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
@@ -35,10 +33,8 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_registrationfragment, container, false)
 
-        val svgImageView = view.findViewById<SVGImageView>(R.id.svgImageView)
-        var svg = SVG.getFromResource(resources, R.raw.backbutton)
-        svgImageView.setSVG(svg)
-        svgImageView.setOnClickListener{
+        val backButton:FloatingActionButton=view.findViewById(R.id.backButton)
+        backButton.setOnClickListener{
             val fragmentTransaction = parentFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.flFragment, ChoiceFragment())
             fragmentTransaction.addToBackStack(null)
@@ -47,19 +43,65 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
 
         val button=view.findViewById<Button>(R.id.button)
         button.setOnClickListener {
-            var userName:TextInputEditText=view.findViewById(R.id.email)
-            val UserName=userName.text.toString()
+            var collection:TextInputEditText=view.findViewById(R.id.email)
+            val UserName=collection.text.toString()
 
-            userName=view.findViewById(R.id.email2)
-            val Email=userName.text.toString()
+            collection=view.findViewById(R.id.email2)
+            val Email=collection.text.toString()
 
-            userName=view.findViewById(R.id.passkey)
-            val password1=userName.text.toString()
+            collection=view.findViewById(R.id.passkey)
+            val password1=collection.text.toString()
 
-            userName=view.findViewById(R.id.passkey2)
-            val password2=userName.text.toString()
+            collection=view.findViewById(R.id.passkey2)
+            val password2=collection.text.toString()
 
-            if(isValidEmail(Email)&&password1==password2) {
+
+            //Flag if all is correct
+            var flag=false
+
+            /** Declairing the variables for the */
+            var userNameIncorrect =view.findViewById<TextView>(R.id.userNameIncorrect)
+            var userMailIncorrect=view.findViewById<TextView>(R.id.userMailIncorrect)
+            var userPassword1=view.findViewById<TextView>(R.id.passwordIncorrect1)
+            var userPassword2=view.findViewById<TextView>(R.id.passwordIncorrect2)
+
+            /** Checking for user name correctness*/
+            if(UserName.length<6)
+            {
+                userNameIncorrect.text="User Name should be more than  6"
+                flag=true
+            }
+            else {
+                userNameIncorrect.text=""
+            }
+            /**Checking For Email Correctness*/
+            if(!isValidEmail(Email))
+            {
+                userMailIncorrect.text="Not a Valid Mail"
+                flag=true
+            }
+            else {
+                userMailIncorrect.text=""
+            }
+
+            /**Checking for if password is valid*/
+            if(!isValidPassword(password1))
+            {
+                userPassword1.text="Password not strong"
+                flag=true
+            }
+            else{
+                userPassword1.text=""
+            }
+            if(password2!=password1)
+            {
+                userPassword2.text="Confirm Password Should match Password"
+                flag=true
+            }
+            else {
+                userPassword2.text=""
+            }
+            if(!flag) {
                 val signUpRequest = SignUpRequest(
                     username = UserName,
                     password = password1,
@@ -91,6 +133,14 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
     }
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+    fun isValidPassword(password: String?): Boolean {
+        val pattern: Pattern
+        val matcher: Matcher
+        val PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$"
+        pattern = Pattern.compile(PASSWORD_PATTERN)
+        matcher = pattern.matcher(password)
+        return matcher.matches()
     }
 
 }
