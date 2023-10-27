@@ -1,6 +1,5 @@
 package com.example.myapplication.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,23 +8,30 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.preferencesKey
+import androidx.lifecycle.lifecycleScope
 import com.caverock.androidsvg.SVG
 import com.caverock.androidsvg.SVGImageView
 import com.example.myapplication.R
+import com.example.myapplication.readFromDataStore
+import com.example.myapplication.verifyMailRequest
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
-
-class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
+class RegistrationVerifyMail : Fragment(R.layout.fragment_registration_verify_mail) {
+    private lateinit var dataStore: DataStore<Preferences>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_verify_mail, container, false)
+        val view = inflater.inflate(R.layout.fragment_registration_verify_mail, container, false)
 
         /** This is the BackButton */
         val backButton: FloatingActionButton =view.findViewById(R.id.backButton)
@@ -76,6 +82,12 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
             otp=otp+editText5.text.toString()
             otp=otp+editText6.text.toString()
             showToast(otp)
+            lifecycleScope.launch {
+                val Email = readFromDataStore(dataStore,"Email")
+                val verifyMailRequest =verifyMailRequest("Email",otp)
+                val response = RetrofitInstance.apiService.checkEmail(verifyMailRequest)
+            }
+
             val fragmentTransaction = parentFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.flFragment, NewPassword())
             fragmentTransaction.addToBackStack(null)
@@ -87,8 +99,11 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
+
+
 }
 
+/*
 class GenericKeyEvent internal constructor(private val currentView: EditText, private val previousView: EditText?) : View.OnKeyListener{
     override fun onKey(p0: View?, keyCode: Int, event: KeyEvent?): Boolean {
         if(event!!.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DEL && currentView.id != R.id.editText1 && currentView.text.isEmpty()) {
@@ -135,7 +150,7 @@ class GenericTextWatcher internal constructor(private val currentView: View, pri
     }
 
 }
-
+*/
 
 //fun start(view :View)
 //{
