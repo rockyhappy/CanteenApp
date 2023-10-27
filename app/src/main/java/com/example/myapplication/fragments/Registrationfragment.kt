@@ -1,7 +1,9 @@
 package com.example.myapplication.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
@@ -9,13 +11,22 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.preferencesKey
+import androidx.datastore.preferences.createDataStore
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.ApiService
+import com.example.myapplication.LoginRequest
 import com.example.myapplication.R
 import com.example.myapplication.SignUpRequest
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -25,7 +36,7 @@ import java.util.regex.Pattern
 
 class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
 
-
+    private lateinit var dataStore: DataStore<Preferences>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,7 +51,6 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
-
         val button=view.findViewById<Button>(R.id.button)
         button.setOnClickListener {
             var collection:TextInputEditText=view.findViewById(R.id.email)
@@ -103,19 +113,31 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
             }
             if(!flag) {
                 val signUpRequest = SignUpRequest(
-                    username = UserName,
-                    password = password1,
-                    email = Email
+                     username= UserName,
+                 name= "Rachit",
+                 email= Email,
+                 password= password1
                 )
-                showToast("Response will be sent")
-//                lifecycleScope.launch {
-//
-//                    val response = RetrofitInstance.apiService.fetchData(signUpRequest)
-//                    if (response.isSuccessful) {
-//
-//                    }
-//
-//                }
+                lifecycleScope.launch {
+                    val response = RetrofitInstance.apiService.fetchData(signUpRequest)
+                    Log.d("error",response.body().toString())
+                    if (response.isSuccessful) {
+                        if(response.body()?.success.toString()=="true"){
+                            dataStore= context?.createDataStore(name= "user")!!
+                            save(
+                                "Email",Email
+                            )
+                            val fragmentTransaction = parentFragmentManager.beginTransaction()
+                            fragmentTransaction.replace(R.id.flFragment, RegistrationVerifyMail())
+                            fragmentTransaction.addToBackStack(null)
+                            fragmentTransaction.commit()
+                        }
+                        else{
+                            showToast("User already Exists")
+                        }
+                    }
+
+                }
             }
             else
             {
@@ -144,9 +166,22 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
         return matcher.matches()
     }
 
+
+    private suspend fun read (key:String) : String?{
+        val dataStoreKey= preferencesKey<String>(key)
+        val preferences = dataStore.data.first()
+        return preferences[dataStoreKey]
+
+    }
+    private suspend fun save (key:String , value:String){
+        val dataStoreKey= preferencesKey<String>(key)
+        dataStore.edit{Email ->
+            Email[dataStoreKey]=value
+        }
+    }
 }
 object RetrofitInstance {
-    private const val BASE_URL = "https://pro-go.onrender.com/"
+    private const val BASE_URL = "https://udemy-nx1v.onrender.com/"
 
     val apiService: ApiService by lazy {
         Retrofit.Builder()

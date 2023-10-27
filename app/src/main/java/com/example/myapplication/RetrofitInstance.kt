@@ -3,7 +3,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
-    private const val BASE_URL = "https://pro-go.onrender.com/"
+    private const val BASE_URL = "https://brunchbliss.onrender.com/"
 
     val apiService: ApiService by lazy {
         Retrofit.Builder()
