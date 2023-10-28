@@ -1,6 +1,7 @@
 package com.example.myapplication.fragments
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.KeyEvent
@@ -81,6 +82,25 @@ class RegistrationVerifyMail : Fragment(R.layout.fragment_registration_verify_ma
 
         /**
          * Now this is the code for the resend button  */
+        lateinit var tv: TextView
+        lateinit var cTimer: CountDownTimer
+
+        val resendBtn = view.findViewById<Button>(R.id.resendBtn)
+        fun startTimer() {
+            tv = view.findViewById(R.id.resend)
+            cTimer = object : CountDownTimer(30000, 1000) {
+                override fun onTick(millisUntilFinished: Long) {
+                    tv.text = "seconds remaining: ${millisUntilFinished / 1000}"
+                }
+
+                override fun onFinish() {
+                    tv.text = "Re send OTP!"
+                    resendBtn.isEnabled = true
+                }
+            }
+            cTimer.start()
+        }
+        startTimer()
 
         /**This passes to the new Password*/
         val button= view.findViewById<Button>(R.id.button)

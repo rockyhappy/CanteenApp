@@ -55,15 +55,19 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
         button.setOnClickListener {
             var collection:TextInputEditText=view.findViewById(R.id.email)
             val UserName=collection.text.toString()
+            UserName.trim()
 
             collection=view.findViewById(R.id.email2)
             val Email=collection.text.toString()
+            Email.trim()
 
             collection=view.findViewById(R.id.passkey)
             val password1=collection.text.toString()
+            password1.trim()
 
             collection=view.findViewById(R.id.passkey2)
             val password2=collection.text.toString()
+            password2.trim()
 
 
             //Flag if all is correct
@@ -111,11 +115,11 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
             else {
                 userPassword2.text=""
             }
-            if(!flag) {
+            if(true) {
                 val signUpRequest = SignUpRequest(
-                    fullName=UserName,
+                    fullName="hood dabag",
                     email=Email,
-                    password=password1,
+                    password="Qwerty@123",
                     role="USER"
                 )
                 lifecycleScope.launch {
