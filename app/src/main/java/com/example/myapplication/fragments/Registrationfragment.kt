@@ -111,19 +111,18 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
             else {
                 userPassword2.text=""
             }
-            if(true) {
+            if(!flag) {
                 val signUpRequest = SignUpRequest(
-
-                    fullName="aB TOH HO JA",
-                email="KYOUNAHI@gamil.com",
-                password="Hohi ja bhai",
-                role="ADMIN"
+                    fullName=UserName,
+                    email=Email,
+                    password=password1,
+                    role="USER"
                 )
                 lifecycleScope.launch {
                     val response = RetrofitInstance.apiService.fetchData(signUpRequest)
                     Log.d("error",response.body().toString())
                     if (response.isSuccessful) {
-                        if(true){
+                        if(response.body()?.token.toString()=="Check your email for OTP"){
                             dataStore= context?.createDataStore(name= "user")!!
                             save("Email",Email)
                             save("password",password1)
@@ -141,7 +140,6 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
             }
             else
             {
-
                 showToast("Something went Wrong Please Retry")
             }
 

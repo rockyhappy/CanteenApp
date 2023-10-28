@@ -79,6 +79,8 @@ class RegistrationVerifyMail : Fragment(R.layout.fragment_registration_verify_ma
         editText5.setOnKeyListener(GenericKeyEvent(editText5,editText4))
         editText6.setOnKeyListener(GenericKeyEvent(editText6,editText5))
 
+        /**
+         * Now this is the code for the resend button  */
 
         /**This passes to the new Password*/
         val button= view.findViewById<Button>(R.id.button)
@@ -108,6 +110,9 @@ class RegistrationVerifyMail : Fragment(R.layout.fragment_registration_verify_ma
                         val incorrectOtp=view.findViewById<TextView>(R.id.incorrectOtp)
                         incorrectOtp.text="Recheck One Time Password"
                     }
+                }
+                else {
+                    showToast("Please Retry")
                 }
             }
         }
