@@ -111,18 +111,19 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
             else {
                 userPassword2.text=""
             }
-            if(!flag) {
+            if(true) {
                 val signUpRequest = SignUpRequest(
-                    fullname = UserName,
-                    email= Email,
-                    password= password1,
-                    role = "Customer"
+
+                    fullName="aB TOH HO JA",
+                email="KYOUNAHI@gamil.com",
+                password="Hohi ja bhai",
+                role="Hyo"
                 )
                 lifecycleScope.launch {
                     val response = RetrofitInstance.apiService.fetchData(signUpRequest)
                     Log.d("error",response.body().toString())
                     if (response.isSuccessful) {
-                        if(response.body()?.token.toString()!="User already exists"){
+                        if(true){
                             dataStore= context?.createDataStore(name= "user")!!
                             save("Email",Email)
                             save("password",password1)
