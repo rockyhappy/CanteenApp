@@ -117,7 +117,7 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
                     fullName="aB TOH HO JA",
                 email="KYOUNAHI@gamil.com",
                 password="Hohi ja bhai",
-                role="Hyo"
+                role="ADMIN"
                 )
                 lifecycleScope.launch {
                     val response = RetrofitInstance.apiService.fetchData(signUpRequest)
@@ -136,11 +136,12 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
                             showToast("User already Exists")
                         }
                     }
-
+                    Log.d("API Error", "Response code: ${response.code()}, Message: ${response.message()}")
                 }
             }
             else
             {
+
                 showToast("Something went Wrong Please Retry")
             }
 
