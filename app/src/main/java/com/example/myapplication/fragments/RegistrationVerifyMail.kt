@@ -10,10 +10,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.datastore.core.DataStore
+import androidx.datastore.createDataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.preferencesKey
+import androidx.datastore.preferences.createDataStore
 import androidx.lifecycle.lifecycleScope
 import com.caverock.androidsvg.SVG
 import com.caverock.androidsvg.SVGImageView
@@ -27,6 +31,10 @@ import kotlinx.coroutines.launch
 class RegistrationVerifyMail : Fragment(R.layout.fragment_registration_verify_mail) {
     private lateinit var dataStore: DataStore<Preferences>
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        dataStore = requireContext().createDataStore(name = "user")
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -81,17 +89,27 @@ class RegistrationVerifyMail : Fragment(R.layout.fragment_registration_verify_ma
             otp=otp+editText4.text.toString()
             otp=otp+editText5.text.toString()
             otp=otp+editText6.text.toString()
-            showToast(otp)
+
             lifecycleScope.launch {
                 val Email = readFromDataStore(dataStore,"Email")
-                val verifyMailRequest =verifyMailRequest("Email",otp)
+                val verifyMailRequest =verifyMailRequest(Email.toString(),otp)
                 val response = RetrofitInstance.apiService.checkEmail(verifyMailRequest)
+                if(response.isSuccessful)
+                {
+                    showToast(otp)
+                    if(response.body()?.token.toString()!="OTP Expired" || response.body()?.token.toString()!="Incorrect OTP"){
+                        save("token",response.body()?.token.toString())
+                        val fragmentTransaction = parentFragmentManager.beginTransaction()
+                        fragmentTransaction.replace(R.id.flFragment, WellDone())
+                        fragmentTransaction.addToBackStack(null)
+                        fragmentTransaction.commit()
+                    }
+                    else {
+                        val incorrectOtp=view.findViewById<TextView>(R.id.incorrectOtp)
+                        incorrectOtp.text="Recheck One Time Password"
+                    }
+                }
             }
-
-            val fragmentTransaction = parentFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.flFragment, NewPassword())
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
         }
 
         return view
@@ -100,62 +118,10 @@ class RegistrationVerifyMail : Fragment(R.layout.fragment_registration_verify_ma
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
-
-}
-
-/*
-class GenericKeyEvent internal constructor(private val currentView: EditText, private val previousView: EditText?) : View.OnKeyListener{
-    override fun onKey(p0: View?, keyCode: Int, event: KeyEvent?): Boolean {
-        if(event!!.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DEL && currentView.id != R.id.editText1 && currentView.text.isEmpty()) {
-            //If current is empty then previous EditText's number will also be deleted
-            previousView!!.text = null
-            previousView.requestFocus()
-            return true
-        }
-        return false
-    }
-
-
-}
-
-class GenericTextWatcher internal constructor(private val currentView: View, private val nextView: View?) :
-    TextWatcher {
-    override fun afterTextChanged(editable: Editable) { // TODO Auto-generated method stub
-        val text = editable.toString()
-        when (currentView.id) {
-            R.id.editText1 -> if (text.length == 1) nextView!!.requestFocus()
-            R.id.editText2 -> if (text.length == 1) nextView!!.requestFocus()
-            R.id.editText3 -> if (text.length == 1) nextView!!.requestFocus()
-            R.id.editText4 -> if (text.length == 1) nextView!!.requestFocus()
-            R.id.editText5 -> if (text.length == 1) nextView!!.requestFocus()
-//            R.id.editText6 -> if (text.length == 1) start(currentView)
-            //You can use EditText4 same as above to hide the keyboard
+    private suspend fun save (key:String , value:String){
+        val dataStoreKey= preferencesKey<String>(key)
+        dataStore.edit{temp ->
+            temp[dataStoreKey]=value
         }
     }
-
-    override fun beforeTextChanged(
-        arg0: CharSequence,
-        arg1: Int,
-        arg2: Int,
-        arg3: Int
-    ) { // TODO Auto-generated method stub
-    }
-
-    override fun onTextChanged(
-        arg0: CharSequence,
-        arg1: Int,
-        arg2: Int,
-        arg3: Int
-    ) { // TODO Auto-generated method stub
-    }
-
 }
-*/
-
-//fun start(view :View)
-//{
-//    val fragmentTransaction = parentFragmentManager.beginTransaction()
-//    fragmentTransaction.replace(R.id.flFragment, VerifyMail())
-//    fragmentTransaction.addToBackStack(null)
-//    fragmentTransaction.commit()
-//}

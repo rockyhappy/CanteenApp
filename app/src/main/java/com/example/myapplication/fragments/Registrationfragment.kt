@@ -113,20 +113,19 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
             }
             if(!flag) {
                 val signUpRequest = SignUpRequest(
-                     username= UserName,
-                 name= "Rachit",
-                 email= Email,
-                 password= password1
+                    fullname = UserName,
+                    email= Email,
+                    password= password1,
+                    role = "Customer"
                 )
                 lifecycleScope.launch {
                     val response = RetrofitInstance.apiService.fetchData(signUpRequest)
                     Log.d("error",response.body().toString())
                     if (response.isSuccessful) {
-                        if(response.body()?.success.toString()=="true"){
+                        if(response.body()?.token.toString()!="User already exists"){
                             dataStore= context?.createDataStore(name= "user")!!
-                            save(
-                                "Email",Email
-                            )
+                            save("Email",Email)
+                            save("password",password1)
                             val fragmentTransaction = parentFragmentManager.beginTransaction()
                             fragmentTransaction.replace(R.id.flFragment, RegistrationVerifyMail())
                             fragmentTransaction.addToBackStack(null)
@@ -141,7 +140,7 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
             }
             else
             {
-                showToast("Kuch toh gadbad hai daya")
+                showToast("Something went Wrong Please Retry")
             }
 
         }
@@ -175,13 +174,13 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
     }
     private suspend fun save (key:String , value:String){
         val dataStoreKey= preferencesKey<String>(key)
-        dataStore.edit{Email ->
-            Email[dataStoreKey]=value
+        dataStore.edit{temp ->
+            temp[dataStoreKey]=value
         }
     }
 }
 object RetrofitInstance {
-    private const val BASE_URL = "https://udemy-nx1v.onrender.com/"
+    private const val BASE_URL = "https://brunchbliss.onrender.com/"
 
     val apiService: ApiService by lazy {
         Retrofit.Builder()

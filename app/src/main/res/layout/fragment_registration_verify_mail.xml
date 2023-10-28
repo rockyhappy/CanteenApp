@@ -71,13 +71,13 @@
         android:layout_height="21dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="600dp"
+        android:layout_marginTop="620dp"
         android:gravity="top"
         android:text="@string/resend_code"
-        android:textStyle="bold"
+        android:textAppearance="@style/try_another"
         android:textSize="17dp"
 
-        android:textAppearance="@style/try_another"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.467"
         app:layout_constraintStart_toStartOf="parent"
@@ -89,13 +89,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="660dp"
-        android:text="Verify"
-        android:textColor="@color/black"
-        android:textAllCaps="false"
-        android:fontFamily="@font/roboto"
+        android:layout_marginTop="680dp"
         android:background="@drawable/round_corner"
         android:elevation="5dp"
+        android:fontFamily="@font/roboto"
+        android:text="Verify"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -118,6 +118,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
+        android:id="@+id/view"
         android:layout_width="38dp"
         android:layout_height="2dp"
         android:background="@color/black"
@@ -244,4 +245,15 @@
         app:layout_constraintEnd_toEndOf="@+id/editText6"
         app:layout_constraintStart_toStartOf="@+id/editText6"
         app:layout_constraintTop_toBottomOf="@+id/editText6" />
+
+    <TextView
+        android:id="@+id/incorrectOtp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text=""
+        android:textColor="@color/incorrect"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/editText1"
+        app:layout_constraintTop_toTopOf="@+id/view" />
 </androidx.constraintlayout.widget.ConstraintLayout>

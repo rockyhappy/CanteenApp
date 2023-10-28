@@ -50,7 +50,7 @@ class WellDone : Fragment(R.layout.fragment_well_done) {
         val button=view.findViewById<Button>(R.id.button)
         button.setOnClickListener {
             val fragmentTransaction = parentFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.flFragment, Registrationfragment())
+            fragmentTransaction.replace(R.id.flFragment, LoginFragment())
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
