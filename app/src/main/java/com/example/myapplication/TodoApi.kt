@@ -5,12 +5,12 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface ApiService {
-    @POST("sign-up")
+    @POST("api/v1/auth/register")
     suspend fun fetchData(@Body request: SignUpRequest): Response<SignUpResponse>
 
     @POST("api/v1/auth/login")
     suspend fun fetchLoginData(@Body request : LoginRequest): Response<LoginResponse>
 
-    @POST("verify-email")
+    @POST("api/v1/auth/verify-email")
     suspend fun checkEmail(@Body request: verifyMailRequest) : Response<verifyMailResponse>
 }

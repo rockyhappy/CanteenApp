@@ -2,6 +2,7 @@ package com.example.myapplication.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.KeyEvent
@@ -13,14 +14,28 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.createDataStore
+import androidx.lifecycle.lifecycleScope
 import com.caverock.androidsvg.SVG
 import com.caverock.androidsvg.SVGImageView
 import com.example.myapplication.R
+import com.example.myapplication.SignUpRequest
+import com.example.myapplication.readFromDataStore
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.launch
 
 
 class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
 
+
+    private lateinit var dataStore: DataStore<Preferences>
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        dataStore = requireContext().createDataStore(name = "user")
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -65,10 +80,51 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
         editText5.setOnKeyListener(GenericKeyEvent(editText5,editText4))
         editText6.setOnKeyListener(GenericKeyEvent(editText6,editText5))
 
+        /**
+         * Now this is the code for the resend button  */
+        lateinit var cTimer: CountDownTimer
+
+        val resendBtn = view.findViewById<Button>(R.id.resendBtn)
+        fun startTimer() {
+            cTimer = object : CountDownTimer(10000, 1000) {
+                override fun onTick(millisUntilFinished: Long) {
+                    resendBtn.text = "seconds remaining: ${millisUntilFinished / 1000}"
+                }
+
+                override fun onFinish() {
+                    resendBtn.text = "Re send OTP!"
+                    resendBtn.isEnabled = true
+                }
+            }
+            cTimer.start()
+        }
+        startTimer()
+
+
+        resendBtn.setOnClickListener {
+            lifecycleScope.launch{
+                val Email = readFromDataStore(dataStore,"Email" )
+                val fullname = readFromDataStore(dataStore , "fullname")
+                val password = readFromDataStore(dataStore,"password")
+                val signUpRequest= SignUpRequest(
+                    fullName=fullname.toString(),
+                    email=Email.toString(),
+                    password=password.toString(),
+                    role="USER"
+                )
+                //val response = RetrofitInstance.apiService.fetchData(signUpRequest)
+            }
+            resendBtn.isEnabled=false
+            startTimer()
+        }
+
 
         /**This passes to the new Password*/
         val button= view.findViewById<Button>(R.id.button)
         button.setOnClickListener {
+            /**
+             * this is the api call verify mail
+             */
             var otp : String=editText1.text.toString()
             otp=otp+editText2.text.toString()
             otp=otp+editText3.text.toString()
@@ -113,8 +169,7 @@ class GenericTextWatcher internal constructor(private val currentView: View, pri
             R.id.editText3 -> if (text.length == 1) nextView!!.requestFocus()
             R.id.editText4 -> if (text.length == 1) nextView!!.requestFocus()
             R.id.editText5 -> if (text.length == 1) nextView!!.requestFocus()
-//            R.id.editText6 -> if (text.length == 1) start(currentView)
-            //You can use EditText4 same as above to hide the keyboard
+
         }
     }
 
@@ -123,7 +178,7 @@ class GenericTextWatcher internal constructor(private val currentView: View, pri
         arg1: Int,
         arg2: Int,
         arg3: Int
-    ) { // TODO Auto-generated method stub
+    ) {
     }
 
     override fun onTextChanged(
@@ -131,16 +186,10 @@ class GenericTextWatcher internal constructor(private val currentView: View, pri
         arg1: Int,
         arg2: Int,
         arg3: Int
-    ) { // TODO Auto-generated method stub
+    ) {
+
     }
 
 }
 
 
-//fun start(view :View)
-//{
-//    val fragmentTransaction = parentFragmentManager.beginTransaction()
-//    fragmentTransaction.replace(R.id.flFragment, VerifyMail())
-//    fragmentTransaction.addToBackStack(null)
-//    fragmentTransaction.commit()
-//}

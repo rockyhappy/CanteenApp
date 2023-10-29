@@ -9,8 +9,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import com.caverock.androidsvg.SVG
 import com.caverock.androidsvg.SVGImageView
+import com.example.myapplication.DashBoard
 import com.example.myapplication.R
-
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class WellDone : Fragment(R.layout.fragment_well_done) {
@@ -23,11 +24,8 @@ class WellDone : Fragment(R.layout.fragment_well_done) {
         val view= inflater.inflate(R.layout.fragment_well_done, container, false)
 
 
-        val svgImageView = view.findViewById<SVGImageView>(R.id.svgImageView)
-        var svg = SVG.getFromResource(resources, R.raw.backbutton)
-        svgImageView.setSVG(svg)
-
-        svgImageView.setOnClickListener{
+        val backButton: FloatingActionButton =view.findViewById(R.id.backButton)
+        backButton.setOnClickListener{
             val fragmentTransaction = parentFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.flFragment, ChoiceFragment())
             fragmentTransaction.addToBackStack(null)
@@ -49,10 +47,8 @@ class WellDone : Fragment(R.layout.fragment_well_done) {
 
         val button=view.findViewById<Button>(R.id.button)
         button.setOnClickListener {
-            val fragmentTransaction = parentFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.flFragment, Registrationfragment())
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
+            startActivity(Intent(requireActivity(),DashBoard::class.java))
+            requireActivity().finish()
         }
         return view
     }
