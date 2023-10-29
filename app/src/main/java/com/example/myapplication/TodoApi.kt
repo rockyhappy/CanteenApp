@@ -16,4 +16,8 @@ interface ApiService {
 
     @POST("api/v1/auth/resend-otp")
     suspend fun resendOtp(@Body request: resendOtpRequest) : Response<resendOtpResponse>
+
+    @POST("api/v1/auth/login")
+    suspend fun login(@Body requset : LoginRequest) : Response<LoginResponse>
+
 }

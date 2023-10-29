@@ -67,11 +67,11 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
         button.setOnClickListener {
             var collection:TextInputEditText=view.findViewById(R.id.email)
             var UserName=collection.text.toString()
-            UserName.trim().toString()
+            UserName=UserName.trim()
 
             collection=view.findViewById(R.id.email2)
             var Email=collection.text.toString()
-            Email.trim()
+            Email=Email.trim()
 
             collection=view.findViewById(R.id.passkey)
             var password1=collection.text.toString()

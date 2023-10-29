@@ -14,6 +14,10 @@ data class LoginResponse(
     val token: String
 )
 
+data class LoginRequest(
+    val email: String,
+    val password: String
+)
 data class UserData(
     val username: String,
     val password: String,
@@ -21,10 +25,7 @@ data class UserData(
 )
 
 
-data class LoginRequest(
-    val email: String,
-    val password: String
-)
+
 
 data class verifyMailRequest(
     val email :String,

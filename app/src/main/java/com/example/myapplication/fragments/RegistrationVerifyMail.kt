@@ -90,7 +90,7 @@ class RegistrationVerifyMail : Fragment(R.layout.fragment_registration_verify_ma
 
         val resendBtn = view.findViewById<Button>(R.id.resendBtn)
         fun startTimer() {
-            cTimer = object : CountDownTimer(10000, 1000) {
+            cTimer = object : CountDownTimer(60000, 1000) {
                 override fun onTick(millisUntilFinished: Long) {
                     resendBtn.text = "Resend OTP in : ${millisUntilFinished / 1000}"
                 }
