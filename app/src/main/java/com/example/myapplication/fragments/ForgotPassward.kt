@@ -37,7 +37,7 @@ class ForgotPassward : Fragment(R.layout.fragment_forgot_passward) {
         val backButton: FloatingActionButton =view.findViewById(R.id.backButton)
         backButton.setOnClickListener{
             val fragmentTransaction = parentFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.flFragment, ChoiceFragment())
+            fragmentTransaction.replace(R.id.flFragment, LoginFragment())
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }

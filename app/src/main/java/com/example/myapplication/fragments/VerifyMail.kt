@@ -169,8 +169,7 @@ class GenericTextWatcher internal constructor(private val currentView: View, pri
             R.id.editText3 -> if (text.length == 1) nextView!!.requestFocus()
             R.id.editText4 -> if (text.length == 1) nextView!!.requestFocus()
             R.id.editText5 -> if (text.length == 1) nextView!!.requestFocus()
-//            R.id.editText6 -> if (text.length == 1) start(currentView)
-            //You can use EditText4 same as above to hide the keyboard
+
         }
     }
 
@@ -179,7 +178,7 @@ class GenericTextWatcher internal constructor(private val currentView: View, pri
         arg1: Int,
         arg2: Int,
         arg3: Int
-    ) { // TODO Auto-generated method stub
+    ) {
     }
 
     override fun onTextChanged(
@@ -187,16 +186,10 @@ class GenericTextWatcher internal constructor(private val currentView: View, pri
         arg1: Int,
         arg2: Int,
         arg3: Int
-    ) { // TODO Auto-generated method stub
+    ) {
+
     }
 
 }
 
 
-//fun start(view :View)
-//{
-//    val fragmentTransaction = parentFragmentManager.beginTransaction()
-//    fragmentTransaction.replace(R.id.flFragment, VerifyMail())
-//    fragmentTransaction.addToBackStack(null)
-//    fragmentTransaction.commit()
-//}
