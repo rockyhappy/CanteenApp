@@ -25,6 +25,7 @@ import com.caverock.androidsvg.SVGImageView
 import com.example.myapplication.R
 import com.example.myapplication.SignUpRequest
 import com.example.myapplication.readFromDataStore
+import com.example.myapplication.resendOtpRequest
 import com.example.myapplication.verifyMailRequest
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.flow.first
@@ -89,9 +90,9 @@ class RegistrationVerifyMail : Fragment(R.layout.fragment_registration_verify_ma
 
         val resendBtn = view.findViewById<Button>(R.id.resendBtn)
         fun startTimer() {
-            cTimer = object : CountDownTimer(10000, 1000) {
+            cTimer = object : CountDownTimer(60000, 1000) {
                 override fun onTick(millisUntilFinished: Long) {
-                    resendBtn.text = "seconds remaining: ${millisUntilFinished / 1000}"
+                    resendBtn.text = "Resend OTP in : ${millisUntilFinished / 1000}"
                 }
 
                 override fun onFinish() {
@@ -109,13 +110,16 @@ class RegistrationVerifyMail : Fragment(R.layout.fragment_registration_verify_ma
                 val Email = readFromDataStore(dataStore,"Email" )
                 val fullname = readFromDataStore(dataStore , "fullname")
                 val password = readFromDataStore(dataStore,"password")
-                val signUpRequest=SignUpRequest(
-                    fullName=fullname.toString(),
-                    email=Email.toString(),
-                    password=password.toString(),
-                    role="USER"
+                val resendOtp= resendOtpRequest(
+                    email=Email.toString()
                 )
-                //val response = RetrofitInstance.apiService.fetchData(signUpRequest)
+                val response = RetrofitInstance.apiService.resendOtp(resendOtp)
+                if(response.isSuccessful){
+                    //showToast(response.body()?.token.toString())
+                }
+                else{
+                    showToast("Something went Wrong")
+                }
             }
             resendBtn.isEnabled=false
             startTimer()
@@ -130,33 +134,31 @@ class RegistrationVerifyMail : Fragment(R.layout.fragment_registration_verify_ma
             otp=otp+editText5.text.toString()
             otp=otp+editText6.text.toString()
 
-            val fragmentTransaction = parentFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.flFragment, Congratulationsfragment())
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
-//            lifecycleScope.launch {
-//                val Email = readFromDataStore(dataStore,"Email")
-//                val verifyMailRequest =verifyMailRequest(Email.toString(),otp)
-//                val response = RetrofitInstance.apiService.checkEmail(verifyMailRequest)
-//                if(response.isSuccessful)
-//                {
-//                    showToast(otp)
-//                    if(response.body()?.token.toString()!="OTP Expired" || response.body()?.token.toString()!="Incorrect OTP"){
-//                        save("token",response.body()?.token.toString())
-//                        val fragmentTransaction = parentFragmentManager.beginTransaction()
-//                        fragmentTransaction.replace(R.id.flFragment, Congratulationsfragment())
-//                        fragmentTransaction.addToBackStack(null)
-//                        fragmentTransaction.commit()
-//                    }
-//                    else {
-//                        val incorrectOtp=view.findViewById<TextView>(R.id.incorrectOtp)
-//                        incorrectOtp.text="Recheck One Time Password"
-//                    }
-//                }
-//                else {
-//                    showToast("Please Retry")
-//                }
-//            }
+
+            lifecycleScope.launch {
+                val Email = readFromDataStore(dataStore,"Email")
+                val verifyMailRequest =verifyMailRequest(Email.toString(),otp)
+                val response = RetrofitInstance.apiService.checkEmail(verifyMailRequest)
+                if(response.isSuccessful)
+                {
+                    showToast(otp)
+                    //if(response.body()?.token.toString()!="OTP Expired" || response.body()?.token.toString()!="Incorrect OTP"||response.body()?.token.toString()!="No OTP generated"){
+                    if(response.body()?.token.toString().length >=20){
+                        save("token",response.body()?.token.toString())
+                        val fragmentTransaction = parentFragmentManager.beginTransaction()
+                        fragmentTransaction.replace(R.id.flFragment, Congratulationsfragment())
+                        fragmentTransaction.addToBackStack(null)
+                        fragmentTransaction.commit()
+                    }
+                    else {
+                        val incorrectOtp=view.findViewById<TextView>(R.id.incorrectOtp)
+                        incorrectOtp.text=response.body()?.token.toString()
+                    }
+                }
+                else {
+                    showToast("Please Retry")
+                }
+            }
         }
 
         return view
