@@ -130,33 +130,31 @@ class RegistrationVerifyMail : Fragment(R.layout.fragment_registration_verify_ma
             otp=otp+editText5.text.toString()
             otp=otp+editText6.text.toString()
 
-            val fragmentTransaction = parentFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.flFragment, Congratulationsfragment())
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
-//            lifecycleScope.launch {
-//                val Email = readFromDataStore(dataStore,"Email")
-//                val verifyMailRequest =verifyMailRequest(Email.toString(),otp)
-//                val response = RetrofitInstance.apiService.checkEmail(verifyMailRequest)
-//                if(response.isSuccessful)
-//                {
-//                    showToast(otp)
-//                    if(response.body()?.token.toString()!="OTP Expired" || response.body()?.token.toString()!="Incorrect OTP"){
-//                        save("token",response.body()?.token.toString())
-//                        val fragmentTransaction = parentFragmentManager.beginTransaction()
-//                        fragmentTransaction.replace(R.id.flFragment, Congratulationsfragment())
-//                        fragmentTransaction.addToBackStack(null)
-//                        fragmentTransaction.commit()
-//                    }
-//                    else {
-//                        val incorrectOtp=view.findViewById<TextView>(R.id.incorrectOtp)
-//                        incorrectOtp.text="Recheck One Time Password"
-//                    }
-//                }
-//                else {
-//                    showToast("Please Retry")
-//                }
-//            }
+
+            lifecycleScope.launch {
+                val Email = readFromDataStore(dataStore,"Email")
+                val verifyMailRequest =verifyMailRequest(Email.toString(),otp)
+                val response = RetrofitInstance.apiService.checkEmail(verifyMailRequest)
+                if(response.isSuccessful)
+                {
+                    showToast(otp)
+                    //if(response.body()?.token.toString()!="OTP Expired" || response.body()?.token.toString()!="Incorrect OTP"||response.body()?.token.toString()!="No OTP generated"){
+                    if(response.body()?.token.toString().length >=20){
+                        save("token",response.body()?.token.toString())
+                        val fragmentTransaction = parentFragmentManager.beginTransaction()
+                        fragmentTransaction.replace(R.id.flFragment, Congratulationsfragment())
+                        fragmentTransaction.addToBackStack(null)
+                        fragmentTransaction.commit()
+                    }
+                    else {
+                        val incorrectOtp=view.findViewById<TextView>(R.id.incorrectOtp)
+                        incorrectOtp.text=response.body()?.token.toString()
+                    }
+                }
+                else {
+                    showToast("Please Retry")
+                }
+            }
         }
 
         return view

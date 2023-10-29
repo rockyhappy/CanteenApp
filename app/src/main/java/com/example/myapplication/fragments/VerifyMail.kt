@@ -132,6 +132,8 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
             otp=otp+editText5.text.toString()
             otp=otp+editText6.text.toString()
             showToast(otp)
+
+
             val fragmentTransaction = parentFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.flFragment, NewPassword())
             fragmentTransaction.addToBackStack(null)

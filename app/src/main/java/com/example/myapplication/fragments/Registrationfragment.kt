@@ -66,19 +66,19 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
         val button=view.findViewById<Button>(R.id.button)
         button.setOnClickListener {
             var collection:TextInputEditText=view.findViewById(R.id.email)
-            val UserName=collection.text.toString()
-            UserName.trim()
+            var UserName=collection.text.toString()
+            UserName.trim().toString()
 
             collection=view.findViewById(R.id.email2)
-            val Email=collection.text.toString()
+            var Email=collection.text.toString()
             Email.trim()
 
             collection=view.findViewById(R.id.passkey)
-            val password1=collection.text.toString()
+            var password1=collection.text.toString()
             password1.trim()
 
             collection=view.findViewById(R.id.passkey2)
-            val password2=collection.text.toString()
+            var password2=collection.text.toString()
             password2.trim()
 
 
@@ -128,18 +128,21 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
                 userPassword2.text=""
             }
             /** API testing */
-            if(true)
+            if(false)
             {
                 val fragmentTransaction = parentFragmentManager.beginTransaction()
                 fragmentTransaction.replace(R.id.flFragment, RegistrationVerifyMail())
                 fragmentTransaction.addToBackStack(null)
                 fragmentTransaction.commit()
             }
+            /**
+             * this is the code for the original api
+             */
             if(!flag) {
                 val signUpRequest = SignUpRequest(
-                    fullName="rachit katiyar",
-                    email="abc@gmail.com",
-                    password="Rachit checking",
+                    fullName=UserName,
+                    email=Email,
+                    password=password1,
                     role="USER"
                 )
                 lifecycleScope.launch {
