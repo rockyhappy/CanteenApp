@@ -44,6 +44,7 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_registrationfragment, container, false)
 
+        /** this is the Back Button */
         val backButton:FloatingActionButton=view.findViewById(R.id.backButton)
         backButton.setOnClickListener{
             val fragmentTransaction = parentFragmentManager.beginTransaction()
@@ -51,6 +52,17 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
+
+        /**This is the Sign In text*/
+        val signIn =view.findViewById<TextView>(R.id.textView2)
+        signIn.setOnClickListener {
+            val fragmentTransaction = parentFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.flFragment, LoginFragment())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
+
+        /** This is the main Button of the api calling*/
         val button=view.findViewById<Button>(R.id.button)
         button.setOnClickListener {
             var collection:TextInputEditText=view.findViewById(R.id.email)
@@ -115,11 +127,19 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
             else {
                 userPassword2.text=""
             }
+            /** API testing */
+            if(true)
+            {
+                val fragmentTransaction = parentFragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.flFragment, RegistrationVerifyMail())
+                fragmentTransaction.addToBackStack(null)
+                fragmentTransaction.commit()
+            }
             if(true) {
                 val signUpRequest = SignUpRequest(
-                    fullName="hood dabag",
-                    email=Email,
-                    password="Qwerty@123",
+                    fullName="rachit katiyar",
+                    email="abc@gmail.com",
+                    password="Rachit checking",
                     role="USER"
                 )
                 lifecycleScope.launch {
@@ -130,6 +150,7 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
                             dataStore= context?.createDataStore(name= "user")!!
                             save("Email",Email)
                             save("password",password1)
+                            save("fullname",UserName)
                             val fragmentTransaction = parentFragmentManager.beginTransaction()
                             fragmentTransaction.replace(R.id.flFragment, RegistrationVerifyMail())
                             fragmentTransaction.addToBackStack(null)

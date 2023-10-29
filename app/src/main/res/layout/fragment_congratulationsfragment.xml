@@ -5,9 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".fragments.congratulationsfragment"
+    tools:context=".fragments.Congratulationsfragment"
     tools:ignore="ExtraText">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        app:fabCustomSize="38dp"
+        android:id="@+id/backButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:elevation="5dp"
+        android:src="@drawable/baseline_arrow_back_24"
+        android:backgroundTint="@color/white"
+        />
 
     <ImageView
         android:id="@+id/tick"
@@ -40,16 +53,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/registered" />
 
-    <ImageView
-        android:id="@+id/backone"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
-        android:layout_marginTop="38dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.099"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back" />
+
 
     <Button
         android:id="@+id/button2"

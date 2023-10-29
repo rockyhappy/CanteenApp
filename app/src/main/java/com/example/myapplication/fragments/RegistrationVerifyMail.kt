@@ -23,6 +23,7 @@ import androidx.lifecycle.lifecycleScope
 import com.caverock.androidsvg.SVG
 import com.caverock.androidsvg.SVGImageView
 import com.example.myapplication.R
+import com.example.myapplication.SignUpRequest
 import com.example.myapplication.readFromDataStore
 import com.example.myapplication.verifyMailRequest
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -42,11 +43,13 @@ class RegistrationVerifyMail : Fragment(R.layout.fragment_registration_verify_ma
     ): View? {
         val view = inflater.inflate(R.layout.fragment_registration_verify_mail, container, false)
 
+
+
         /** This is the BackButton */
         val backButton: FloatingActionButton =view.findViewById(R.id.backButton)
         backButton.setOnClickListener{
             val fragmentTransaction = parentFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.flFragment, ForgotPassward())
+            fragmentTransaction.replace(R.id.flFragment, Registrationfragment())
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
@@ -82,19 +85,17 @@ class RegistrationVerifyMail : Fragment(R.layout.fragment_registration_verify_ma
 
         /**
          * Now this is the code for the resend button  */
-        lateinit var tv: TextView
         lateinit var cTimer: CountDownTimer
 
         val resendBtn = view.findViewById<Button>(R.id.resendBtn)
         fun startTimer() {
-            tv = view.findViewById(R.id.resend)
-            cTimer = object : CountDownTimer(30000, 1000) {
+            cTimer = object : CountDownTimer(10000, 1000) {
                 override fun onTick(millisUntilFinished: Long) {
-                    tv.text = "seconds remaining: ${millisUntilFinished / 1000}"
+                    resendBtn.text = "seconds remaining: ${millisUntilFinished / 1000}"
                 }
 
                 override fun onFinish() {
-                    tv.text = "Re send OTP!"
+                    resendBtn.text = "Re send OTP!"
                     resendBtn.isEnabled = true
                 }
             }
@@ -102,6 +103,23 @@ class RegistrationVerifyMail : Fragment(R.layout.fragment_registration_verify_ma
         }
         startTimer()
 
+
+        resendBtn.setOnClickListener {
+            lifecycleScope.launch{
+                val Email = readFromDataStore(dataStore,"Email" )
+                val fullname = readFromDataStore(dataStore , "fullname")
+                val password = readFromDataStore(dataStore,"password")
+                val signUpRequest=SignUpRequest(
+                    fullName=fullname.toString(),
+                    email=Email.toString(),
+                    password=password.toString(),
+                    role="USER"
+                )
+                val response = RetrofitInstance.apiService.fetchData(signUpRequest)
+            }
+            resendBtn.isEnabled=false
+            startTimer()
+        }
         /**This passes to the new Password*/
         val button= view.findViewById<Button>(R.id.button)
         button.setOnClickListener {
@@ -122,7 +140,7 @@ class RegistrationVerifyMail : Fragment(R.layout.fragment_registration_verify_ma
                     if(response.body()?.token.toString()!="OTP Expired" || response.body()?.token.toString()!="Incorrect OTP"){
                         save("token",response.body()?.token.toString())
                         val fragmentTransaction = parentFragmentManager.beginTransaction()
-                        fragmentTransaction.replace(R.id.flFragment, WellDone())
+                        fragmentTransaction.replace(R.id.flFragment, Congratulationsfragment())
                         fragmentTransaction.addToBackStack(null)
                         fragmentTransaction.commit()
                     }
