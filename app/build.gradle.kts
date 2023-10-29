@@ -48,6 +48,8 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    // To apply Svg images directly
     implementation ("com.caverock:androidsvg:1.4")
 
     // Retrofit
@@ -65,4 +67,5 @@ dependencies {
 
     // Preferences DataStore
     implementation ("androidx.datastore:datastore-preferences:1.0.0-alpha04")
+
 }
