@@ -1,15 +1,19 @@
 package com.example.myapplication.fragments
 
 import android.os.Bundle
+import android.text.TextUtils
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import com.caverock.androidsvg.SVG
 import com.caverock.androidsvg.SVGImageView
 import com.example.myapplication.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.textfield.TextInputEditText
 
 class ForgotPassward : Fragment(R.layout.fragment_forgot_passward) {
 
@@ -27,7 +31,26 @@ class ForgotPassward : Fragment(R.layout.fragment_forgot_passward) {
         val button= view.findViewById<Button>(R.id.button)
         button.setOnClickListener {
             /**call api for the forgot password*/
+            var collection : TextInputEditText =view.findViewById(R.id.email)
+            var Email=collection.text.toString()
+            Email=Email.trim()
 
+            var flag=false
+
+            var userMailIncorrect=view.findViewById<TextView>(R.id.userMailIncorrect)
+
+            if(!isValidEmail(Email))
+            {
+                userMailIncorrect.text="Not a Valid Mail"
+                flag=true
+            }
+            else {
+                userMailIncorrect.text=""
+            }
+            if(!flag)
+            {
+
+            }
             val fragmentTransaction = parentFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.flFragment, VerifyMail())
             fragmentTransaction.addToBackStack(null)
@@ -44,5 +67,12 @@ class ForgotPassward : Fragment(R.layout.fragment_forgot_passward) {
 
 
         return view
+    }
+    fun isValidEmail(target: CharSequence?): Boolean {
+        return if (TextUtils.isEmpty(target)) {
+            false
+        } else {
+            Patterns.EMAIL_ADDRESS.matcher(target).matches()
+        }
     }
 }

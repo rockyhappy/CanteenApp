@@ -88,7 +88,7 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
         fun startTimer() {
             cTimer = object : CountDownTimer(10000, 1000) {
                 override fun onTick(millisUntilFinished: Long) {
-                    resendBtn.text = "seconds remaining: ${millisUntilFinished / 1000}"
+                    resendBtn.text = "Resend OTP in : ${millisUntilFinished / 1000}"
                 }
 
                 override fun onFinish() {
@@ -132,6 +132,8 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
             otp=otp+editText5.text.toString()
             otp=otp+editText6.text.toString()
             showToast(otp)
+
+
             val fragmentTransaction = parentFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.flFragment, NewPassword())
             fragmentTransaction.addToBackStack(null)
