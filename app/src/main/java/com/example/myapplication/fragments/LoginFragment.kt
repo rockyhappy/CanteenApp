@@ -53,6 +53,13 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
+        val textView2 =view.findViewById<TextView>(R.id.signUp)
+        textView2.setOnClickListener {
+            val fragmentTransaction = parentFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.flFragment, Registrationfragment())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
 
 
         return view

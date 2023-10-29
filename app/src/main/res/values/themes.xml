@@ -18,6 +18,7 @@
     <!-- res/values-night/styles.xml (for dark mode) -->
     <style name="AppTheme" parent="Theme.AppCompat.DayNight">
         <item name="android:statusBarColor">@color/primary_color</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
 
@@ -27,5 +28,6 @@
         <item name="colorPrimaryDark">@color/primary_color</item>
         <item name="colorAccent">@color/primary_color</item>
         <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 </resources>

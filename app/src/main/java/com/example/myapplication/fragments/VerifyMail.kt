@@ -112,7 +112,7 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
                     password=password.toString(),
                     role="USER"
                 )
-                val response = RetrofitInstance.apiService.fetchData(signUpRequest)
+                //val response = RetrofitInstance.apiService.fetchData(signUpRequest)
             }
             resendBtn.isEnabled=false
             startTimer()
