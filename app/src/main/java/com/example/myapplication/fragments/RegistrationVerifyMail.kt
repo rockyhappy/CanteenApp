@@ -25,6 +25,7 @@ import com.caverock.androidsvg.SVGImageView
 import com.example.myapplication.R
 import com.example.myapplication.SignUpRequest
 import com.example.myapplication.readFromDataStore
+import com.example.myapplication.resendOtpRequest
 import com.example.myapplication.verifyMailRequest
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.flow.first
@@ -109,13 +110,16 @@ class RegistrationVerifyMail : Fragment(R.layout.fragment_registration_verify_ma
                 val Email = readFromDataStore(dataStore,"Email" )
                 val fullname = readFromDataStore(dataStore , "fullname")
                 val password = readFromDataStore(dataStore,"password")
-                val signUpRequest=SignUpRequest(
-                    fullName=fullname.toString(),
-                    email=Email.toString(),
-                    password=password.toString(),
-                    role="USER"
+                val resendOtp= resendOtpRequest(
+                    email=Email.toString()
                 )
-                //val response = RetrofitInstance.apiService.fetchData(signUpRequest)
+                val response = RetrofitInstance.apiService.resendOtp(resendOtp)
+                if(response.isSuccessful){
+                    //showToast(response.body()?.token.toString())
+                }
+                else{
+                    showToast("Something went Wrong")
+                }
             }
             resendBtn.isEnabled=false
             startTimer()

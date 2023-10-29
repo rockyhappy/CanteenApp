@@ -34,3 +34,11 @@ data class verifyMailRequest(
 data class verifyMailResponse(
     val token:String
 )
+
+data class resendOtpRequest(
+    val email:String
+)
+
+data class resendOtpResponse(
+    val token:String
+)

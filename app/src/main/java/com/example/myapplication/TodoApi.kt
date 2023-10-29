@@ -13,4 +13,7 @@ interface ApiService {
 
     @POST("api/v1/auth/verify-email")
     suspend fun checkEmail(@Body request: verifyMailRequest) : Response<verifyMailResponse>
+
+    @POST("api/v1/auth/resend-otp")
+    suspend fun resendOtp(@Body request: resendOtpRequest) : Response<resendOtpResponse>
 }
