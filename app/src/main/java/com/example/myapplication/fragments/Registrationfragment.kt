@@ -135,7 +135,7 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
                 fragmentTransaction.addToBackStack(null)
                 fragmentTransaction.commit()
             }
-            if(true) {
+            if(!flag) {
                 val signUpRequest = SignUpRequest(
                     fullName="rachit katiyar",
                     email="abc@gmail.com",

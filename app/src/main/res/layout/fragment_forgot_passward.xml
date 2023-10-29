@@ -8,17 +8,18 @@
     android:background="@color/white">
 
 
-    <com.caverock.androidsvg.SVGImageView
-        android:id="@+id/svgImageView"
-        android:layout_width="37dp"
-        android:layout_height="32dp"
-        android:padding="5dp"
-        android:layout_marginTop="21dp"
-        android:layout_marginStart="45dp"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        app:fabCustomSize="38dp"
+        android:id="@+id/backButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:elevation="5dp"
-        android:background="@drawable/ellipse"
+        android:src="@drawable/baseline_arrow_back_24"
+        android:backgroundTint="@color/white"
         />
 
     <TextView
@@ -45,7 +46,7 @@
         android:layout_height="65dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="132dp"
         android:fontFamily="@font/roboto"
         android:gravity="center_horizontal|top"
         android:text="@string/don_t_worry"
@@ -58,57 +59,57 @@
         android:id="@+id/svgImageView2"
         android:layout_width="360dp"
         android:layout_height="302dp"
-        android:layout_marginTop="187dp"
+        android:layout_marginTop="217dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
         android:layout_width="match_parent"
         android:layout_height="58dp"
-        android:layout_marginTop="505dp"
         android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="555dp"
         android:background="@drawable/rectangle1"
-        app:hintEnabled="false"
         android:fontFamily="@font/roboto"
+        app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:startIconDrawable="@drawable/baseline_mail_24"
-        app:startIconTint="@color/grey"
-        >
+        app:startIconTint="@color/grey">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/email"
             style="@style/NoUnderline"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fontFamily="@font/roboto"
             android:hint="User@gmail.com"
             android:imeOptions="actionNext"
             android:maxLines="1"
             android:textColor="@color/black"
-            android:textColorHint="@color/grey"
-            android:fontFamily="@font/roboto"/>
+            android:textColorHint="@color/grey" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/try_another"
-        android:layout_width="wrap_content"
-        android:layout_height="21dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="600dp"
-        android:gravity="top"
-        android:text="@string/try_another"
-        android:textStyle="bold"
-        android:textSize="17dp"
+<!--    <TextView-->
+<!--        android:id="@+id/try_another"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="21dp"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginTop="600dp"-->
+<!--        android:gravity="top"-->
+<!--        android:text="@string/try_another"-->
+<!--        android:textStyle="bold"-->
+<!--        android:textSize="17dp"-->
 
-        android:textAppearance="@style/try_another"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.467"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--        android:textAppearance="@style/try_another"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.467"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 
     <Button
@@ -116,13 +117,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="660dp"
-        android:text="Send"
-        android:textColor="@color/black"
-        android:textAllCaps="false"
-        android:fontFamily="@font/roboto"
+        android:layout_marginTop="680dp"
         android:background="@drawable/round_corner"
         android:elevation="5dp"
+        android:fontFamily="@font/roboto"
+        android:text="Send"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="760dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
