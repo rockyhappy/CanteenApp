@@ -9,8 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -64,9 +66,18 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
             fragmentTransaction.commit()
         }
 
+        val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
+        val container = view.findViewById<ConstraintLayout>(R.id.Container)
         /** This is the main Button of the api calling*/
         val button=view.findViewById<Button>(R.id.button)
         button.setOnClickListener {
+
+            // Disable the button
+            button.isEnabled = false
+            container.isEnabled=false
+            container.isFocusable = false
+            progressBar.visibility = View.VISIBLE
+
             var collection:TextInputEditText=view.findViewById(R.id.email)
             var UserName=collection.text.toString()
             UserName=UserName.trim()
@@ -154,12 +165,13 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
 
             }
             /** API testing */
-            if(false)
+            if(flag)
             {
-                val fragmentTransaction = parentFragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.flFragment, RegistrationVerifyMail())
-                fragmentTransaction.addToBackStack(null)
-                fragmentTransaction.commit()
+                // Enable the button
+                button.isEnabled = true
+                container.isEnabled=true
+                container.isFocusable = true
+                progressBar.visibility = View.GONE
             }
             /**
              * this is the code for the original api
@@ -195,6 +207,12 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
                         }
                     }catch(e : Exception){
                         showToast("Network Error")
+                    }finally {
+                        // Enable the button
+                        button.isEnabled = true
+                        container.isEnabled=true
+                        container.isFocusable = true
+                        progressBar.visibility = View.GONE
                     }
                     //Log.d("API Error", "Response code: ${response.code()}, Message: ${response.message()}")
                 }
@@ -202,6 +220,10 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
             else
             {
                 showToast("Something went Wrong Please Retry")
+                button.isEnabled = true
+                container.isEnabled=true
+                container.isFocusable = true
+                progressBar.visibility = View.GONE
             }
 
         }
@@ -239,6 +261,20 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
             temp[dataStoreKey]=value
         }
     }
+    fun setChildViewsInteractable(view: View, interactable: Boolean) {
+        if (view is ViewGroup) {
+            for (i in 0 until view.childCount) {
+                val child = view.getChildAt(i)
+                child.isClickable = interactable
+                child.isFocusable = interactable
+                if (child is ViewGroup) {
+                    setChildViewsInteractable(child, interactable)
+                }
+            }
+        }
+    }
+
+
 }
 object RetrofitInstance {
     private const val BASE_URL = "https://brunchbliss.onrender.com/"
