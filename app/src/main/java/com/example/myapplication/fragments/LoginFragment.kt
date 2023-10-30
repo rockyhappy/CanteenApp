@@ -100,26 +100,31 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 email=Email,
                 password = password1)
                 lifecycleScope.launch{
-                    val response = RetrofitInstance.apiService.login(loginRequest)
-                    if(response.isSuccessful)
-                    {
-                        //if(response.body()?.token.toString()!="OTP Expired" || response.body()?.token.toString()!="Incorrect OTP"||response.body()?.token.toString()!="No OTP generated"){
-                        if(response.body()?.token.toString().length >=30){
-                            save("token",response.body()?.token.toString())
+
+                    try {
+
+
+                        val response = RetrofitInstance.apiService.login(loginRequest)
+                        if (response.isSuccessful) {
+                            //if(response.body()?.token.toString()!="OTP Expired" || response.body()?.token.toString()!="Incorrect OTP"||response.body()?.token.toString()!="No OTP generated"){
+                            if (response.body()?.token.toString().length >= 30) {
+                                save("token", response.body()?.token.toString())
 //                            val fragmentTransaction = parentFragmentManager.beginTransaction()
 //                            fragmentTransaction.replace(R.id.flFragment, Congratulationsfragment())
 //                            fragmentTransaction.addToBackStack(null)
 //                            fragmentTransaction.commit()
-                            startActivity(Intent(requireActivity(), DashBoard::class.java))
-                            requireActivity().finish()
+                                startActivity(Intent(requireActivity(), DashBoard::class.java))
+                                requireActivity().finish()
+                            } else {
+                                val incorrectOtp =
+                                    view.findViewById<TextView>(R.id.passwordIncorrect1)
+                                incorrectOtp.text = response.body()?.token.toString()
+                            }
+                        } else {
+                            showToast("Please Retry")
                         }
-                        else {
-                            val incorrectOtp=view.findViewById<TextView>(R.id.passwordIncorrect1)
-                            incorrectOtp.text=response.body()?.token.toString()
-                        }
-                    }
-                    else {
-                        showToast("Please Retry")
+                    }catch(e : Exception){
+                        showToast("Connection Error")
                     }
                 }
 

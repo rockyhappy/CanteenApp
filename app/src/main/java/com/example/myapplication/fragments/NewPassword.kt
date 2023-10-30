@@ -7,17 +7,31 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.createDataStore
+import androidx.lifecycle.lifecycleScope
 import com.caverock.androidsvg.SVG
 import com.caverock.androidsvg.SVGImageView
 import com.example.myapplication.R
+import com.example.myapplication.ResetPasswordRequest
+import com.example.myapplication.readFromDataStore
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.launch
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 class NewPassword : Fragment(R.layout.fragment_new_password) {
 
+    private lateinit var dataStore: DataStore<Preferences>
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        dataStore = requireContext().createDataStore(name = "user")
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -77,6 +91,29 @@ class NewPassword : Fragment(R.layout.fragment_new_password) {
             }
             if(!flag)
             {
+                lifecycleScope.launch{
+                    try{
+                        val resetPasswordRequest=ResetPasswordRequest(
+                            email= readFromDataStore(dataStore,"Email").toString(),
+                            password = password1,
+                            otp= readFromDataStore(dataStore,"otp").toString()
+                        )
+                        val response=RetrofitInstance.apiService.ResetPassword(resetPasswordRequest)
+                        if (response.isSuccessful) {
+                            if (response.body()?.token.toString().length >=30) {
+                                val fragmentTransaction = parentFragmentManager.beginTransaction()
+                                fragmentTransaction.replace(R.id.flFragment, VerifyMail())
+                                fragmentTransaction.addToBackStack(null)
+                                fragmentTransaction.commit()
+                            } else {
+                                showToast("User already Exists")
+                            }
+                        }
+                    }catch (e:Exception)
+                    {
+                        showToast("Connection Error")
+                    }
+                }
 
             }
             val fragmentTransaction = parentFragmentManager.beginTransaction()
@@ -104,5 +141,7 @@ class NewPassword : Fragment(R.layout.fragment_new_password) {
         matcher = pattern.matcher(password)
         return matcher.matches()
     }
-
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
 }

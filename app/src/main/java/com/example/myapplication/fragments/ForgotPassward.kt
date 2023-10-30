@@ -71,28 +71,32 @@ class ForgotPassward : Fragment(R.layout.fragment_forgot_passward) {
                     email=Email
                 )
                 lifecycleScope.launch {
-                    val response = RetrofitInstance.apiService.ForgotPassward(forgotPasswordRequest)
-                    Log.d("error",response.body().toString())
-                    if (response.isSuccessful) {
-                        if(response.body()?.token.toString()=="Check your email for OTP"){
-                            dataStore= context?.createDataStore(name= "user")!!
-                            save("Email",Email)
-                            val fragmentTransaction = parentFragmentManager.beginTransaction()
-                            fragmentTransaction.replace(R.id.flFragment, VerifyMail())
-                            fragmentTransaction.addToBackStack(null)
-                            fragmentTransaction.commit()
+                    try {
+                        val response = RetrofitInstance.apiService.ForgotPassward(forgotPasswordRequest)
+                        Log.d("error", response.body().toString())
+                        if (response.isSuccessful) {
+                            if (response.body()?.token.toString() == "Check your email for OTP") {
+                                dataStore = context?.createDataStore(name = "user")!!
+                                save("Email", Email)
+                                val fragmentTransaction = parentFragmentManager.beginTransaction()
+                                fragmentTransaction.replace(R.id.flFragment, VerifyMail())
+                                fragmentTransaction.addToBackStack(null)
+                                fragmentTransaction.commit()
+                            } else {
+                                showToast("User already Exists")
+                            }
                         }
-                        else{
-                            showToast("User already Exists")
-                        }
+                    }catch(e : Exception)
+                    {
+                        showToast("Connection Error")
                     }
-                    Log.d("API Error", "Response code: ${response.code()}, Message: ${response.message()}")
+                    //Log.d("API Error", "Response code: ${response.code()}, Message: ${response.message()}")
                 }
             }
-            val fragmentTransaction = parentFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.flFragment, VerifyMail())
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
+//            val fragmentTransaction = parentFragmentManager.beginTransaction()
+//            fragmentTransaction.replace(R.id.flFragment, VerifyMail())
+//            fragmentTransaction.addToBackStack(null)
+//            fragmentTransaction.commit()
         }
 
         val backButton: FloatingActionButton =view.findViewById(R.id.backButton)
