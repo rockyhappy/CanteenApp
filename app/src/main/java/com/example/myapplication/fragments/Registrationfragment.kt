@@ -31,6 +31,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.lang.Exception
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -171,24 +172,31 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
                     role="USER"
                 )
                 lifecycleScope.launch {
-                    val response = RetrofitInstance.apiService.fetchData(signUpRequest)
-                    Log.d("error",response.body().toString())
-                    if (response.isSuccessful) {
-                        if(response.body()?.token.toString()=="Check your email for OTP"){
-                            dataStore= context?.createDataStore(name= "user")!!
-                            save("Email",Email)
-                            save("password",password1)
-                            save("fullname",UserName)
-                            val fragmentTransaction = parentFragmentManager.beginTransaction()
-                            fragmentTransaction.replace(R.id.flFragment, RegistrationVerifyMail())
-                            fragmentTransaction.addToBackStack(null)
-                            fragmentTransaction.commit()
+                    try {
+
+                        val response = RetrofitInstance.apiService.fetchData(signUpRequest)
+                        Log.d("error", response.body().toString())
+                        if (response.isSuccessful) {
+                            if (response.body()?.token.toString() == "Check your email for OTP") {
+                                dataStore = context?.createDataStore(name = "user")!!
+                                save("Email", Email)
+                                save("password", password1)
+                                save("fullname", UserName)
+                                val fragmentTransaction = parentFragmentManager.beginTransaction()
+                                fragmentTransaction.replace(
+                                    R.id.flFragment,
+                                    RegistrationVerifyMail()
+                                )
+                                fragmentTransaction.addToBackStack(null)
+                                fragmentTransaction.commit()
+                            } else {
+                                showToast("User already Exists")
+                            }
                         }
-                        else{
-                            showToast("User already Exists")
-                        }
+                    }catch(e : Exception){
+                        showToast("Network Error")
                     }
-                    Log.d("API Error", "Response code: ${response.code()}, Message: ${response.message()}")
+                    //Log.d("API Error", "Response code: ${response.code()}, Message: ${response.message()}")
                 }
             }
             else

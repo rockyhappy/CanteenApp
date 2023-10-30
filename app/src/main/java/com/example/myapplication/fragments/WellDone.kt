@@ -47,8 +47,10 @@ class WellDone : Fragment(R.layout.fragment_well_done) {
 
         val button=view.findViewById<Button>(R.id.button)
         button.setOnClickListener {
-            startActivity(Intent(requireActivity(),DashBoard::class.java))
-            requireActivity().finish()
+            val fragmentTransaction = parentFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.flFragment, ChoiceFragment())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
         }
         return view
     }

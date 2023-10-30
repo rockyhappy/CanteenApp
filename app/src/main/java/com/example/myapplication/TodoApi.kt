@@ -24,4 +24,7 @@ interface ApiService {
     @POST("api/v1/auth/forgot-password")
     suspend fun ForgotPassward(@Body request:forgotPasswordRequest) : Response<forgotPasswordResponse>
 
+    @POST("api/v1/auth/reset-password")
+    suspend fun ResetPassword(@Body request: ResetPasswordRequest) : Response<ResetPasswordResponse>
+
 }
