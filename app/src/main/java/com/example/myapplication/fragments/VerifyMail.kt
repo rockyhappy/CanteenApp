@@ -89,7 +89,7 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
 
         val resendBtn = view.findViewById<Button>(R.id.resendBtn)
         fun startTimer() {
-            cTimer = object : CountDownTimer(10000, 1000) {
+            cTimer = object : CountDownTimer(60000, 1000) {
                 override fun onTick(millisUntilFinished: Long) {
                     resendBtn.text = "Resend OTP in : ${millisUntilFinished / 1000}"
                 }
@@ -165,7 +165,6 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
 class GenericKeyEvent internal constructor(private val currentView: EditText, private val previousView: EditText?) : View.OnKeyListener{
     override fun onKey(p0: View?, keyCode: Int, event: KeyEvent?): Boolean {
         if(event!!.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DEL && currentView.id != R.id.editText1 && currentView.text.isEmpty()) {
-            //If current is empty then previous EditText's number will also be deleted
             previousView!!.text = null
             previousView.requestFocus()
             return true
@@ -178,7 +177,7 @@ class GenericKeyEvent internal constructor(private val currentView: EditText, pr
 
 class GenericTextWatcher internal constructor(private val currentView: View, private val nextView: View?) :
     TextWatcher {
-    override fun afterTextChanged(editable: Editable) { // TODO Auto-generated method stub
+    override fun afterTextChanged(editable: Editable) {
         val text = editable.toString()
         when (currentView.id) {
             R.id.editText1 -> if (text.length == 1) nextView!!.requestFocus()
