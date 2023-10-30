@@ -43,3 +43,11 @@ data class resendOtpRequest(
 data class resendOtpResponse(
     val token:String
 )
+
+data class forgotPasswordRequest(
+    val email:String
+)
+
+data class forgotPasswordResponse(
+    val token:String
+)

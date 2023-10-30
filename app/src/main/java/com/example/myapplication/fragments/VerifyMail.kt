@@ -16,6 +16,8 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.preferencesKey
 import androidx.datastore.preferences.createDataStore
 import androidx.lifecycle.lifecycleScope
 import com.caverock.androidsvg.SVG
@@ -23,6 +25,7 @@ import com.caverock.androidsvg.SVGImageView
 import com.example.myapplication.R
 import com.example.myapplication.SignUpRequest
 import com.example.myapplication.readFromDataStore
+import com.example.myapplication.resendOtpRequest
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
 
@@ -106,13 +109,17 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
                 val Email = readFromDataStore(dataStore,"Email" )
                 val fullname = readFromDataStore(dataStore , "fullname")
                 val password = readFromDataStore(dataStore,"password")
-                val signUpRequest= SignUpRequest(
-                    fullName=fullname.toString(),
-                    email=Email.toString(),
-                    password=password.toString(),
-                    role="USER"
+                val resendOtp= resendOtpRequest(
+                    email=Email.toString()
                 )
                 //val response = RetrofitInstance.apiService.fetchData(signUpRequest)
+                val response = RetrofitInstance.apiService.resendOtp(resendOtp)
+                if(response.isSuccessful){
+                    //showToast(response.body()?.token.toString())
+                }
+                else{
+                    showToast("Something went Wrong")
+                }
             }
             resendBtn.isEnabled=false
             startTimer()
@@ -132,8 +139,10 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
             otp=otp+editText5.text.toString()
             otp=otp+editText6.text.toString()
             showToast(otp)
+            lifecycleScope.launch{
 
-
+                save("otp",otp)
+            }
             val fragmentTransaction = parentFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.flFragment, NewPassword())
             fragmentTransaction.addToBackStack(null)
@@ -144,6 +153,12 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
     }
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+    private suspend fun save (key:String , value:String){
+        val dataStoreKey= preferencesKey<String>(key)
+        dataStore.edit{temp ->
+            temp[dataStoreKey]=value
+        }
     }
 }
 
