@@ -32,7 +32,7 @@
             <!-- Green outline shape -->
             <item>
                 <shape android:shape="rectangle">
-                    <solid android:color="@color/primary_color" /> <!-- Specify your desired green color -->
+                    <solid android:color="#CC2F2F" /> <!-- Specify your desired green color -->
                     <corners android:radius="12dp" />
                 </shape>
             </item>

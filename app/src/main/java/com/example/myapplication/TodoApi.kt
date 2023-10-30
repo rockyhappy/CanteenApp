@@ -1,4 +1,5 @@
 package com.example.myapplication
+import com.example.myapplication.fragments.ForgotPassward
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -18,6 +19,9 @@ interface ApiService {
     suspend fun resendOtp(@Body request: resendOtpRequest) : Response<resendOtpResponse>
 
     @POST("api/v1/auth/login")
-    suspend fun login(@Body requset : LoginRequest) : Response<LoginResponse>
+    suspend fun login(@Body request : LoginRequest) : Response<LoginResponse>
+
+    @POST("api/v1/auth/forgot-password")
+    suspend fun ForgotPassward(@Body request:forgotPasswordRequest) : Response<forgotPasswordResponse>
 
 }
