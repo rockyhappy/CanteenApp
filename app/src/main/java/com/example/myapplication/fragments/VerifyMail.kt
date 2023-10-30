@@ -108,19 +108,25 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
 
         resendBtn.setOnClickListener {
             lifecycleScope.launch{
-                val Email = readFromDataStore(dataStore,"Email" )
-                val fullname = readFromDataStore(dataStore , "fullname")
-                val password = readFromDataStore(dataStore,"password")
-                val resendOtp= resendOtpRequest(
-                    email=Email.toString()
-                )
-                //val response = RetrofitInstance.apiService.fetchData(signUpRequest)
-                val response = RetrofitInstance.apiService.resendOtp(resendOtp)
-                if(response.isSuccessful){
-                    //showToast(response.body()?.token.toString())
-                }
-                else{
-                    showToast("Something went Wrong")
+                try {
+
+
+                    val Email = readFromDataStore(dataStore, "Email")
+                    val fullname = readFromDataStore(dataStore, "fullname")
+                    val password = readFromDataStore(dataStore, "password")
+                    val resendOtp = resendOtpRequest(
+                        email = Email.toString()
+                    )
+                    //val response = RetrofitInstance.apiService.fetchData(signUpRequest)
+                    val response = RetrofitInstance.apiService.resendOtp(resendOtp)
+                    if (response.isSuccessful) {
+                        //showToast(response.body()?.token.toString())
+                    } else {
+                        showToast("Something went Wrong")
+                    }
+                }catch (e:Exception)
+                {
+                    showToast("Connection Error")
                 }
             }
             resendBtn.isEnabled=false
@@ -140,7 +146,7 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
             otp=otp+editText4.text.toString()
             otp=otp+editText5.text.toString()
             otp=otp+editText6.text.toString()
-            showToast(otp)
+            //showToast(otp)
             lifecycleScope.launch{
 
                 save("otp",otp)

@@ -100,9 +100,9 @@ class NewPassword : Fragment(R.layout.fragment_new_password) {
                         )
                         val response=RetrofitInstance.apiService.ResetPassword(resetPasswordRequest)
                         if (response.isSuccessful) {
-                            if (response.body()?.token.toString().length >=30) {
+                            if (response.body()?.token.toString().length <=30) {
                                 val fragmentTransaction = parentFragmentManager.beginTransaction()
-                                fragmentTransaction.replace(R.id.flFragment, VerifyMail())
+                                fragmentTransaction.replace(R.id.flFragment, WellDone())
                                 fragmentTransaction.addToBackStack(null)
                                 fragmentTransaction.commit()
                             } else {
