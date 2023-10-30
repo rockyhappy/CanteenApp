@@ -24,6 +24,7 @@ import com.example.myapplication.R
 import com.example.myapplication.SignUpRequest
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.first
@@ -96,18 +97,30 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
             {
                 userNameIncorrect.text="User Name should be more than  6"
                 flag=true
+                val text1: TextInputLayout = view.findViewById(R.id.textInputLayout)
+                text1.setBackgroundResource(R.drawable.button_layout)
+
             }
             else {
                 userNameIncorrect.text=""
+                val text1: TextInputLayout = view.findViewById(R.id.textInputLayout)
+                text1.setBackgroundResource(R.drawable.inputbox)
+
             }
             /**Checking For Email Correctness*/
             if(!isValidEmail(Email))
             {
                 userMailIncorrect.text="Not a Valid Mail"
                 flag=true
+                val text1: TextInputLayout = view.findViewById(R.id.textInputLayout2)
+                text1.setBackgroundResource(R.drawable.button_layout)
+
             }
             else {
                 userMailIncorrect.text=""
+                val text1: TextInputLayout = view.findViewById(R.id.textInputLayout2)
+                text1.setBackgroundResource(R.drawable.inputbox)
+
             }
 
             /**Checking for if password is valid*/
@@ -115,17 +128,29 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
             {
                 userPassword1.text="Password not strong"
                 flag=true
+                val text1: TextInputLayout = view.findViewById(R.id.textInputLayout3)
+                text1.setBackgroundResource(R.drawable.button_layout)
+
             }
             else{
                 userPassword1.text=""
+                val text1: TextInputLayout = view.findViewById(R.id.textInputLayout3)
+                text1.setBackgroundResource(R.drawable.inputbox)
+
             }
             if(password2!=password1)
             {
                 userPassword2.text="Confirm Password Should match Password"
                 flag=true
+                val text1: TextInputLayout = view.findViewById(R.id.textInputLayout4)
+                text1.setBackgroundResource(R.drawable.button_layout)
+
             }
             else {
                 userPassword2.text=""
+                val text1: TextInputLayout = view.findViewById(R.id.textInputLayout4)
+                text1.setBackgroundResource(R.drawable.inputbox)
+
             }
             /** API testing */
             if(false)

@@ -23,6 +23,7 @@ import com.example.myapplication.R
 import com.example.myapplication.forgotPasswordRequest
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.launch
 
 class ForgotPassward : Fragment(R.layout.fragment_forgot_passward) {
@@ -54,9 +55,15 @@ class ForgotPassward : Fragment(R.layout.fragment_forgot_passward) {
             {
                 userMailIncorrect.text="Not a Valid Mail"
                 flag=true
+                val text1: TextInputLayout = view.findViewById(R.id.textInputLayout)
+                text1.setBackgroundResource(R.drawable.button_layout)
+
             }
             else {
                 userMailIncorrect.text=""
+                val text1: TextInputLayout = view.findViewById(R.id.textInputLayout)
+                text1.setBackgroundResource(R.drawable.inputbox)
+
             }
             if(!flag)
             {

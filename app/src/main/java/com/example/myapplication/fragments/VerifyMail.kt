@@ -28,6 +28,8 @@ import com.example.myapplication.readFromDataStore
 import com.example.myapplication.resendOtpRequest
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 
 class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
