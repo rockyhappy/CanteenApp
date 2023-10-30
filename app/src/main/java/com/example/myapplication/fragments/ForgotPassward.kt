@@ -2,6 +2,7 @@ package com.example.myapplication.fragments
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,14 +10,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.preferencesKey
+import androidx.datastore.preferences.createDataStore
+import androidx.lifecycle.lifecycleScope
 import com.caverock.androidsvg.SVG
 import com.caverock.androidsvg.SVGImageView
 import com.example.myapplication.R
+import com.example.myapplication.forgotPasswordRequest
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.launch
 
 class ForgotPassward : Fragment(R.layout.fragment_forgot_passward) {
 
+    private lateinit var dataStore: DataStore<Preferences>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,18 +55,48 @@ class ForgotPassward : Fragment(R.layout.fragment_forgot_passward) {
             {
                 userMailIncorrect.text="Not a Valid Mail"
                 flag=true
+                val text1: TextInputLayout = view.findViewById(R.id.textInputLayout)
+                text1.setBackgroundResource(R.drawable.button_layout)
+
             }
             else {
                 userMailIncorrect.text=""
+                val text1: TextInputLayout = view.findViewById(R.id.textInputLayout)
+                text1.setBackgroundResource(R.drawable.inputbox)
+
             }
             if(!flag)
             {
-
+                val forgotPasswordRequest=forgotPasswordRequest(
+                    email=Email
+                )
+                lifecycleScope.launch {
+                    try {
+                        val response = RetrofitInstance.apiService.ForgotPassward(forgotPasswordRequest)
+                        Log.d("error", response.body().toString())
+                        if (response.isSuccessful) {
+                            if (response.body()?.token.toString() == "Check your email for OTP") {
+                                dataStore = context?.createDataStore(name = "user")!!
+                                save("Email", Email)
+                                val fragmentTransaction = parentFragmentManager.beginTransaction()
+                                fragmentTransaction.replace(R.id.flFragment, VerifyMail())
+                                fragmentTransaction.addToBackStack(null)
+                                fragmentTransaction.commit()
+                            } else {
+                                showToast("User already Exists")
+                            }
+                        }
+                    }catch(e : Exception)
+                    {
+                        showToast("Connection Error")
+                    }
+                    //Log.d("API Error", "Response code: ${response.code()}, Message: ${response.message()}")
+                }
             }
-            val fragmentTransaction = parentFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.flFragment, VerifyMail())
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
+//            val fragmentTransaction = parentFragmentManager.beginTransaction()
+//            fragmentTransaction.replace(R.id.flFragment, VerifyMail())
+//            fragmentTransaction.addToBackStack(null)
+//            fragmentTransaction.commit()
         }
 
         val backButton: FloatingActionButton =view.findViewById(R.id.backButton)
@@ -73,6 +115,15 @@ class ForgotPassward : Fragment(R.layout.fragment_forgot_passward) {
             false
         } else {
             Patterns.EMAIL_ADDRESS.matcher(target).matches()
+        }
+    }
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+    private suspend fun save (key:String , value:String){
+        val dataStoreKey= preferencesKey<String>(key)
+        dataStore.edit{temp ->
+            temp[dataStoreKey]=value
         }
     }
 }

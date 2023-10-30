@@ -24,6 +24,7 @@ import com.example.myapplication.LoginRequest
 import com.example.myapplication.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.launch
 import java.util.regex.Matcher
 import java.util.regex.Pattern
@@ -64,10 +65,15 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             if(!isValidEmail(Email))
             {
                 userMailIncorrect.text="Not a Valid Mail"
+                val text1: TextInputLayout = view.findViewById(R.id.textInputLayout)
+                text1.setBackgroundResource(R.drawable.button_layout)
                 flag=true
             }
             else {
                 userMailIncorrect.text=""
+                val text1: TextInputLayout = view.findViewById(R.id.textInputLayout)
+                text1.setBackgroundResource(R.drawable.inputbox)
+
             }
 
 
@@ -80,9 +86,13 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             {
                 userPassword1.text="Password not Applicable"
                 flag=true
+                val text1: TextInputLayout = view.findViewById(R.id.textInputLayout2)
+                text1.setBackgroundResource(R.drawable.button_layout)
             }
             else{
                 userPassword1.text=""
+                val text1: TextInputLayout = view.findViewById(R.id.textInputLayout2)
+                text1.setBackgroundResource(R.drawable.inputbox)
             }
             if(!flag)
             {
@@ -90,26 +100,31 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 email=Email,
                 password = password1)
                 lifecycleScope.launch{
-                    val response = RetrofitInstance.apiService.login(loginRequest)
-                    if(response.isSuccessful)
-                    {
-                        //if(response.body()?.token.toString()!="OTP Expired" || response.body()?.token.toString()!="Incorrect OTP"||response.body()?.token.toString()!="No OTP generated"){
-                        if(response.body()?.token.toString().length >=30){
-                            save("token",response.body()?.token.toString())
+
+                    try {
+
+
+                        val response = RetrofitInstance.apiService.login(loginRequest)
+                        if (response.isSuccessful) {
+                            //if(response.body()?.token.toString()!="OTP Expired" || response.body()?.token.toString()!="Incorrect OTP"||response.body()?.token.toString()!="No OTP generated"){
+                            if (response.body()?.token.toString().length >= 30) {
+                                save("token", response.body()?.token.toString())
 //                            val fragmentTransaction = parentFragmentManager.beginTransaction()
 //                            fragmentTransaction.replace(R.id.flFragment, Congratulationsfragment())
 //                            fragmentTransaction.addToBackStack(null)
 //                            fragmentTransaction.commit()
-                            startActivity(Intent(requireActivity(), DashBoard::class.java))
-                            requireActivity().finish()
+                                startActivity(Intent(requireActivity(), DashBoard::class.java))
+                                requireActivity().finish()
+                            } else {
+                                val incorrectOtp =
+                                    view.findViewById<TextView>(R.id.passwordIncorrect1)
+                                incorrectOtp.text = response.body()?.token.toString()
+                            }
+                        } else {
+                            showToast("Please Retry")
                         }
-                        else {
-                            val incorrectOtp=view.findViewById<TextView>(R.id.passwordIncorrect1)
-                            incorrectOtp.text=response.body()?.token.toString()
-                        }
-                    }
-                    else {
-                        showToast("Please Retry")
+                    }catch(e : Exception){
+                        showToast("Connection Error")
                     }
                 }
 

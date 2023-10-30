@@ -24,12 +24,14 @@ import com.example.myapplication.R
 import com.example.myapplication.SignUpRequest
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.lang.Exception
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -96,18 +98,30 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
             {
                 userNameIncorrect.text="User Name should be more than  6"
                 flag=true
+                val text1: TextInputLayout = view.findViewById(R.id.textInputLayout)
+                text1.setBackgroundResource(R.drawable.button_layout)
+
             }
             else {
                 userNameIncorrect.text=""
+                val text1: TextInputLayout = view.findViewById(R.id.textInputLayout)
+                text1.setBackgroundResource(R.drawable.inputbox)
+
             }
             /**Checking For Email Correctness*/
             if(!isValidEmail(Email))
             {
                 userMailIncorrect.text="Not a Valid Mail"
                 flag=true
+                val text1: TextInputLayout = view.findViewById(R.id.textInputLayout2)
+                text1.setBackgroundResource(R.drawable.button_layout)
+
             }
             else {
                 userMailIncorrect.text=""
+                val text1: TextInputLayout = view.findViewById(R.id.textInputLayout2)
+                text1.setBackgroundResource(R.drawable.inputbox)
+
             }
 
             /**Checking for if password is valid*/
@@ -115,17 +129,29 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
             {
                 userPassword1.text="Password not strong"
                 flag=true
+                val text1: TextInputLayout = view.findViewById(R.id.textInputLayout3)
+                text1.setBackgroundResource(R.drawable.button_layout)
+
             }
             else{
                 userPassword1.text=""
+                val text1: TextInputLayout = view.findViewById(R.id.textInputLayout3)
+                text1.setBackgroundResource(R.drawable.inputbox)
+
             }
             if(password2!=password1)
             {
                 userPassword2.text="Confirm Password Should match Password"
                 flag=true
+                val text1: TextInputLayout = view.findViewById(R.id.textInputLayout4)
+                text1.setBackgroundResource(R.drawable.button_layout)
+
             }
             else {
                 userPassword2.text=""
+                val text1: TextInputLayout = view.findViewById(R.id.textInputLayout4)
+                text1.setBackgroundResource(R.drawable.inputbox)
+
             }
             /** API testing */
             if(false)
@@ -146,24 +172,31 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
                     role="USER"
                 )
                 lifecycleScope.launch {
-                    val response = RetrofitInstance.apiService.fetchData(signUpRequest)
-                    Log.d("error",response.body().toString())
-                    if (response.isSuccessful) {
-                        if(response.body()?.token.toString()=="Check your email for OTP"){
-                            dataStore= context?.createDataStore(name= "user")!!
-                            save("Email",Email)
-                            save("password",password1)
-                            save("fullname",UserName)
-                            val fragmentTransaction = parentFragmentManager.beginTransaction()
-                            fragmentTransaction.replace(R.id.flFragment, RegistrationVerifyMail())
-                            fragmentTransaction.addToBackStack(null)
-                            fragmentTransaction.commit()
+                    try {
+
+                        val response = RetrofitInstance.apiService.fetchData(signUpRequest)
+                        Log.d("error", response.body().toString())
+                        if (response.isSuccessful) {
+                            if (response.body()?.token.toString() == "Check your email for OTP") {
+                                dataStore = context?.createDataStore(name = "user")!!
+                                save("Email", Email)
+                                save("password", password1)
+                                save("fullname", UserName)
+                                val fragmentTransaction = parentFragmentManager.beginTransaction()
+                                fragmentTransaction.replace(
+                                    R.id.flFragment,
+                                    RegistrationVerifyMail()
+                                )
+                                fragmentTransaction.addToBackStack(null)
+                                fragmentTransaction.commit()
+                            } else {
+                                showToast("User already Exists")
+                            }
                         }
-                        else{
-                            showToast("User already Exists")
-                        }
+                    }catch(e : Exception){
+                        showToast("Network Error")
                     }
-                    Log.d("API Error", "Response code: ${response.code()}, Message: ${response.message()}")
+                    //Log.d("API Error", "Response code: ${response.code()}, Message: ${response.message()}")
                 }
             }
             else

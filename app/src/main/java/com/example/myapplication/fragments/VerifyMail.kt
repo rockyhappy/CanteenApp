@@ -16,6 +16,8 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.preferencesKey
 import androidx.datastore.preferences.createDataStore
 import androidx.lifecycle.lifecycleScope
 import com.caverock.androidsvg.SVG
@@ -23,8 +25,11 @@ import com.caverock.androidsvg.SVGImageView
 import com.example.myapplication.R
 import com.example.myapplication.SignUpRequest
 import com.example.myapplication.readFromDataStore
+import com.example.myapplication.resendOtpRequest
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 
 class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
@@ -86,7 +91,7 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
 
         val resendBtn = view.findViewById<Button>(R.id.resendBtn)
         fun startTimer() {
-            cTimer = object : CountDownTimer(10000, 1000) {
+            cTimer = object : CountDownTimer(60000, 1000) {
                 override fun onTick(millisUntilFinished: Long) {
                     resendBtn.text = "Resend OTP in : ${millisUntilFinished / 1000}"
                 }
@@ -103,16 +108,26 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
 
         resendBtn.setOnClickListener {
             lifecycleScope.launch{
-                val Email = readFromDataStore(dataStore,"Email" )
-                val fullname = readFromDataStore(dataStore , "fullname")
-                val password = readFromDataStore(dataStore,"password")
-                val signUpRequest= SignUpRequest(
-                    fullName=fullname.toString(),
-                    email=Email.toString(),
-                    password=password.toString(),
-                    role="USER"
-                )
-                //val response = RetrofitInstance.apiService.fetchData(signUpRequest)
+                try {
+
+
+                    val Email = readFromDataStore(dataStore, "Email")
+                    val fullname = readFromDataStore(dataStore, "fullname")
+                    val password = readFromDataStore(dataStore, "password")
+                    val resendOtp = resendOtpRequest(
+                        email = Email.toString()
+                    )
+                    //val response = RetrofitInstance.apiService.fetchData(signUpRequest)
+                    val response = RetrofitInstance.apiService.resendOtp(resendOtp)
+                    if (response.isSuccessful) {
+                        //showToast(response.body()?.token.toString())
+                    } else {
+                        showToast("Something went Wrong")
+                    }
+                }catch (e:Exception)
+                {
+                    showToast("Connection Error")
+                }
             }
             resendBtn.isEnabled=false
             startTimer()
@@ -131,9 +146,11 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
             otp=otp+editText4.text.toString()
             otp=otp+editText5.text.toString()
             otp=otp+editText6.text.toString()
-            showToast(otp)
+            //showToast(otp)
+            lifecycleScope.launch{
 
-
+                save("otp",otp)
+            }
             val fragmentTransaction = parentFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.flFragment, NewPassword())
             fragmentTransaction.addToBackStack(null)
@@ -145,12 +162,17 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
+    private suspend fun save (key:String , value:String){
+        val dataStoreKey= preferencesKey<String>(key)
+        dataStore.edit{temp ->
+            temp[dataStoreKey]=value
+        }
+    }
 }
 
 class GenericKeyEvent internal constructor(private val currentView: EditText, private val previousView: EditText?) : View.OnKeyListener{
     override fun onKey(p0: View?, keyCode: Int, event: KeyEvent?): Boolean {
         if(event!!.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DEL && currentView.id != R.id.editText1 && currentView.text.isEmpty()) {
-            //If current is empty then previous EditText's number will also be deleted
             previousView!!.text = null
             previousView.requestFocus()
             return true
@@ -163,7 +185,7 @@ class GenericKeyEvent internal constructor(private val currentView: EditText, pr
 
 class GenericTextWatcher internal constructor(private val currentView: View, private val nextView: View?) :
     TextWatcher {
-    override fun afterTextChanged(editable: Editable) { // TODO Auto-generated method stub
+    override fun afterTextChanged(editable: Editable) {
         val text = editable.toString()
         when (currentView.id) {
             R.id.editText1 -> if (text.length == 1) nextView!!.requestFocus()
