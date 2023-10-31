@@ -9,8 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -51,11 +53,18 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
+
+        val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
+        val container = view.findViewById<ConstraintLayout>(R.id.Container)
         val button= view.findViewById<Button>(R.id.button)
         button.setOnClickListener {
             /** call api and apply checks*/
 
             var flag=false
+            button.isEnabled = false
+            container.isEnabled=false
+            container.isFocusable = false
+            progressBar.visibility = View.VISIBLE
 
             var collection : TextInputEditText =view.findViewById(R.id.email)
             var Email=collection.text.toString()
@@ -94,6 +103,16 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 val text1: TextInputLayout = view.findViewById(R.id.textInputLayout2)
                 text1.setBackgroundResource(R.drawable.inputbox)
             }
+
+            /** API testing */
+            if(flag)
+            {
+                // Enable the button
+                button.isEnabled = true
+                container.isEnabled=true
+                container.isFocusable = true
+                progressBar.visibility = View.GONE
+            }
             if(!flag)
             {
                 val loginRequest=LoginRequest(
@@ -125,6 +144,11 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                         }
                     }catch(e : Exception){
                         showToast("Connection Error")
+                    }finally {
+                        button.isEnabled = true
+                        container.isEnabled=true
+                        container.isFocusable = true
+                        progressBar.visibility = View.GONE
                     }
                 }
 
