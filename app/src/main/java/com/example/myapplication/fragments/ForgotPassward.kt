@@ -9,8 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -40,10 +42,17 @@ class ForgotPassward : Fragment(R.layout.fragment_forgot_passward) {
         var svg2 = SVG.getFromResource(resources, R.raw.forgot_password_image)
         svgImageView2.setSVG(svg2)
 
+
+        val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
+        val container = view.findViewById<ConstraintLayout>(R.id.Container)
         val button= view.findViewById<Button>(R.id.button)
         button.setOnClickListener {
             /**call api for the forgot password*/
             var collection : TextInputEditText =view.findViewById(R.id.email)
+            button.isEnabled = false
+            container.isEnabled=false
+            container.isFocusable = false
+            progressBar.visibility = View.VISIBLE
             var Email=collection.text.toString()
             Email=Email.trim()
 
@@ -65,6 +74,15 @@ class ForgotPassward : Fragment(R.layout.fragment_forgot_passward) {
                 text1.setBackgroundResource(R.drawable.inputbox)
 
             }
+            if(flag)
+            {
+                // Enable the button
+                button.isEnabled = true
+                container.isEnabled=true
+                container.isFocusable = true
+                progressBar.visibility = View.GONE
+            }
+
             if(!flag)
             {
                 val forgotPasswordRequest=forgotPasswordRequest(
@@ -89,6 +107,12 @@ class ForgotPassward : Fragment(R.layout.fragment_forgot_passward) {
                     }catch(e : Exception)
                     {
                         showToast("Connection Error")
+                    }
+                    finally {
+                        button.isEnabled = true
+                        container.isEnabled=true
+                        container.isFocusable = true
+                        progressBar.visibility = View.GONE
                     }
                     //Log.d("API Error", "Response code: ${response.code()}, Message: ${response.message()}")
                 }

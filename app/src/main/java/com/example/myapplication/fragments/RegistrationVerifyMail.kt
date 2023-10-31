@@ -11,8 +11,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.datastore.core.DataStore
 import androidx.datastore.createDataStore
 import androidx.datastore.preferences.core.Preferences
@@ -124,9 +126,18 @@ class RegistrationVerifyMail : Fragment(R.layout.fragment_registration_verify_ma
             resendBtn.isEnabled=false
             startTimer()
         }
+
+        val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
+        val container = view.findViewById<ConstraintLayout>(R.id.Container)
         /**This passes to the new Password*/
         val button= view.findViewById<Button>(R.id.button)
         button.setOnClickListener {
+
+            button.isEnabled = false
+            container.isEnabled=false
+            container.isFocusable = false
+            progressBar.visibility = View.VISIBLE
+
             var otp : String=editText1.text.toString()
             otp=otp+editText2.text.toString()
             otp=otp+editText3.text.toString()
@@ -136,9 +147,7 @@ class RegistrationVerifyMail : Fragment(R.layout.fragment_registration_verify_ma
 
 
             lifecycleScope.launch {
-
                 try {
-
 
                     val Email = readFromDataStore(dataStore, "Email")
                     val verifyMailRequest = verifyMailRequest(Email.toString(), otp)
@@ -163,6 +172,15 @@ class RegistrationVerifyMail : Fragment(R.layout.fragment_registration_verify_ma
                 catch(e: Exception)
                 {
                     showToast("Connection Error")
+                }
+                finally {
+                    /** API testing */
+                        // Enable the button
+                        button.isEnabled = true
+                        container.isEnabled=true
+                        container.isFocusable = true
+                        progressBar.visibility = View.GONE
+
                 }
             }
         }

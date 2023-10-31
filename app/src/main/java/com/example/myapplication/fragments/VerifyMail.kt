@@ -13,7 +13,10 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -26,6 +29,7 @@ import com.example.myapplication.R
 import com.example.myapplication.SignUpRequest
 import com.example.myapplication.readFromDataStore
 import com.example.myapplication.resendOtpRequest
+import com.example.myapplication.verifyMailRequest
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
 import java.util.regex.Matcher
@@ -105,6 +109,8 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
         }
         startTimer()
 
+        val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
+        val container = view.findViewById<ConstraintLayout>(R.id.Container)
 
         resendBtn.setOnClickListener {
             lifecycleScope.launch{
@@ -140,6 +146,11 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
             /**
              * this is the api call verify mail
              */
+
+            button.isEnabled = false
+            container.isEnabled=false
+            container.isFocusable = false
+            progressBar.visibility = View.VISIBLE
             var otp : String=editText1.text.toString()
             otp=otp+editText2.text.toString()
             otp=otp+editText3.text.toString()
@@ -149,13 +160,43 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
             //showToast(otp)
             lifecycleScope.launch{
 
-                save("otp",otp)
+                try {
+
+                    val Email = readFromDataStore(dataStore, "Email")
+                    val verifyMailRequest = verifyMailRequest(Email.toString(), otp)
+                    val response = RetrofitInstance.apiService.resetPasswordCheckEmail(verifyMailRequest)
+                    if (response.isSuccessful) {
+                        //showToast(otp)
+                        //if(response.body()?.token.toString()!="OTP Expired" || response.body()?.token.toString()!="Incorrect OTP"||response.body()?.token.toString()!="No OTP generated"){
+                        if (response.body()?.token.toString()=="Otp Verified Successfully") {
+                            save("token", response.body()?.token.toString())
+                            val fragmentTransaction = parentFragmentManager.beginTransaction()
+                            fragmentTransaction.replace(R.id.flFragment, NewPassword())
+                            fragmentTransaction.addToBackStack(null)
+                            fragmentTransaction.commit()
+                        } else {
+                            val incorrectOtp = view.findViewById<TextView>(R.id.incorrectOtp)
+                            incorrectOtp.text = response.body()?.token.toString()
+                        }
+                    } else {
+                        showToast("Please Retry")
+                    }
+                }
+                catch(e: Exception)
+                {
+                    showToast("Connection Error")
+                }
+                finally {
+                    /** API testing */
+                    // Enable the button
+                    button.isEnabled = true
+                    container.isEnabled=true
+                    container.isFocusable = true
+                    progressBar.visibility = View.GONE
+
+                }
             }
-            val fragmentTransaction = parentFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.flFragment, NewPassword())
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
-        }
+            }
 
         return view
     }
