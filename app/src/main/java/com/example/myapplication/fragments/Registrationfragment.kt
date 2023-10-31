@@ -208,7 +208,6 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
                     }catch(e : Exception){
                         showToast("Network Error")
                     }finally {
-                        // Enable the button
                         button.isEnabled = true
                         container.isEnabled=true
                         container.isFocusable = true

@@ -54,8 +54,7 @@ data class forgotPasswordResponse(
 
 data class ResetPasswordRequest(
     val email:String,
-    val password:String,
-    val otp:String
+    val newPassword:String
 )
 data class ResetPasswordResponse(
     val token:String

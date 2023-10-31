@@ -1,13 +1,16 @@
 package com.example.myapplication.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.createDataStore
@@ -45,11 +48,21 @@ class NewPassword : Fragment(R.layout.fragment_new_password) {
         var svg2 = SVG.getFromResource(resources, R.raw.new_password)
         svgImageView2.setSVG(svg2)
 
+
+        val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
+        val container = view.findViewById<ConstraintLayout>(R.id.Container)
         val button= view.findViewById<Button>(R.id.button)
         button.setOnClickListener {
             /**
              * this is the position to call the api
              */
+
+            button.isEnabled = false
+            container.isEnabled=false
+            container.isFocusable = false
+            progressBar.visibility = View.VISIBLE
+
+
             var collection : TextInputEditText =view.findViewById(R.id.passkey)
             var password1=collection.text.toString()
             password1.trim()
@@ -89,18 +102,30 @@ class NewPassword : Fragment(R.layout.fragment_new_password) {
                 text1.setBackgroundResource(R.drawable.inputbox)
 
             }
+
+            /** API testing */
+            if(flag)
+            {
+                // Enable the button
+                button.isEnabled = true
+                container.isEnabled=true
+                container.isFocusable = true
+                progressBar.visibility = View.GONE
+            }
+
             if(!flag)
             {
                 lifecycleScope.launch{
                     try{
+                        val Email = readFromDataStore(dataStore, "Email")
                         val resetPasswordRequest=ResetPasswordRequest(
-                            email= readFromDataStore(dataStore,"Email").toString(),
-                            password = password1,
-                            otp= readFromDataStore(dataStore,"otp").toString()
+                            email=Email.toString(),
+                            newPassword = password1
                         )
                         val response=RetrofitInstance.apiService.ResetPassword(resetPasswordRequest)
+                        Log.d("error", response.body().toString())
                         if (response.isSuccessful) {
-                            if (response.body()?.token.toString().length <=30) {
+                            if (response.body()?.token.toString()=="Password has been reset Successfully") {
                                 val fragmentTransaction = parentFragmentManager.beginTransaction()
                                 fragmentTransaction.replace(R.id.flFragment, WellDone())
                                 fragmentTransaction.addToBackStack(null)
@@ -113,13 +138,21 @@ class NewPassword : Fragment(R.layout.fragment_new_password) {
                     {
                         showToast("Connection Error")
                     }
+                    finally {
+                        button.isEnabled = true
+                        container.isEnabled=true
+                        container.isFocusable = true
+                        progressBar.visibility = View.GONE
+                    }
                 }
 
             }
-            val fragmentTransaction = parentFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.flFragment, WellDone())
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
+            else {
+                button.isEnabled = true
+                container.isEnabled=true
+                container.isFocusable = true
+                progressBar.visibility = View.GONE
+            }
         }
 
         val backButton: FloatingActionButton =view.findViewById(R.id.backButton)
