@@ -112,6 +112,12 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 container.isEnabled=true
                 container.isFocusable = true
                 progressBar.visibility = View.GONE
+
+                /**
+                 * This is bypassing the checkpoint
+                 */
+                startActivity(Intent(requireActivity(), DashBoard::class.java))
+                requireActivity().finish()
             }
             if(!flag)
             {

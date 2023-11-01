@@ -19,7 +19,7 @@ android {
 
     buildFeatures {
         viewBinding=true
-        //dataBinding=true
+        dataBinding=true
     }
     buildTypes {
         release {
@@ -67,5 +67,9 @@ dependencies {
 
     // Preferences DataStore
     implementation ("androidx.datastore:datastore-preferences:1.0.0-alpha04")
+
+    //for the meow Bottom Navigation
+    implementation ("com.etebarian:meow-bottom-navigation:1.2.0")
+
 
 }

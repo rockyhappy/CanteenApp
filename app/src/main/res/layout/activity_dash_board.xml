@@ -4,6 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DashBoard">
+    android:scrollbarSize="40dp"
+    tools:context=".DashBoard"
+    android:background="@color/white">
+
+
+    <com.etebarian.meowbottomnavigation.MeowBottomNavigation
+        android:id="@+id/btmnav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:mbn_defaultIconColor="@color/white"
+        app:mbn_selectedIconColor="@color/white"
+        app:mbn_circleColor="@color/primary_color"
+        app:mbn_backgroundBottomColor="@color/primary_color"
+        app:mbn_countBackgroundColor="@color/primary_color"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
