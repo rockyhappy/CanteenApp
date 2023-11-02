@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.widget.Toolbar
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 
 
@@ -25,6 +26,9 @@ class DashBoard : AppCompatActivity() {
         bottomNavigation.add(settingsItem)
         bottomNavigation.show(1, true) // Adjust the icon scaling as needed
 
+
+        val topAppBar: Toolbar = findViewById(R.id.topAppBar)
+        setSupportActionBar(topAppBar)
 
         bottomNavigation.setOnClickMenuListener { item ->
             when (item.id) {

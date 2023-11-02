@@ -30,4 +30,13 @@
         <item name="android:statusBarColor">@color/white</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>
+
+
+    <style name="AppTheme2" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@color/primary_color</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <!-- Other theme attributes -->
+    </style>
 </resources>
