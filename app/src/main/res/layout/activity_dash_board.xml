@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbarSize="40dp"
+    tools:context=".DashBoard"
+    android:id="@+id/drawerLayout"
+    android:background="@color/white">
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbarSize="40dp"
@@ -12,14 +22,40 @@
         android:id="@+id/topAppBar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="@color/primary_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/brunchbliss"
-        app:titleTextColor="@color/white"
         android:backgroundTint="@color/primary_color"
-        />
+        app:title=""
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/brunchbliss"
+            android:textColor="@color/white"
+            android:fontFamily="@font/roboto"
+            android:textSize="24sp"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_shopping_cart_24"
+            android:scaleX="-1"
+            android:layout_gravity="end"
+            android:layout_marginEnd="15dp"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_notifications_24"
+            android:scaleX="-1"
+            android:layout_gravity="end"
+            android:layout_marginEnd="15dp"
+            />
+
+    </androidx.appcompat.widget.Toolbar>
 
     <com.etebarian.meowbottomnavigation.MeowBottomNavigation
         android:id="@+id/btmnav"
@@ -36,3 +72,13 @@
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:menu="@menu/nav_menu"
+        app:headerLayout="@layout/nav_header"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"/>
+</androidx.drawerlayout.widget.DrawerLayout>
