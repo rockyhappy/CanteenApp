@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.MyApplication" parent="Theme.AppCompat">
         <!-- Customize your light theme here. -->
-         <item name="colorPrimary">@color/primary_color</item>
+        <item name="colorPrimary">@color/primary_color</item>
         <item name="colorPrimaryDark">@color/primary_color</item>
         <item name="colorAccent">@color/primary_color</item>
         <item name="android:statusBarColor">@color/primary_color</item>
@@ -30,4 +30,22 @@
         <item name="android:statusBarColor">@color/white</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>
+
+
+    <style name="AppTheme2" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@color/primary_color</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <!-- Other theme attributes -->
+    </style>
+
+    <style name="Theme.MyApplication.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.MyApplication.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.MyApplication.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
