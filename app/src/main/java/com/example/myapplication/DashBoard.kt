@@ -10,6 +10,8 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.example.myapplication.databinding.ActivityDashBoardBinding
+import com.example.myapplication.fragments.ChoiceFragment
+import com.example.myapplication.fragments.SettingsFragment
 import com.google.android.material.navigation.NavigationView
 
 
@@ -22,6 +24,14 @@ class DashBoard : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding=ActivityDashBoardBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        /**
+         * Setting up the Basic Fragment
+         */
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.flFragment, SettingsFragment())
+            commit()
+        }
 
         binding.apply{
             toggle = ActionBarDrawerToggle(this@DashBoard, drawerLayout, R.string.open, R.string.close)
@@ -83,6 +93,10 @@ class DashBoard : AppCompatActivity() {
             when (it.itemId) {
                 R.id.firstItem -> {
                     Toast.makeText(this@DashBoard, "First Item Clicked", Toast.LENGTH_SHORT).show()
+                    supportFragmentManager.beginTransaction().apply {
+                        replace(R.id.flFragment, Dishes_Category())
+                        commit()
+                    }
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
                 R.id.secondtItem -> {

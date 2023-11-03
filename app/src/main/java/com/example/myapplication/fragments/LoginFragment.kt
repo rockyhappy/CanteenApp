@@ -116,8 +116,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 /**
                  * This is bypassing the checkpoint
                  */
-                startActivity(Intent(requireActivity(), DashBoard::class.java))
-                requireActivity().finish()
+//                startActivity(Intent(requireActivity(), DashBoard::class.java))
+//                requireActivity().finish()
             }
             if(!flag)
             {
