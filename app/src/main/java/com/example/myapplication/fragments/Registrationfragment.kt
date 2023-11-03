@@ -241,7 +241,7 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
     fun isValidPassword(password: String?): Boolean {
         val pattern: Pattern
         val matcher: Matcher
-        val PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$"
+        val PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{4,}$"
         pattern = Pattern.compile(PASSWORD_PATTERN)
         matcher = pattern.matcher(password)
         return matcher.matches()
