@@ -60,6 +60,7 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
         /**This is the Sign In text*/
         val signIn =view.findViewById<TextView>(R.id.textView2)
         signIn.setOnClickListener {
+            parentFragmentManager.popBackStack()
             val fragmentTransaction = parentFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.flFragment, LoginFragment())
             fragmentTransaction.addToBackStack(null)
@@ -194,6 +195,7 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
                                 save("Email", Email)
                                 save("password", password1)
                                 save("fullname", UserName)
+
                                 val fragmentTransaction = parentFragmentManager.beginTransaction()
                                 fragmentTransaction.replace(
                                     R.id.flFragment,
