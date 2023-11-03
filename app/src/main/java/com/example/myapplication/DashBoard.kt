@@ -6,6 +6,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.example.myapplication.databinding.ActivityDashBoardBinding
@@ -66,12 +67,12 @@ class DashBoard : AppCompatActivity() {
 
 
         val topAppBar: Toolbar = findViewById(R.id.topAppBar)
-        topAppBar.setNavigationIcon(R.drawable.baseline_menu_24)
         setSupportActionBar(topAppBar)
         supportActionBar?.title=""
 
         var drawerLayout : DrawerLayout = findViewById(R.id.drawerLayout)
         toggle = ActionBarDrawerToggle(this@DashBoard, drawerLayout, R.string.open, R.string.close)
+        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white))
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
@@ -82,6 +83,7 @@ class DashBoard : AppCompatActivity() {
             when (it.itemId) {
                 R.id.firstItem -> {
                     Toast.makeText(this@DashBoard, "First Item Clicked", Toast.LENGTH_SHORT).show()
+                    drawerLayout.closeDrawer(GravityCompat.START)
                 }
                 R.id.secondtItem -> {
                     Toast.makeText(this@DashBoard, "Second Item Clicked", Toast.LENGTH_SHORT).show()

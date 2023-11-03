@@ -22,7 +22,6 @@ import androidx.lifecycle.lifecycleScope
 import com.caverock.androidsvg.SVG
 import com.caverock.androidsvg.SVGImageView
 import com.example.myapplication.DashBoard
-import com.example.myapplication.Dashboard2
 import com.example.myapplication.LoginRequest
 import com.example.myapplication.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -117,7 +116,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 /**
                  * This is bypassing the checkpoint
                  */
-                startActivity(Intent(requireActivity(), Dashboard2::class.java))
+                startActivity(Intent(requireActivity(), DashBoard::class.java))
                 requireActivity().finish()
             }
             if(!flag)
