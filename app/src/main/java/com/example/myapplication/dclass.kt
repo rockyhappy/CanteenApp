@@ -2,7 +2,8 @@ package com.example.myapplication
 
 
 data class SignUpResponse(
-    val token:String
+    val token:String,
+    val message:String
 )
 data class SignUpRequest(
     val fullName:String,
@@ -33,7 +34,8 @@ data class verifyMailRequest(
 )
 
 data class verifyMailResponse(
-    val token:String
+    val token:String,
+    val message: String
 )
 
 data class resendOtpRequest(
@@ -41,7 +43,8 @@ data class resendOtpRequest(
 )
 
 data class resendOtpResponse(
-    val token:String
+    val token:String,
+    val message: String
 )
 
 data class forgotPasswordRequest(

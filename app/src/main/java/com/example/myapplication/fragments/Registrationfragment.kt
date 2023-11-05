@@ -90,9 +90,9 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
 
 
             // Disable the button
-            button.isEnabled = false
-            container.isEnabled=false
-            container.isFocusable = false
+//            button.isEnabled = false
+//            container.isEnabled=false
+//            container.isFocusable = false
             //progressBar.visibility = View.VISIBLE
 
             var collection:TextInputEditText=view.findViewById(R.id.email)
@@ -212,7 +212,6 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
                             if (response.body()?.token.toString() == "null" && response.code().toString()=="200") {
                                 dataStore = context?.createDataStore(name = "user")!!
                                 save("Email", Email)
-                                save("password", password1)
                                 save("fullname", UserName)
 
                                 val fragmentTransaction = parentFragmentManager.beginTransaction()
@@ -244,9 +243,10 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
             else
             {
                 //showToast("Something went Wrong Please Retry")
-                button.isEnabled = true
-                container.isEnabled=true
-                container.isFocusable = true
+//                button.isEnabled = true
+//                container.isEnabled=true
+//                container.isFocusable = true
+                dismissCustomProgressDialog()
                 //progressBar.visibility = View.GONE
             }
 

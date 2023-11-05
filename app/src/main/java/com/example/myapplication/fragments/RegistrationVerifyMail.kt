@@ -1,5 +1,6 @@
 package com.example.myapplication.fragments
 
+import android.app.Dialog
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.Editable
@@ -35,7 +36,7 @@ import kotlinx.coroutines.launch
 
 class RegistrationVerifyMail : Fragment(R.layout.fragment_registration_verify_mail) {
     private lateinit var dataStore: DataStore<Preferences>
-
+    private var dialog: Dialog? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dataStore = requireContext().createDataStore(name = "user")
@@ -111,7 +112,6 @@ class RegistrationVerifyMail : Fragment(R.layout.fragment_registration_verify_ma
             lifecycleScope.launch{
                 val Email = readFromDataStore(dataStore,"Email" )
                 val fullname = readFromDataStore(dataStore , "fullname")
-                val password = readFromDataStore(dataStore,"password")
                 val resendOtp= resendOtpRequest(
                     email=Email.toString()
                 )
@@ -133,58 +133,64 @@ class RegistrationVerifyMail : Fragment(R.layout.fragment_registration_verify_ma
         val button= view.findViewById<Button>(R.id.button)
         button.setOnClickListener {
 
-            button.isEnabled = false
-            container.isEnabled=false
-            container.isFocusable = false
-            progressBar.visibility = View.VISIBLE
+//            button.isEnabled = false
+//            container.isEnabled = false
+//            container.isFocusable = false
+//            progressBar.visibility = View.VISIBLE
 
-            var otp : String=editText1.text.toString()
-            otp=otp+editText2.text.toString()
-            otp=otp+editText3.text.toString()
-            otp=otp+editText4.text.toString()
-            otp=otp+editText5.text.toString()
-            otp=otp+editText6.text.toString()
+            var otp: String = editText1.text.toString()
+            otp = otp + editText2.text.toString()
+            otp = otp + editText3.text.toString()
+            otp = otp + editText4.text.toString()
+            otp = otp + editText5.text.toString()
+            otp = otp + editText6.text.toString()
 
+            if (otp.length == 6) {
+                lifecycleScope.launch {
+                    showCustomProgressDialog()
+                    try {
 
-            lifecycleScope.launch {
-                try {
-
-                    val Email = readFromDataStore(dataStore, "Email")
-                    val verifyMailRequest = verifyMailRequest(Email.toString(), otp)
-                    val response = RetrofitInstance.apiService.checkEmail(verifyMailRequest)
-                    if (response.isSuccessful) {
-                        //showToast(otp)
-                        //if(response.body()?.token.toString()!="OTP Expired" || response.body()?.token.toString()!="Incorrect OTP"||response.body()?.token.toString()!="No OTP generated"){
-                        if (response.body()?.token.toString().length >= 20) {
-                            save("token", response.body()?.token.toString())
-                            val fragmentTransaction = parentFragmentManager.beginTransaction()
-                            fragmentTransaction.replace(R.id.flFragment, Congratulationsfragment())
-                            fragmentTransaction.addToBackStack(null)
-                            fragmentTransaction.commit()
+                        val Email = readFromDataStore(dataStore, "Email")
+                        val verifyMailRequest = verifyMailRequest(Email.toString(), otp)
+                        val response = RetrofitInstance.apiService.checkEmail(verifyMailRequest)
+                        if (response.isSuccessful) {
+                            //showToast(otp)
+                            //if(response.body()?.token.toString()!="OTP Expired" || response.body()?.token.toString()!="Incorrect OTP"||response.body()?.token.toString()!="No OTP generated"){
+                            if (response.body()?.token.toString().length >= 20 && response.code().toString()=="201") {
+                                save("token", response.body()?.token.toString())
+                                val fragmentTransaction = parentFragmentManager.beginTransaction()
+                                fragmentTransaction.replace(
+                                    R.id.flFragment,
+                                    Congratulationsfragment()
+                                )
+                                fragmentTransaction.addToBackStack(null)
+                                fragmentTransaction.commit()
+                            } else {
+                                val incorrectOtp = view.findViewById<TextView>(R.id.incorrectOtp)
+                                incorrectOtp.text = response.body()?.message.toString()
+                            }
                         } else {
-                            val incorrectOtp = view.findViewById<TextView>(R.id.incorrectOtp)
-                            incorrectOtp.text = response.body()?.token.toString()
+                            dismissCustomProgressDialog()
+                            showToast("Wrong Otp")
                         }
-                    } else {
-                        showToast("Please Retry")
+                    } catch (e: Exception) {
+                        showToast("Connection Error")
+                    } finally {
+
+//                        // Enable the button
+//                        button.isEnabled = true
+//                        container.isEnabled = true
+//                        container.isFocusable = true
+//                        progressBar.visibility = View.GONE
+                        dismissCustomProgressDialog()
                     }
                 }
-                catch(e: Exception)
-                {
-                    showToast("Connection Error")
-                }
-                finally {
-                    /** API testing */
-                        // Enable the button
-                        button.isEnabled = true
-                        container.isEnabled=true
-                        container.isFocusable = true
-                        progressBar.visibility = View.GONE
-
-                }
+            } else {
+                dismissCustomProgressDialog()
+                val incorrectOtp = view.findViewById<TextView>(R.id.incorrectOtp)
+                incorrectOtp.text = "Fill correctly"
             }
         }
-
         return view
     }
     private fun showToast(message: String) {
@@ -196,5 +202,19 @@ class RegistrationVerifyMail : Fragment(R.layout.fragment_registration_verify_ma
         dataStore.edit{temp ->
             temp[dataStoreKey]=value
         }
+    }
+    private fun showCustomProgressDialog() {
+        dialog = Dialog(requireContext())
+        dialog?.setContentView(R.layout.custom_dialog_loading)
+        dialog?.setCancelable(false)
+
+        val window = dialog?.window
+        window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        dialog?.show()
+    }
+    private fun dismissCustomProgressDialog() {
+        dialog?.dismiss()
+        dialog = null
     }
 }
