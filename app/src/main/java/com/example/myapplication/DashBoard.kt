@@ -30,7 +30,7 @@ class DashBoard : AppCompatActivity() {
          * Setting up the Basic Fragment
          */
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.flFragment, SettingsFragment())
+            replace(R.id.flFragment, MainDashboard())
             commit()
         }
 
@@ -104,6 +104,11 @@ class DashBoard : AppCompatActivity() {
                 }
                 R.id.secondtItem -> {
                     Toast.makeText(this@DashBoard, "Second Item Clicked", Toast.LENGTH_SHORT).show()
+                    supportFragmentManager.beginTransaction().apply {
+                        replace(R.id.flFragment, Dishes_Category())
+                        commit()
+                    }
+                    drawerLayout.closeDrawer(GravityCompat.START)
                 }
                 R.id.thirdItem -> {
                     Toast.makeText(this@DashBoard, "third Item Clicked", Toast.LENGTH_SHORT).show()
