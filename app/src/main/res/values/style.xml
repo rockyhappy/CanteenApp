@@ -30,6 +30,7 @@
     </style>
     <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
         <item name="android:textColorHint">@color/semiblack</item>
+
     </style>
     <style name="greeting">
         <item name="android:textSize">22sp</item>

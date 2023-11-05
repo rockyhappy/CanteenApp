@@ -6,20 +6,27 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.GravityCompat
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.createDataStore
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.lifecycleScope
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.example.myapplication.databinding.ActivityDashBoardBinding
 import com.example.myapplication.fragments.ChoiceFragment
 import com.example.myapplication.fragments.SettingsFragment
 import com.google.android.material.navigation.NavigationView
+import kotlinx.coroutines.launch
 
 
 class DashBoard : AppCompatActivity() {
     lateinit var toggle: ActionBarDrawerToggle
     private lateinit var binding: ActivityDashBoardBinding
+    private lateinit var dataStore: DataStore<Preferences>
     override fun onCreate(savedInstanceState: Bundle?) {
-
+        dataStore = createDataStore(name = "user")
 
         super.onCreate(savedInstanceState)
         binding=ActivityDashBoardBinding.inflate(layoutInflater)
@@ -93,6 +100,11 @@ class DashBoard : AppCompatActivity() {
             when (it.itemId) {
                 R.id.firstItem -> {
                     Toast.makeText(this@DashBoard, "First Item Clicked", Toast.LENGTH_SHORT).show()
+                    lifecycleScope.launch {
+                        val e=readFromDataStore(dataStore,"Email")
+                        showToast(e.toString())
+                    }
+
                     supportFragmentManager.popBackStack()
                     supportFragmentManager.beginTransaction().apply {
                         replace(R.id.flFragment, Dishes_Category())
@@ -139,5 +151,8 @@ class DashBoard : AppCompatActivity() {
             true
         }
         return super.onOptionsItemSelected(item)
+    }
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
