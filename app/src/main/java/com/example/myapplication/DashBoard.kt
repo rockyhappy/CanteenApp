@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -67,12 +68,14 @@ class DashBoard : AppCompatActivity() {
         val searchItem = MeowBottomNavigation.Model(2, R.drawable.ic_search)
         val profileItem = MeowBottomNavigation.Model(3, R.drawable.ic_profile)
         val settingsItem = MeowBottomNavigation.Model(4, R.drawable.ic_settings)
-
+        val settings = MeowBottomNavigation.Model(5, R.drawable.ic_settings)
+        bottomNavigation.setBackgroundColor(Color.TRANSPARENT)
 
         bottomNavigation.add(homeItem)
         bottomNavigation.add(searchItem)
         bottomNavigation.add(profileItem)
         bottomNavigation.add(settingsItem)
+        bottomNavigation.add(settings)
         bottomNavigation.show(1, true)
 
 
@@ -122,6 +125,7 @@ class DashBoard : AppCompatActivity() {
                 4 -> {
                     // Handle the "Settings" tab selection
                 }
+                5->{}
             }
         }
 

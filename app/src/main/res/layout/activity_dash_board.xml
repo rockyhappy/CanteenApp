@@ -100,6 +100,7 @@
         app:mbn_circleColor="@color/primary_color"
         app:mbn_backgroundBottomColor="@color/primary_color"
         app:mbn_countBackgroundColor="@color/primary_color"
+        android:background="@android:color/transparent"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
