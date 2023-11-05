@@ -84,5 +84,6 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="greeting">Hii Rachit !!! \nWhat would you like to eat today ??</string>
+    <string name="your_message">You\'ve registered your account and you\'re now ready to use it !</string>
 
 </resources>
