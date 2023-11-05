@@ -195,12 +195,6 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
              */
             if(!flag) {
 
-                //setting the progress dialog
-//                progressDialog = ProgressDialog(requireContext(),R.drawable.custom_progress_dialog_background)
-//                progressDialog?.setMessage("Loading...")
-//                progressDialog?.setCancelable(false)
-//                progressDialog?.show()
-
                 showCustomProgressDialog()
 
                 val signUpRequest = SignUpRequest(
@@ -215,7 +209,7 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
                         val response = RetrofitInstance.apiService.fetchData(signUpRequest)
                         Log.d("error", response.body().toString())
                         if (response.isSuccessful) {
-                            if (response.body()?.token.toString() == "null") {
+                            if (response.body()?.token.toString() == "null" && response.code().toString()=="200") {
                                 dataStore = context?.createDataStore(name = "user")!!
                                 save("Email", Email)
                                 save("password", password1)
@@ -231,9 +225,9 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
                             } else {
                                 showToast("User already Exists")
                             }
-                        }
+                        }else showToast("User Already Exists with the same Email")
                     }catch(e : Exception){
-                        showToast("Network Error")
+                        showToast("Connection Error")
                     }finally {
 //                        progressDialog?.dismiss()
 //                        progressDialog = null
@@ -249,7 +243,7 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
             }
             else
             {
-                showToast("Something went Wrong Please Retry")
+                //showToast("Something went Wrong Please Retry")
                 button.isEnabled = true
                 container.isEnabled=true
                 container.isFocusable = true
