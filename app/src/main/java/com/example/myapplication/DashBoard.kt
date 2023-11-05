@@ -29,7 +29,7 @@ class DashBoard : AppCompatActivity() {
          * Setting up the Basic Fragment
          */
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.flFragment, SettingsFragment())
+            replace(R.id.flFragment, MainDashboard())
             commit()
         }
 
@@ -93,6 +93,7 @@ class DashBoard : AppCompatActivity() {
             when (it.itemId) {
                 R.id.firstItem -> {
                     Toast.makeText(this@DashBoard, "First Item Clicked", Toast.LENGTH_SHORT).show()
+                    supportFragmentManager.popBackStack()
                     supportFragmentManager.beginTransaction().apply {
                         replace(R.id.flFragment, Dishes_Category())
                         commit()
@@ -109,9 +110,14 @@ class DashBoard : AppCompatActivity() {
             true
         }
         bottomNavigation.setOnClickMenuListener { item ->
+
             when (item.id) {
                 1 -> {
-                    // Handle the "Home" tab selection
+                    supportFragmentManager.popBackStack()
+                    supportFragmentManager.beginTransaction().apply {
+                        replace(R.id.flFragment, MainDashboard())
+                        commit()
+                    }
                 }
                 2 -> {
                     // Handle the "Search" tab selection
