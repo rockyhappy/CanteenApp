@@ -82,7 +82,9 @@
             android:maxLines="1"
             android:maxLength="50"
             android:textColor="@color/black"
-            android:textColorHint="@color/grey" />
+            android:textColorHint="@color/grey"
+            android:digits="qwertyuiopasdfghjklzxcvbnm 1234567890 QWERTYUIOPASDFGHJKLZXCVBNM"
+            />
 
     </com.google.android.material.textfield.TextInputLayout>
 

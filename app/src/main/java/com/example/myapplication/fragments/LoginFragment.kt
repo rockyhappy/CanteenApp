@@ -116,8 +116,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 /**
                  * This is bypassing the checkpoint
                  */
-                startActivity(Intent(requireActivity(), DashBoard::class.java))
-                requireActivity().finish()
+//                startActivity(Intent(requireActivity(), DashBoard::class.java))
+//                requireActivity().finish()
             }
             if(!flag)
             {
@@ -175,6 +175,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         val signUp =view.findViewById<TextView>(R.id.textView2)
         signUp.setOnClickListener {
+            parentFragmentManager.popBackStack()
             val fragmentTransaction = parentFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.flFragment, Registrationfragment())
             fragmentTransaction.addToBackStack(null)
