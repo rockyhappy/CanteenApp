@@ -19,7 +19,7 @@ class SplashScreen : AppCompatActivity() {
         svgImageView.setSVG(svg)
         Handler(Looper.getMainLooper()).postDelayed(
             {
-                val intent= Intent(this,DashBoard::class.java)
+                val intent= Intent(this,Login::class.java)
                 startActivity(intent)
                 finish()
             },2000

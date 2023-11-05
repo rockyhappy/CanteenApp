@@ -75,5 +75,6 @@ dependencies {
     //for the meow Bottom Navigation
     implementation ("com.etebarian:meow-bottom-navigation:1.2.0")
 
-
+    //for progress bar
+    implementation ("com.jpardogo.googleprogressbar:library:1.2.0")
 }
