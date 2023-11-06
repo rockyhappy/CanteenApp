@@ -69,12 +69,15 @@ class DashBoard : AppCompatActivity() {
         val bottomNavigation = findViewById<MeowBottomNavigation>(R.id.btmnav)
 
         val homeItem = MeowBottomNavigation.Model(1, R.drawable.baseline_home_24)
-        val searchItem = MeowBottomNavigation.Model(2, R.drawable.ic_search)
-        val profileItem = MeowBottomNavigation.Model(3, R.drawable.ic_profile)
-        val settingsItem = MeowBottomNavigation.Model(4, R.drawable.ic_settings)
+        val menu = MeowBottomNavigation.Model(2, R.drawable.baseline_restaurant_menu_24)
+        val searchItem = MeowBottomNavigation.Model(3, R.drawable.baseline_bookmark_border_24)
+        val profileItem = MeowBottomNavigation.Model(4, R.drawable.baseline_shopping_cart_24)
+        val settingsItem = MeowBottomNavigation.Model(5, R.drawable.ic_profile)
+
 
 
         bottomNavigation.add(homeItem)
+        bottomNavigation.add(menu)
         bottomNavigation.add(searchItem)
         bottomNavigation.add(profileItem)
         bottomNavigation.add(settingsItem)
@@ -87,7 +90,7 @@ class DashBoard : AppCompatActivity() {
 
         var drawerLayout : DrawerLayout = findViewById(R.id.drawerLayout)
         toggle = ActionBarDrawerToggle(this@DashBoard, drawerLayout, R.string.open, R.string.close)
-        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white))
+        //toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white))
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
