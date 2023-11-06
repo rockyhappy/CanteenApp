@@ -74,6 +74,7 @@ dependencies {
 
     //for the meow Bottom Navigation
     implementation ("com.etebarian:meow-bottom-navigation:1.2.0")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
 
 
 }
