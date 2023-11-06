@@ -95,11 +95,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:mbn_defaultIconColor="@color/white"
-        app:mbn_selectedIconColor="@color/white"
-        app:mbn_circleColor="@color/primary_color"
-        app:mbn_backgroundBottomColor="@color/primary_color"
-        app:mbn_countBackgroundColor="@color/primary_color"
+        app:mbn_defaultIconColor="@color/primary_color"
+        app:mbn_selectedIconColor="@color/primary_color"
+        app:mbn_circleColor="@color/white"
+        app:mbn_backgroundBottomColor="@color/white"
+        app:mbn_countBackgroundColor="@color/white"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

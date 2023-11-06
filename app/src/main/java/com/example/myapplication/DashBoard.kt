@@ -6,7 +6,6 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.GravityCompat
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -15,8 +14,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.lifecycleScope
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.example.myapplication.databinding.ActivityDashBoardBinding
-import com.example.myapplication.fragments.ChoiceFragment
-import com.example.myapplication.fragments.SettingsFragment
+import com.example.myapplication.fragments.MainDashboard
 import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.launch
 
@@ -121,8 +119,35 @@ class DashBoard : AppCompatActivity() {
             }
             true
         }
+
+        /**
+         * This is working when the item  is not selected
+         */
         bottomNavigation.setOnClickMenuListener { item ->
 
+            when (item.id) {
+                1 -> {
+                    supportFragmentManager.popBackStack()
+                    supportFragmentManager.beginTransaction().apply {
+                        replace(R.id.flFragment, MainDashboard())
+                        commit()
+                    }
+                }
+                2 -> {
+                    // Handle the "Search" tab selection
+                }
+                3 -> {
+                    // Handle the "Profile" tab selection
+                }
+                4 -> {
+                    // Handle the "Settings" tab selection
+                }
+            }
+        }
+        /**
+         * This is working when the item  is selected and then we are re-selecting the same item
+         */
+        bottomNavigation.setOnReselectListener {item ->
             when (item.id) {
                 1 -> {
                     supportFragmentManager.popBackStack()

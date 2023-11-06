@@ -20,7 +20,7 @@
             android:name=".DashBoard"
             android:configChanges="orientation|screenSize"
             android:exported="false"
-            android:theme="@style/AppTheme2" />
+            android:theme="@style/Base.MyApplication" />
         <activity
             android:name=".Login"
             android:configChanges="orientation|screenSize"

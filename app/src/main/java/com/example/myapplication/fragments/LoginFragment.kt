@@ -59,6 +59,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         val container = view.findViewById<ConstraintLayout>(R.id.Container)
         val button= view.findViewById<Button>(R.id.button)
         button.setOnClickListener {
+
             /** call api and apply checks*/
 
             var flag=false
