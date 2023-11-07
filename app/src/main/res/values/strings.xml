@@ -90,10 +90,10 @@
     <string name="your_email">Your Email</string>
     <string name="contact_number">Contact Number</string>
     <string name="date_of_birth">Date Of Birth</string>
-    <string name="this_can_t_be_edited_later">This can\'t be edited later! </string>
+    <string name="this_can_t_be_edited_later">This can\'t be edited later ! </string>
     <string name="gender">Gender</string>
     <string name="your_anniversary">Your Anniversary</string>
-    <string name="annp">This can\'t be edited later!</string>
+    <string name="annp">This can\'t be edited later !</string>
     <string name="update">Update Profile</string>
 
 

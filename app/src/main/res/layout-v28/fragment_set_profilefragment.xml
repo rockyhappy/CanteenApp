@@ -85,6 +85,23 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="RtlSymmetry" />
 
+
+    <TextView
+
+        android:id="@+id/this_can_t_be_edited_later"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/this_can_t_be_edited_later"
+        android:textColor="@color/primary_color"
+        android:textSize="8sp"
+        app:layout_constraintEnd_toEndOf="@+id/date_of_birth"
+        app:layout_constraintHorizontal_bias="0.009"
+        app:layout_constraintStart_toStartOf="@+id/date_of_birth"
+        app:layout_constraintTop_toBottomOf="@+id/date_of_birth"
+        tools:ignore="SmallSp" />
+
     <EditText
         android:id="@+id/contact_number"
         android:layout_width="300dp"
@@ -174,9 +191,20 @@
         app:layout_constraintTop_toBottomOf="@+id/date_of_birth"
         tools:ignore="RtlSymmetry" />
 
-
-
-
+    <TextView
+        android:id="@+id/annp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/annp"
+        android:textColor="@color/primary_color"
+        android:textSize="8sp"
+        app:layout_constraintEnd_toEndOf="@+id/your_anniversary"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/your_anniversary"
+        app:layout_constraintTop_toBottomOf="@+id/your_anniversary"
+        tools:ignore="SmallSp" />
 
 
 </com.google.android.material.textfield.TextInputLayout>
