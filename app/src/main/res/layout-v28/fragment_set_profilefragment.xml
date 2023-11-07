@@ -47,7 +47,7 @@
         android:layout_width="300dp"
         android:layout_height="48dp"
         android:layout_marginTop="200dp"
-
+        android:background="@drawable/rounded_border"
         android:ems="10"
         android:fontFamily="@font/roboto"
         android:inputType="text"
@@ -70,6 +70,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="328dp"
         android:ems="10"
+        android:background="@drawable/rounded_border"
         android:fontFamily="@font/roboto"
         android:inputType="textEmailAddress"
         android:paddingStart="15dp"
@@ -89,7 +90,7 @@
         android:layout_width="300dp"
         android:layout_height="48dp"
         android:layout_marginTop="264dp"
-
+        android:background="@drawable/rounded_border"
         android:ems="10"
         android:fontFamily="@font/roboto"
         android:inputType="phone"
@@ -111,7 +112,7 @@
         android:layout_width="300dp"
         android:layout_height="48dp"
         android:layout_marginTop="388dp"
-
+        android:background="@drawable/rounded_border"
         android:ems="10"
         android:fontFamily="@font/roboto"
         android:inputType="date"
@@ -136,7 +137,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="16dp"
-
+        android:background="@drawable/rounded_border"
         android:ems="10"
         android:fontFamily="@font/roboto"
         android:inputType="text"
@@ -157,7 +158,6 @@
         android:layout_width="300dp"
         android:layout_height="48dp"
         android:layout_marginTop="20dp"
-
         android:ems="10"
         android:fontFamily="@font/roboto"
         android:inputType="date"
@@ -167,6 +167,7 @@
         android:textColor="@color/black"
         android:textColorHint="@color/grey"
         android:textSize="14sp"
+        android:background="@drawable/rounded_border"
         app:layout_constraintEnd_toEndOf="@+id/date_of_birth"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/date_of_birth"
