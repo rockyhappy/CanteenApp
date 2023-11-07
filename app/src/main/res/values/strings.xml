@@ -101,6 +101,7 @@
     <string name="edit">Edit</string>
     <string name="transaction">Transaction</string>
     <string name="transcation">Transcation</string>
+    <string name="favourite">Favourite</string>
 
 
 </resources>
