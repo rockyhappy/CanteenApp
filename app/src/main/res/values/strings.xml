@@ -95,6 +95,10 @@
     <string name="your_anniversary">Anniversary</string>
     <string name="annp">This can\'t be edited later !</string>
     <string name="update">Update Profile</string>
+    <string name="profile">Profile</string>
+    <string name="main_name">Shinchain Nuhara</string>
+    <string name="semail">shinchain2231012@akgec.ac.in</string>
+    <string name="edit">Edit</string>
 
 
 </resources>
