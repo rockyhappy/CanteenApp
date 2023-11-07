@@ -206,7 +206,24 @@
         app:layout_constraintTop_toBottomOf="@+id/your_anniversary"
         tools:ignore="SmallSp" />
 
+    <Button
+        android:id="@+id/update"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="632dp"
+        android:background="@drawable/rounded_border"
+        android:backgroundTint="@color/primary_color"
+        android:elevation="5dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/update"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</com.google.android.material.textfield.TextInputLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
