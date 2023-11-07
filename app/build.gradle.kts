@@ -70,7 +70,7 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
 
     // Preferences DataStore
-    implementation ("androidx.datastore:datastore-preferences:1.0.0-alpha04")
+    implementation ("androidx.datastore:datastore-preferences:1.1.0-alpha06")
 
     //for the meow Bottom Navigation
     implementation ("com.etebarian:meow-bottom-navigation:1.2.0")
