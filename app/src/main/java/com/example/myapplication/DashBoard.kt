@@ -14,6 +14,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.lifecycleScope
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.example.myapplication.databinding.ActivityDashBoardBinding
+import com.example.myapplication.fragments.Breakfast
 import com.example.myapplication.fragments.MainDashboard
 import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.launch
@@ -115,6 +116,12 @@ class DashBoard : AppCompatActivity() {
                 }
                 R.id.secondtItem -> {
                     Toast.makeText(this@DashBoard, "Second Item Clicked", Toast.LENGTH_SHORT).show()
+                    supportFragmentManager.popBackStack()
+                    supportFragmentManager.beginTransaction().apply {
+                        replace(R.id.flFragment, Breakfast())
+                        commit()
+                    }
+                    drawerLayout.closeDrawer(GravityCompat.START)
                 }
                 R.id.thirdItem -> {
                     Toast.makeText(this@DashBoard, "third Item Clicked", Toast.LENGTH_SHORT).show()

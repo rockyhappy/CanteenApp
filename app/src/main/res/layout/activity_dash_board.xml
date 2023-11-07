@@ -95,7 +95,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:mbn_defaultIconColor="@color/primary_color"
+        app:mbn_defaultIconColor="@color/semiblack"
         app:mbn_selectedIconColor="@color/primary_color"
         app:mbn_circleColor="@color/white"
         app:mbn_backgroundBottomColor="@color/white"
