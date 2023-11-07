@@ -2,7 +2,8 @@ package com.example.myapplication
 
 
 data class SignUpResponse(
-    val token:String
+    val token:String,
+    val message:String
 )
 data class SignUpRequest(
     val fullName:String,
@@ -11,7 +12,8 @@ data class SignUpRequest(
     val role:String
 )
 data class LoginResponse(
-    val token: String
+    val token: String,
+    val message: String
 )
 
 data class LoginRequest(
@@ -24,16 +26,14 @@ data class UserData(
     val email: String
 )
 
-
-
-
 data class verifyMailRequest(
     val email :String,
     val otp: String
 )
 
 data class verifyMailResponse(
-    val token:String
+    val token:String,
+    val message: String
 )
 
 data class resendOtpRequest(
@@ -41,7 +41,8 @@ data class resendOtpRequest(
 )
 
 data class resendOtpResponse(
-    val token:String
+    val token:String,
+    val message: String
 )
 
 data class forgotPasswordRequest(
@@ -59,3 +60,6 @@ data class ResetPasswordRequest(
 data class ResetPasswordResponse(
     val token:String
 )
+
+data class RvModel(var profile :Int , var name: String , var adress :String) {
+}
