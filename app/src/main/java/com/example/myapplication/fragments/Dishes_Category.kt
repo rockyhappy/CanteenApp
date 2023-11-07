@@ -1,10 +1,12 @@
-package com.example.myapplication
+package com.example.myapplication.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.cardview.widget.CardView
+import com.example.myapplication.R
 
 
 class Dishes_Category : Fragment() {
@@ -17,6 +19,11 @@ class Dishes_Category : Fragment() {
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_dishes__category, container, false)
 
+        val lunch1= view.findViewById<CardView>(R.id.cardView1)
+        lunch1.setOnClickListener {
+
+
+        }
 
 
         return view

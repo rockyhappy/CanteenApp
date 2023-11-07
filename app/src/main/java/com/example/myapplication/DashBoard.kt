@@ -15,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.example.myapplication.databinding.ActivityDashBoardBinding
 import com.example.myapplication.fragments.Breakfast
+import com.example.myapplication.fragments.Dishes_Category
 import com.example.myapplication.fragments.MainDashboard
 import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.launch

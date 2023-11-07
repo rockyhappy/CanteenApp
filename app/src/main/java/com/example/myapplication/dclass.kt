@@ -63,3 +63,20 @@ data class ResetPasswordResponse(
 
 data class RvModel(var profile :Int , var name: String , var adress :String) {
 }
+
+
+/**
+ * Data classes for the Dashboard
+ */
+data class CanteenResponse(
+    val canteenItems: List<CanteenItem>
+)
+
+data class CanteenItem(
+    val id: Long,
+    val name: String,
+    val email: String,
+    val description: String,
+    val canteenImage: String,
+    val foods: List<Int>
+)
