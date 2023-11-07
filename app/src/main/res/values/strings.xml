@@ -102,6 +102,7 @@
     <string name="transaction">Transaction</string>
     <string name="transcation">Transcation</string>
     <string name="favourite">Favourite</string>
+    <string name="subscription">Subscription</string>
 
 
 </resources>
