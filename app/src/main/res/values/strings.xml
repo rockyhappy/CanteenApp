@@ -83,9 +83,18 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="greeting">Hii Rachit !!! \nWhat would you like to eat today ??</string>
+    <string name="greeting">Hello Friend !!! \nWhat would you like to eat today ??</string>
     <string name="your_message">You\'ve registered your account and you\'re now ready to use it !</string>
     <string name="profileb">Your Profile</string>
+    <string name="your_name">Your Name</string>
+    <string name="your_email">Your Email</string>
+    <string name="contact_number">Contact Number</string>
+    <string name="date_of_birth">Date Of Birth</string>
+    <string name="this_can_t_be_edited_later">This can\'t be edited later! </string>
+    <string name="gender">Gender</string>
+    <string name="your_anniversary">Your Anniversary</string>
+    <string name="annp">This can\'t be edited later!</string>
+    <string name="update">Update Profile</string>
 
 
 </resources>
