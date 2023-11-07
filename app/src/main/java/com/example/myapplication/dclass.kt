@@ -61,8 +61,7 @@ data class ResetPasswordResponse(
     val token:String
 )
 
-data class RvModel(var profile :Int , var name: String , var adress :String) {
-}
+data class RvModel(var canteenUrl : String , var name: String , var descriptionn :String)
 
 
 /**

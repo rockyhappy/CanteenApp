@@ -1,5 +1,6 @@
 package com.example.myapplication.fragments
 
+import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -26,6 +27,9 @@ import okhttp3.OkHttpClient
 import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 
 
 class Breakfast : Fragment(), RvAdapter.OnItemClickListener {
@@ -33,22 +37,39 @@ class Breakfast : Fragment(), RvAdapter.OnItemClickListener {
     private lateinit var recyclerView: RecyclerView
     private lateinit var rvadapter : RvAdapter
     private lateinit var dataStore: DataStore<Preferences>
+    private var dialog: Dialog? = null
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        dataStore = requireContext().createDataStore(name = "user")
-    }
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//        dataStore = requireContext().createDataStore(name = "user")
+//    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
+        dataStore = requireContext().createDataStore(name = "user")
+
+        val view = inflater.inflate(R.layout.fragment_breakfast, container, false)
+        rvadapter = RvAdapter(ArrayList(), requireContext(), this)
+        recyclerView = view.findViewById<RecyclerView>(R.id.rvid)
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
+        recyclerView.adapter = rvadapter
         lifecycleScope.launch {
             try {
+                showCustomProgressDialog()
                 val response = RetrofitInstance2.getApiServiceWithToken(dataStore).getCanteens()
                 if (response.isSuccessful) {
                     Log.d("Testing",response.body().toString())
                     Log.d("Testing", "Successful response: ${response.body()}")
+                    val canteenItems = response.body()?.canteenItems.orEmpty()
+
+                    // Convert CanteenItem objects to RvModel objects
+                    val dataList = canteenItems.map { canteenItem ->
+                        RvModel(canteenItem.canteenImage, canteenItem.name, canteenItem.description)
+                    }
+                    rvadapter.updateData(dataList)
                 } else {
                     // Handle the error
                     Log.d("Testing",response.body().toString())
@@ -57,16 +78,20 @@ class Breakfast : Fragment(), RvAdapter.OnItemClickListener {
             } catch (e: Exception) {
                 // Handle network or other exceptions
                 Log.d("Testing","Network Error")
+                Log.e("Testing", "Network Error: ${e.message}", e)
+            }
+            finally {
+                dismissCustomProgressDialog()
             }
         }
 
 
 
-        val view= inflater.inflate(R.layout.fragment_breakfast, container, false)
-        recyclerView=view.findViewById<RecyclerView>(R.id.rvid)
-        rvadapter= RvAdapter(RvDataList.getData(),requireContext(),this)
-        recyclerView.layoutManager= GridLayoutManager(requireContext(),2, GridLayoutManager.VERTICAL,false)
-        recyclerView.adapter= rvadapter
+//        val view= inflater.inflate(R.layout.fragment_breakfast, container, false)
+//        recyclerView=view.findViewById<RecyclerView>(R.id.rvid)
+//        rvadapter= RvAdapter(RvDataList.getData(),requireContext(),this)
+//        recyclerView.layoutManager= GridLayoutManager(requireContext(),2, GridLayoutManager.VERTICAL,false)
+//        recyclerView.adapter= rvadapter
 
 
         return view
@@ -80,6 +105,21 @@ class Breakfast : Fragment(), RvAdapter.OnItemClickListener {
         showToast(name)
 
     }
+    private fun showCustomProgressDialog() {
+        dialog = Dialog(requireContext())
+        dialog?.setContentView(R.layout.custom_dialog_loading)
+        dialog?.setCancelable(false)
+
+        val window = dialog?.window
+        window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        dialog?.show()
+    }
+    private fun dismissCustomProgressDialog() {
+        dialog?.dismiss()
+        dialog = null
+    }
+
 
 }
 
@@ -105,18 +145,23 @@ class RvAdapter(
         var profile = holder.view.findViewById<ImageView>(R.id.imageView)
         var name = holder.view.findViewById<TextView>(R.id.textView)
         var residence = holder.view.findViewById<TextView>(R.id.textView2)
-        profile.setImageResource(dataList.get(position).profile)
-        name.text =dataList.get(position).name
-        residence.text=dataList.get(position).adress
 
         val item = dataList[position]
-        profile.setImageResource(item.profile)
         name.text = item.name
-        residence.text = item.adress
+        residence.text = item.descriptionn
+
+        Glide.with(context)
+            .load(item.canteenUrl)
+            .apply(
+                RequestOptions()
+                    .placeholder(R.drawable.baseline_person_24)
+                    .error(R.drawable.baseline_home_24)
+            )
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(profile)
 
 
         holder.view.setOnClickListener {
-            // Call the onItemClick function with the name of the clicked item
             itemClickListener.onItemClick(item.name)
         }
 
@@ -128,28 +173,15 @@ class RvAdapter(
         fun onItemClick(name: String)
     }
 
-}
 
-
-object RvDataList {
-    private lateinit var datalist: ArrayList<RvModel>
-    fun getData():ArrayList<RvModel>{
-
-        datalist=ArrayList<RvModel>()
-        datalist.add(RvModel(R.drawable.breakfast,"Rachit Katiyar","Software Incubator"))
-        datalist.add(RvModel(R.drawable.breakfast,"Rachit Katiyar","Software Incubator"))
-        datalist.add(RvModel(R.drawable.breakfast,"Rachit Katiyar","Software Incubator"))
-        datalist.add(RvModel(R.drawable.breakfast,"Rachit Katiyar","Software Incubator"))
-        datalist.add(RvModel(R.drawable.breakfast,"Rachit Katiyar","Software Incubator"))
-        datalist.add(RvModel(R.drawable.breakfast,"Ujjwal Rana","Software Incubator"))
-        datalist.add(RvModel(R.drawable.breakfast,"Andrew Tate","Software Incubator"))
-        datalist.add(RvModel(R.drawable.breakfast,"jimmy parson","Software Incubator"))
-        datalist.add(RvModel(R.drawable.breakfast,"Paras Upadhyay","Software Incubator"))
-        datalist.add(RvModel(R.drawable.breakfast,"Ankit Varshney","Software Incubator"))
-        datalist.add(RvModel(R.drawable.breakfast,"Lakshay Gupta","Software Incubator"))
-        return datalist
+    fun updateData(newDataList: List<RvModel>) {
+        dataList.clear()
+        dataList.addAll(newDataList)
+        notifyDataSetChanged()
     }
 }
+
+
 
 /**
  * this is the interceptor to add the jwt to the header of the request
@@ -177,9 +209,9 @@ object RetrofitInstance2 {
 
     private val authInterceptor = AuthInterceptor("")
 
-    private val okHttpClient = OkHttpClient.Builder()
-        .addInterceptor(authInterceptor)
-        .build()
+//    private val okHttpClient = OkHttpClient.Builder()
+//        .addInterceptor(authInterceptor)
+//        .build()
 
     // Function to create the Retrofit API service with the JWT token
     private fun createApiService(jwtToken: String): ApiService {
@@ -198,7 +230,8 @@ object RetrofitInstance2 {
 
     // Function to get the JWT token from DataStore
     suspend fun getApiServiceWithToken(dataStore: DataStore<Preferences>): ApiService {
-        val jwtToken = readFromDataStore(dataStore, "token").toString()
+        //val jwtToken = readFromDataStore(dataStore, "token").toString()
+        val jwtToken="eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcmFuYXZAZ21haWwuY29tIiwiaWF0IjoxNjk5Mzg1NjcxLCJleHAiOjE2OTkzODcxMTF9.BvRKtFLDld4HoCT-Y98Hc5DzTUKewpFVbKptH_Z89eY"
         return createApiService(jwtToken)
     }
 }
