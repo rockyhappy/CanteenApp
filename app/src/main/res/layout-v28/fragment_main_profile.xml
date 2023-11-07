@@ -41,7 +41,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="350dp"
-        android:layout_height="80dp"
+        android:layout_height="100dp"
         android:layout_marginTop="112dp"
         android:backgroundTint="@color/white"
         app:cardCornerRadius="8dp"
@@ -134,18 +134,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView10"
             android:layout_width="100dp"
             android:layout_height="48dp"
             android:layout_marginTop="220dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="5dp"
+            app:cardBackgroundColor="@color/primary_color"
+            app:cardCornerRadius="8dp"
             app:cardElevation="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.093"
@@ -169,21 +166,25 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="MissingConstraints" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_editor_absoluteX="5dp">
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView11"
             android:layout_width="100dp"
             android:layout_height="48dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="5dp"
+            app:cardBackgroundColor="@color/primary_color"
+            app:cardCornerRadius="8dp"
             app:cardElevation="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -212,8 +213,8 @@
         <androidx.cardview.widget.CardView
             android:layout_width="100dp"
             android:layout_height="48dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="5dp"
+            app:cardBackgroundColor="@color/primary_color"
+            app:cardCornerRadius="8dp"
             app:cardElevation="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
