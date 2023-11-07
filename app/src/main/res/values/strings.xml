@@ -2,7 +2,7 @@
 <resources>
     <string name="reg">Register</string>
 
-    <string name="create">Create your new account</string>
+    <string name="create">Create Your New Account</string>
 
     <string name="name">Full Name</string>
 
@@ -12,7 +12,7 @@
 
     <string name="cont">Continue With</string>
 
-    <string name="option">Already have account ? <font color="#FA902D"><u>Sign In</u></font></string>
+    <string name="option">Already have an Account ? <font color="#FA902D"><u>Sign In</u></font></string>
 
     <string name="option2">By signing up, you agree to our<font color="#FA902D"><b>Terms of Service</b></font> and <font color="#FA902D"><b>Privacy Policy</b></font></string>
 
@@ -26,25 +26,25 @@
 
     <string name="welcome_bac">Welcome back!</string>
 
-    <string name="login_to_yo">Login to your account</string>
+    <string name="login_to_yo">Login to your Account</string>
 
     <string name="forgot_pass">Forgot Password?</string>
 
-    <string name="don_t_worry">Don\'t worry! It happens, please enter your Email address to receive a verification code</string>
+    <string name="don_t_worry">Don\'t worry! It happens, please enter your Email Address to receive a verification code</string>
 
     <string name="try_another"><u>Try another way</u></string>
 
-    <string name="please_ente">Please enter the 6 digit code sent to your registered mail</string>
+    <string name="please_ente">Please enter 6 digit code sent to your registered Email Address</string>
 
     <string name="resend_code">Resend Code in 00:31sec</string>
 
-    <string name="your_new_pa">Your new password must be different from previously used password</string>
+    <string name="your_new_pa">Your new Password must be different from previously used Password</string>
 
-    <string name="your_passwo">Your password has been successfully changed. Please use your new password to login!</string>
+    <string name="your_passwo">Your password has been successfully changed. Please use your New Password to login!</string>
 
-    <string name="login_or_si">Login or sign up to explore delicious foods</string>
+    <string name="login_or_si">Login or Sign up to Explore Delicious foods !</string>
 
-    <string name="already_hav">Already have account ?<font color="#FA902D"><b> Sign In</b></font></string>
+    <string name="already_hav">Already have an Account ?<font color="#FA902D"><b> Sign In</b></font></string>
 
     <string name="open">Open</string>
 
@@ -74,7 +74,7 @@
     <string name="sync_header">Sync</string>
 
     <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
+    <string name="signature_title">Your Signature</string>
     <string name="reply_title">Default reply action</string>
 
     <!-- Sync Preferences -->
