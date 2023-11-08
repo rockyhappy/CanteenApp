@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
@@ -41,9 +42,20 @@ class SplashScreen : AppCompatActivity() {
                 else {
 
                     //over here i can add an api to check that if the added token is verified or not
-                    val intent= Intent(this@SplashScreen,DashBoard::class.java)
-                    startActivity(intent)
-                    finish()
+
+                    val response = RetrofitInstance2.getApiServiceWithToken(dataStore).getCanteens()
+                    if (response.isSuccessful) {
+                        val intent= Intent(this@SplashScreen,DashBoard::class.java)
+                        startActivity(intent)
+                        finish()
+
+                    } else {
+                        val intent= Intent(this@SplashScreen,Login::class.java)
+                        startActivity(intent)
+                        finish()
+                        Log.d("Testing",response.body().toString())
+                        Log.d("Testing", "Response code: ${response.code()}, Response body: ${response.body()}")
+                    }
                 }
             }catch (e: Exception){
                 showToast("SomeThing went wrong")

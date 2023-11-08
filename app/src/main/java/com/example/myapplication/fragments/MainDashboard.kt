@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.myapplication.R
+import com.example.myapplication.RetrofitInstance2
+import com.example.myapplication.RvAdapter
 import com.example.myapplication.RvModel
 import kotlinx.coroutines.launch
 
