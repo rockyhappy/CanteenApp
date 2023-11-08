@@ -79,7 +79,7 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
         val passing =ShowCanteenMenu()
         passing.arguments=bundle
         val fragmentTransaction = parentFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.flFragment, ShowCanteenMenu())
+        fragmentTransaction.replace(R.id.flFragment, passing)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
         //showToast(name)

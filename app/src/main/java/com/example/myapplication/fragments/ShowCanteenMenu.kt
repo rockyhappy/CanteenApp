@@ -32,7 +32,7 @@ class ShowCanteenMenu : Fragment() , RvAdapter.OnItemClickListener{
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_show_canteen_menu, container, false)
         rvadapter = RvAdapter(ArrayList(), requireContext(), this)
-        recyclerView = view.findViewById<RecyclerView>(R.id.rvid)
+        recyclerView = view.findViewById<RecyclerView>(R.id.rvi)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 1, GridLayoutManager.VERTICAL, false)
         recyclerView.adapter = rvadapter
 
@@ -44,12 +44,13 @@ class ShowCanteenMenu : Fragment() , RvAdapter.OnItemClickListener{
                 showCustomProgressDialog()
                 val request=GetFoodByCanteenRequest(
                     name =receivedData.toString()
+                    //name ="Sarthak ki dukaan"
                 )
                 val response = RetrofitInstance2.getApiServiceWithToken(dataStore).getCanteenFood(request)
                 if (response.isSuccessful) {
                     Log.d("Testing",response.body().toString())
                     Log.d("Testing", "Successful response: ${response.body()}")
-                    val canteenItems = response.body()?.foods.orEmpty()
+                    val canteenItems = response.body()?.foodItems.orEmpty()
 
                     // Convert CanteenItem objects to RvModel objects
                     val dataList = canteenItems.map { canteenItem ->
