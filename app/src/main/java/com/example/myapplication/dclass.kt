@@ -79,3 +79,19 @@ data class CanteenItem(
     val canteenImage: String,
     val foods: List<Int>
 )
+
+data class GetFoodByCanteenRequest(
+    val name :String
+)
+data class GetFoodByCanteenResponse(
+    val foods: List<FoodItem>
+)
+data class FoodItem(
+    val id: Long,
+    val name: String,
+    val category: String,
+    val price: Double,
+    val canteenId: Long,
+    val foodImage: String,
+    val description: String
+)

@@ -32,4 +32,6 @@ interface ApiService {
     @GET("api/v1/user/get-canteens")
     suspend fun getCanteens() : Response<CanteenResponse>
 
+    @POST("api/v1/user/get-canteen-food")
+    suspend fun getCanteenFood(@Body request: GetFoodByCanteenRequest) : Response<GetFoodByCanteenResponse>
 }
