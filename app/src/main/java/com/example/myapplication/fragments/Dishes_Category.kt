@@ -21,7 +21,14 @@ class Dishes_Category : Fragment() {
 
         val lunch1= view.findViewById<CardView>(R.id.cardView1)
         lunch1.setOnClickListener {
-
+            val bundle = Bundle()
+            bundle.putString("key2","lunch")
+            val passing=ShowCategoryMenu()
+            passing.arguments=bundle
+            val fragmentTransaction = parentFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.flFragment, passing)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
 
         }
 
