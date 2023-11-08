@@ -14,6 +14,8 @@ import androidx.datastore.preferences.createDataStore
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.myapplication.R
@@ -35,8 +37,10 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
         val view= inflater.inflate(R.layout.fragment_main_dashboard, container, false)
         rvadapter = RvAdapter(ArrayList(), requireContext(), this)
         recyclerView = view.findViewById<RecyclerView>(R.id.rvid)
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 1, GridLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         recyclerView.adapter = rvadapter
+        val pagerSnapHelper = PagerSnapHelper()
+        pagerSnapHelper.attachToRecyclerView(recyclerView)
         lifecycleScope.launch {
             try {
                 showCustomProgressDialog()

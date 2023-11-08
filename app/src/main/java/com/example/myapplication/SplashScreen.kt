@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.preferencesKey
 import androidx.datastore.preferences.createDataStore
 import androidx.lifecycle.lifecycleScope
 import com.caverock.androidsvg.SVG
@@ -30,7 +32,6 @@ class SplashScreen : AppCompatActivity() {
         svgImageView.setSVG(svg)
         dataStore = createDataStore(name = "user")
         lifecycleScope.launch {
-            showCustomProgressDialog()
             try {
                 val token = readFromDataStore(dataStore, "token" ).toString()
                 if (token == "null")
@@ -45,6 +46,7 @@ class SplashScreen : AppCompatActivity() {
 
                     val response = RetrofitInstance2.getApiServiceWithToken(dataStore).getCanteens()
                     if (response.isSuccessful) {
+                        save("token","eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYWNAZ21haWwuY29tIiwiaWF0IjoxNjk5NDY2OTAxLCJleHAiOjE2OTk5OTI1MDF9.d1lp6UGWEHI-llYjhsahKCn60jelcz9pSj6G0JdFHqU")
                         val intent= Intent(this@SplashScreen,DashBoard::class.java)
                         startActivity(intent)
                         finish()
@@ -60,10 +62,6 @@ class SplashScreen : AppCompatActivity() {
             }catch (e: Exception){
                 showToast("SomeThing went wrong")
             }
-            finally {
-                dismissCustomProgressDialog()
-            }
-           dismissCustomProgressDialog()
 
 
         }
@@ -85,5 +83,10 @@ class SplashScreen : AppCompatActivity() {
         dialog?.dismiss()
         dialog = null
     }
-
+    private suspend fun save (key:String , value:String){
+        val dataStoreKey= preferencesKey<String>(key)
+        dataStore.edit{temp ->
+            temp[dataStoreKey]=value
+        }
+    }
 }

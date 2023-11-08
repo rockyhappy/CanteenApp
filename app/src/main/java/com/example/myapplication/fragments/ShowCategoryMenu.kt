@@ -13,6 +13,7 @@ import androidx.datastore.preferences.createDataStore
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
+import com.example.myapplication.RvAdapter
 
 
 class ShowCategoryMenu : Fragment(), RvAdapter.OnItemClickListener {
