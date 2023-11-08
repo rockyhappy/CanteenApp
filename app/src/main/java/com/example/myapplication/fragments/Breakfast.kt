@@ -51,10 +51,11 @@ class Breakfast : Fragment(), RvAdapter.OnItemClickListener {
 
         dataStore = requireContext().createDataStore(name = "user")
 
+
         val view = inflater.inflate(R.layout.fragment_breakfast, container, false)
         rvadapter = RvAdapter(ArrayList(), requireContext(), this)
         recyclerView = view.findViewById<RecyclerView>(R.id.rvid)
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 1, GridLayoutManager.VERTICAL, false)
         recyclerView.adapter = rvadapter
         lifecycleScope.launch {
             try {
@@ -151,7 +152,7 @@ class RvAdapter(
         residence.text = item.descriptionn
 
         Glide.with(context)
-            .load(item.canteenUrl)
+            .load("https://picsum.photos/seed/picsum/200/300")
             .apply(
                 RequestOptions()
                     .placeholder(R.drawable.baseline_person_24)
@@ -231,7 +232,7 @@ object RetrofitInstance2 {
     // Function to get the JWT token from DataStore
     suspend fun getApiServiceWithToken(dataStore: DataStore<Preferences>): ApiService {
         //val jwtToken = readFromDataStore(dataStore, "token").toString()
-        val jwtToken="eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcmFuYXZAZ21haWwuY29tIiwiaWF0IjoxNjk5Mzg1NjcxLCJleHAiOjE2OTkzODcxMTF9.BvRKtFLDld4HoCT-Y98Hc5DzTUKewpFVbKptH_Z89eY"
+        val jwtToken="eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcmFuYXZAZ21haWwuY29tIiwiaWF0IjoxNjk5NDEzMzk4LCJleHAiOjE2OTk5Mzg5OTh9.pr2Yq7AqjeTYAQEF19TT_hia6Oh6TsnUj9DhK6-iooY"
         return createApiService(jwtToken)
     }
 }
