@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -62,7 +63,13 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
                 dismissCustomProgressDialog()
             }
         }
-
+        val fullCategory = view.findViewById<TextView>(R.id.fullCategory)
+        fullCategory.setOnClickListener {
+            val fragmentTransaction = parentFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.flFragment, Dishes_Category())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
 
 
 

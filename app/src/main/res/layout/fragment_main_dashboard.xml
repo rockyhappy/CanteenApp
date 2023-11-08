@@ -59,6 +59,7 @@
         android:textColor="@color/primary_color"
         android:textSize="19dp"
         android:textStyle="bold"
+        android:id="@+id/fullCategory"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
