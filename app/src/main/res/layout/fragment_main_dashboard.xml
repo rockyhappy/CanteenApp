@@ -2,6 +2,7 @@
 <ScrollView
     android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:fillViewport="true"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -97,10 +98,10 @@
 
     <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:layout_marginTop="200dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -247,7 +248,7 @@
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/white"
                 android:elevation="4dp"
-                app:cardCornerRadius="1500dp"
+                app:cardCornerRadius="5dp"
                 android:layout_marginStart="20dp"
                 app:layout_constraintStart_toEndOf="@+id/cardView4"
                 app:layout_constraintTop_toTopOf="parent">
@@ -276,12 +277,12 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView6"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="82dp"
+                android:layout_height="130dp"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/white"
                 android:elevation="4dp"
-                app:cardCornerRadius="1500dp"
+                app:cardCornerRadius="5dp"
                 android:layout_marginStart="20dp"
                 app:layout_constraintStart_toEndOf="@+id/cardView5"
                 app:layout_constraintTop_toTopOf="parent">
@@ -289,31 +290,30 @@
 
                 <ImageView
                     android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:layout_gravity="center"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_horizontal"
                     android:src="@drawable/chaat" />
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chaat"
+                    android:textColor="@color/grey"
+                    android:fontFamily="@font/roboto"
+                    android:layout_marginTop="100dp"
+                    android:textSize="12sp"
+                    android:layout_gravity="center_horizontal"
+                    />
             </androidx.cardview.widget.CardView>
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Chaat"
-                android:textColor="@color/grey"
-                android:fontFamily="@font/roboto"
-                android:layout_marginTop="5dp"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@+id/cardView6"
-                app:layout_constraintStart_toStartOf="@+id/cardView6"
-                app:layout_constraintTop_toBottomOf="@+id/cardView6" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView7"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="82dp"
+                android:layout_height="130dp"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/white"
                 android:elevation="4dp"
-                app:cardCornerRadius="1500dp"
+                app:cardCornerRadius="5dp"
                 android:layout_marginStart="20dp"
                 app:layout_constraintStart_toEndOf="@+id/cardView6"
                 app:layout_constraintTop_toTopOf="parent">
@@ -321,31 +321,31 @@
 
                 <ImageView
                     android:layout_width="210dp"
-                    android:layout_height="210dp"
-                    android:layout_gravity="center"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_horizontal"
                     android:src="@drawable/thali" />
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Thali"
+                    android:textColor="@color/grey"
+                    android:fontFamily="@font/roboto"
+                    android:layout_marginTop="100dp"
+                    android:textSize="12sp"
+                    android:layout_gravity="center_horizontal"
+                    />
             </androidx.cardview.widget.CardView>
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Thali"
-                android:textColor="@color/grey"
-                android:fontFamily="@font/roboto"
-                android:layout_marginTop="5dp"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@+id/cardView7"
-                app:layout_constraintStart_toStartOf="@+id/cardView7"
-                app:layout_constraintTop_toBottomOf="@+id/cardView7" />
+
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView8"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="82dp"
+                android:layout_height="130dp"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/white"
                 android:elevation="4dp"
-                app:cardCornerRadius="1500dp"
+                app:cardCornerRadius="5dp"
                 android:layout_marginStart="20dp"
                 app:layout_constraintStart_toEndOf="@+id/cardView7"
                 app:layout_constraintTop_toTopOf="parent">
@@ -353,31 +353,31 @@
 
                 <ImageView
                     android:layout_width="230dp"
-                    android:layout_height="230dp"
-                    android:layout_gravity="center"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_horizontal"
                     android:src="@drawable/samosa" />
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Snacks"
+                    android:textColor="@color/grey"
+                    android:fontFamily="@font/roboto"
+                    android:layout_marginTop="100dp"
+                    android:textSize="12sp"
+                    android:layout_gravity="center_horizontal"
+                    />
             </androidx.cardview.widget.CardView>
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Snacks"
-                android:textColor="@color/grey"
-                android:fontFamily="@font/roboto"
-                android:layout_marginTop="5dp"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@+id/cardView8"
-                app:layout_constraintStart_toStartOf="@+id/cardView8"
-                app:layout_constraintTop_toBottomOf="@+id/cardView8" />
+
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView9"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="82dp"
+                android:layout_height="130dp"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/white"
                 android:elevation="4dp"
-                app:cardCornerRadius="1500dp"
+                app:cardCornerRadius="5dp"
                 android:layout_marginStart="20dp"
                 app:layout_constraintStart_toEndOf="@+id/cardView8"
                 app:layout_constraintTop_toTopOf="parent">
@@ -385,51 +385,64 @@
 
                 <ImageView
                     android:layout_width="210dp"
-                    android:layout_height="210dp"
-                    android:layout_gravity="center"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_horizontal"
                     android:src="@drawable/drinks" />
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Drinks"
+                    android:textColor="@color/grey"
+                    android:fontFamily="@font/roboto"
+                    android:layout_marginTop="100dp"
+                    android:textSize="12sp"
+                    android:layout_gravity="center_horizontal"
+                    />
             </androidx.cardview.widget.CardView>
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Drinks"
-                android:textColor="@color/grey"
-                android:fontFamily="@font/roboto"
-                android:layout_marginTop="5dp"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@+id/cardView9"
-                app:layout_constraintStart_toStartOf="@+id/cardView9"
-                app:layout_constraintTop_toBottomOf="@+id/cardView9" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </HorizontalScrollView>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_marginTop="370dp"
+        android:src="@drawable/offer_sample"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:text="Select Canteen"
-        android:layout_marginTop="420dp"
+        android:layout_marginStart="30dp"
+        android:text="Canteen"
+        android:layout_marginTop="600dp"
         android:textColor="@color/black"
-        android:textSize="19dp"
+        android:textSize="19sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="450dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/inputbox"
-        >
-    </HorizontalScrollView>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvid"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_marginTop="560dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="640dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="900dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

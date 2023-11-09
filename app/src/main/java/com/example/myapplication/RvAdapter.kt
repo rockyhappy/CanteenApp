@@ -16,7 +16,7 @@ class RvAdapter(
     var context : Context,
     private val itemClickListener: OnItemClickListener
 ): RecyclerView.Adapter<RvAdapter.MyViewHolder>() {
-
+    private var selectedPosition: Int = 0
     inner class MyViewHolder(var view : View) : RecyclerView.ViewHolder(view)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -38,7 +38,7 @@ class RvAdapter(
         residence.text = item.descriptionn
 
         Glide.with(context)
-            .load("https://picsum.photos/seed/picsum/200/300")
+            .load("https://picsum.photos/200/1000?random=2")
             .apply(
                 RequestOptions()
                     .placeholder(R.drawable.baseline_person_24)
@@ -50,6 +50,11 @@ class RvAdapter(
 
         holder.view.setOnClickListener {
             itemClickListener.onItemClick(item.name)
+        }
+        if (position == selectedPosition) {
+            holder.dotImageView.setBackgroundResource(R.drawable.dot_selected)
+        } else {
+            holder.dotImageView.setBackgroundResource(R.drawable.dot_unselected)
         }
 
     }
@@ -65,5 +70,9 @@ class RvAdapter(
         dataList.clear()
         dataList.addAll(newDataList)
         notifyDataSetChanged()
+    }
+    fun setSelectedPosition(position: Int) {
+        selectedPosition = position
+        notifyDataSetChanged() // Trigger a data set change to update the UI
     }
 }
