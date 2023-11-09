@@ -103,7 +103,7 @@
         android:textColor="@color/primary_color"
         android:textSize="8sp"
         app:layout_constraintEnd_toEndOf="@+id/date_of_birth"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.032"
         app:layout_constraintStart_toStartOf="@+id/date_of_birth"
         app:layout_constraintTop_toBottomOf="@+id/date_of_birth"
         tools:ignore="SmallSp" />
@@ -137,7 +137,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="432dp"
+        android:layout_marginTop="444dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/rounded_border"
         android:ems="10"
@@ -150,7 +150,6 @@
         android:textColorHint="@color/grey"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/your_name"
-        app:layout_constraintHorizontal_bias="0.531"
         app:layout_constraintStart_toStartOf="@+id/your_name"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="RtlSymmetry" />
@@ -161,7 +160,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="508dp"
+        android:layout_marginTop="524dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/rounded_border"
         android:ems="10"
@@ -174,7 +173,7 @@
         android:textColorHint="@color/grey"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/your_name"
-        app:layout_constraintHorizontal_bias="0.218"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/your_name"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="RtlSymmetry" />
@@ -196,6 +195,22 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="@+id/your_name"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/this_can_t_be_edited_later"
+        android:textColor="@color/primary_color"
+        android:textSize="8sp"
+        app:layout_constraintEnd_toEndOf="@+id/your_email"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/your_email"
+        app:layout_constraintTop_toBottomOf="@+id/your_email"
+        tools:ignore="SmallSp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
