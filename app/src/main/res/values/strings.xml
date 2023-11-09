@@ -95,7 +95,10 @@
     <string name="your_anniversary">Anniversary</string>
     <string name="annp">This can\'t be edited later !</string>
     <string name="update">Update Profile</string>
-    <string name="my_profile">My Profile</string>
+    <string name="my_profile"><u>My Profile</u></string>
     <string name="my_name">Deepika Dubey</string>
+    <string name="my_phone">+91 9911882277</string>
+    <string name="my_email">deepika2231012@akgec.ac.in</string>
+    <string name="update_profile"><u>Update Profile</u></string>
 
 </resources>
