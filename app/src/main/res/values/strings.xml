@@ -104,5 +104,10 @@
     <string name="favourite">Favourite</string>
     <string name="subscription">Subscription</string>
     <string name="feedback">FeedBack</string>
+    <string name="refer_earn"><![CDATA[Refer & Earn]]></string>
+    <string name="help_support"><![CDATA[Help & Support]]></string>
+    <string name="privacy_setting"><![CDATA[Privacy & Setting]]></string>
+    <string name="logout">LogOut</string>
+
 
 </resources>
