@@ -101,5 +101,7 @@
     <string name="my_email">deepika2231012@akgec.ac.in</string>
     <string name="update_profile"><u>Update Profile</u></string>
     <string name="transaction">Transaction</string>
+    <string name="favourite">Favourite</string>
+    <string name="subscription">Subscription</string>
 
 </resources>
