@@ -18,76 +18,60 @@
     tools:context=".DashBoard"
     android:background="@color/white">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/topAppBar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/primary_color"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:backgroundTint="@color/white"
-        app:title=""
-        >
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/brunchbliss"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:fontFamily="@font/roboto"-->
-<!--            android:textSize="24sp"-->
-<!--            />-->
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:id="@+id/topAppBar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="?attr/actionBarSize"-->
+<!--        android:background="@color/primary_color"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        android:backgroundTint="@color/white"-->
+<!--        app:title=""-->
+<!--        >-->
+<!--&lt;!&ndash;        <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:text="@string/brunchbliss"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:textColor="@color/white"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:fontFamily="@font/roboto"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:textSize="24sp"&ndash;&gt;-->
+<!--&lt;!&ndash;            />&ndash;&gt;-->
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/bell"
-            android:scaleX="-1"
-            android:layout_gravity="end"
-            android:layout_marginEnd="15dp"
-            />
 <!--        <ImageView-->
 <!--            android:layout_width="wrap_content"-->
 <!--            android:layout_height="wrap_content"-->
-<!--            android:src="@drawable/baseline_notifications_24"-->
+<!--            android:src="@drawable/bell"-->
 <!--            android:scaleX="-1"-->
 <!--            android:layout_gravity="end"-->
 <!--            android:layout_marginEnd="15dp"-->
 <!--            />-->
+<!--&lt;!&ndash;        <ImageView&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:src="@drawable/baseline_notifications_24"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:scaleX="-1"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_gravity="end"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_marginEnd="15dp"&ndash;&gt;-->
+<!--&lt;!&ndash;            />&ndash;&gt;-->
 
-    </androidx.appcompat.widget.Toolbar>
+<!--    </androidx.appcompat.widget.Toolbar>-->
 
-    <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:fillViewport="true"
+
+    <FrameLayout
+        android:id="@+id/flFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
         app:layout_constraintBottom_toTopOf="@+id/btmnav"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topAppBar">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/grey">
+    </FrameLayout>
 
-            <FrameLayout
-                android:id="@+id/flFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
 
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </FrameLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
     <com.etebarian.meowbottomnavigation.MeowBottomNavigation
         android:id="@+id/btmnav"
         android:layout_width="match_parent"

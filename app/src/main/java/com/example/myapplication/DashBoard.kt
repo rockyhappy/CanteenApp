@@ -48,7 +48,8 @@ class DashBoard : AppCompatActivity() {
             drawerLayout.addDrawerListener(toggle)
             toggle.syncState()
 
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            supportActionBar?.setDisplayHomeAsUpEnabled(false)
+            supportActionBar?.hide()
 
             navView.setNavigationItemSelectedListener {
                 when (it.itemId) {
@@ -89,9 +90,9 @@ class DashBoard : AppCompatActivity() {
         bottomNavigation.show(1, true)
 
 
-        val topAppBar: Toolbar = findViewById(R.id.topAppBar)
-        setSupportActionBar(topAppBar)
-        supportActionBar?.title=""
+        //val topAppBar: Toolbar = findViewById(R.id.topAppBar)
+        //setSupportActionBar(topAppBar)
+        //supportActionBar?.title=""
 
         var drawerLayout : DrawerLayout = findViewById(R.id.drawerLayout)
         toggle = ActionBarDrawerToggle(this@DashBoard, drawerLayout, R.string.open, R.string.close)
@@ -189,12 +190,16 @@ class DashBoard : AppCompatActivity() {
 
 
     }
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (toggle.onOptionsItemSelected(item)){
-            true
-        }
-        return super.onOptionsItemSelected(item)
-    }
+
+    /**
+     * This function Enables the opening and closing of the drawer
+     */
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        if (toggle.onOptionsItemSelected(item)){
+//            true
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }

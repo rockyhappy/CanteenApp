@@ -60,7 +60,8 @@ class SplashScreen : AppCompatActivity() {
                     }
                 }
             }catch (e: Exception){
-                showToast("SomeThing went wrong")
+               startActivity(Intent(this@SplashScreen,DashBoard::class.java))
+                finish()
             }
 
 
