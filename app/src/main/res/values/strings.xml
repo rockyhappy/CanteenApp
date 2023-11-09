@@ -108,6 +108,7 @@
     <string name="help_support"><![CDATA[Help & Support]]></string>
     <string name="privacy_setting"><![CDATA[Privacy & Setting]]></string>
     <string name="logout">LogOut</string>
+    <string name="edit_p">Edit</string>
 
 
 </resources>
