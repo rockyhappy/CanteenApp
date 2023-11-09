@@ -100,5 +100,6 @@
     <string name="my_phone">+91 9911882277</string>
     <string name="my_email">deepika2231012@akgec.ac.in</string>
     <string name="update_profile"><u>Update Profile</u></string>
+    <string name="transaction">Transaction</string>
 
 </resources>
