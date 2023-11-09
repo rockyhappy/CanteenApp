@@ -103,5 +103,6 @@
     <string name="transaction">Transaction</string>
     <string name="favourite">Favourite</string>
     <string name="subscription">Subscription</string>
+    <string name="feedback">FeedBack</string>
 
 </resources>
