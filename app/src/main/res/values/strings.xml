@@ -109,6 +109,8 @@
     <string name="logout">LogOut</string>
     <string name="edit_p">Edit</string>
     <string name="help_support"><![CDATA[Help & Support]]></string>
+    <string name="todo">TODO</string>
+    <string name="payment_heading">Payment</string>
 
 
 </resources>
