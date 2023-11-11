@@ -105,7 +105,7 @@ class RvAdapter2(
         residence.text = item.descriptionn
 
         Glide.with(context)
-            .load("https://i.postimg.cc/4dYWcGgm/bundo-kim-Pb9b-Uz-H1n-D8-unsplash.jpg")
+            .load("https://i.postimg.cc/xTMVqcLJ/Break-fast.png")
             .apply(
                 RequestOptions()
                     .placeholder(R.drawable.baseline_person_24)
