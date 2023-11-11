@@ -135,7 +135,8 @@
                 app:drawableEndCompat="@drawable/next_arrow"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:id="@+id/debit_card"
@@ -189,6 +190,52 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/gpay" />
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="28dp"
+                android:layout_height="32dp"
+                android:src="@drawable/paytm"
+                app:layout_constraintBottom_toBottomOf="@+id/paytm_upi"
+                app:layout_constraintEnd_toEndOf="@+id/paytm_upi"
+                app:layout_constraintHorizontal_bias="0.026"
+                app:layout_constraintStart_toStartOf="@+id/paytm_upi"
+                app:layout_constraintTop_toTopOf="@+id/paytm_upi"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="40dp"
+                android:layout_height="24dp"
+                android:src="@drawable/credit_card"
+                app:layout_constraintBottom_toBottomOf="@+id/credit_card"
+                app:layout_constraintEnd_toEndOf="@+id/credit_card"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/credit_card"
+                app:layout_constraintTop_toTopOf="@+id/credit_card"
+                app:layout_constraintVertical_bias="0.523" />
+
+            <ImageView
+                android:id="@+id/imageView11"
+                android:layout_width="40dp"
+                android:layout_height="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/debit_card"
+                app:layout_constraintEnd_toEndOf="@+id/credit_card"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/debit_card"
+                app:layout_constraintTop_toTopOf="@+id/debit_card"
+                tools:src="@drawable/debit_cardpay" />
+
+            <ImageView
+                android:id="@+id/imageView12"
+                android:layout_width="40dp"
+                android:layout_height="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/cash_payment"
+                app:layout_constraintEnd_toEndOf="@+id/cash_payment"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/cash_payment"
+                app:layout_constraintTop_toTopOf="@+id/cash_payment"
+                tools:src="@drawable/offlinepayment" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
