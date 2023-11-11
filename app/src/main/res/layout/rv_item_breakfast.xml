@@ -8,6 +8,7 @@
     android:layout_margin="20dp"
     app:cardCornerRadius="15dp"
     android:elevation="10dp"
+    android:background="@color/primary_color"
 >
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,9 +33,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Recycler View"
-            android:background="@color/white"
-            android:textColor="@color/black"
-            android:textSize="24sp"
+            android:background="@drawable/rounded_border"
+            android:textColor="@color/primary_color"
+            android:textSize="18sp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="15dp"
+            android:paddingHorizontal="10dp"
+            android:fontFamily="@font/roboto"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

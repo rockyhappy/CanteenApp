@@ -101,5 +101,4 @@ class ShowCanteenMenu : Fragment() , RvAdapter.OnItemClickListener{
         dialog?.dismiss()
         dialog = null
     }
-
 }
