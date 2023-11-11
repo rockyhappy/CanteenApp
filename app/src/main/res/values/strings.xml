@@ -113,6 +113,10 @@
     <string name="payment_heading">Payment</string>
     <string name="payment_method">Choose Payment Method</string>
     <string name="gpay">Google Pay UPI</string>
+    <string name="paytm_upi">Paytm UPI</string>
+    <string name="credit_card">Pay via Credit Card</string>
+    <string name="debit_card">Pay via Debit Card</string>
+    <string name="cash_payment">Pay Cash</string>
 
 
 </resources>
