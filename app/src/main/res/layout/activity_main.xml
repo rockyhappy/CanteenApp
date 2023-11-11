@@ -11,7 +11,7 @@
         android:id="@+id/vector_1"
         android:layout_width="match_parent"
         android:layout_height="168.39dp"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/upper"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,13 +28,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.32999998"
-        app:srcCompat="@drawable/ion_home" />
+        app:srcCompat="@drawable/ion_home"
+        android:contentDescription="TODO" />
 
     <View
         android:id="@+id/vector_2"
         android:layout_width="match_parent"
         android:layout_height="168.39dp"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/splashscreen_lower_border"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -58,7 +59,8 @@
         app:layout_constraintEnd_toEndOf="@+id/svgImageView"
         app:layout_constraintStart_toStartOf="@+id/svgImageView"
         app:layout_constraintTop_toTopOf="@+id/svgImageView"
-        app:srcCompat="@drawable/_crave_click_enjoy_" />
+        app:srcCompat="@drawable/_crave_click_enjoy_"
+        android:contentDescription="TODO" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
