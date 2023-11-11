@@ -22,7 +22,7 @@
         android:elevation="5dp"
         android:src="@drawable/baseline_arrow_back_24"
         android:backgroundTint="@color/white"
-        />
+        android:contentDescription="TODO" />
 
     <TextView
         android:id="@+id/forgot_pass"
@@ -34,7 +34,7 @@
         android:gravity="top"
         android:text="Verify Your Email"
         android:textColor="@color/semiblack"
-        android:textSize="33dp"
+        android:textSize="33sp"
         android:textStyle="bold"
         android:fontFamily="@font/roboto"
         android:textAppearance="@style/forgot_pass"
@@ -108,7 +108,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="515dp"
         android:hint="*"
-        android:paddingLeft="15dp"
+        android:paddingStart="15dp"
         android:textColor="@color/black"
         android:digits="123456789"
         android:inputType="number"
@@ -116,7 +116,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.10"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry"
+        android:autofillHints="" />
 
     <View
         android:layout_width="38dp"
@@ -134,7 +136,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="515dp"
         android:hint="*"
-        android:paddingLeft="15dp"
+        android:paddingStart="15dp"
         android:textColor="@color/black"
         android:digits="123456789"
         android:inputType="number"
@@ -142,7 +144,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.26"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry" />
     <View
         android:layout_width="38dp"
         android:layout_height="2dp"
@@ -158,7 +161,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="515dp"
         android:hint="*"
-        android:paddingLeft="15dp"
+        android:paddingStart="15dp"
         android:textColor="@color/black"
         android:digits="123456789"
         android:inputType="number"
@@ -166,7 +169,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.42"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry" />
     <View
         android:layout_width="38dp"
         android:layout_height="2dp"
@@ -182,7 +186,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="515dp"
         android:hint="*"
-        android:paddingLeft="15dp"
+        android:paddingStart="15dp"
         android:textColor="@color/black"
         android:digits="123456789"
         android:inputType="number"
@@ -190,7 +194,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.58"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry" />
     <View
         android:layout_width="38dp"
         android:layout_height="2dp"
@@ -206,7 +211,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="515dp"
         android:hint="*"
-        android:paddingLeft="15dp"
+        android:paddingStart="15dp"
         android:textColor="@color/black"
         android:digits="123456789"
         android:inputType="number"
@@ -214,7 +219,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.74"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry" />
     <View
         android:layout_width="38dp"
         android:layout_height="2dp"
@@ -230,7 +236,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="515dp"
         android:hint="*"
-        android:paddingLeft="15dp"
+        android:paddingStart="15dp"
         android:textColor="@color/black"
         android:digits="123456789"
         android:inputType="number"
@@ -238,7 +244,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.90"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry" />
     <View
         android:layout_width="38dp"
         android:layout_height="2dp"
