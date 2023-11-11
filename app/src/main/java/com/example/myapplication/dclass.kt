@@ -97,3 +97,5 @@ data class FoodItem(
     val foodImage: String,
     val description: String
 )
+
+
