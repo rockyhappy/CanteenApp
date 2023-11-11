@@ -44,8 +44,8 @@
         android:id="@+id/payment_method"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="212dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="196dp"
         android:fontFamily="@font/roboto"
         android:paddingVertical="16dp"
         android:text="@string/payment_method"
@@ -53,15 +53,16 @@
         android:textFontWeight="500"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.069"
+        app:layout_constraintHorizontal_bias="0.071"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView13"
         android:layout_width="match_parent"
         android:layout_height="360dp"
         android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="276dp"
+        android:layout_marginTop="240dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="16dp"
         app:cardElevation="8dp"
@@ -173,8 +174,45 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
+
+    <Button
+        android:id="@+id/confirm_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="636dp"
+        android:background="@drawable/button_layout"
+        android:drawablePadding="8dp"
+        android:fontFamily="@font/roboto"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="8dp"
+        android:text="@string/confirm_order"
+        android:textAllCaps="false"
+        android:textColor="@color/semiblack"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/cardView13"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/cancel_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:background="@drawable/button_layout"
+        android:drawablePadding="8dp"
+        android:fontFamily="@font/roboto"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="8dp"
+        android:text="@string/cancel_order"
+        android:textAllCaps="false"
+        android:textColor="@color/semiblack"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/cardView13"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/confirm_order"
+        tools:layout_editor_absoluteY="636dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

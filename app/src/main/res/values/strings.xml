@@ -117,6 +117,8 @@
     <string name="credit_card">Pay via Credit Card</string>
     <string name="debit_card">Pay via Debit Card</string>
     <string name="cash_payment">Pay Cash</string>
+    <string name="confirm_order">Confirm Order</string>
+    <string name="cancel_order">Cancel Order</string>
 
 
 </resources>
