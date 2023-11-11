@@ -83,9 +83,10 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="52dp"
                 android:background="@drawable/rounded_border"
+                android:src="@drawable/google_pay"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/roboto"
-                android:paddingHorizontal="16dp"
+                android:paddingStart="40dp"
                 android:paddingVertical="8dp"
                 android:text="@string/gpay"
                 android:textColor="@color/semiblack"
@@ -93,7 +94,8 @@
                 app:drawableEndCompat="@drawable/next_arrow"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:id="@+id/paytm_upi"
@@ -104,7 +106,7 @@
                 android:background="@drawable/rounded_border"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/roboto"
-                android:paddingHorizontal="16dp"
+                android:paddingStart="40dp"
                 android:paddingVertical="8dp"
                 android:text="@string/paytm_upi"
                 android:textColor="@color/semiblack"
@@ -113,7 +115,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.906"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:id="@+id/credit_card"
@@ -124,7 +127,7 @@
                 android:background="@drawable/rounded_border"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/roboto"
-                android:paddingHorizontal="16dp"
+                android:paddingStart="40dp"
                 android:paddingVertical="8dp"
                 android:text="@string/credit_card"
                 android:textColor="@color/semiblack"
@@ -143,7 +146,7 @@
                 android:background="@drawable/rounded_border"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/roboto"
-                android:paddingHorizontal="16dp"
+                android:paddingStart="40dp"
                 android:paddingVertical="8dp"
                 android:text="@string/debit_card"
                 android:textColor="@color/semiblack"
@@ -151,7 +154,8 @@
                 app:drawableEndCompat="@drawable/next_arrow"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:id="@+id/cash_payment"
@@ -162,7 +166,7 @@
                 android:background="@drawable/rounded_border"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/roboto"
-                android:paddingHorizontal="16dp"
+                android:paddingStart="40dp"
                 android:paddingVertical="8dp"
                 android:text="@string/cash_payment"
                 android:textColor="@color/semiblack"
@@ -171,7 +175,20 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.156"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="RtlSymmetry" />
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="26dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="24dp"
+                android:src="@drawable/google_pay"
+                app:layout_constraintBottom_toBottomOf="@+id/gpay"
+                app:layout_constraintEnd_toEndOf="@+id/gpay"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/gpay" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
