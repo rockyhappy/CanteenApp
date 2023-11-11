@@ -65,7 +65,7 @@ object RetrofitInstance2 {
     // Function to get the JWT token from DataStore
     suspend fun getApiServiceWithToken(dataStore: DataStore<Preferences>): ApiService {
         //val jwtToken = readFromDataStore(dataStore, "token").toString()
-        val jwtToken="eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJHYXJlZWJAZ21haWwuY29tIiwiaWF0IjoxNjk5NTY1MTY4LCJleHAiOjE3MDAwOTA3Njh9.h22YAWpg1pxgHDdAqmrj6FqGE6q_r2hOvdfajdie2OM"
+        val jwtToken="eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoaWlAZ21haWwuY29tIiwiaWF0IjoxNjk5Njc5MzEyLCJleHAiOjE3MDAyMDQ5MTJ9.ZzThEiZSZOdNV1asVfxpEAiCijknUVx_QurAM4xSy0s"
         return createApiService(jwtToken)
     }
 }

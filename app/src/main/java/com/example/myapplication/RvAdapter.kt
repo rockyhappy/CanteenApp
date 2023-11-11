@@ -52,9 +52,9 @@ class RvAdapter(
             itemClickListener.onItemClick(item.name)
         }
         if (position == selectedPosition) {
-            holder.dotImageView.setBackgroundResource(R.drawable.dot_selected)
+            //holder.dotImageView.setBackgroundResource(R.drawable.dot_selected)
         } else {
-            holder.dotImageView.setBackgroundResource(R.drawable.dot_unselected)
+            //holder.dotImageView.setBackgroundResource(R.drawable.dot_unselected)
         }
 
     }

@@ -46,7 +46,7 @@ class SplashScreen : AppCompatActivity() {
 
                     val response = RetrofitInstance2.getApiServiceWithToken(dataStore).getCanteens()
                     if (response.isSuccessful) {
-                        save("token","eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYWNAZ21haWwuY29tIiwiaWF0IjoxNjk5NDY2OTAxLCJleHAiOjE2OTk5OTI1MDF9.d1lp6UGWEHI-llYjhsahKCn60jelcz9pSj6G0JdFHqU")
+                        save("token","eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoaWlAZ21haWwuY29tIiwiaWF0IjoxNjk5Njc5MzEyLCJleHAiOjE3MDAyMDQ5MTJ9.ZzThEiZSZOdNV1asVfxpEAiCijknUVx_QurAM4xSy0s")
                         val intent= Intent(this@SplashScreen,DashBoard::class.java)
                         startActivity(intent)
                         finish()
