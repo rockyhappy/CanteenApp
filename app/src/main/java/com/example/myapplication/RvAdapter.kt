@@ -87,7 +87,7 @@ class RvAdapter2(
     inner class MyViewHolder(var view : View) : RecyclerView.ViewHolder(view)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        var view = LayoutInflater.from(context).inflate(R.layout.rv_item_breakfast , parent,false)
+        var view = LayoutInflater.from(context).inflate(R.layout.rv_item_view, parent,false)
         return MyViewHolder(view)
     }
 
