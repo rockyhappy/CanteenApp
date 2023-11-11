@@ -63,7 +63,7 @@ data class ResetPasswordResponse(
 
 data class RvModel(var canteenUrl : String , var name: String , var descriptionn :String)
 
-data class RvModel2(var canteenUrl : String , var name: String , var price :String)
+data class RvModel2(var canteenUrl : String , var name: String , var price :String , var id : Long)
 
 
 /**

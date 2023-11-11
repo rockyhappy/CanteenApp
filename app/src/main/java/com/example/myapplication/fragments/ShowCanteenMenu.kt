@@ -63,7 +63,7 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener{
 
                     // Convert CanteenItem objects to RvModel objects
                     val dataList = canteenItems.map { canteenItem ->
-                        RvModel2(canteenItem.category, canteenItem.name, canteenItem.price.toString())
+                        RvModel2(canteenItem.category, canteenItem.name, canteenItem.price.toString(), canteenItem.id)
                     }
                     rvadapter.updateData(dataList)
                 } else {
@@ -90,8 +90,17 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener{
     }
 
 
-    override fun onItemClick(name: String) {
-        showToast(name)
+    override fun onItemClick(name: Long) {
+        val bundle =Bundle()
+        bundle.putLong("id",name)
+        val passing =ShowItem()
+        passing.arguments=bundle
+        val fragmentTransaction = parentFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.flFragment, passing)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
+        //showToast(name.toString())
+
 
     }
     private fun showCustomProgressDialog() {
