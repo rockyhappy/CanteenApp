@@ -92,7 +92,7 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener{
 
     override fun onItemClick(name: Long) {
         val bundle =Bundle()
-        bundle.putLong("id",name)
+        bundle.putString("id",name.toString())
         val passing =ShowItem()
         passing.arguments=bundle
         val fragmentTransaction = parentFragmentManager.beginTransaction()
