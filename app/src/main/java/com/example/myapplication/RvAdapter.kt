@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import android.graphics.Rect
 
 class RvAdapter(
     var dataList: ArrayList<RvModel>,
@@ -79,7 +80,7 @@ class RvAdapter(
 
 
 class RvAdapter2(
-    var dataList: ArrayList<RvModel>,
+    var dataList: ArrayList<RvModel2>,
     var context : Context,
     private val itemClickListener: OnItemClickListener
 ): RecyclerView.Adapter<RvAdapter2.MyViewHolder>() {
@@ -98,11 +99,12 @@ class RvAdapter2(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         var profile = holder.view.findViewById<ImageView>(R.id.imageView1)
         var name = holder.view.findViewById<TextView>(R.id.textView1)
-        //var residence = holder.view.findViewById<TextView>(R.id.textView2)
+        var residence = holder.view.findViewById<TextView>(R.id.price)
+
 
         val item = dataList[position]
         name.text = item.name
-        //residence.text = item.descriptionn
+        residence.text = item.price
 
         Glide.with(context)
             .load("https://i.postimg.cc/xTMVqcLJ/Break-fast.png")
@@ -133,7 +135,7 @@ class RvAdapter2(
     }
 
 
-    fun updateData(newDataList: List<RvModel>) {
+    fun updateData(newDataList: List<RvModel2>) {
         dataList.clear()
         dataList.addAll(newDataList)
         notifyDataSetChanged()
@@ -141,6 +143,21 @@ class RvAdapter2(
     fun setSelectedPosition(position: Int) {
         selectedPosition = position
         notifyDataSetChanged() // Trigger a data set change to update the UI
+    }
+}
+
+
+class SpaceItemDecoration(private val spaceHeight: Int) : RecyclerView.ItemDecoration() {
+
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+        super.getItemOffsets(outRect, view, parent, state)
+
+        val itemPosition = parent.getChildAdapterPosition(view)
+
+        // Apply the margin to all items except the last one
+        if (itemPosition < parent.adapter?.itemCount?.minus(1) ?: 0) {
+            outRect.bottom = spaceHeight
+        }
     }
 }
 

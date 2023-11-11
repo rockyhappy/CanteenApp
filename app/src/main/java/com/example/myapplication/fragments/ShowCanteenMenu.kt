@@ -20,6 +20,8 @@ import com.example.myapplication.RetrofitInstance2
 import com.example.myapplication.RvAdapter
 import com.example.myapplication.RvAdapter2
 import com.example.myapplication.RvModel
+import com.example.myapplication.RvModel2
+import com.example.myapplication.SpaceItemDecoration
 import kotlinx.coroutines.launch
 
 class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener{
@@ -38,6 +40,10 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener{
         recyclerView = view.findViewById<RecyclerView>(R.id.rvi)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 4, GridLayoutManager.VERTICAL, false)
         recyclerView.adapter = rvadapter
+        val spaceHeight = resources.getDimensionPixelSize(R.dimen.space_50dp)
+        val itemDecoration = SpaceItemDecoration(spaceHeight)
+        recyclerView.addItemDecoration(itemDecoration)
+
 
         val receivedData = arguments?.getString("key").toString()
         showToast(receivedData)
@@ -57,7 +63,7 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener{
 
                     // Convert CanteenItem objects to RvModel objects
                     val dataList = canteenItems.map { canteenItem ->
-                        RvModel(canteenItem.category, canteenItem.name, canteenItem.description)
+                        RvModel2(canteenItem.category, canteenItem.name, canteenItem.price.toString())
                     }
                     rvadapter.updateData(dataList)
                 } else {
