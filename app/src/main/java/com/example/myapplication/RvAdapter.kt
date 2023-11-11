@@ -96,13 +96,13 @@ class RvAdapter2(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        var profile = holder.view.findViewById<ImageView>(R.id.imageView)
-        var name = holder.view.findViewById<TextView>(R.id.textView)
-        var residence = holder.view.findViewById<TextView>(R.id.textView2)
+        var profile = holder.view.findViewById<ImageView>(R.id.imageView1)
+        var name = holder.view.findViewById<TextView>(R.id.textView1)
+        //var residence = holder.view.findViewById<TextView>(R.id.textView2)
 
         val item = dataList[position]
         name.text = item.name
-        residence.text = item.descriptionn
+        //residence.text = item.descriptionn
 
         Glide.with(context)
             .load("https://i.postimg.cc/xTMVqcLJ/Break-fast.png")

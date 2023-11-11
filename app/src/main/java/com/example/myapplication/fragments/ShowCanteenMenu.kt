@@ -18,12 +18,13 @@ import com.example.myapplication.GetFoodByCanteenRequest
 import com.example.myapplication.R
 import com.example.myapplication.RetrofitInstance2
 import com.example.myapplication.RvAdapter
+import com.example.myapplication.RvAdapter2
 import com.example.myapplication.RvModel
 import kotlinx.coroutines.launch
 
-class ShowCanteenMenu : Fragment() , RvAdapter.OnItemClickListener{
+class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener{
     private lateinit var recyclerView: RecyclerView
-    private lateinit var rvadapter : RvAdapter
+    private lateinit var rvadapter : RvAdapter2
     private lateinit var dataStore: DataStore<Preferences>
     private var dialog: Dialog? = null
     override fun onCreateView(
@@ -33,9 +34,9 @@ class ShowCanteenMenu : Fragment() , RvAdapter.OnItemClickListener{
         dataStore = requireContext().createDataStore(name = "user")
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_show_canteen_menu, container, false)
-        rvadapter = RvAdapter(ArrayList(), requireContext(), this)
+        rvadapter = RvAdapter2(ArrayList(), requireContext(), this)
         recyclerView = view.findViewById<RecyclerView>(R.id.rvi)
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 1, GridLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 4, GridLayoutManager.VERTICAL, false)
         recyclerView.adapter = rvadapter
 
         val receivedData = arguments?.getString("key").toString()
