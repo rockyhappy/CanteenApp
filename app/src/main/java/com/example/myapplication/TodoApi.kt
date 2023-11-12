@@ -40,5 +40,5 @@ interface ApiService {
     suspend fun getFoodDetail(@Path("id")id:String) : Response<FoodItem>
 
     @GET("api/v1/cart/add-to-cart")
-    suspend fun getCartItem() : Response<FoodItem>
+    suspend fun addCartItems(@Body request: addCartItemsRequest) : Response<addCartItemsResponse>
 }

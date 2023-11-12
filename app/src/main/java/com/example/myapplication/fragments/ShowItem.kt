@@ -17,6 +17,7 @@ import androidx.datastore.preferences.createDataStore
 import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.R
 import com.example.myapplication.RetrofitInstance2
+import com.example.myapplication.addCartItemsRequest
 import kotlinx.coroutines.launch
 
 
@@ -73,7 +74,24 @@ class ShowItem : Fragment() {
 
         }
         cart.setOnClickListener {
-
+            lifecycleScope.launch{
+                try {
+                    val request = addCartItemsRequest(
+                        foodId = receivedData.toString(),
+                        quantity = "1"
+                    )
+                    val response = RetrofitInstance2.getApiServiceWithToken(dataStore).addCartItems(request)
+                    if(response.isSuccessful){
+                        showToast("item Added")
+                    }else{
+                        showToast("Failed to add")
+                    }
+                }catch (e:Exception){
+                        showToast("Error occured")
+                }finally {
+                    showToast("this is finally block")
+                }
+            }
         }
 
 
