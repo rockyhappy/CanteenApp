@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -37,6 +38,8 @@ class ShowItem : Fragment() {
         val textView6=view.findViewById<TextView>(R.id.textView6)
         val textView7=view.findViewById<TextView>(R.id.textView7)
         val textView8=view.findViewById<TextView>(R.id.textView8)
+        val cart = view.findViewById<Button>(R.id.cart)
+        val wish = view.findViewById<Button>(R.id.wish)
         val receivedData = arguments?.getString("id")
         Log.d("error",receivedData.toString())
 
