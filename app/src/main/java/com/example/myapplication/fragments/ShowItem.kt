@@ -68,6 +68,13 @@ class ShowItem : Fragment() {
             }
         }
 
+        wish.setOnClickListener {
+
+        }
+        cart.setOnClickListener {
+
+        }
+
 
         return view
     }
