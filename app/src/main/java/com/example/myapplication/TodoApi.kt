@@ -41,4 +41,7 @@ interface ApiService {
 
     @POST("api/v1/cart/add-to-cart")
     suspend fun addCartItems(@Body request: addCartItemsRequest) : Response<addCartItemsResponse>
+
+    @GET("api/v1/cart/get-cart-items")
+    suspend fun getCart() :Response<getCartResponse>
 }
