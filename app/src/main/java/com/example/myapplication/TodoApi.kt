@@ -29,4 +29,5 @@ interface ApiService {
     @POST("api/v1/auth/reset-password-verify")
     suspend fun resetPasswordCheckEmail(@Body request: verifyMailRequest) : Response<verifyMailResponse>
 
+
 }

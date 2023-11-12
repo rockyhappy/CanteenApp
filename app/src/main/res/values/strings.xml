@@ -95,7 +95,7 @@
     <string name="your_anniversary">Anniversary</string>
     <string name="annp">This can\'t be edited later !</string>
     <string name="update">Update Profile</string>
-    <string name="my_profile"><u>My Profile</u></string>
+    <!--<string name="my_profile"><u>My Profile</u></string>
     <string name="my_name">Deepika Dubey</string>
     <string name="my_phone">+91 9911882277</string>
     <string name="my_email">deepika2231012@akgec.ac.in</string>
@@ -108,7 +108,7 @@
     <string name="privacy_setting"><![CDATA[Privacy & Setting]]></string>
     <string name="logout">LogOut</string>
     <string name="edit_p">Edit</string>
-    <string name="help_support"><![CDATA[Help & Support]]></string>
+    <string name="help_support"><![CDATA[Help & Support]]></string>-->
     <string name="todo">TODO</string>
     <string name="payment_heading">Payment</string>
     <string name="payment_method">Choose Payment Method</string>
@@ -119,6 +119,8 @@
     <string name="cash_payment">Pay Cash</string>
     <string name="confirm_order">Confirm Order</string>
     <string name="cancel_order">Cancel Order</string>
+    <string name="todos">TODO</string>
+    <string name="profile_main">Profile</string>
 
 
 </resources>
