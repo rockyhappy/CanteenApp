@@ -99,3 +99,7 @@ data class FoodItem(
 )
 
 
+data class addCartItems(
+    val foodId: String,
+    val quantity: String
+)
