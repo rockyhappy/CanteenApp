@@ -130,6 +130,7 @@
     <string name="privacy_setting"><![CDATA[Privacy & Settings]]></string>
     <string name="help_support"><![CDATA[Help & Support]]></string>
     <string name="rate_us">Rate us</string>
+    <string name="log_out">Log out</string>
 
 
 </resources>
