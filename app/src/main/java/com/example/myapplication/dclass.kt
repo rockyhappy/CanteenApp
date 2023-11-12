@@ -99,7 +99,10 @@ data class FoodItem(
 )
 
 
-data class addCartItems(
+data class addCartItemsRequest(
     val foodId: String,
     val quantity: String
+)
+data class addCartItemsResponse(
+    val message:String
 )
