@@ -71,7 +71,7 @@ class ShowItem : Fragment() {
         }
 
         wish.setOnClickListener {
-
+            showToast("WishList api yet not delivered")
 
         }
         cart.setOnClickListener {
