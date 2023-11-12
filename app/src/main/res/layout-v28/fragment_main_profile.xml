@@ -509,7 +509,7 @@
         android:id="@+id/cardView10"
         android:layout_width="300dp"
         android:layout_height="38dp"
-        android:layout_marginTop="304dp"
+        android:layout_marginTop="318dp"
         app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="6dp"
         app:cardElevation="4dp"
@@ -555,7 +555,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="300dp"
         android:layout_height="38dp"
-        android:layout_marginTop="364dp"
+        android:layout_marginTop="366dp"
         app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="6dp"
         app:cardElevation="4dp"
@@ -579,7 +579,7 @@
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintHorizontal_bias="0.202"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -601,7 +601,7 @@
         android:id="@+id/cardView11"
         android:layout_width="300dp"
         android:layout_height="38dp"
-        android:layout_marginTop="424dp"
+        android:layout_marginTop="414dp"
         app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="6dp"
         app:cardElevation="4dp"
@@ -614,6 +614,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
             <TextView
                 android:id="@+id/privacy_setting"
                 android:layout_width="wrap_content"
@@ -625,10 +626,9 @@
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.25"
+                app:layout_constraintHorizontal_bias="0.26"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
 
             <TextView
                 android:layout_width="wrap_content"
@@ -649,7 +649,7 @@
 
         android:layout_width="300dp"
         android:layout_height="38dp"
-        android:layout_marginTop="484dp"
+        android:layout_marginTop="462dp"
         app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="6dp"
         app:cardElevation="4dp"
@@ -664,19 +664,19 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/help_support"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
+                android:text="@string/help_support"
                 android:textColor="#46474B"
                 android:textFontWeight="400"
                 android:textSize="12sp"
-                android:text="@string/help_support"
-                android:id="@+id/help_support"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.25"
+                app:layout_constraintHorizontal_bias="0.235"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -693,11 +693,10 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-
     <androidx.cardview.widget.CardView
         android:layout_width="300dp"
         android:layout_height="38dp"
-        android:layout_marginTop="544dp"
+        android:layout_marginTop="510dp"
         app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="6dp"
         app:cardElevation="4dp"
@@ -711,19 +710,19 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/rate_us"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
+                android:text="@string/rate_us"
                 android:textColor="#46474B"
                 android:textFontWeight="400"
                 android:textSize="12sp"
-                android:text="@string/rate_us"
-                android:id="@+id/rate_us"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.25"
+                app:layout_constraintHorizontal_bias="0.204"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -741,11 +740,10 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-
     <androidx.cardview.widget.CardView
         android:layout_width="300dp"
         android:layout_height="38dp"
-        android:layout_marginTop="604dp"
+        android:layout_marginTop="558dp"
         app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="6dp"
         app:cardElevation="4dp"
@@ -759,19 +757,20 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/log_out"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
+                android:text="@string/log_out"
                 android:textColor="#46474B"
                 android:textFontWeight="400"
                 android:textSize="12sp"
-                android:text="@string/log_out"
-                android:id="@+id/log_out"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.25"
+                app:layout_constraintHorizontal_bias="0.216"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.363" />
 
             <TextView
                 android:layout_width="wrap_content"
