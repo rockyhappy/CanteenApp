@@ -121,6 +121,7 @@
     <string name="cancel_order">Cancel Order</string>
     <string name="todos">TODO</string>
     <string name="profile_main">Profile</string>
+    <string name="todom">TODO</string>
 
 
 </resources>

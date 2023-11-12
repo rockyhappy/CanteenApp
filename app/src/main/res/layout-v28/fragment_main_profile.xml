@@ -374,10 +374,10 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/backButton"
-        android:layout_width="38dp"
+        android:layout_width="36dp"
         android:layout_height="38dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:backgroundTint="@color/white"
         android:contentDescription="@string/todos"
         android:elevation="5dp"
@@ -387,19 +387,81 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <TextView
-        android:layout_width="59dp"
-        android:layout_height="24dp"
-      android:text="@string/profile_main"
-        android:id="@+id/profile_main"
-        android:fontFamily="@font/roboto"
-        android:textFontWeight="500"
-        android:textColor="#46474B"
-        android:layout_marginTop="28dp"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:outlineAmbientShadowColor="#00000026"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardElevation="1dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.309"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/profile_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/profile_main"
+                android:textAlignment="center"
+                android:textColor="#46474B"
+                android:textFontWeight="500"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="300dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="92dp"
+        app:cardCornerRadius="6dp"
+        app:cardBackgroundColor="#EE9A4E"
+        app:cardElevation="2dp"
+        android:outlineAmbientShadowColor="#00000026"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/person"
+                android:layout_marginVertical="8dp"
+                android:layout_marginStart="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.074"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.68"
+                android:contentDescription="@string/todom" />
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
