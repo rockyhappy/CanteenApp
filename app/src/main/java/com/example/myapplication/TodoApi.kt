@@ -39,6 +39,6 @@ interface ApiService {
     @GET("api/v1/user/food/{id}")
     suspend fun getFoodDetail(@Path("id")id:String) : Response<FoodItem>
 
-    @GET("api/v1/cart/add-to-cart")
+    @POST("api/v1/cart/add-to-cart")
     suspend fun addCartItems(@Body request: addCartItemsRequest) : Response<addCartItemsResponse>
 }

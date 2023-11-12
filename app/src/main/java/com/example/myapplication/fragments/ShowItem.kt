@@ -47,6 +47,7 @@ class ShowItem : Fragment() {
         lifecycleScope.launch{
             try{
                 val response = RetrofitInstance2.getApiServiceWithToken(dataStore).getFoodDetail(receivedData.toString())
+                Log.d("response",response.toString())
                 if(response.isSuccessful)
                 {
                     textView1.text=response.body()?.id.toString()
@@ -81,6 +82,7 @@ class ShowItem : Fragment() {
                         quantity = "1"
                     )
                     val response = RetrofitInstance2.getApiServiceWithToken(dataStore).addCartItems(request)
+                    Log.d("response",response.toString())
                     if(response.isSuccessful){
                         showToast("item Added")
                     }else{
