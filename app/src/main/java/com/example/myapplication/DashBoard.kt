@@ -20,6 +20,7 @@ import com.example.myapplication.databinding.ActivityDashBoardBinding
 import com.example.myapplication.fragments.Breakfast
 import com.example.myapplication.fragments.Dishes_Category
 import com.example.myapplication.fragments.MainDashboard
+import com.example.myapplication.fragments.cart
 import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.launch
 
@@ -160,6 +161,11 @@ class DashBoard : AppCompatActivity() {
                 }
                 4 -> {
                     // Handle the "Settings" tab selection
+                    supportFragmentManager.popBackStack()
+                    supportFragmentManager.beginTransaction().apply {
+                        replace(R.id.flFragment, cart())
+                        commit()
+                    }
                 }
             }
         }
