@@ -122,6 +122,10 @@
     <string name="todos">TODO</string>
     <string name="profile_main">Profile</string>
     <string name="todom">TODO</string>
+    <string name="name_main">Deepika Dubey</string>
+    <string name="email_main">deepika2231012@akgec.ac.in</string>
+    <string name="number_main">+91 9911882277</string>
+    <string name="feedback">Feedback</string>
 
 
 </resources>
