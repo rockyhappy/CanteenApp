@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -9,12 +10,15 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.preferencesKey
 import androidx.datastore.preferences.createDataStore
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.lifecycleScope
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.example.myapplication.databinding.ActivityDashBoardBinding
 import com.example.myapplication.fragments.Breakfast
+import com.example.myapplication.fragments.Dishes_Category
 import com.example.myapplication.fragments.MainDashboard
 import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.launch
@@ -44,7 +48,8 @@ class DashBoard : AppCompatActivity() {
             drawerLayout.addDrawerListener(toggle)
             toggle.syncState()
 
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            supportActionBar?.setDisplayHomeAsUpEnabled(false)
+            supportActionBar?.hide()
 
             navView.setNavigationItemSelectedListener {
                 when (it.itemId) {
@@ -85,9 +90,9 @@ class DashBoard : AppCompatActivity() {
         bottomNavigation.show(1, true)
 
 
-        val topAppBar: Toolbar = findViewById(R.id.topAppBar)
-        setSupportActionBar(topAppBar)
-        supportActionBar?.title=""
+        //val topAppBar: Toolbar = findViewById(R.id.topAppBar)
+        //setSupportActionBar(topAppBar)
+        //supportActionBar?.title=""
 
         var drawerLayout : DrawerLayout = findViewById(R.id.drawerLayout)
         toggle = ActionBarDrawerToggle(this@DashBoard, drawerLayout, R.string.open, R.string.close)
@@ -124,6 +129,10 @@ class DashBoard : AppCompatActivity() {
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
                 R.id.thirdItem -> {
+                    lifecycleScope.launch{
+                        save("token","null")
+                        startActivity(Intent(this@DashBoard,Login::class.java))
+                    }
                     Toast.makeText(this@DashBoard, "third Item Clicked", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -181,6 +190,10 @@ class DashBoard : AppCompatActivity() {
 
 
     }
+
+    /**
+     * This function Enables the opening and closing of the drawer
+     */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (toggle.onOptionsItemSelected(item)){
             true
@@ -189,5 +202,11 @@ class DashBoard : AppCompatActivity() {
     }
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+    private suspend fun save (key:String , value:String){
+        val dataStoreKey= preferencesKey<String>(key)
+        dataStore.edit{temp ->
+            temp[dataStoreKey]=value
+        }
     }
 }

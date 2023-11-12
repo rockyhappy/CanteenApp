@@ -61,5 +61,41 @@ data class ResetPasswordResponse(
     val token:String
 )
 
-data class RvModel(var profile :Int , var name: String , var adress :String) {
-}
+data class RvModel(var canteenUrl : String , var name: String , var descriptionn :String)
+
+data class RvModel2(var canteenUrl : String , var name: String , var price :String , var id : Long)
+
+
+/**
+ * Data classes for the Dashboard
+ */
+data class CanteenResponse(
+    val canteenItems: List<CanteenItem>
+)
+
+data class CanteenItem(
+    val id: Long,
+    val name: String,
+    val email: String,
+    val description: String,
+    val canteenImage: String,
+    val foods: List<Int>
+)
+
+data class GetFoodByCanteenRequest(
+    val name :String
+)
+data class GetFoodByCanteenResponse(
+    val foodItems: List<FoodItem>
+)
+data class FoodItem(
+    val id: Long,
+    val name: String,
+    val category: String,
+    val price: Double,
+    val canteenId: Long,
+    val foodImage: String,
+    val description: String
+)
+
+

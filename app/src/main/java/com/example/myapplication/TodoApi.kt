@@ -4,6 +4,7 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface ApiService {
     @POST("api/v1/auth/register")
@@ -29,4 +30,12 @@ interface ApiService {
     @POST("api/v1/auth/reset-password-verify")
     suspend fun resetPasswordCheckEmail(@Body request: verifyMailRequest) : Response<verifyMailResponse>
 
+    @GET("api/v1/user/get-canteens")
+    suspend fun getCanteens() : Response<CanteenResponse>
+
+    @POST("api/v1/user/get-canteen-food")
+    suspend fun getCanteenFood(@Body request: GetFoodByCanteenRequest) : Response<GetFoodByCanteenResponse>
+
+    @GET("api/v1/user/food/{id}")
+    suspend fun getFoodDetail(@Path("id")id:String) : Response<FoodItem>
 }

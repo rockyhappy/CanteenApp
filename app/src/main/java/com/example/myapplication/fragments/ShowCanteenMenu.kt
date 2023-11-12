@@ -3,30 +3,30 @@ package com.example.myapplication.fragments
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.createDataStore
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-
+import com.example.myapplication.GetFoodByCanteenRequest
 import com.example.myapplication.R
 import com.example.myapplication.RetrofitInstance2
 import com.example.myapplication.RvAdapter
+import com.example.myapplication.RvAdapter2
 import com.example.myapplication.RvModel
+import com.example.myapplication.RvModel2
+import com.example.myapplication.SpaceItemDecoration
 import kotlinx.coroutines.launch
 
-class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnItemClickListener {
+class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener{
     private lateinit var recyclerView: RecyclerView
-    private lateinit var rvadapter : RvAdapter
+    private lateinit var rvadapter : RvAdapter2
     private lateinit var dataStore: DataStore<Preferences>
     private var dialog: Dialog? = null
     override fun onCreateView(
@@ -34,25 +34,36 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
         savedInstanceState: Bundle?
     ): View? {
         dataStore = requireContext().createDataStore(name = "user")
-        val view= inflater.inflate(R.layout.fragment_main_dashboard, container, false)
-        rvadapter = RvAdapter(ArrayList(), requireContext(), this)
-        recyclerView = view.findViewById<RecyclerView>(R.id.rvid)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        // Inflate the layout for this fragment
+        val view= inflater.inflate(R.layout.fragment_show_canteen_menu, container, false)
+        rvadapter = RvAdapter2(ArrayList(), requireContext(), this)
+        recyclerView = view.findViewById<RecyclerView>(R.id.rvi)
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 4, GridLayoutManager.VERTICAL, false)
         recyclerView.adapter = rvadapter
-        val pagerSnapHelper = PagerSnapHelper()
-        pagerSnapHelper.attachToRecyclerView(recyclerView)
+        val spaceHeight = resources.getDimensionPixelSize(R.dimen.space_50dp)
+        val itemDecoration = SpaceItemDecoration(spaceHeight)
+        recyclerView.addItemDecoration(itemDecoration)
+
+
+        val receivedData = arguments?.getString("key").toString()
+        showToast(receivedData)
         lifecycleScope.launch {
             try {
+
                 showCustomProgressDialog()
-                val response = RetrofitInstance2.getApiServiceWithToken(dataStore).getCanteens()
+                val request=GetFoodByCanteenRequest(
+                    name =receivedData.toString()
+                    //name ="Sarthak ki dukaan"
+                )
+                val response = RetrofitInstance2.getApiServiceWithToken(dataStore).getCanteenFood(request)
                 if (response.isSuccessful) {
                     Log.d("Testing",response.body().toString())
                     Log.d("Testing", "Successful response: ${response.body()}")
-                    val canteenItems = response.body()?.canteenItems.orEmpty()
+                    val canteenItems = response.body()?.foodItems.orEmpty()
 
                     // Convert CanteenItem objects to RvModel objects
                     val dataList = canteenItems.map { canteenItem ->
-                        RvModel(canteenItem.canteenImage, canteenItem.name, canteenItem.description)
+                        RvModel2(canteenItem.category, canteenItem.name, canteenItem.price.toString(), canteenItem.id)
                     }
                     rvadapter.updateData(dataList)
                 } else {
@@ -69,13 +80,6 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
                 dismissCustomProgressDialog()
             }
         }
-        val fullCategory = view.findViewById<TextView>(R.id.fullCategory)
-        fullCategory.setOnClickListener {
-            val fragmentTransaction = parentFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.flFragment, Dishes_Category())
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
-        }
 
 
 
@@ -86,16 +90,17 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
     }
 
 
-    override fun onItemClick(name: String) {
-        val bundle= Bundle()
-        bundle.putString("key",name)
-        val passing =ShowCanteenMenu()
+    override fun onItemClick(name: Long) {
+        val bundle =Bundle()
+        bundle.putString("id",name.toString())
+        val passing =ShowItem()
         passing.arguments=bundle
         val fragmentTransaction = parentFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.flFragment, passing)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
-        //showToast(name)
+        //showToast(name.toString())
+
 
     }
     private fun showCustomProgressDialog() {
@@ -112,6 +117,4 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
         dialog?.dismiss()
         dialog = null
     }
-
 }
-
