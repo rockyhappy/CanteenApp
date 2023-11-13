@@ -35,6 +35,8 @@ interface ApiService {
 
     @POST("api/v1/user/get-canteen-food")
     suspend fun getCanteenFood(@Body request: GetFoodByCanteenRequest) : Response<GetFoodByCanteenResponse>
+    @POST("api/v1/user/get-food-items")
+    suspend fun getCategoryFood(@Body request: GetFoodByCategoryRequest) : Response<GetFoodByCanteenResponse>
 
     @GET("api/v1/user/food/{id}")
     suspend fun getFoodDetail(@Path("id")id:String) : Response<FoodItem>

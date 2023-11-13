@@ -85,6 +85,10 @@ data class CanteenItem(
 data class GetFoodByCanteenRequest(
     val name :String
 )
+
+data class GetFoodByCategoryRequest(
+    val category: String
+)
 data class GetFoodByCanteenResponse(
     val foodItems: List<FoodItem>
 )
