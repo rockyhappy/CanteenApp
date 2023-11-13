@@ -24,7 +24,7 @@
         android:elevation="5dp"
         android:src="@drawable/baseline_arrow_back_24"
         android:backgroundTint="@color/white"
-        />
+        android:contentDescription="TODO" />
     <TextView
         android:id="@+id/forgot_pass"
         android:layout_width="wrap_content"
@@ -35,7 +35,7 @@
         android:gravity="top"
         android:text="Register"
         android:textColor="@color/semiblack"
-        android:textSize="33dp"
+        android:textSize="33sp"
         android:textStyle="bold"
         android:fontFamily="@font/roboto"
         android:textAppearance="@style/forgot_pass"
@@ -47,12 +47,14 @@
         android:id="@+id/create"
         android:layout_width="wrap_content"
         android:layout_height="34dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto"
         android:text="@string/create"
         android:textColor="#787878"
         android:textFontWeight="500"
         android:textSize="19sp"
         app:layout_constraintEnd_toEndOf="@+id/forgot_pass"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="@+id/forgot_pass"
         app:layout_constraintTop_toBottomOf="@+id/forgot_pass" />
 
@@ -307,15 +309,6 @@
 <!--            app:layout_constraintTop_toTopOf="parent" />-->
 <!--    </LinearLayout>-->
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="800dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/userNameIncorrect"
