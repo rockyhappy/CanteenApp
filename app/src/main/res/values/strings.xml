@@ -141,6 +141,7 @@
     <string name="phone_number">PHONE NUMBER</string>
     <string name="email_address">EMAIL ADDRESS</string>
     <string name="text_logout">Oh no! You are leaving...</string>
+    <string name="question">Are you sure?</string>
 
 
 </resources>
