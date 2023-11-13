@@ -457,7 +457,7 @@
                 android:layout_marginVertical="8dp"
                 android:layout_marginStart="4dp"
                 android:contentDescription="@string/todom"
-                android:src="@drawable/person"
+             android:src="@drawable/profile_image"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.074"
