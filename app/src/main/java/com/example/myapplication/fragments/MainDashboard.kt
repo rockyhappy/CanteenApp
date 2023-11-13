@@ -78,7 +78,19 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
             fragmentTransaction.commit()
         }
 
-        val breakfast= view.findViewById<CardView>(R.id.cardView2)
+        val lunch1= view.findViewById<CardView>(R.id.cardView2)
+        lunch1.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("key2","LUNCH")
+            val passing=ShowCategoryMenu()
+            passing.arguments=bundle
+            val fragmentTransaction = parentFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.flFragment, passing)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+
+        }
+        val breakfast= view.findViewById<CardView>(R.id.cardView1)
         breakfast.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("key2","BREAKFAST")
@@ -90,7 +102,7 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
             fragmentTransaction.commit()
 
         }
-        val chinese= view.findViewById<CardView>(R.id.cardView3)
+        val chinese= view.findViewById<CardView>(R.id.cardView4)
         chinese.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("key2","CHINESE")
@@ -102,7 +114,7 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
             fragmentTransaction.commit()
 
         }
-        val dinner= view.findViewById<CardView>(R.id.cardView4)
+        val dinner= view.findViewById<CardView>(R.id.cardView3)
         dinner.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("key2","DINNER")
