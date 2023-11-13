@@ -519,7 +519,7 @@
         app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="6dp"
         app:cardElevation="4dp"
-        android:paddingHorizontal="4dp"
+
         app:layout_constraintEnd_toEndOf="@+id/cardView"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/cardView"
@@ -551,7 +551,6 @@
                 android:layout_height="12dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/forward_arrow"
-                android:textAlignment="textEnd"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -584,7 +583,6 @@
                 android:id="@+id/refer_earn"
                 android:layout_width="wrap_content"
                 android:layout_height="14dp"
-                android:drawableLeft="@drawable/refer_earn"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/roboto"
                 android:text="@string/refer_earn"
@@ -595,7 +593,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.076"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:drawableLeftCompat="@drawable/refer_earn" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -619,6 +618,7 @@
         android:layout_marginTop="414dp"
         app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="6dp"
+        android:paddingHorizontal="4dp"
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="@+id/cardView"
         app:layout_constraintHorizontal_bias="1.0"
@@ -634,16 +634,19 @@
                 android:id="@+id/privacy_setting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
                 android:fontFamily="@font/roboto"
                 android:text="@string/privacy_setting"
                 android:textColor="#46474B"
                 android:textFontWeight="400"
                 android:textSize="12sp"
+                app:drawableLeftCompat="@drawable/privacy_setting"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.26"
+                app:layout_constraintHorizontal_bias="0.089"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.545" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -655,7 +658,8 @@
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/privacy_setting"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.615" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
@@ -872,7 +876,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/heart"
+                android:src=
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
