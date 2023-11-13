@@ -24,6 +24,9 @@ class ChoiceFragment : Fragment(R.layout.fragment_choice) {
         var svg2 = SVG.getFromResource(resources, R.raw.couple_eats)
         svgImageView2.setSVG(svg2)
 
+        /**
+         * This is the button for the login
+         */
         val button=view.findViewById<Button>(R.id.button)
         button.setOnClickListener {
             val fragmentTransaction = parentFragmentManager.beginTransaction()
@@ -31,6 +34,10 @@ class ChoiceFragment : Fragment(R.layout.fragment_choice) {
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
+
+        /**
+         * This is the button for the sign up
+         */
         val button2=view.findViewById<Button>(R.id.button2)
         button2.setOnClickListener {
             val fragmentTransaction = parentFragmentManager.beginTransaction()

@@ -76,5 +76,9 @@ dependencies {
     implementation ("com.etebarian:meow-bottom-navigation:1.2.0")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
 
+    //for progress bar
+    implementation ("com.jpardogo.googleprogressbar:library:1.2.0")
 
+    //for glide
+    implementation ("com.github.bumptech.glide:recyclerview-integration:4.14.2")
 }
