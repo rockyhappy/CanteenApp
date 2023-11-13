@@ -26,6 +26,9 @@ data class UserData(
     val email: String
 )
 
+
+
+
 data class verifyMailRequest(
     val email :String,
     val otp: String
