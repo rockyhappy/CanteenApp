@@ -85,6 +85,10 @@ data class CanteenItem(
 data class GetFoodByCanteenRequest(
     val name :String
 )
+
+data class GetFoodByCategoryRequest(
+    val category: String
+)
 data class GetFoodByCanteenResponse(
     val foodItems: List<FoodItem>
 )
@@ -99,3 +103,17 @@ data class FoodItem(
 )
 
 
+data class addCartItemsRequest(
+    val foodId: String,
+    val quantity: String
+)
+data class addCartItemsResponse(
+    val message:String
+)
+
+data class getCartResponse(
+    val id: Long,
+    val foodItemName: String,
+    val quantity: Int,
+    val price: Double
+)
