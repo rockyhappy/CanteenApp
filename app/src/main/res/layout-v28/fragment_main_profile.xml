@@ -723,6 +723,7 @@
         app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="6dp"
         app:cardElevation="4dp"
+        android:paddingStart="4dp"
         app:layout_constraintEnd_toEndOf="@+id/cardView"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/cardView"
@@ -736,14 +737,17 @@
                 android:id="@+id/rate_us"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/rate_us"
+                android:drawablePadding="8dp"
                 android:fontFamily="@font/roboto"
+
                 android:text="@string/rate_us"
                 android:textColor="#46474B"
                 android:textFontWeight="400"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.204"
+                app:layout_constraintHorizontal_bias="0.067"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -754,10 +758,11 @@
                 android:background="@drawable/forward_arrow"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.917"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/rate_us"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.461"/>
+                app:layout_constraintVertical_bias="0.615" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -788,6 +793,7 @@
                 android:textColor="#46474B"
                 android:textFontWeight="400"
                 android:textSize="12sp"
+
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.216"
