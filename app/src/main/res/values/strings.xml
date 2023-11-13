@@ -132,6 +132,7 @@
     <string name="rate_us">Rate us</string>
     <string name="log_out">Log out</string>
     <string name="transaction_main">Transaction</string>
+    <string name="favourite">Favourite</string>
 
 
 </resources>
