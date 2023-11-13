@@ -152,4 +152,5 @@ Hello Rachit,
     <string name="todomm">TODO</string>
     <string name="todomn">TODO</string>
     <string name="nmtodo">TODO</string>
+    <string name="feedback_text">Feedback</string>
 </resources>
