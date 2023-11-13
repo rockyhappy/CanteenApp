@@ -153,4 +153,7 @@ Hello Rachit,
     <string name="todomn">TODO</string>
     <string name="nmtodo">TODO</string>
     <string name="feedback_text">Feedback</string>
+    <string name="feel_free">How do you feel about our food?</string>
+    <string name="feed_page">Write Comment</string>
+
 </resources>
