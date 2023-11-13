@@ -137,6 +137,7 @@
     <string name="todoedit">TODO</string>
     <string name="todoedit2">TODO</string>
     <string name="todoedit3">TODO</string>
+    <string name="name_edit">NAME</string>
 
 
 </resources>
