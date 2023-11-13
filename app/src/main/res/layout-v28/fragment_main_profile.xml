@@ -519,27 +519,30 @@
         app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="6dp"
         app:cardElevation="4dp"
+        android:paddingHorizontal="4dp"
         app:layout_constraintEnd_toEndOf="@+id/cardView"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/cardView"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="293dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/feedback"
-                android:layout_width="56dp"
+                android:layout_width="wrap_content"
                 android:layout_height="14dp"
+                android:drawablePadding="8dp"
                 android:fontFamily="@font/roboto"
                 android:text="@string/feedback"
                 android:textColor="#46474B"
                 android:textFontWeight="400"
                 android:textSize="12sp"
+                app:drawableLeftCompat="@drawable/feedback"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintHorizontal_bias="0.073"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -548,10 +551,12 @@
                 android:layout_height="12dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/forward_arrow"
+                android:textAlignment="textEnd"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.917"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/feedback"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.615" />
 
@@ -565,6 +570,7 @@
         app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="6dp"
         app:cardElevation="4dp"
+        android:paddingHorizontal="4dp"
         app:layout_constraintEnd_toEndOf="@+id/cardView"
         app:layout_constraintHorizontal_bias="0.709"
         app:layout_constraintStart_toStartOf="@+id/cardView"
@@ -578,6 +584,8 @@
                 android:id="@+id/refer_earn"
                 android:layout_width="wrap_content"
                 android:layout_height="14dp"
+                android:drawableLeft="@drawable/refer_earn"
+                android:drawablePadding="8dp"
                 android:fontFamily="@font/roboto"
                 android:text="@string/refer_earn"
                 android:textColor="#46474B"
@@ -585,7 +593,7 @@
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.202"
+                app:layout_constraintHorizontal_bias="0.076"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -596,8 +604,9 @@
                 android:background="@drawable/forward_arrow"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.917"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/refer_earn"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.461" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -643,10 +652,10 @@
                 android:background="@drawable/forward_arrow"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.917"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/privacy_setting"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.461" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
