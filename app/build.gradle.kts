@@ -48,6 +48,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.4")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.4")
+    implementation("androidx.preference:preference:1.2.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -74,5 +75,9 @@ dependencies {
     //for the meow Bottom Navigation
     implementation ("com.etebarian:meow-bottom-navigation:1.2.0")
 
+    //for progress bar
+    implementation ("com.jpardogo.googleprogressbar:library:1.2.0")
 
+    //for glide
+    implementation ("com.github.bumptech.glide:recyclerview-integration:4.14.2")
 }

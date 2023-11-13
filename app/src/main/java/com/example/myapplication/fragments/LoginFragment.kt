@@ -1,5 +1,6 @@
 package com.example.myapplication.fragments
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -35,7 +36,7 @@ import java.util.regex.Pattern
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private lateinit var dataStore: DataStore<Preferences>
-
+    private var dialog: Dialog? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dataStore = requireContext().createDataStore(name = "user")
@@ -58,14 +59,15 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         val container = view.findViewById<ConstraintLayout>(R.id.Container)
         val button= view.findViewById<Button>(R.id.button)
         button.setOnClickListener {
+
             /** call api and apply checks*/
 
             var flag=false
-            button.isEnabled = false
-            container.isEnabled=false
-            container.isFocusable = false
-            progressBar.visibility = View.VISIBLE
-
+//            button.isEnabled = false
+//            container.isEnabled=false
+//            container.isFocusable = false
+//            progressBar.visibility = View.VISIBLE
+            showCustomProgressDialog()
             var collection : TextInputEditText =view.findViewById(R.id.email)
             var Email=collection.text.toString()
             Email=Email.trim()
@@ -105,20 +107,20 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             }
 
             /** API testing */
-            if(flag)
-            {
-                // Enable the button
-                button.isEnabled = true
-                container.isEnabled=true
-                container.isFocusable = true
-                progressBar.visibility = View.GONE
-
-                /**
-                 * This is bypassing the checkpoint
-                 */
-                startActivity(Intent(requireActivity(), DashBoard::class.java))
-                requireActivity().finish()
-            }
+//            if(flag)
+//            {
+//                // Enable the button
+//                button.isEnabled = true
+//                container.isEnabled=true
+//                container.isFocusable = true
+//                progressBar.visibility = View.GONE
+//
+//                /**
+//                 * This is bypassing the checkpoint
+//                 */
+////                startActivity(Intent(requireActivity(), DashBoard::class.java))
+////                requireActivity().finish()
+//            }
             if(!flag)
             {
                 val loginRequest=LoginRequest(
@@ -131,13 +133,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
                         val response = RetrofitInstance.apiService.login(loginRequest)
                         if (response.isSuccessful) {
-                            //if(response.body()?.token.toString()!="OTP Expired" || response.body()?.token.toString()!="Incorrect OTP"||response.body()?.token.toString()!="No OTP generated"){
                             if (response.body()?.token.toString().length >= 30) {
                                 save("token", response.body()?.token.toString())
-//                            val fragmentTransaction = parentFragmentManager.beginTransaction()
-//                            fragmentTransaction.replace(R.id.flFragment, Congratulationsfragment())
-//                            fragmentTransaction.addToBackStack(null)
-//                            fragmentTransaction.commit()
                                 startActivity(Intent(requireActivity(), DashBoard::class.java))
                                 requireActivity().finish()
                             } else {
@@ -146,18 +143,52 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                                 incorrectOtp.text = response.body()?.token.toString()
                             }
                         } else {
-                            showToast("Please Retry")
+                            val userMailIncorrect=view.findViewById<TextView>(R.id.userMailIncorrect)
+                            val incorrectOtp = view.findViewById<TextView>(R.id.passwordIncorrect1)
+                            when(response.code().toString()){
+                                "404" -> {
+                                    userMailIncorrect.text = "User Not Found"
+                                    val text1: TextInputLayout = view.findViewById(R.id.textInputLayout)
+                                    text1.setBackgroundResource(R.drawable.button_layout)
+                                }
+                                "401" -> {
+                                    userMailIncorrect.text = "User Mail is Not verified"
+                                    val text1: TextInputLayout = view.findViewById(R.id.textInputLayout)
+                                    text1.setBackgroundResource(R.drawable.button_layout)
+                                    val text2: TextInputLayout = view.findViewById(R.id.textInputLayout2)
+                                    text2.setBackgroundResource(R.drawable.button_layout)
+                                }
+                                "400" -> {
+                                    incorrectOtp.text = "Invalid Credential"
+                                    val text1: TextInputLayout = view.findViewById(R.id.textInputLayout)
+                                    text1.setBackgroundResource(R.drawable.button_layout)
+                                    val text2: TextInputLayout = view.findViewById(R.id.textInputLayout2)
+                                    text2.setBackgroundResource(R.drawable.button_layout)
+                                }
+                                else-> { showToast("Retry")
+                                    val text1: TextInputLayout = view.findViewById(R.id.textInputLayout)
+                                    text1.setBackgroundResource(R.drawable.button_layout)
+                                    val text2: TextInputLayout = view.findViewById(R.id.textInputLayout2)
+                                    text2.setBackgroundResource(R.drawable.button_layout)
+                                }
+                            }
+
+
                         }
                     }catch(e : Exception){
                         showToast("Connection Error")
                     }finally {
-                        button.isEnabled = true
-                        container.isEnabled=true
-                        container.isFocusable = true
-                        progressBar.visibility = View.GONE
+//                        button.isEnabled = true
+//                        container.isEnabled=true
+//                        container.isFocusable = true
+//                        progressBar.visibility = View.GONE
+                        dismissCustomProgressDialog()
                     }
                 }
 
+            }
+            else {
+                dismissCustomProgressDialog()
             }
 
 //            startActivity(Intent(requireActivity(), DashBoard::class.java))
@@ -175,6 +206,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         val signUp =view.findViewById<TextView>(R.id.textView2)
         signUp.setOnClickListener {
+            parentFragmentManager.popBackStack()
             val fragmentTransaction = parentFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.flFragment, Registrationfragment())
             fragmentTransaction.addToBackStack(null)
@@ -214,5 +246,19 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         dataStore.edit{temp ->
             temp[dataStoreKey]=value
         }
+    }
+    private fun showCustomProgressDialog() {
+        dialog = Dialog(requireContext())
+        dialog?.setContentView(R.layout.custom_dialog_loading)
+        dialog?.setCancelable(false)
+
+        val window = dialog?.window
+        window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        dialog?.show()
+    }
+    private fun dismissCustomProgressDialog() {
+        dialog?.dismiss()
+        dialog = null
     }
 }

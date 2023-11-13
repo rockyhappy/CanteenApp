@@ -18,44 +18,59 @@
     tools:context=".DashBoard"
     android:background="@color/white">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/topAppBar"
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:id="@+id/topAppBar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="?attr/actionBarSize"-->
+<!--        android:background="@color/primary_color"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        android:backgroundTint="@color/white"-->
+<!--        app:title=""-->
+<!--        >-->
+<!--&lt;!&ndash;        <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:text="@string/brunchbliss"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:textColor="@color/white"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:fontFamily="@font/roboto"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:textSize="24sp"&ndash;&gt;-->
+<!--&lt;!&ndash;            />&ndash;&gt;-->
+
+<!--        <ImageView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:src="@drawable/bell"-->
+<!--            android:scaleX="-1"-->
+<!--            android:layout_gravity="end"-->
+<!--            android:layout_marginEnd="15dp"-->
+<!--            />-->
+<!--&lt;!&ndash;        <ImageView&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:src="@drawable/baseline_notifications_24"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:scaleX="-1"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_gravity="end"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_marginEnd="15dp"&ndash;&gt;-->
+<!--&lt;!&ndash;            />&ndash;&gt;-->
+
+<!--    </androidx.appcompat.widget.Toolbar>-->
+
+
+    <FrameLayout
+        android:id="@+id/flFragment"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/primary_color"
+        android:layout_height="0dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:backgroundTint="@color/primary_color"
-        app:title=""
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/brunchbliss"
-            android:textColor="@color/white"
-            android:fontFamily="@font/roboto"
-            android:textSize="24sp"
-            />
+        app:layout_constraintVertical_bias="0.0">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/baseline_shopping_cart_24"
-            android:scaleX="-1"
-            android:layout_gravity="end"
-            android:layout_marginEnd="15dp"
-            />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/baseline_notifications_24"
-            android:scaleX="-1"
-            android:layout_gravity="end"
-            android:layout_marginEnd="15dp"
-            />
-
-    </androidx.appcompat.widget.Toolbar>
+    </FrameLayout>
 
     <com.etebarian.meowbottomnavigation.MeowBottomNavigation
         android:id="@+id/btmnav"
@@ -64,11 +79,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:mbn_defaultIconColor="@color/white"
-        app:mbn_selectedIconColor="@color/white"
-        app:mbn_circleColor="@color/primary_color"
-        app:mbn_backgroundBottomColor="@color/primary_color"
-        app:mbn_countBackgroundColor="@color/primary_color"
+        app:mbn_defaultIconColor="@color/semiblack"
+        app:mbn_selectedIconColor="@color/primary_color"
+        app:mbn_circleColor="@color/white"
+        app:mbn_backgroundBottomColor="@color/white"
+        app:mbn_countBackgroundColor="@android:color/white"
+        android:background="@android:color/transparent"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
