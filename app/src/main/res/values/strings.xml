@@ -2,7 +2,7 @@
 <resources>
     <string name="reg">Register</string>
 
-    <string name="create">Create your new account</string>
+    <string name="create">Create Your New Account</string>
 
     <string name="name">Full Name</string>
 
@@ -12,7 +12,7 @@
 
     <string name="cont">Continue With</string>
 
-    <string name="option">Already have account ? <font color="#FA902D"><u>Sign In</u></font></string>
+    <string name="option">Already have an Account ? <font color="#FA902D"><u>Sign In</u></font></string>
 
     <string name="option2">By signing up, you agree to our<font color="#FA902D"><b>Terms of Service</b></font> and <font color="#FA902D"><b>Privacy Policy</b></font></string>
 
@@ -26,11 +26,11 @@
 
     <string name="welcome_bac">Welcome back!</string>
 
-    <string name="login_to_yo">Login to your account</string>
+    <string name="login_to_yo">Login to your Account</string>
 
     <string name="forgot_pass">Forgot Password?</string>
 
-    <string name="don_t_worry">Don\'t worry! It happens, please enter your Email address to receive a verification code</string>
+    <string name="don_t_worry">Don\'t worry! It happens, please enter your Email Address to receive a verification code</string>
 
     <string name="try_another"><u>Try another way</u></string>
 
@@ -38,13 +38,13 @@
 
     <string name="resend_code">Resend Code in 00:31sec</string>
 
-    <string name="your_new_pa">Your new password must be different from previously used password</string>
+    <string name="your_new_pa">Your new Password must be different from previously used Password</string>
 
-    <string name="your_passwo">Your password has been successfully changed. Please use your new password to login!</string>
+    <string name="your_passwo">Your password has been successfully changed. Please use your New Password to login!</string>
 
-    <string name="login_or_si">Login or sign up to explore delicious foods</string>
+    <string name="login_or_si">Login or Sign up to Explore Delicious foods !</string>
 
-    <string name="already_hav">Already have account ?<font color="#FA902D"><b> Sign In</b></font></string>
+    <string name="already_hav">Already have an Account ?<font color="#FA902D"><b> Sign In</b></font></string>
 
     <string name="open">Open</string>
 
@@ -74,7 +74,7 @@
     <string name="sync_header">Sync</string>
 
     <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
+    <string name="signature_title">Your Signature</string>
     <string name="reply_title">Default reply action</string>
 
     <!-- Sync Preferences -->
@@ -83,7 +83,67 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="greeting">Hii Rachit !! \nWhat would you like to eat today??</string>
+    <string name="greeting">Hello Friend !!! \nWhat would you like to eat today ??</string>
+    <string name="your_message">You\'ve registered your account and you\'re now ready to use it !</string>
+    <string name="profileb">Your Profile</string>
+    <string name="your_name">Your Name</string>
+    <string name="your_email">Your Email</string>
+    <string name="contact_number">Contact Number</string>
+    <string name="date_of_birth">Date Of Birth</string>
+    <string name="this_can_t_be_edited_later">This can\'t be edited later ! </string>
+    <string name="gender">Gender</string>
+    <string name="your_anniversary">Anniversary</string>
+    <string name="annp">This can\'t be edited later !</string>
+    <string name="update">Update Profile</string>
+    <!--<string name="my_profile"><u>My Profile</u></string>
+    <string name="my_name">Deepika Dubey</string>
+    <string name="my_phone">+91 9911882277</string>
+    <string name="my_email">deepika2231012@akgec.ac.in</string>
+    <string name="update_profile"><u>Update Profile</u></string>
+    <string name="transaction">Transaction</string>
+    <string name="favourite">Favourite</string>
+    <string name="subscription">Subscription</string>
+    <string name="feedback">FeedBack</string>
+    <string name="refer_earn"><![CDATA[Refer & Earn]]></string>
+    <string name="privacy_setting"><![CDATA[Privacy & Setting]]></string>
+    <string name="logout">LogOut</string>
+    <string name="edit_p">Edit</string>
+    <string name="help_support"><![CDATA[Help & Support]]></string>-->
+    <string name="todo">TODO</string>
+    <string name="payment_heading">Payment</string>
+    <string name="payment_method">Choose Payment Method</string>
+    <string name="gpay">Google Pay UPI</string>
+    <string name="paytm_upi">Paytm UPI</string>
+    <string name="credit_card">Pay via Credit Card</string>
+    <string name="debit_card">Pay via Debit Card</string>
+    <string name="cash_payment">Pay Cash</string>
+    <string name="confirm_order">Confirm Order</string>
+    <string name="cancel_order">Cancel Order</string>
+    <string name="todos">TODO</string>
+    <string name="profile_main">Profile</string>
+    <string name="todom">TODO</string>
+    <string name="name_main">Deepika Dubey</string>
+    <string name="email_main">deepika2231012@akgec.ac.in</string>
+    <string name="number_main">+91 9911882277</string>
+    <string name="feedback">Feedback</string>
+    <string name="refer_earn"><![CDATA[Refer & Earn]]></string>
+    <string name="privacy_setting"><![CDATA[Privacy & Settings]]></string>
+    <string name="help_support"><![CDATA[Help & Support]]></string>
+    <string name="rate_us">Rate us</string>
+    <string name="log_out">Log out</string>
+    <string name="transaction_main">Transaction</string>
+    <string name="favourite">Favourite</string>
+    <string name="subscription_main">Subscription</string>
+    <string name="todoedit">TODO</string>
+    <string name="todoedit2">TODO</string>
+    <string name="todoedit3">TODO</string>
+    <string name="name_edit">NAME</string>
+    <string name="phone_number">PHONE NUMBER</string>
+    <string name="email_address">EMAIL ADDRESS</string>
+    <string name="text_logout">Oh no! You are leaving...</string>
+    <string name="question">Are you sure?</string>
+
+
 
     <string name="hello_rachi">
 Hello Rachit,
