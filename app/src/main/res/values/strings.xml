@@ -138,6 +138,8 @@
     <string name="todoedit2">TODO</string>
     <string name="todoedit3">TODO</string>
     <string name="name_edit">NAME</string>
+    <string name="phone_number">PHONE NUMBER</string>
+    <string name="email_address">EMAIL ADDRESS</string>
 
 
 </resources>
