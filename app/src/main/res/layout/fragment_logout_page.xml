@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".logOut_page">
+    tools:context=".fragments.LogoutPage">
 
     <TextView
         android:id="@+id/text_logout"
