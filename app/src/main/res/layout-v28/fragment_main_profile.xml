@@ -402,11 +402,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:layout_width="82dp"
-                android:layout_height="0dp"
-                android:src="@drawable/dollar_vect"
-                tools:layout_editor_absoluteY="80dp" />
+
 
             <TextView
                 android:id="@+id/profile_main"
@@ -672,7 +668,7 @@
         app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="6dp"
         app:cardElevation="4dp"
-        android:paddingLeft="4dp"
+        android:paddingHorizontal="4dp"
         app:layout_constraintEnd_toEndOf="@+id/cardView"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/cardView"
@@ -687,7 +683,6 @@
                 android:id="@+id/help_support"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/help_support"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/roboto"
                 android:text="@string/help_support"
@@ -699,7 +694,8 @@
                 app:layout_constraintHorizontal_bias="0.082"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.545" />
+                app:layout_constraintVertical_bias="0.545"
+                app:drawableLeftCompat="@drawable/help_support" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -723,7 +719,7 @@
         app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="6dp"
         app:cardElevation="4dp"
-        android:paddingStart="4dp"
+        android:paddingHorizontal="4dp"
         app:layout_constraintEnd_toEndOf="@+id/cardView"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/cardView"
@@ -737,7 +733,6 @@
                 android:id="@+id/rate_us"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/rate_us"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/roboto"
 
@@ -749,7 +744,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.067"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:drawableLeftCompat="@drawable/rate_us" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -845,7 +841,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.363" />
+                app:layout_constraintVertical_bias="0.363"
+                android:contentDescription="@string/todomm" />
 
             <TextView
                 android:id="@id/transaction_main"
@@ -885,15 +882,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src=
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.363" />
+
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -903,7 +892,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.363" />
+                app:layout_constraintVertical_bias="0.363"
+                android:contentDescription="@string/todomn" />
 
             <TextView
                 android:id="@id/favourite_main"
@@ -950,7 +940,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.38" />
+                app:layout_constraintVertical_bias="0.38"
+                android:contentDescription="@string/nmtodo" />
 
             <TextView
                 android:id="@+id/subscription_main"

@@ -144,10 +144,12 @@
     <string name="question">Are you sure?</string>
 
 
-
     <string name="hello_rachi">
 Hello Rachit,
 </string>
     <string name="logout_button">Yes, Log me out</string>
     <string name="kidding">Nah! Just kidding</string>
+    <string name="todomm">TODO</string>
+    <string name="todomn">TODO</string>
+    <string name="nmtodo">TODO</string>
 </resources>
