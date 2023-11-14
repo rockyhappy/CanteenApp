@@ -38,7 +38,7 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener{
         val view= inflater.inflate(R.layout.fragment_show_canteen_menu, container, false)
         rvadapter = RvAdapter2(ArrayList(), requireContext(), this)
         recyclerView = view.findViewById<RecyclerView>(R.id.rvi)
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 4, GridLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 1, GridLayoutManager.VERTICAL, false)
         recyclerView.adapter = rvadapter
         val spaceHeight = resources.getDimensionPixelSize(R.dimen.space_50dp)
         val itemDecoration = SpaceItemDecoration(spaceHeight)
