@@ -75,7 +75,7 @@
         android:elevation="5dp"
         android:textSize="16sp"
         android:inputType="text"
-       android:gravity="left"
+       android:gravity="start"
        android:hint="@string/feed_page"
         android:id="@+id/feed_page"
         android:textColor="@color/black"
