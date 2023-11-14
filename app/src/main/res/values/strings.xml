@@ -157,5 +157,6 @@ Hello Rachit,
     <string name="feed_page">Write Comment</string>
     <string name="todomainprofile">TODO</string>
     <string name="payment_headingpage">Payment</string>
+    <string name="new_payment">Add new UPI ID</string>
 
 </resources>

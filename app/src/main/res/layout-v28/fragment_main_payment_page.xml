@@ -68,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="176dp"
+        android:layout_marginTop="167dp"
         android:layout_marginEnd="120dp"
         android:fontFamily="@font/roboto"
         android:paddingVertical="16dp"
@@ -107,9 +107,9 @@
                 android:id="@+id/gpay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-               android:paddingVertical="4dp"
                 android:layout_marginStart="56dp"
                 android:fontFamily="@font/roboto"
+                android:paddingVertical="4dp"
                 android:text="@string/gpay"
                 android:textColor="#46474B"
                 android:textFontWeight="400"
@@ -139,15 +139,17 @@
 
     </androidx.cardview.widget.CardView>
 
+
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView16"
         android:layout_width="300dp"
         android:layout_height="40dp"
-        android:layout_marginTop="292dp"
+        android:layout_marginTop="284dp"
         app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="6dp"
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="@+id/cardView15"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/cardView15"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -159,14 +161,13 @@
                 android:id="@+id/paytm_upi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingVertical="4dp"
                 android:layout_marginStart="56dp"
                 android:fontFamily="@font/roboto"
+                android:paddingVertical="4dp"
                 android:text="@string/paytm_upi"
                 android:textColor="#46474B"
                 android:textFontWeight="400"
                 android:textSize="12sp"
-
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -190,6 +191,58 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="332dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="4dp"
+
+        app:layout_constraintEnd_toEndOf="@+id/cardView15"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/cardView15"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="56dp"
+            android:fontFamily="@font/roboto"
+            android:layout_marginVertical="8dp"
+            android:paddingVertical="4dp"
+            android:text="@string/new_payment"
+            android:id="@+id/new_payment"
+            android:textColor="#46474B"
+            android:textFontWeight="400"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <ImageView
+            android:id="@+id/imageviewpayment"
+            android:layout_width="28dp"
+            android:layout_height="32dp"
+            
+            android:layout_marginVertical="4dp"
+            android:layout_marginStart="24dp"
+            android:paddingVertical="4dp"
+            android:src="@drawable/upijpg"
+            />
+
 
 
     </androidx.cardview.widget.CardView>
