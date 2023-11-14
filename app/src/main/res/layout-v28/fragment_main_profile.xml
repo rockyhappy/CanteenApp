@@ -515,7 +515,6 @@
         app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="6dp"
         app:cardElevation="4dp"
-
         app:layout_constraintEnd_toEndOf="@+id/cardView"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/cardView"
