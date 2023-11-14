@@ -1,5 +1,6 @@
 package com.example.myapplication
 import com.example.myapplication.fragments.ForgotPassward
+import com.example.myapplication.fragments.SetProfile
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -46,4 +47,12 @@ interface ApiService {
 
     @GET("api/v1/cart/get-cart-items")
     suspend fun getCart() :Response<getCartResponse>
+
+    @GET("api/v1/profile/get")
+    suspend fun SetProfile(): Response<SetProfileResponse>
 }
+
+
+
+
+

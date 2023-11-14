@@ -120,3 +120,9 @@ data class getCartResponse(
     val quantity: Int,
     val price: Double
 )
+
+data class SetProfileResponse(
+val profileImage: String,
+val fullName:String,
+val  contactNumber:String
+)

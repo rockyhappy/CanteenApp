@@ -195,8 +195,9 @@
 
     </androidx.cardview.widget.CardView>
 
-    
+
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView18"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="332dp"
@@ -214,14 +215,14 @@
 
 
         <TextView
+            android:id="@+id/new_payment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
             android:layout_marginStart="56dp"
             android:fontFamily="@font/roboto"
-            android:layout_marginVertical="8dp"
             android:paddingVertical="4dp"
             android:text="@string/new_payment"
-            android:id="@+id/new_payment"
             android:textColor="#46474B"
             android:textFontWeight="400"
             android:textSize="12sp"
@@ -229,8 +230,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageviewpayment"
@@ -244,11 +244,9 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            />
+            app:layout_constraintVertical_bias="1.0" />
 
-
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
 
@@ -404,9 +402,15 @@
                 app:layout_constraintTop_toTopOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
     </androidx.cardview.widget.CardView>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="569dp"
+        android:text=""
+        app:layout_constraintStart_toStartOf="@+id/cardView15"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
