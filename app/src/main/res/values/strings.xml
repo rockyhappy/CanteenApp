@@ -159,5 +159,6 @@ Hello Rachit,
     <string name="payment_headingpage">Payment</string>
     <string name="new_payment">Add new UPI ID</string>
     <string name="id1">Please wait...</string>
+    <string name="edit_name">EDIT</string>
 
 </resources>
