@@ -31,6 +31,7 @@
     <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
         <item name="android:textColorHint">@color/grey</item>
         <item name="android:textSize">14sp</item>
+        <item name="colorAccent">@color/primary_color</item>
 
     </style>
     <style name="greeting">

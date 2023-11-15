@@ -54,7 +54,6 @@
         android:layout_marginEnd="30dp"
         />
 
-
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
@@ -62,14 +61,22 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="30dp"
+        app:backHandlingEnabled="true"
         android:background="@drawable/rounded_border"
-        android:iconifiedByDefault="false"
         android:queryHint="What would you like to eat ?"
+        app:queryHint="What would you like to eat ?"
+        app:defaultQueryHint="What would you like to eat ?"
+        android:iconifiedByDefault="false"
+        app:iconifiedByDefault="false"
         android:theme="@style/SearchViewStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-         />
+        app:voiceIcon="@drawable/mic"
+        android:voiceIcon="@drawable/mic"
+        android:voiceSearchMode="showVoiceSearchButton|launchRecognizer"
+        />
+
 
     <TextView
         android:layout_width="wrap_content"
