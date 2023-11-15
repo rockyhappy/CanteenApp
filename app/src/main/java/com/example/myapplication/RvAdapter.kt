@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.content.Context
+import android.graphics.Rect
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
-import android.graphics.Rect
 
 class RvAdapter(
     var dataList: ArrayList<RvModel>,
@@ -232,4 +232,7 @@ class RvAdapterCart(
         selectedPosition = position
         notifyDataSetChanged() // Trigger a data set change to update the UI
     }
+
+
+
 }

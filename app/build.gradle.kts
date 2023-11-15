@@ -81,4 +81,9 @@ dependencies {
 
     //for glide
     implementation ("com.github.bumptech.glide:recyclerview-integration:4.14.2")
+
+
+   //for image upload
+    implementation ("com.squareup.retrofit2:converter-scalars:2.9.0")
+
 }
