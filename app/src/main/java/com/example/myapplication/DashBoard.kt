@@ -151,16 +151,23 @@ class DashBoard : AppCompatActivity() {
                     supportFragmentManager.beginTransaction().apply {
                         replace(R.id.flFragment, MainDashboard())
                         commit()
+                        }
                     }
-                }
+
                 2 -> {
-                    // Handle the "Search" tab selection
+
+                        supportFragmentManager.popBackStack()
+                        supportFragmentManager.beginTransaction().apply {
+                        replace(R.id.flFragment, Dishes_Category())
+                        commit()
+
+                        }
                 }
                 3 -> {
-                    // Handle the "Profile" tab selection
+
                 }
                 4 -> {
-                    // Handle the "Settings" tab selection
+
                     supportFragmentManager.popBackStack()
                     supportFragmentManager.beginTransaction().apply {
                         replace(R.id.flFragment, cart())

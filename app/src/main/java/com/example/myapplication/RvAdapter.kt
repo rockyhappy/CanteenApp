@@ -12,6 +12,10 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import android.graphics.Rect
 
+/**
+ * This is the adapter that is loading the canteens in the home page
+ */
+
 class RvAdapter(
     var dataList: ArrayList<RvModel>,
     var context : Context,
@@ -32,14 +36,14 @@ class RvAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         var profile = holder.view.findViewById<ImageView>(R.id.imageView)
         var name = holder.view.findViewById<TextView>(R.id.textView)
-        var residence = holder.view.findViewById<TextView>(R.id.textView2)
+        //var residence = holder.view.findViewById<TextView>(R.id.textView2)
 
         val item = dataList[position]
         name.text = item.name
-        residence.text = item.descriptionn
+        //residence.text = item.descriptionn
 
         Glide.with(context)
-            .load("https://i.postimg.cc/4dYWcGgm/bundo-kim-Pb9b-Uz-H1n-D8-unsplash.jpg")
+            .load("https://i.postimg.cc/Vkt4HFqH/726617d5b82c0367ff5faadb547da306.png")
             .apply(
                 RequestOptions()
                     .placeholder(R.drawable.baseline_person_24)
@@ -47,16 +51,16 @@ class RvAdapter(
             )
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(profile)
+        //var dotImageView = holder.view.findViewById<ImageView>(R.id.dotImageView)
 
 
         holder.view.setOnClickListener {
             itemClickListener.onItemClick(item.name)
         }
-        if (position == selectedPosition) {
-            //holder.dotImageView.setBackgroundResource(R.drawable.dot_selected)
-        } else {
-            //holder.dotImageView.setBackgroundResource(R.drawable.dot_unselected)
-        }
+//        if (position == selectedPosition) {
+//            dotImageView.setBackgroundResource(R.drawable.dot_selected)
+//        } else { dotImageView.setBackgroundResource(R.drawable.dot_unselected)
+//        }
 
     }
     /**
@@ -78,7 +82,9 @@ class RvAdapter(
     }
 }
 
-
+/**
+ * This is the recycler view adapter for the showing of items
+ */
 class RvAdapter2(
     var dataList: ArrayList<RvModel2>,
     var context : Context,
