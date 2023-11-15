@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".main_profileFragment">
+    tools:context=".fragments.MainProfile">
 
     <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/backButton"
@@ -541,6 +541,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="14dp"
                 android:drawablePadding="8dp"
+                android:drawableLeft="@drawable/newfeedback"
                 android:fontFamily="@font/roboto"
                 android:text="@string/feedback"
                 android:textColor="#46474B"
@@ -642,12 +643,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawablePadding="8dp"
+                android:drawableLeft="@drawable/newsetting"
                 android:fontFamily="@font/roboto"
                 android:text="@string/privacy_setting"
                 android:textColor="#46474B"
                 android:textFontWeight="400"
                 android:textSize="12sp"
-                app:drawableLeftCompat="@drawable/privacy_setting"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.089"
@@ -694,7 +695,7 @@
                 android:id="@+id/help_support"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/help_support"
+              android:drawableLeft="@drawable/newhelp"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/roboto"
                 android:text="@string/help_support"
@@ -745,6 +746,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawablePadding="8dp"
+                android:drawableLeft="@drawable/newrateus"
                 android:fontFamily="@font/roboto"
                 android:text="@string/rate_us"
                 android:textColor="#46474B"
@@ -755,7 +757,7 @@
                 app:layout_constraintHorizontal_bias="0.067"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:drawableLeftCompat="@drawable/rate_us" />
+                 />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -781,11 +783,12 @@
         app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="6dp"
         app:cardElevation="4dp"
-        android:paddingLeft="4dp"
+        android:paddingStart="4dp"
         app:layout_constraintEnd_toEndOf="@+id/cardView"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/cardView"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -796,12 +799,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawablePadding="8dp"
+
                 android:fontFamily="@font/roboto"
                 android:text="@string/log_out"
                 android:textColor="#46474B"
                 android:textFontWeight="400"
                 android:textSize="12sp"
-                app:drawableLeftCompat="@drawable/log_out"
+               android:drawableLeft="@drawable/newlogout"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.067"

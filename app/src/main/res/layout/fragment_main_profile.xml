@@ -539,7 +539,6 @@
                 android:textColor="#46474B"
                 android:textFontWeight="400"
                 android:textSize="12sp"
-                app:drawableLeftCompat="@drawable/feedback"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.073"
