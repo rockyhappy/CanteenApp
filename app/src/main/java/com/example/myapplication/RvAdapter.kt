@@ -12,6 +12,10 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import android.graphics.Rect
 
+/**
+ * This is the adapter that is loading the canteens in the home page
+ */
+
 class RvAdapter(
     var dataList: ArrayList<RvModel>,
     var context : Context,
@@ -78,7 +82,9 @@ class RvAdapter(
     }
 }
 
-
+/**
+ * This is the recycler view adapter for the showing of items
+ */
 class RvAdapter2(
     var dataList: ArrayList<RvModel2>,
     var context : Context,
