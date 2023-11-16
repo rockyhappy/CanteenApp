@@ -92,4 +92,8 @@ Hello Rachit,
     <string name="stuffed_ome">
 Stuffed omelette
 </string>
+
+    <string name="menu">
+Menu
+</string>
 </resources>

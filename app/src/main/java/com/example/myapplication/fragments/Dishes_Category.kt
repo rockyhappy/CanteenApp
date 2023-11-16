@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import com.example.myapplication.R
+import com.google.android.material.card.MaterialCardView
 
 
 class Dishes_Category : Fragment() {
@@ -20,6 +22,9 @@ class Dishes_Category : Fragment() {
         val view= inflater.inflate(R.layout.fragment_dishes__category, container, false)
 
         val lunch1= view.findViewById<CardView>(R.id.cardView1)
+
+        val newOutlineColor = ContextCompat.getColor(requireContext(), R.drawable.round_corner)
+        lunch1.background.setTint(newOutlineColor)
         lunch1.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("key2","LUNCH")
