@@ -118,4 +118,19 @@
         app:elevation="0dp"
         app:fabCustomSize="28dp"
          />
+
+
+    <TextView
+        android:id="@+id/ratings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(316 Ratings)"
+        android:textColor="@color/grey"
+        android:layout_marginStart="220dp"
+        android:layout_marginTop="40dp"
+        android:textAppearance="@style/some_id"
+        android:gravity="top"
+        android:textSize="12dp"
+        android:fontFamily="@font/roboto"
+        />
     </androidx.cardview.widget.CardView>
