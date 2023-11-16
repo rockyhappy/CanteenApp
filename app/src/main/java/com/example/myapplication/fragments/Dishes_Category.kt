@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import com.example.myapplication.R
@@ -20,6 +21,16 @@ class Dishes_Category : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_dishes__category, container, false)
+
+
+        val filter= view.findViewById<Button>(R.id.filter)
+        filter.setOnClickListener {
+            val fragmentTransaction = parentFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.flFragment, SearchFilter())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
+
 
         val lunch1= view.findViewById<CardView>(R.id.cardView1)
 
