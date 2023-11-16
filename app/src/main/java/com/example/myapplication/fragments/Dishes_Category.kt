@@ -24,7 +24,7 @@ class Dishes_Category : Fragment() {
         val lunch1= view.findViewById<CardView>(R.id.cardView1)
 
         //val newOutlineColor = ContextCompat.getColor(requireContext(), R.drawable.round_corner)
-        lunch1.setBackgroundResource(R.drawable.primary_color_layout)
+        //lunch1.setBackgroundResource(R.drawable.primary_color_layout)
         lunch1.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("key2","LUNCH")
