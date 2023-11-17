@@ -145,7 +145,7 @@
         android:textFontWeight="300"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/editText"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.033"
         app:layout_constraintStart_toStartOf="@+id/editText"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -207,15 +207,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="256dp"
+        android:fontFamily="@font/roboto"
         android:text="@string/edit_name"
         android:textColor="#FA902D"
-        android:textSize="12sp"
-        android:fontFamily="@font/roboto"
         android:textFontWeight="500"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/editText"
         app:layout_constraintEnd_toEndOf="@+id/editText"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editText"
         app:layout_constraintTop_toTopOf="@+id/editText" />
+
+    <TextView
+        android:id="@+id/edit_name2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="256dp"
+        android:text="@string/edit_name"
+        android:textColor="#FA902D"
+        android:textSize="12sp"
+        android:fontFamily="@font/roboto"
+        android:textFontWeight="500"
+        app:layout_constraintBottom_toBottomOf="@+id/editText7"
+        app:layout_constraintEnd_toEndOf="@+id/editText7"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editText7"
+        app:layout_constraintTop_toTopOf="@+id/editText7" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
