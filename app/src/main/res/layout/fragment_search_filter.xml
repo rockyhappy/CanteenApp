@@ -114,7 +114,7 @@
         <Button
             android:id="@+id/nonveg"
             android:layout_width="100dp"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:layout_marginStart="150dp"
             android:layout_marginTop="220dp"
             android:text="Non-Veg"
@@ -128,7 +128,7 @@
         <Button
             android:id="@+id/veg"
             android:layout_width="100dp"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="220dp"
             android:text="Veg"
@@ -145,7 +145,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="280dp"
+            android:layout_marginTop="290dp"
             android:text="Meals"
             android:textColor="#46474B"
             android:textSize="20sp"
@@ -156,9 +156,9 @@
         <Button
             android:id="@+id/breakfast"
             android:layout_width="100dp"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="320dp"
+            android:layout_marginTop="330dp"
             android:text="Breakfast"
             android:textColor="@color/grey"
             android:textAllCaps="false"
@@ -171,24 +171,25 @@
         <Button
             android:id="@+id/dinner"
             android:layout_width="100dp"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:layout_marginStart="270dp"
-            android:layout_marginTop="320dp"
+            android:layout_marginTop="330dp"
             android:text="Dinner"
             android:textColor="@color/grey"
             android:textAllCaps="false"
             android:fontFamily="@font/roboto"
             android:background="@drawable/rounded_border"
             android:elevation="5dp"
+            android:textSize="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/lunch"
             android:layout_width="100dp"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:layout_marginStart="150dp"
-            android:layout_marginTop="320dp"
+            android:layout_marginTop="330dp"
             android:text="Lunch"
             android:textColor="@color/grey"
             android:textAllCaps="false"
@@ -203,7 +204,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="380dp"
+            android:layout_marginTop="390dp"
             android:text="Canteen"
             android:textColor="#46474B"
             android:textSize="20sp"
@@ -215,7 +216,7 @@
             android:id="@+id/rvi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="420dp"
+            android:layout_marginTop="430dp"
             android:paddingBottom="70dp"
             android:layout_marginHorizontal="15dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -226,7 +227,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="710dp"
+            android:layout_marginTop="720dp"
             android:text="Ratings"
             android:textColor="#46474B"
             android:textSize="20sp"
@@ -236,9 +237,10 @@
 
         <Button
             android:id="@+id/star1"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="750dp"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="760dp"
+            android:layout_marginStart="30dp"
             android:text="@string/rating1"
             android:textColor="@color/grey"
             android:textAllCaps="false"
@@ -246,50 +248,47 @@
             android:background="@drawable/rounded_border"
             android:elevation="5dp"
             app:layout_constraintStart_toStartOf="parent"
-
             app:layout_constraintTop_toTopOf="parent" />
 
 
         <Button
             android:id="@+id/star2"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="150dp"
-            android:layout_marginTop="750dp"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="140dp"
+            android:layout_marginTop="760dp"
             android:text="2 &amp; above ⭐"
             android:textColor="@color/grey"
             android:textAllCaps="false"
             android:fontFamily="@font/roboto"
             android:background="@drawable/rounded_border"
             android:elevation="5dp"
-            app:layout_constraintStart_toEndOf="@+id/star1"
-            app:layout_constraintEnd_toStartOf="@+id/star3"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
         <Button
             android:id="@+id/star3"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="280dp"
-            android:layout_marginTop="750dp"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="250dp"
+            android:layout_marginTop="760dp"
             android:text="3 &amp; above ⭐"
             android:textColor="@color/grey"
             android:textAllCaps="false"
             android:fontFamily="@font/roboto"
             android:background="@drawable/rounded_border"
             android:elevation="5dp"
-            app:layout_constraintStart_toEndOf="@+id/star2"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
         <Button
             android:id="@+id/star4"
             android:layout_width="100dp"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="800dp"
+            android:layout_marginTop="820dp"
             android:text="4 &amp; above ⭐"
             android:textColor="@color/grey"
             android:textAllCaps="false"
@@ -303,7 +302,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="860dp"
+            android:layout_marginTop="880dp"
             android:text="Pricing"
             android:textColor="#46474B"
             android:textSize="20sp"
@@ -312,23 +311,41 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <SeekBar
+<!--        <SeekBar-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:layout_marginTop="930dp"-->
+<!--            android:layout_marginBottom="30dp"-->
+<!--            android:layout_marginHorizontal="30dp"-->
+<!--            android:max="100"-->
+<!--            android:progress="50"-->
+<!--            android:thumbTint="@color/primary_color"-->
+<!--            android:progressTint="@color/primary_color"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent" />-->
+
+        <com.google.android.material.slider.Slider
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="900dp"
-            android:layout_marginBottom="30dp"
+            android:layout_height="wrap_content"
+            android:value="20"
+            android:valueFrom="0"
+            android:valueTo="500"
+            android:stepSize="1"
+            app:trackColor="@color/primary_color"
+            app:tickColorActive="@color/primary_color"
+            android:layout_marginTop="930dp"
             android:layout_marginHorizontal="30dp"
-            android:max="100"
-            android:progress="50"
+            tools:ignore="SpeakableTextPresentCheck"
+            android:theme="@style/MyMaterialTheme"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
+            app:layout_constraintStart_toStartOf="parent"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="950dp"
+            android:layout_marginTop="1050dp"
             android:text=""
             android:textColor="#46474B"
             android:textSize="20sp"

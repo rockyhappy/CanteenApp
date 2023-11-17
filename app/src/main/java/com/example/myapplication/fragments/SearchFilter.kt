@@ -30,6 +30,8 @@ class SearchFilter : Fragment() {
             {
                 vegChecked=false
                 vegUnchecked=true
+                nonvegChecked=false
+                nonvegUnchecked=true
                 veg.setTextColor(getResources().getColor(R.color.grey))
                 veg.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
                 nonveg.setTextColor(getResources().getColor(R.color.grey))
@@ -38,6 +40,8 @@ class SearchFilter : Fragment() {
             else{
                 vegChecked=true
                 vegUnchecked=false
+                nonvegChecked=false
+                nonvegUnchecked=true
                 veg.setTextColor(getResources().getColor(R.color.primary_color))
                 veg.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border2)
                 nonveg.setTextColor(getResources().getColor(R.color.grey))
@@ -52,6 +56,8 @@ class SearchFilter : Fragment() {
             {
                 nonvegChecked=false
                 nonvegUnchecked=true
+                vegChecked=false
+                vegUnchecked=true
                 nonveg.setTextColor(getResources().getColor(R.color.grey))
                 nonveg.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
                 veg.setTextColor(getResources().getColor(R.color.grey))
@@ -60,12 +66,130 @@ class SearchFilter : Fragment() {
             else{
                 nonvegChecked=true
                 nonvegUnchecked=false
+                vegChecked=false
+                vegUnchecked=true
                 nonveg.setTextColor(getResources().getColor(R.color.primary_color))
                 nonveg.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border2)
                 veg.setTextColor(getResources().getColor(R.color.grey))
                 veg.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
             }
 
+        }
+        val breakfast=view.findViewById<Button>(R.id.breakfast)
+        var breakfastClick=false
+        var breakfastUnclick=true
+        val lunch=view.findViewById<Button>(R.id.lunch)
+        var lunchClick=false
+        var lunchUnclick= true
+        val dinner=view.findViewById<Button>(R.id.dinner)
+        var dinnerClick=false
+        var dinnerUnclick=true
+
+        breakfast.setOnClickListener {
+            if(breakfastClick)
+            {
+                breakfastClick=false
+                breakfastUnclick=true
+                breakfast.setTextColor(getResources().getColor(R.color.grey))
+                breakfast.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
+            }
+            else
+            {
+                breakfastClick=true
+                breakfastUnclick=false
+                breakfast.setTextColor(getResources().getColor(R.color.primary_color))
+                breakfast.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border2)
+            }
+        }
+
+        lunch.setOnClickListener {
+            if(lunchClick)
+            {
+                lunchClick=false
+                lunchUnclick=true
+                lunch.setTextColor(getResources().getColor(R.color.grey))
+                lunch.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
+            }
+            else
+            {
+                lunchClick=true
+                lunchUnclick=false
+                lunch.setTextColor(getResources().getColor(R.color.primary_color))
+                lunch.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border2)
+            }
+        }
+
+        dinner.setOnClickListener {
+            if(dinnerClick)
+            {
+                dinnerClick=false
+                dinnerUnclick=true
+                dinner.setTextColor(getResources().getColor(R.color.grey))
+                dinner.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
+            }
+            else
+            {
+                dinnerClick=true
+                dinnerUnclick=false
+                dinner.setTextColor(getResources().getColor(R.color.primary_color))
+                dinner.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border2)
+            }
+        }
+        val star1=view.findViewById<Button>(R.id.star1)
+        var star1Clicked=false
+        star1.setOnClickListener {
+            if(star1Clicked){
+                star1Clicked=false
+                star1.setTextColor(getResources().getColor(R.color.grey))
+                star1.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
+            }
+            else{
+                star1Clicked=true
+                star1.setTextColor(getResources().getColor(R.color.primary_color))
+                star1.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border2)
+            }
+        }
+        val star2=view.findViewById<Button>(R.id.star2)
+        var star2Clicked=false
+        star2.setOnClickListener {
+            if(star2Clicked){
+                star2Clicked=false
+                star2.setTextColor(getResources().getColor(R.color.grey))
+                star2.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
+            }
+            else{
+                star2Clicked=true
+                star2.setTextColor(getResources().getColor(R.color.primary_color))
+                star2.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border2)
+            }
+        }
+        val star3=view.findViewById<Button>(R.id.star3)
+        var star3Clicked=false
+        star3.setOnClickListener {
+            if(star3Clicked){
+                star3Clicked=false
+                star3.setTextColor(getResources().getColor(R.color.grey))
+                star3.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
+            }
+            else{
+                star3Clicked=true
+                star3.setTextColor(getResources().getColor(R.color.primary_color))
+                star3.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border2)
+            }
+        }
+        val star4=view.findViewById<Button>(R.id.star4)
+        var star4Clicked=false
+        star4.setOnClickListener {
+            if(star4Clicked){
+                star4Clicked=false
+                star4.setTextColor(getResources().getColor(R.color.grey))
+                star4.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
+            }
+            else{
+                star4Clicked=true
+                star4.setTextColor(getResources().getColor(R.color.primary_color))
+                star4.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border2)
+            }
         }
 
         return view

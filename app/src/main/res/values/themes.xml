@@ -48,4 +48,9 @@
     <style name="Theme.MyApplication.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.MyApplication.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="MyMaterialTheme" parent="Theme.MaterialComponents">
+        <!-- Add attributes here -->
+        <item name="colorPrimary">@color/primary_color</item>
+    </style>
 </resources>
