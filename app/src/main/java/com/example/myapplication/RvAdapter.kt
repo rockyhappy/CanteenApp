@@ -96,7 +96,8 @@ class RvAdapter2(
     var dataList: ArrayList<RvModel2>,
     var context : Context,
     private val itemClickListener: OnItemClickListener,
-    private val cartClickListener: OnCartClickListener
+    private val cartClickListener: OnCartClickListener,
+    private val wishClickListener: OnWishClickListener
 ): RecyclerView.Adapter<RvAdapter2.MyViewHolder>() {
     private var selectedPosition: Int = 0
     inner class MyViewHolder(var view : View) : RecyclerView.ViewHolder(view){
@@ -137,7 +138,7 @@ class RvAdapter2(
             cartClickListener.onCartClick(item.id)
         }
         holder.wish.setOnClickListener {
-
+            wishClickListener.onWishClick(item.id)
         }
 
         holder.view.setOnClickListener {
@@ -159,7 +160,9 @@ class RvAdapter2(
     interface OnCartClickListener {
         fun onCartClick(name: Long)
     }
-
+    interface OnWishClickListener {
+        fun onWishClick(name: Long)
+    }
     fun updateData(newDataList: List<RvModel2>) {
         dataList.clear()
         dataList.addAll(newDataList)
@@ -195,13 +198,16 @@ class SpaceItemDecoration(private val spaceHeight: Int) : RecyclerView.ItemDecor
 class RvAdapterCart(
     var dataList: ArrayList<RvModel2>,
     var context : Context,
-    private val itemClickListener: OnItemClickListener
+    private val itemClickListener: OnItemClickListener,
+    private val itemDeleteListener: OnDeleteClickListener
 ): RecyclerView.Adapter<RvAdapterCart.MyViewHolder>() {
     private var selectedPosition: Int = 0
-    inner class MyViewHolder(var view : View) : RecyclerView.ViewHolder(view)
+    inner class MyViewHolder(var view : View) : RecyclerView.ViewHolder(view){
+        val delete =view.findViewById<ImageView>(R.id.delete)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        var view = LayoutInflater.from(context).inflate(R.layout.rv_item_view, parent,false)
+        var view = LayoutInflater.from(context).inflate(R.layout.rv_item_cart, parent,false)
         return MyViewHolder(view)
     }
 
@@ -245,6 +251,9 @@ class RvAdapterCart(
      */
     interface OnItemClickListener {
         fun onItemClick(name: Long)
+    }
+    interface OnDeleteClickListener {
+        fun onDeleteClick(name: Long)
     }
 
 

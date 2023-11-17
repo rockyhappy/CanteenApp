@@ -51,7 +51,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvi"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:paddingBottom="70dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,13 +63,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
         android:text="Add Dishes +"
-        android:textSize="19sp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginTop="20dp"
         android:textColor="@color/primary_color"
-        app:layout_constraintTop_toBottomOf="@+id/rvi"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:textSize="19sp"
+        android:layout_marginTop="390dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -88,7 +88,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="484dp"
         android:background="@drawable/rounded_border"
-        android:layout_marginHorizontal="22dp"
+        android:layout_marginHorizontal="30dp"
         android:drawableRight="@drawable/icon_arrow"
         android:drawableLeft="@drawable/offer"
         android:paddingLeft="15dp"
@@ -96,7 +96,7 @@
         android:text="  Apply Coupons"
         android:textColor="@color/grey"
         android:textAllCaps="false"
-        android:gravity=""
+        android:gravity="center_vertical"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -116,11 +116,30 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="160dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="600dp"
         android:src="@drawable/bill"
-        android:layout_marginTop="630dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+<!--    <com.travijuu.numberpicker.library.NumberPicker-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:fontFamily="@font/roboto"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:np_default_value="5"-->
+<!--        app:np_max="10"-->
+<!--        app:np_min="1"-->
+<!--        app:np_separator="1"-->
+<!--        app:np_separator_color="#000000"-->
+<!--        app:np_show_default_value="false"-->
+<!--        android:layout_marginTop="900dp"-->
+<!--        app:np_text_color="#000000"-->
+<!--        app:np_text_size="16sp" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

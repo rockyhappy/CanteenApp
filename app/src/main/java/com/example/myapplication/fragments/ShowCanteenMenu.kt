@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -22,9 +23,11 @@ import com.example.myapplication.RvAdapter2
 import com.example.myapplication.RvModel
 import com.example.myapplication.RvModel2
 import com.example.myapplication.SpaceItemDecoration
+import com.example.myapplication.addCartItemsRequest
+import com.example.myapplication.addToCartRequest
 import kotlinx.coroutines.launch
 
-class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2.OnCartClickListener{
+class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2.OnCartClickListener,RvAdapter2.OnWishClickListener{
     private lateinit var recyclerView: RecyclerView
     private lateinit var rvadapter : RvAdapter2
     private lateinit var dataStore: DataStore<Preferences>
@@ -36,7 +39,7 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
         dataStore = requireContext().createDataStore(name = "user")
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_show_canteen_menu, container, false)
-        rvadapter = RvAdapter2(ArrayList(), requireContext(), this,this)
+        rvadapter = RvAdapter2(ArrayList(), requireContext(), this,this,this)
         recyclerView = view.findViewById<RecyclerView>(R.id.rvi)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 1, GridLayoutManager.VERTICAL, false)
         recyclerView.adapter = rvadapter
@@ -47,6 +50,9 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
 
         val receivedData = arguments?.getString("key").toString()
         //showToast(receivedData)
+        val tittle=view.findViewById<TextView>(R.id.tittle)
+        tittle.text=receivedData.toString()
+
         lifecycleScope.launch {
             try {
 
@@ -106,8 +112,40 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
 
     override fun onCartClick(name: Long) {
        lifecycleScope.launch {
+           try{
+               showCustomProgressDialog()
+               val request= addCartItemsRequest(
+                   foodId = name,
+                   quantity = "1"
+               )
+               val response = RetrofitInstance2.getApiServiceWithToken(dataStore).addCartItems(request)
+               if(response.isSuccessful)
+               {
+                   showToast(response.body()?.message.toString())
+                   Log.d("ResponseCart",response.body()?.message.toString())
+               }
+
+           }catch (e:Exception){
+               showToast("Connection Error")
+           }finally{
+               dismissCustomProgressDialog()
+           }
+
 
        }
+    }
+
+    override fun onWishClick(name: Long) {
+        showToast(name.toString())
+//        val bundle =Bundle()
+//        bundle.putString("id",name.toString())
+//        val passing =ShowItem()
+//        passing.arguments=bundle
+//        val fragmentTransaction = parentFragmentManager.beginTransaction()
+//        fragmentTransaction.replace(R.id.flFragment, passing)
+//        fragmentTransaction.addToBackStack(null)
+//        fragmentTransaction.commit()
+
     }
     private fun showCustomProgressDialog() {
         dialog = Dialog(requireContext())

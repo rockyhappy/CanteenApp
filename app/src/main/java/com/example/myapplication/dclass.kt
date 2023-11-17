@@ -104,7 +104,7 @@ data class FoodItem(
 
 
 data class addCartItemsRequest(
-    val foodId: String,
+    val foodId: Long,
     val quantity: String
 )
 data class addCartItemsResponse(
@@ -116,4 +116,9 @@ data class getCartResponse(
     val foodItemName: String,
     val quantity: Int,
     val price: Double
+)
+
+data class addToCartRequest(
+    val foodId: Long,
+    val quantity: String
 )

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.createDataStore
@@ -14,12 +15,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.RetrofitInstance2
 import com.example.myapplication.RvAdapter2
+import com.example.myapplication.RvAdapterCart
 import kotlinx.coroutines.launch
 
-class cart : Fragment() {
+class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnItemClickListener{
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var rvadapter : RvAdapter2
+    private lateinit var rvadapter : RvAdapterCart
     private lateinit var dataStore: DataStore<Preferences>
     private var dialog: Dialog? = null
 
@@ -42,6 +44,24 @@ class cart : Fragment() {
         }
         return view;
     }
+    override fun onItemClick(name: Long) {
+//        val bundle =Bundle()
+//        bundle.putString("id",name.toString())
+//        val passing =ShowItem()
+//        passing.arguments=bundle
+//        val fragmentTransaction = parentFragmentManager.beginTransaction()
+//        fragmentTransaction.replace(R.id.flFragment, passing)
+//        fragmentTransaction.addToBackStack(null)
+//        fragmentTransaction.commit()
+        showToast(name.toString())
 
 
+    }
+
+    override fun onDeleteClick(name: Long) {
+        TODO("Not yet implemented")
+    }
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
 }

@@ -63,7 +63,7 @@ class ShowItem : Fragment() {
             lifecycleScope.launch{
                 try {
                     val request = addCartItemsRequest(
-                        foodId = receivedData.toString(),
+                        foodId = receivedData!!.toLong(),
                         quantity = "1"
                     )
                     val response = RetrofitInstance2.getApiServiceWithToken(dataStore).addCartItems(request)
