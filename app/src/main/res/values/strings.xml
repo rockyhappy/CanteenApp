@@ -162,6 +162,7 @@ Hello Rachit,
     <string name="edit_name">EDIT</string>
     <string name="add_photos">Add photos + </string>
     <string name="submit_review">Submit Review</string>
+    <string name="helpsupport"><![CDATA[Help & Support]]></string>
 
 
 </resources>
