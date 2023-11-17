@@ -169,6 +169,7 @@ Hello Rachit,
     <string name="enter_messsage">Enter Message</string>
     <string name="send_message">Send Message</string>
     <string name="referearn"><![CDATA[Refer & Earn]]></string>
+    <string name="referPageHeading">Refer and Earn</string>
 
 
 </resources>
