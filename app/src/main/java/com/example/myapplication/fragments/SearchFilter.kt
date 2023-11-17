@@ -1,23 +1,78 @@
 package com.example.myapplication.fragments
 
+import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.core.content.ContextCompat
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.createDataStore
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
+import com.example.myapplication.RetrofitInstance2
+import com.example.myapplication.RvAdapter
+import com.example.myapplication.RvAdapterSearch
+import com.example.myapplication.RvModel
+import kotlinx.coroutines.launch
 
-class SearchFilter : Fragment() {
+class SearchFilter : Fragment(R.layout.fragment_search_filter) , RvAdapterSearch.OnItemClickListener {
 
-
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var rvadapter : RvAdapterSearch
+    private lateinit var dataStore: DataStore<Preferences>
+    private var dialog: Dialog? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_search_filter, container, false)
+        dataStore = requireContext().createDataStore(name = "user")
+        rvadapter = RvAdapterSearch(ArrayList(), requireContext(), this)
+        recyclerView = view.findViewById<RecyclerView>(R.id.rvi)
+        recyclerView.layoutManager = GridLayoutManager(requireContext(),3, GridLayoutManager.VERTICAL, false)
+        recyclerView.adapter = rvadapter
+
+        lifecycleScope.launch {
+            try {
+                showCustomProgressDialog()
+                val response = RetrofitInstance2.getApiServiceWithToken(dataStore).getCanteens()
+                if (response.isSuccessful) {
+                    Log.d("Testing",response.body().toString())
+                    Log.d("Testing", "Successful response: ${response.body()}")
+                    val canteenItems = response.body()?.canteenItems.orEmpty()
+
+                    // Convert CanteenItem objects to RvModel objects
+                    val dataList = canteenItems.map { canteenItem ->
+                        RvModel(canteenItem.canteenImage, canteenItem.name, canteenItem.description)
+                    }
+                    rvadapter.updateData(dataList)
+                } else {
+                    // Handle the error
+                    Log.d("Testing",response.body().toString())
+                    Log.d("Testing", "Response code: ${response.code()}, Response body: ${response.body()}")
+                }
+            } catch (e: Exception) {
+                // Handle network or other exceptions
+                Log.d("Testing","Network Error")
+                Log.e("Testing", "Network Error: ${e.message}", e)
+            }
+            finally {
+                dismissCustomProgressDialog()
+            }
+        }
+
+
+
+
 
         val veg = view.findViewById<Button>(R.id.veg)
         val nonveg=view.findViewById<Button>(R.id.nonveg)
@@ -193,6 +248,33 @@ class SearchFilter : Fragment() {
         }
 
         return view
+    }
+    override fun onItemClick(name: String) {
+//        val bundle= Bundle()
+//        bundle.putString("key",name)
+//        val passing =ShowCanteenMenu()
+//        passing.arguments=bundle
+//        val fragmentTransaction = parentFragmentManager.beginTransaction()
+//        fragmentTransaction.replace(R.id.flFragment, passing)
+//        fragmentTransaction.addToBackStack(null)
+//        fragmentTransaction.commit()
+        //showToast(name)
+
+    }
+
+    private fun showCustomProgressDialog() {
+        dialog = Dialog(requireContext())
+        dialog?.setContentView(R.layout.custom_dialog_loading)
+        dialog?.setCancelable(false)
+
+        val window = dialog?.window
+        window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        dialog?.show()
+    }
+    private fun dismissCustomProgressDialog() {
+        dialog?.dismiss()
+        dialog = null
     }
 
 }
