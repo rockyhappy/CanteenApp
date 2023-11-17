@@ -24,7 +24,7 @@ import com.example.myapplication.RvModel2
 import com.example.myapplication.SpaceItemDecoration
 import kotlinx.coroutines.launch
 
-class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener{
+class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2.OnCartClickListener{
     private lateinit var recyclerView: RecyclerView
     private lateinit var rvadapter : RvAdapter2
     private lateinit var dataStore: DataStore<Preferences>
@@ -36,7 +36,7 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener{
         dataStore = requireContext().createDataStore(name = "user")
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_show_canteen_menu, container, false)
-        rvadapter = RvAdapter2(ArrayList(), requireContext(), this)
+        rvadapter = RvAdapter2(ArrayList(), requireContext(), this,this)
         recyclerView = view.findViewById<RecyclerView>(R.id.rvi)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 1, GridLayoutManager.VERTICAL, false)
         recyclerView.adapter = rvadapter
@@ -46,7 +46,7 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener{
 
 
         val receivedData = arguments?.getString("key").toString()
-        showToast(receivedData)
+        //showToast(receivedData)
         lifecycleScope.launch {
             try {
 
@@ -102,6 +102,12 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener{
         //showToast(name.toString())
 
 
+    }
+
+    override fun onCartClick(name: Long) {
+       lifecycleScope.launch {
+
+       }
     }
     private fun showCustomProgressDialog() {
         dialog = Dialog(requireContext())

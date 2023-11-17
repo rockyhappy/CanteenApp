@@ -17,6 +17,7 @@ import android.widget.Button
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import com.example.myapplication.fragments.SearchFilter
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 /**
  * This is the adapter that is loading the canteens in the home page
@@ -94,10 +95,14 @@ class RvAdapter(
 class RvAdapter2(
     var dataList: ArrayList<RvModel2>,
     var context : Context,
-    private val itemClickListener: OnItemClickListener
+    private val itemClickListener: OnItemClickListener,
+    private val cartClickListener: OnCartClickListener
 ): RecyclerView.Adapter<RvAdapter2.MyViewHolder>() {
     private var selectedPosition: Int = 0
-    inner class MyViewHolder(var view : View) : RecyclerView.ViewHolder(view)
+    inner class MyViewHolder(var view : View) : RecyclerView.ViewHolder(view){
+        val cart =view.findViewById<Button>(R.id.cart)
+        val wish : FloatingActionButton=view.findViewById(R.id.wish)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         var view = LayoutInflater.from(context).inflate(R.layout.rv_item_view, parent,false)
@@ -128,6 +133,12 @@ class RvAdapter2(
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(profile)
 
+        holder.cart.setOnClickListener {
+            cartClickListener.onCartClick(item.id)
+        }
+        holder.wish.setOnClickListener {
+
+        }
 
         holder.view.setOnClickListener {
             itemClickListener.onItemClick(item.id)
@@ -145,7 +156,9 @@ class RvAdapter2(
     interface OnItemClickListener {
         fun onItemClick(name: Long)
     }
-
+    interface OnCartClickListener {
+        fun onCartClick(name: Long)
+    }
 
     fun updateData(newDataList: List<RvModel2>) {
         dataList.clear()
@@ -273,22 +286,36 @@ class RvAdapterSearch(
         val item = dataList[position]
         holder.name.text = item.name
 
-        if (position == selectedPosition) {
-            holder.name.setTextColor(ContextCompat.getColor(context, R.color.primary_color))
-            holder.name.background = ContextCompat.getDrawable(context, R.drawable.rounded_border2)
-        } else {
-            holder.name.setTextColor(ContextCompat.getColor(context, R.color.grey))
-            holder.name.background = ContextCompat.getDrawable(context, R.drawable.rounded_border)
-        }
+//        if (holder.adapterPosition == selectedPosition) {
+//            holder.name.setTextColor(ContextCompat.getColor(context, R.color.primary_color))
+//            holder.name.background = ContextCompat.getDrawable(context, R.drawable.rounded_border2)
+//        } else {
+//            holder.name.setTextColor(ContextCompat.getColor(context, R.color.grey))
+//            holder.name.background = ContextCompat.getDrawable(context, R.drawable.rounded_border)
+//        }
 
         holder.name.setOnClickListener {
             selectedPosition = holder.adapterPosition
+            if (holder.adapterPosition == selectedPosition) {
+                holder.name.setTextColor(ContextCompat.getColor(context, R.color.primary_color))
+                holder.name.background = ContextCompat.getDrawable(context, R.drawable.rounded_border2)
+            } else {
+                holder.name.setTextColor(ContextCompat.getColor(context, R.color.grey))
+                holder.name.background = ContextCompat.getDrawable(context, R.drawable.rounded_border)
+            }
             notifyDataSetChanged()
             itemClickListener.onItemClick(item.name)
         }
 
         holder.view.setOnClickListener {
             selectedPosition = holder.adapterPosition
+            if (holder.adapterPosition == selectedPosition) {
+                holder.name.setTextColor(ContextCompat.getColor(context, R.color.primary_color))
+                holder.name.background = ContextCompat.getDrawable(context, R.drawable.rounded_border2)
+            } else {
+                holder.name.setTextColor(ContextCompat.getColor(context, R.color.grey))
+                holder.name.background = ContextCompat.getDrawable(context, R.drawable.rounded_border)
+            }
             notifyDataSetChanged()
             Log.d("RvAdapterSearch", "Item clicked: ${item.name}")
             itemClickListener.onItemClick(item.name)

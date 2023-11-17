@@ -9,9 +9,6 @@
     android:fillViewport="true"
     >
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.ShowItem">
@@ -394,6 +391,29 @@
 <!--        android:layout_marginTop="1500dp"-->
 <!--        app:layout_constraintEnd_toEndOf="parent"-->
 <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+
+    <ImageView
+        android:id="@+id/wish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/heart"
+        app:layout_constraintEnd_toEndOf="@+id/ImageView"
+        app:layout_constraintTop_toTopOf="@+id/ImageView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:fontFamily="@font/roboto"
+        android:gravity="top"
+        android:textColor="#46474B"
+        android:textSize="19sp"
+        android:layout_marginTop="960dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

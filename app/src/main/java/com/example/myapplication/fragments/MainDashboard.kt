@@ -199,9 +199,6 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
 
         searchView.queryHint = "What would you like to eat?"
 
-        //searchView.setBackgroundColor(Color.TRANSPARENT);
-
-
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 // Handle the submission of the query
