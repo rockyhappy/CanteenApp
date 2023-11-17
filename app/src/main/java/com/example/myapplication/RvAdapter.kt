@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import android.graphics.Rect
+import android.widget.Button
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
+import com.example.myapplication.fragments.SearchFilter
 
 /**
  * This is the adapter that is loading the canteens in the home page
@@ -230,6 +235,66 @@ class RvAdapterCart(
 
 
     fun updateData(newDataList: List<RvModel2>) {
+        dataList.clear()
+        dataList.addAll(newDataList)
+        notifyDataSetChanged()
+    }
+    fun setSelectedPosition(position: Int) {
+        selectedPosition = position
+        notifyDataSetChanged() // Trigger a data set change to update the UI
+    }
+}
+/**
+ * This is the adapter for the search Filter
+ */
+
+class RvAdapterSearch(
+    var dataList: ArrayList<RvModel>,
+    var context : Context,
+    private val itemClickListener: OnItemClickListener
+): RecyclerView.Adapter<RvAdapterSearch.MyViewHolder>() {
+    private var selectedPosition: Int = 0
+    inner class MyViewHolder(var view : View) : RecyclerView.ViewHolder(view)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        var view = LayoutInflater.from(context).inflate(R.layout.rv__button_search , parent,false)
+        return MyViewHolder(view)
+    }
+
+    override fun getItemCount(): Int {
+        return dataList.size
+    }
+
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        //var profile = holder.view.findViewById<ImageView>(R.id.breakfast)
+        var name = holder.view.findViewById<Button>(R.id.breakfast)
+        //var residence = holder.view.findViewById<TextView>(R.id.textView2)
+
+        val item = dataList[position]
+        name.text = item.name
+        //residence.text = item.descriptionn
+        var canteenClick=false
+
+        holder.view.setOnClickListener {
+                name.setTextColor(ContextCompat.getColor(context,R.color.primary_color))
+                name.background= ContextCompat.getDrawable(context, R.drawable.rounded_border2)
+            itemClickListener.onItemClick(item.name)
+        }
+//        if (position == selectedPosition) {
+//            dotImageView.setBackgroundResource(R.drawable.dot_selected)
+//        } else { dotImageView.setBackgroundResource(R.drawable.dot_unselected)
+//        }
+
+    }
+    /**
+     * This is for the click in the recycler view
+     */
+    interface OnItemClickListener {
+        fun onItemClick(name: String)
+    }
+
+
+    fun updateData(newDataList: List<RvModel>) {
         dataList.clear()
         dataList.addAll(newDataList)
         notifyDataSetChanged()
