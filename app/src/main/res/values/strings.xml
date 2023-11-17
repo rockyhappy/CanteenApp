@@ -161,6 +161,7 @@ Hello Rachit,
     <string name="id1">Please wait...</string>
     <string name="edit_name">EDIT</string>
     <string name="add_photos">Add photos + </string>
+    <string name="submit_review">Submit Review</string>
 
 
 </resources>
