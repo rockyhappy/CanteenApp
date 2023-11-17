@@ -165,6 +165,8 @@ Hello Rachit,
     <string name="helpsupport"><![CDATA[Help & Support]]></string>
     <string name="questionTextView">Select Type</string>
     <string name="select_question">Select your Question</string>
+    <string name="message_help">Message</string>
+    <string name="enter_messsage">Enter Message</string>
 
 
     <!--     <string-array name="Select">-->

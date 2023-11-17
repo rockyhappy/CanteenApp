@@ -90,30 +90,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-
-<!--    <TextView-->
-<!--        android:id="@+id/questionTextView"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentStart="true"-->
-<!--        android:layout_alignParentEnd="true"-->
-<!--        android:layout_marginStart="31dp"-->
-<!--        android:layout_marginTop="146dp"-->
-<!--        android:layout_marginEnd="29dp"-->
-<!--        android:fontFamily="@font/roboto"-->
-<!--        android:gravity="center"-->
-<!--        android:text="@string/questionTextView"-->
-<!--        android:textAlignment="textStart"-->
-<!--        android:textColor="#46474B"-->
-<!--        android:textFontWeight="400"-->
-<!--        android:textSize="12sp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.097"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        tools:ignore="RtlCompat" />-->
-
     <Spinner
         android:id="@+id/optionsSpinner"
         android:layout_width="300dp"
@@ -131,5 +107,46 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <TextView
+        android:id="@+id/message_help"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="198dp"
+        android:layout_marginEnd="31dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/message_help"
+        android:textColor="#46474B"
+        android:textFontWeight="500"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.105"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="358dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginEnd="31dp"
+        android:paddingStart="8dp"
+        android:paddingTop="4dp"
+        android:textColorHint="#B3B3B3"
+        android:fontFamily="@font/roboto"
+        android:textSize="12sp"
+        android:textFontWeight="400"
+        android:inputType="text"
+        android:background="@drawable/rounded_border"
+        android:textAlignment="textStart"
+        android:hint="@string/enter_messsage"
+        android:id="@+id/enter_messsage"
+        android:textColor="#46474B"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints=""
+        tools:ignore="RtlSymmetry" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
