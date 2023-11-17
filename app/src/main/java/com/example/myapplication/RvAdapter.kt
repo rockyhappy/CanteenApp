@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,9 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import android.graphics.Rect
 import android.widget.Button
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
+import com.example.myapplication.fragments.SearchFilter
 
 /**
  * This is the adapter that is loading the canteens in the home page
@@ -269,8 +273,11 @@ class RvAdapterSearch(
         val item = dataList[position]
         name.text = item.name
         //residence.text = item.descriptionn
+        var canteenClick=false
 
         holder.view.setOnClickListener {
+                name.setTextColor(ContextCompat.getColor(context,R.color.primary_color))
+                name.background= ContextCompat.getDrawable(context, R.drawable.rounded_border2)
             itemClickListener.onItemClick(item.name)
         }
 //        if (position == selectedPosition) {
