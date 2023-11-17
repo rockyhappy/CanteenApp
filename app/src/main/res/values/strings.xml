@@ -160,5 +160,7 @@ Hello Rachit,
     <string name="new_payment">Add new UPI ID</string>
     <string name="id1">Please wait...</string>
     <string name="edit_name">EDIT</string>
+    <string name="add_photos">Add photos + </string>
+
 
 </resources>
