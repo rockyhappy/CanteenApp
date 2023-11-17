@@ -1,10 +1,12 @@
 package com.example.myapplication.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RatingBar
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.example.myapplication.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -35,7 +37,15 @@ class feedback_page : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_feedback_page, container, false)
+        val view = inflater.inflate(R.layout.fragment_feedback_page, container, false)
+
+        val ratingBar: RatingBar = view.findViewById(R.id.ratingBar)
+        ratingBar.setOnRatingBarChangeListener { _, rating, _ ->
+            // Handle the rating change event
+            Toast.makeText(requireContext(), "Rating: $rating", Toast.LENGTH_SHORT).show()
+        }
+
+        return view
     }
 
     companion object {
