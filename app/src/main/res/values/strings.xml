@@ -163,6 +163,16 @@ Hello Rachit,
     <string name="add_photos">Add photos + </string>
     <string name="submit_review">Submit Review</string>
     <string name="helpsupport"><![CDATA[Help & Support]]></string>
+    <string name="questionTextView">Select Type</string>
+    <string name="select_question">Select your Question</string>
+
+
+    <!--     <string-array name="Select">-->
+<!--         <item>Order Related Complain</item>-->
+<!--         <item>Order Related Ingredients</item>-->
+<!--         <item>Order Related Menu</item>-->
+<!--         <item>Service Related</item>-->
+<!--     </string-array>-->
 
 
 </resources>
