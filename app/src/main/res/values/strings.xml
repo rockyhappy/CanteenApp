@@ -167,6 +167,7 @@ Hello Rachit,
     <string name="select_question">Select your Question</string>
     <string name="message_help">Message</string>
     <string name="enter_messsage">Enter Message</string>
+    <string name="send_message">Send Message</string>
 
 
     <!--     <string-array name="Select">-->
