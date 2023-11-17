@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import android.graphics.Rect
+import android.util.Log
 import android.widget.Button
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
@@ -254,8 +255,11 @@ class RvAdapterSearch(
     private val itemClickListener: OnItemClickListener
 ): RecyclerView.Adapter<RvAdapterSearch.MyViewHolder>() {
     private var selectedPosition: Int = 0
-    inner class MyViewHolder(var view : View) : RecyclerView.ViewHolder(view)
 
+
+    inner class MyViewHolder(var view : View) : RecyclerView.ViewHolder(view) {
+        val name: Button = view.findViewById(R.id.breakfast)
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         var view = LayoutInflater.from(context).inflate(R.layout.rv__button_search , parent,false)
         return MyViewHolder(view)
@@ -266,24 +270,30 @@ class RvAdapterSearch(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        //var profile = holder.view.findViewById<ImageView>(R.id.breakfast)
-        var name = holder.view.findViewById<Button>(R.id.breakfast)
-        //var residence = holder.view.findViewById<TextView>(R.id.textView2)
-
         val item = dataList[position]
-        name.text = item.name
-        //residence.text = item.descriptionn
-        var canteenClick=false
+        holder.name.text = item.name
 
-        holder.view.setOnClickListener {
-                name.setTextColor(ContextCompat.getColor(context,R.color.primary_color))
-                name.background= ContextCompat.getDrawable(context, R.drawable.rounded_border2)
+        if (position == selectedPosition) {
+            holder.name.setTextColor(ContextCompat.getColor(context, R.color.primary_color))
+            holder.name.background = ContextCompat.getDrawable(context, R.drawable.rounded_border2)
+        } else {
+            holder.name.setTextColor(ContextCompat.getColor(context, R.color.grey))
+            holder.name.background = ContextCompat.getDrawable(context, R.drawable.rounded_border)
+        }
+
+        holder.name.setOnClickListener {
+            selectedPosition = holder.adapterPosition
+            notifyDataSetChanged()
             itemClickListener.onItemClick(item.name)
         }
-//        if (position == selectedPosition) {
-//            dotImageView.setBackgroundResource(R.drawable.dot_selected)
-//        } else { dotImageView.setBackgroundResource(R.drawable.dot_unselected)
-//        }
+
+        holder.view.setOnClickListener {
+            selectedPosition = holder.adapterPosition
+            notifyDataSetChanged()
+            Log.d("RvAdapterSearch", "Item clicked: ${item.name}")
+            itemClickListener.onItemClick(item.name)
+        }
+
 
     }
     /**
