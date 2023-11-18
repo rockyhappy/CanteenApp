@@ -44,8 +44,8 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 1, GridLayoutManager.VERTICAL, false)
         recyclerView.adapter = rvadapter
         val spaceHeight = resources.getDimensionPixelSize(R.dimen.space_50dp)
-        val itemDecoration = SpaceItemDecoration(spaceHeight)
-        recyclerView.addItemDecoration(itemDecoration)
+//        val itemDecoration = SpaceItemDecoration(spaceHeight)
+//        recyclerView.addItemDecoration(itemDecoration)
 
 
         val receivedData = arguments?.getString("key").toString()

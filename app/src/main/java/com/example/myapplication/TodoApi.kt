@@ -2,6 +2,7 @@ package com.example.myapplication
 import com.example.myapplication.fragments.ForgotPassward
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -49,4 +50,7 @@ interface ApiService {
 
     @POST("api/v1/cart/calculateDiscountedPrice")
     suspend fun calculateDiscountedPrice(@Body couponCodeRequest: CouponCodeRequest): Response<DiscountedPriceResponse>
+
+    @DELETE("api/v1/cart/delete-cart-item")
+    suspend fun deleteCartItem(@Body request: DeleteCartItemRequest): Response<DeleteCartItemResponse>
 }

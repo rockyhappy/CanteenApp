@@ -3,6 +3,7 @@ package com.example.myapplication.fragments
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.CouponCodeRequest
+import com.example.myapplication.DeleteCartItemRequest
 import com.example.myapplication.DiscountedPriceResponse
 import com.example.myapplication.FoodItem
 import com.example.myapplication.FoodItemCart
@@ -100,12 +102,58 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
 //        fragmentTransaction.replace(R.id.flFragment, passing)
 //        fragmentTransaction.addToBackStack(null)
 //        fragmentTransaction.commit()
-        showToast(name.toString())
+//        showToast(name.toString())
     }
 
     override fun onDeleteClick(name: Long) {
-        TODO("Not yet implemented")
+
+        Log.d("deleting","inprogress")
+        val request = DeleteCartItemRequest(cartItemId = name.toString())
+        lifecycleScope.launch {
+            try {
+                // Show your progress dialog if needed
+                showCustomProgressDialog()
+                val response =RetrofitInstance2.getApiServiceWithToken(dataStore).deleteCartItem(request)
+
+                if (response.isSuccessful) {
+                    // Handle success, refresh the data, etc.
+                    showToast("Item deleted successfully")
+                } else {
+                    // Handle API error
+                    showToast("Failed to delete item. Code: ${response.code()}")
+                }
+            } catch (e: Exception) {
+                // Handle exception
+                showToast("An error occurred: ${e.message}")
+            } finally {
+                // Dismiss your progress dialog if needed
+                dismissCustomProgressDialog()
+            }
+        }
     }
+//    private fun deleteCartItem(itemId: Long) {
+//        lifecycleScope.launch {
+//            try {
+//                // Show your progress dialog if needed
+//
+//                val response =
+//                    RetrofitInstance2.getApiServiceWithToken(dataStore).deleteCartItem(itemId)
+//
+//                if (response.isSuccessful) {
+//                    // Handle success, refresh the data, etc.
+//                    showToast("Item deleted successfully")
+//                } else {
+//                    // Handle API error
+//                    showToast("Failed to delete item. Code: ${response.code()}")
+//                }
+//            } catch (e: Exception) {
+//                // Handle exception
+//                showToast("An error occurred: ${e.message}")
+//            } finally {
+//                // Dismiss your progress dialog if needed
+//            }
+//        }
+//    }
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }

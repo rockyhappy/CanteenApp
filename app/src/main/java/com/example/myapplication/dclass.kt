@@ -138,3 +138,9 @@ data class DiscountedPriceResponse(
 data class CouponCodeRequest(
     val couponCode: String
 )
+data class DeleteCartItemResponse(
+    val errorMessage: String?
+)
+data class DeleteCartItemRequest(
+    val cartItemId: String
+)

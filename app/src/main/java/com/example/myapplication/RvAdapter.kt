@@ -223,6 +223,7 @@ class RvAdapterCart(
 
         val item = dataList[position]
         name.text = item.foodItemName
+        residence.text=item.price.toString()
 
         Glide.with(context)
             .load("https://i.postimg.cc/xTMVqcLJ/Break-fast.png")
@@ -234,6 +235,10 @@ class RvAdapterCart(
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(profile)
 
+
+        holder.delete.setOnClickListener {
+            itemDeleteListener.onDeleteClick(item.id)
+        }
 
         holder.view.setOnClickListener {
             itemClickListener.onItemClick(item.id)
