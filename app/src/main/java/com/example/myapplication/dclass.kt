@@ -144,3 +144,6 @@ data class DeleteCartItemResponse(
 data class DeleteCartItemRequest(
     val cartItemId: String
 )
+data class TotalBillResponse(
+    val totalBill: Double
+)

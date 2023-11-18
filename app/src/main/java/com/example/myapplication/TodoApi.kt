@@ -53,4 +53,7 @@ interface ApiService {
 
     @DELETE("api/v1/cart/delete-cart-item")
     suspend fun deleteCartItem(@Body request: DeleteCartItemRequest): Response<DeleteCartItemResponse>
+
+    @GET("api/v1/cart/total-bill")
+    suspend fun getTotalBill(): Double
 }

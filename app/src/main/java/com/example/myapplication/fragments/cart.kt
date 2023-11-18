@@ -28,6 +28,7 @@ import com.example.myapplication.R
 import com.example.myapplication.RetrofitInstance2
 import com.example.myapplication.RvAdapter2
 import com.example.myapplication.RvAdapterCart
+import com.example.myapplication.TotalBillResponse
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.launch
@@ -71,6 +72,14 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
             }finally{
                 dismissCustomProgressDialog()
             }
+
+
+            // now for the total price of the cart
+            val total = view.findViewById<TextView>(R.id.total)
+            total.text=getTotalBill().toString()
+            val subTotal = view.findViewById<TextView>(R.id.subtotal)
+            subTotal.text=total.text
+
         }
 
 
@@ -105,19 +114,57 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
 //        showToast(name.toString())
     }
 
-    override fun onDeleteClick(name: Long) {
+//    override fun onDeleteClick(name: Long) {
+//
+//        Log.d("deleting","inprogress")
+//        val request = DeleteCartItemRequest(cartItemId = name.toString())
+//        lifecycleScope.launch {
+//            try {
+//                // Show your progress dialog if needed
+//                showCustomProgressDialog()
+//                val response =RetrofitInstance2.getApiServiceWithToken(dataStore).deleteCartItem(request)
+//
+//                if (response.isSuccessful) {
+//                    // Handle success, refresh the data, etc.
+//                    showToast("Item deleted successfully")
+//                } else {
+//                    // Handle API error
+//                    showToast("Failed to delete item. Code: ${response.code()}")
+//                }
+//            } catch (e: Exception) {
+//                // Handle exception
+//                showToast("An error occurred: ${e.message}")
+//            } finally {
+//                // Dismiss your progress dialog if needed
+//                val total = view?.findViewById<TextView>(R.id.total)
+//                total?.text=getTotalBill().toString()
+//                val subTotal = view?.findViewById<TextView>(R.id.subtotal)
+//                subTotal?.text=total?.text
+//                dismissCustomProgressDialog()
+//            }
+//        }
+//    }
 
-        Log.d("deleting","inprogress")
+    override fun onDeleteClick(name: Long) {
         val request = DeleteCartItemRequest(cartItemId = name.toString())
         lifecycleScope.launch {
             try {
                 // Show your progress dialog if needed
                 showCustomProgressDialog()
-                val response =RetrofitInstance2.getApiServiceWithToken(dataStore).deleteCartItem(request)
+
+                val response = RetrofitInstance2.getApiServiceWithToken(dataStore).deleteCartItem(request)
 
                 if (response.isSuccessful) {
                     // Handle success, refresh the data, etc.
                     showToast("Item deleted successfully")
+                    // Find the position of the item in the dataList based on its ID
+                    val position = rvadapter.dataList.indexOfFirst { it.id == name }
+                    // Remove the item from the dataList
+                    rvadapter.removeItem(position)
+                    // Update the dataset using DiffUtil
+                    rvadapter.updateData(rvadapter.dataList)
+                    // Update the total and subtotal
+
                 } else {
                     // Handle API error
                     showToast("Failed to delete item. Code: ${response.code()}")
@@ -128,10 +175,17 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
             } finally {
                 // Dismiss your progress dialog if needed
                 dismissCustomProgressDialog()
+                val total = view?.findViewById<TextView>(R.id.total)
+                total?.text=getTotalBill().toString()
+                val subTotal = view?.findViewById<TextView>(R.id.subtotal)
+                subTotal?.text=total?.text
+
             }
         }
     }
-//    private fun deleteCartItem(itemId: Long) {
+
+
+    //    private fun deleteCartItem(itemId: Long) {
 //        lifecycleScope.launch {
 //            try {
 //                // Show your progress dialog if needed
@@ -211,6 +265,11 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
                             // Now you have the 'discountedPriceResponse', you can use its properties.
                             val discountedPrice = discountedPriceResponse.discountedPrice
                             showToast(discountedPrice.toString())
+                            val total = view?.findViewById<TextView>(R.id.total)
+                            val discount = view?.findViewById<TextView>(R.id.discount)
+                            val subTotal = view?.findViewById<TextView>(R.id.subtotal)
+                            total?.text=discountedPrice.toString()
+                            discount?.text=(subTotal?.text.toString().toInt()-total?.text.toString().toInt()).toString()
                             // Handle the discounted price as needed.
                         } else {
                             showToast("Empty or null response body received from the server.")
@@ -228,12 +287,47 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
         }
 
         noButton.setOnClickListener {
-            // Handle No button click
-            showToast("No clicked")
             alertDialog.dismiss()
         }
 
         alertDialog.show()
+    }
+    suspend fun getTotalBill(): Double? {
+        return try {
+            // Show your progress dialog if needed
+            showCustomProgressDialog()
+            val total = view?.findViewById<TextView>(R.id.total)
+            val response = RetrofitInstance2.getApiServiceWithToken(dataStore)
+                .getTotalBill()
+            total?.text=response.toString()
+
+
+
+//            if (response.isSuccessful) {
+//                val totalBillResponse: TotalBillResponse? = response.body()
+//
+//                if (totalBillResponse != null) {
+//                    // Now you have the 'totalBill', you can use it as needed.
+//                    val totalBill = totalBillResponse.totalBill
+//                    total?.text=totalBill.toString()
+//                    showToast("Total Bill: $totalBill")
+//                    totalBill
+//                } else {
+//                    showToast("Empty or null response body received from the server.")
+//                    null
+//                }
+//            } else {
+//                showToast("Failed to get total bill. Code: ${response.code()}")
+//                null
+//            }
+            null
+        } catch (e: Exception) {
+            showToast("An error occurred: ${e.message}")
+            null
+        } finally {
+            // Dismiss your progress dialog if needed
+            dismissCustomProgressDialog()
+        }
     }
 
 }

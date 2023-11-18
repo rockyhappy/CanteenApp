@@ -16,6 +16,7 @@ import android.util.Log
 import android.widget.Button
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DiffUtil
 import com.example.myapplication.fragments.SearchFilter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -260,17 +261,44 @@ class RvAdapterCart(
         fun onDeleteClick(name: Long)
     }
 
+    fun removeItem(position: Int) {
+        if (position in 0 until dataList.size) {
+            dataList.removeAt(position)
+            notifyItemRemoved(position)
+        }
+    }
 
     fun updateData(newDataList: List<FoodItemCart>) {
+        val diffResult = DiffUtil.calculateDiff(FoodItemCartDiffCallback(dataList, newDataList))
         dataList.clear()
         dataList.addAll(newDataList)
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
     fun setSelectedPosition(position: Int) {
         selectedPosition = position
         notifyDataSetChanged() // Trigger a data set change to update the UI
     }
 }
+
+
+class FoodItemCartDiffCallback(
+    private val oldList: List<FoodItemCart>,
+    private val newList: List<FoodItemCart>
+) : DiffUtil.Callback() {
+
+    override fun getOldListSize(): Int = oldList.size
+
+    override fun getNewListSize(): Int = newList.size
+
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        return oldList[oldItemPosition].id == newList[newItemPosition].id
+    }
+
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        return oldList[oldItemPosition] == newList[newItemPosition]
+    }
+}
+
 /**
  * This is the adapter for the search Filter
  */
