@@ -102,13 +102,13 @@ data class FoodItem(
     val description: String
 )
 
-
 data class addCartItemsRequest(
     val foodId: Long,
     val quantity: String
 )
 data class addCartItemsResponse(
     val message:String
+
 )
 
 data class getCartResponse(
@@ -121,4 +121,20 @@ data class getCartResponse(
 data class addToCartRequest(
     val foodId: Long,
     val quantity: String
+)
+
+data class FoodItemCart(
+    val id: Long,
+    val foodItemName: String,
+    val quantity: Int,
+    val price: Double,
+    val canteenId: Long
+)
+
+data class DiscountedPriceResponse(
+    val discountedPrice: Double,
+    val errorMessage: String?
+)
+data class CouponCodeRequest(
+    val couponCode: String
 )

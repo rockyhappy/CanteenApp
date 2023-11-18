@@ -87,8 +87,6 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
             }
         }
 
-
-
         return view;
     }
     private fun showToast(message: String) {

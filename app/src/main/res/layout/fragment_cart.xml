@@ -36,7 +36,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tittle"
+            android:text="Cart"
             android:textColor="@color/black"
             android:textSize="25dp"
             android:layout_gravity="center"
@@ -53,7 +53,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:paddingBottom="70dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -61,70 +60,83 @@
     </androidx.recyclerview.widget.RecyclerView>
 
     <TextView
+        android:id="@+id/add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
         android:layout_marginEnd="30dp"
         android:text="Add Dishes +"
         android:textColor="@color/primary_color"
         android:textSize="19sp"
-        android:layout_marginTop="390dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/rvi" />
 
     <TextView
+        android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="440dp"
+        android:layout_marginTop="66dp"
+        android:fontFamily="@font/roboto"
         android:text="Offers &amp; Benefits"
         android:textColor="#46474B"
         android:textSize="20sp"
-        android:fontFamily="@font/roboto"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/rvi" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <Button
+        android:id="@+id/apply"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="484dp"
-        android:background="@drawable/rounded_border"
         android:layout_marginHorizontal="30dp"
-        android:drawableRight="@drawable/icon_arrow"
+        android:layout_marginTop="105dp"
+        android:background="@drawable/rounded_border"
         android:drawableLeft="@drawable/offer"
+        android:drawableRight="@drawable/icon_arrow"
+        android:gravity="center_vertical"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:text="  Apply Coupons"
-        android:textColor="@color/grey"
         android:textAllCaps="false"
-        android:gravity="center_vertical"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/rvi" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="570dp"
+        android:layout_marginTop="197dp"
+        android:fontFamily="@font/roboto"
         android:text="Bill Details"
         android:textColor="#46474B"
         android:textSize="20sp"
-        android:fontFamily="@font/roboto"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/rvi" />
 
     <ImageView
+        android:id="@+id/imageView5"
         android:layout_width="match_parent"
         android:layout_height="160dp"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="600dp"
+        android:layout_marginTop="240dp"
         android:src="@drawable/bill"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/rvi" />
 
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="700dp"
+        android:fontFamily="@font/roboto"
+        android:text=""
+        android:textColor="#46474B"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvi" />
 <!--    <com.travijuu.numberpicker.library.NumberPicker-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->
@@ -141,5 +153,46 @@
 <!--        android:layout_marginTop="900dp"-->
 <!--        app:np_text_color="#000000"-->
 <!--        app:np_text_size="16sp" />-->
+
+    <Button
+        android:id="@+id/cart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="600dp"
+        android:background="@drawable/round_corner"
+        android:elevation="5dp"
+        android:fontFamily="@font/roboto"
+        android:text="Proceed to Pay"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvi" />
+
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="480dp"
+        android:src="@drawable/cancelation2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvi" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="450dp"
+        android:fontFamily="@font/roboto"
+        android:text="Cancellation policy"
+        android:textColor="#46474B"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvi" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

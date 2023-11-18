@@ -1,21 +1,33 @@
 package com.example.myapplication.fragments
 
+import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.createDataStore
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.CouponCodeRequest
+import com.example.myapplication.DiscountedPriceResponse
+import com.example.myapplication.FoodItem
+import com.example.myapplication.FoodItemCart
 import com.example.myapplication.R
 import com.example.myapplication.RetrofitInstance2
 import com.example.myapplication.RvAdapter2
 import com.example.myapplication.RvAdapterCart
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.launch
 
 class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnItemClickListener{
@@ -32,17 +44,52 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_cart, container, false)
         dataStore = requireContext().createDataStore(name = "user")
+
+        rvadapter = RvAdapterCart(ArrayList(), requireContext(), this,this)
+        recyclerView = view.findViewById<RecyclerView>(R.id.rvi)
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 1, GridLayoutManager.VERTICAL, false)
+        recyclerView.adapter = rvadapter
         lifecycleScope.launch{
             try{
-//                val response = RetrofitInstance2.getApiServiceWithToken(dataStore = )
+                showCustomProgressDialog()
+                val response = RetrofitInstance2.getApiServiceWithToken(dataStore).getCart()
+                if (response.isSuccessful) {
+                    val foodItemList: List<FoodItemCart>? = response.body()
+                    if (foodItemList != null) {
+                        rvadapter.updateData(foodItemList)
+                    } else {
+                        showToast("Empty or null response body received from the server.")
+                    }
+                } else {
+                    showToast("Failed to retrieve data. Code: ${response.code()}")
+                }
             }catch (e: Exception)
             {
-
+                showToast("Catch Block")
             }finally{
-
+                dismissCustomProgressDialog()
             }
         }
-        return view;
+
+
+        val cart=view.findViewById<Button>(R.id.cart)
+        cart.setOnClickListener {
+            showToast("Razor Pay")
+        }
+
+        val add = view.findViewById<TextView>(R.id.add)
+        add.setOnClickListener {
+            val fragmentTransaction = parentFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.flFragment, Dishes_Category())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
+
+        val apply = view.findViewById<Button>(R.id.apply)
+        apply.setOnClickListener {
+            showApplyDialog()
+        }
+        return view
     }
     override fun onItemClick(name: Long) {
 //        val bundle =Bundle()
@@ -54,8 +101,6 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
 //        fragmentTransaction.addToBackStack(null)
 //        fragmentTransaction.commit()
         showToast(name.toString())
-
-
     }
 
     override fun onDeleteClick(name: Long) {
@@ -64,4 +109,83 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
+
+    private fun showCustomProgressDialog() {
+        dialog = Dialog(requireContext())
+        dialog?.setContentView(R.layout.custom_dialog_loading)
+        dialog?.setCancelable(false)
+
+        val window = dialog?.window
+        window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        dialog?.show()
+    }
+    private fun dismissCustomProgressDialog() {
+        dialog?.dismiss()
+        dialog = null
+    }
+
+
+    private fun showApplyDialog() {
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog__layout, null)
+        val dialogBuilder = AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+        val alertDialog = dialogBuilder.create()
+
+        val closeImageView = dialogView.findViewById<ImageView>(R.id.closeImageView)
+        val editTextCouponCode = dialogView.findViewById<EditText>(R.id.editText)
+        val yesButton = dialogView.findViewById<Button>(R.id.yesButton)
+        val noButton = dialogView.findViewById<Button>(R.id.noButton)
+
+        closeImageView.setOnClickListener {
+            alertDialog.dismiss()
+        }
+
+        yesButton.setOnClickListener {
+
+            showToast("Yes clicked, Input: ${editTextCouponCode.text}")
+            alertDialog.dismiss()
+            val couponCode = editTextCouponCode.text.toString()
+
+// Create an instance of CouponCodeRequest
+            val couponCodeRequest = CouponCodeRequest(couponCode = couponCode)
+
+            lifecycleScope.launch {
+                try {
+                    showCustomProgressDialog()
+
+                    val response = RetrofitInstance2.getApiServiceWithToken(dataStore).calculateDiscountedPrice(couponCodeRequest )
+
+                    if (response.isSuccessful) {
+                        val discountedPriceResponse: DiscountedPriceResponse? = response.body()
+
+                        if (discountedPriceResponse != null) {
+                            // Now you have the 'discountedPriceResponse', you can use its properties.
+                            val discountedPrice = discountedPriceResponse.discountedPrice
+                            showToast(discountedPrice.toString())
+                            // Handle the discounted price as needed.
+                        } else {
+                            showToast("Empty or null response body received from the server.")
+                        }
+                    } else {
+                        showToast("Failed to retrieve data. Code: ${response.code()}")
+                    }
+                } catch (e: Exception) {
+                    showToast("An error occurred: ${e.message}")
+                } finally {
+                    dismissCustomProgressDialog()
+                }
+            }
+
+        }
+
+        noButton.setOnClickListener {
+            // Handle No button click
+            showToast("No clicked")
+            alertDialog.dismiss()
+        }
+
+        alertDialog.show()
+    }
+
 }

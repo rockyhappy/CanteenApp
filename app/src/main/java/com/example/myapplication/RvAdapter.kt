@@ -196,7 +196,7 @@ class SpaceItemDecoration(private val spaceHeight: Int) : RecyclerView.ItemDecor
 
 
 class RvAdapterCart(
-    var dataList: ArrayList<RvModel2>,
+    var dataList: ArrayList<FoodItemCart>,
     var context : Context,
     private val itemClickListener: OnItemClickListener,
     private val itemDeleteListener: OnDeleteClickListener
@@ -222,8 +222,7 @@ class RvAdapterCart(
 
 
         val item = dataList[position]
-        name.text = item.name
-        residence.text = item.price
+        name.text = item.foodItemName
 
         Glide.with(context)
             .load("https://i.postimg.cc/xTMVqcLJ/Break-fast.png")
@@ -257,7 +256,7 @@ class RvAdapterCart(
     }
 
 
-    fun updateData(newDataList: List<RvModel2>) {
+    fun updateData(newDataList: List<FoodItemCart>) {
         dataList.clear()
         dataList.addAll(newDataList)
         notifyDataSetChanged()
