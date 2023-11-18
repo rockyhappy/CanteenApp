@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardView1"
+    android:layout_width="match_parent"
+    android:layout_height="124dp"
+    android:backgroundTint="@color/white"
+    android:elevation="4dp"
+    app:cardCornerRadius="5dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="24dp"
+    android:layout_marginHorizontal="30dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+
+    <ImageView
+        android:layout_width="114dp"
+        android:layout_height="104dp"
+        android:scaleType="centerCrop"
+        android:scaleX="1"
+        android:scaleY="1"
+        android:id="@+id/imageView1"
+        android:src="@drawable/breakfast"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/rounded_border"
+
+        />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="134dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/stuffed_ome"
+        android:textColor="@color/black"
+        android:fontFamily="@font/roboto"
+        android:textSize="23sp"
+        />
+    <!--        <TextView-->
+    <!--            android:id="@+id/textView1"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="BreakFast"-->
+    <!--            android:textColor="@color/grey"-->
+    <!--            android:fontFamily="@font/roboto"-->
+    <!--            android:layout_marginTop="100dp"-->
+    <!--            android:textSize="12sp"-->
+    <!--            android:layout_gravity="center_horizontal"-->
+    <!--            />-->
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:max="5"
+        android:numStars="5"
+        android:stepSize="0.1"
+        android:isIndicator="true"
+        android:layout_marginStart="134dp"
+        android:layout_marginTop="40dp"
+        android:rating="3.3"
+        android:theme="@style/RatingBar"
+        style="?android:attr/ratingBarStyleSmall"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="₹"
+        android:layout_marginStart="134dp"
+        android:layout_marginTop="55dp"
+        android:fontFamily="@font/roboto"
+        android:textAppearance="@style/some_id"
+
+        />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price"
+        android:layout_marginStart="145dp"
+        android:layout_marginTop="55dp"
+        android:textAppearance="@style/some_id"
+        android:gravity="top"
+        android:fontFamily="@font/roboto"
+        />
+
+
+<!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:id="@+id/cart"-->
+<!--        android:layout_width="86dp"-->
+<!--        android:layout_height="28dp"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:text="Add"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:background="@drawable/round_corner2"-->
+<!--        android:elevation="5dp"-->
+<!--        android:fontFamily="@font/roboto"-->
+<!--        android:layout_marginStart="174dp"-->
+<!--        android:layout_marginTop="84dp"-->
+<!--        android:drawableRight="@drawable/cart2"-->
+<!--        android:paddingRight="15dp"-->
+<!--        android:paddingLeft="15dp"-->
+<!--        >-->
+<!--    </androidx.appcompat.widget.AppCompatButton>-->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/delete"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="134dp"
+        android:layout_marginTop="84dp"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/delete"
+        app:borderWidth="0dp"
+        app:elevation="0dp"
+        app:fabCustomSize="28dp"
+        />
+
+
+    <TextView
+        android:id="@+id/ratings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(316 Ratings)"
+        android:textColor="@color/grey"
+        android:layout_marginStart="220dp"
+        android:layout_marginTop="40dp"
+        android:textAppearance="@style/some_id"
+        android:gravity="top"
+        android:textSize="12dp"
+        android:fontFamily="@font/roboto"
+        />
+
+<!--    <NumberPicker-->
+<!--        android:layout_width="86dp"-->
+<!--        android:layout_height="28dp"-->
+<!--        android:layout_marginTop="84dp"-->
+<!--        android:fontFamily="@font/roboto"-->
+<!--        android:layout_marginStart="174dp"-->
+<!--        android:solidColor="@color/primary_color"-->
+<!--        android:backgroundTint="@color/primary_color"-->
+<!--        text-->
+<!--        />-->
+
+<!--    <com.travijuu.numberpicker.library.NumberPicker-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="84dp"-->
+<!--        android:fontFamily="@font/roboto"-->
+<!--        android:layout_marginStart="174dp"-->
+<!--        app:np_default_value="5"-->
+<!--        app:np_max="10"-->
+<!--        app:np_min="1"-->
+<!--        app:np_separator="1"-->
+<!--        app:np_separator_color="#000000"-->
+<!--        app:np_text_color="#000000"-->
+<!--        app:np_text_size="16sp"-->
+<!--        app:np_show_default_value="false"-->
+
+<!--        />-->
+
+</androidx.cardview.widget.CardView>
