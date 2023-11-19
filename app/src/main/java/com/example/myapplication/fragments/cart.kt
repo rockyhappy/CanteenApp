@@ -31,14 +31,28 @@ import com.example.myapplication.RvAdapterCart
 import com.example.myapplication.TotalBillResponse
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.razorpay.Checkout
+import com.razorpay.PaymentResultListener
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 
-class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnItemClickListener{
-
+class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnItemClickListener,
+    PaymentResultListener {
+    val check = Checkout()
     private lateinit var recyclerView: RecyclerView
     private lateinit var rvadapter : RvAdapterCart
     private lateinit var dataStore: DataStore<Preferences>
     private var dialog: Dialog? = null
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Checkout.preload(context)
+
+        // Initialize Razorpay
+        Checkout.preload(requireContext())
+        check.setKeyID("rzp_test_AORXCaj7c5I5QR")
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -83,9 +97,13 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
         }
 
 
+        Checkout.preload(requireContext())
+
+
         val cart=view.findViewById<Button>(R.id.cart)
         cart.setOnClickListener {
             showToast("Razor Pay")
+            startRazorpayPayment()
         }
 
         val add = view.findViewById<TextView>(R.id.add)
@@ -328,6 +346,39 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
             // Dismiss your progress dialog if needed
             dismissCustomProgressDialog()
         }
+    }
+
+
+    /**
+     * This is to implement RazorPay
+     */
+    private fun startRazorpayPayment() {
+        // Create a JSONObject with payment details
+        val options = JSONObject()
+        options.put("name", "BrunchBliss")
+        options.put("description", "Payment for items in the cart")
+        options.put("image", "YOUR_APP_LOGO_URL")
+        options.put("currency", "INR")
+        options.put("amount", "8000")  // Amount in paise (80 rupees * 100)
+        options.put("theme.color", "#FFFA902D")  // Optional, set the theme color
+
+        // Open Razorpay checkout activity
+        try {
+            check.open(requireActivity(), options)
+        } catch (e: Exception) {
+            // Handle exception
+            showToast("Error in payment initiation")
+        }
+    }
+
+    override fun onPaymentSuccess(razorpayPaymentId: String?) {
+        // Handle payment success
+        showToast("Payment Successful. Razorpay ID: $razorpayPaymentId")
+    }
+
+    override fun onPaymentError(code: Int, response: String?) {
+        // Handle payment failure
+        showToast("Payment Failed. Code: $code, Response: $response")
     }
 
 }
