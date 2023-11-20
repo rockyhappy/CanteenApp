@@ -1,237 +1,16 @@
-
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/backgroundimage"
     android:paddingStart="10dp"
     tools:context=".fragments.SetProfile"
     tools:ignore="RtlSymmetry">
 
 
-    <!-- <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/backButton"
-        android:layout_width="38dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/white"
-        android:elevation="5dp"
-        android:src="@drawable/baseline_arrow_back_24"
-        app:borderWidth="0dp"
-        app:fabCustomSize="38dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/profileb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/roboto"
-        android:paddingTop="8dp"
-        android:text="@string/profileb"
-        android:gravity="center"
-        android:textColor="@color/cardview_dark_background"
-        android:textFontWeight="500"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/backButton"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <EditText
-        android:id="@+id/your_name"
-        style="@style/NoUnderline"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="224dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/rounded_border"
-        android:ems="10"
-        android:fontFamily="@font/roboto"
-        android:inputType="text"
-        android:paddingStart="15dp"
-        android:text="@string/your_name"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textColorHint="@color/grey"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="RtlSymmetry" />
-
-    <EditText
-        android:id="@+id/your_email"
-        style="@style/NoUnderline"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="368dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/rounded_border"
-        android:ems="10"
-        android:fontFamily="@font/roboto"
-        android:inputType="textEmailAddress"
-        android:paddingStart="15dp"
-        android:text="@string/your_email"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textColorHint="@color/grey"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/your_name"
-        app:layout_constraintHorizontal_bias="0.25"
-        app:layout_constraintStart_toStartOf="@+id/your_name"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="RtlSymmetry" />
-
-
-    <TextView
-
-        android:id="@+id/this_can_t_be_edited_later"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="4dp"
-        android:fontFamily="@font/roboto"
-        android:text="@string/this_can_t_be_edited_later"
-        android:textColor="@color/primary_color"
-        android:textSize="8sp"
-        app:layout_constraintEnd_toEndOf="@+id/date_of_birth"
-        app:layout_constraintHorizontal_bias="0.032"
-        app:layout_constraintStart_toStartOf="@+id/date_of_birth"
-        app:layout_constraintTop_toBottomOf="@+id/date_of_birth"
-        tools:ignore="SmallSp" />
-
-    <EditText
-        android:id="@+id/contact_number"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="296dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/rounded_border"
-        android:ems="10"
-        android:fontFamily="@font/roboto"
-        android:inputType="phone"
-        android:paddingStart="15dp"
-        android:text="@string/contact_number"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textColorHint="@color/grey"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/your_name"
-        app:layout_constraintHorizontal_bias="0.531"
-        app:layout_constraintStart_toStartOf="@+id/your_name"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="RtlSymmetry" />
-
-    <EditText
-        android:id="@+id/date_of_birth"
-        style="@style/NoUnderline"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="444dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/rounded_border"
-        android:ems="10"
-        android:fontFamily="@font/roboto"
-        android:inputType="date"
-        android:paddingStart="15dp"
-        android:text="@string/date_of_birth"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textColorHint="@color/grey"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/your_name"
-        app:layout_constraintStart_toStartOf="@+id/your_name"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="RtlSymmetry" />
-
-    <EditText
-        android:id="@+id/gender"
-        style="@style/NoUnderline"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="524dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/rounded_border"
-        android:ems="10"
-        android:fontFamily="@font/roboto"
-        android:inputType="text"
-        android:paddingStart="15dp"
-        android:text="@string/gender"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textColorHint="@color/grey"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/your_name"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/your_name"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="RtlSymmetry" />
-
-    <Button
-        android:id="@+id/update"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="632dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/rounded_border"
-        android:backgroundTint="@color/primary_color"
-        android:fontFamily="@font/roboto"
-        android:text="@string/update"
-        android:textAllCaps="false"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/your_name"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="@+id/your_name"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:fontFamily="@font/roboto"
-        android:text="@string/this_can_t_be_edited_later"
-        android:textColor="@color/primary_color"
-        android:textSize="8sp"
-        app:layout_constraintEnd_toEndOf="@+id/your_email"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/your_email"
-        app:layout_constraintTop_toBottomOf="@+id/your_email"
-        tools:ignore="SmallSp" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>-->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/backButton"
-        android:layout_width="36dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:backgroundTint="@color/white"
-        android:contentDescription="@string/todos"
-        android:elevation="5dp"
-        android:src="@drawable/baseline_arrow_back_24"
-        app:borderWidth="0dp"
-        app:fabCustomSize="38dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -273,48 +52,54 @@
     </androidx.cardview.widget.CardView>
 
     <ImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginHorizontal="120dp"
-        android:layout_marginTop="115dp"
-        android:contentDescription="@string/todoedit"
-        android:src="@drawable/picture_profile"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="75dp"
+        android:src="@drawable/juicyorange"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.649"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imagView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="109dp"
+        android:layout_marginTop="131dp"
+        android:contentDescription="@string/todoedit"
+        android:src="@drawable/greyblank"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="205dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="125dp"
-        android:contentDescription="@string/todoedit2"
-        android:src="@drawable/orange_frame"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="194dp"
+        android:layout_marginTop="216dp"
+        android:src="@drawable/orangeframe"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.588"
+        app:layout_constraintHorizontal_bias="0.411"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.009" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:layout_width="13dp"
-        android:layout_height="11dp"
-        android:layout_marginStart="213dp"
-        android:layout_marginTop="209dp"
-        android:layout_marginEnd="133dp"
-        android:contentDescription="@string/todoedit3"
-        android:src="@drawable/edit_picture"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="202dp"
+        android:layout_marginTop="225dp"
+        android:src="@drawable/camerainframe"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintHorizontal_bias="0.388"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.007" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
 
     <TextView
         android:id="@+id/name_edit"
@@ -328,65 +113,66 @@
         android:textColor="#787878"
         android:textFontWeight="300"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.44"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="300dp"
-        android:layout_height="38dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:inputType="text"
         style="@style/NoUnderline"
-        android:maxLines="1"
-        android:maxLength="50"
-        android:textColor="@color/black"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="288dp"
+        android:layout_marginRight="30dp"
+        android:autofillHints=""
         android:background="@drawable/inputbox"
+        android:inputType="text"
+        android:maxLength="50"
+        android:maxLines="1"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.369"
+        app:layout_constraintHorizontal_bias="0.558"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.415" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="LabelFor" />
 
     <TextView
         android:id="@+id/phone_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="346dp"
+        android:layout_marginTop="344dp"
         android:fontFamily="@font/roboto"
         android:text="@string/phone_number"
         android:textColor="#787878"
         android:textFontWeight="300"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/editText"
+        app:layout_constraintHorizontal_bias="0.033"
+        app:layout_constraintStart_toStartOf="@+id/editText"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editText7"
+        style="@style/NoUnderline"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="362dp"
+        android:autofillHints=""
+        android:background="@drawable/inputbox"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        android:maxLength="10"
+        android:maxLines="1"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/editText"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editText"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
-        android:id="@+id/editText7"
-        android:layout_width="300dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="362dp"
-        android:background="@drawable/inputbox"
-        android:inputType="number"
-        style="@style/NoUnderline"
-        android:imeOptions="actionNext"
-        android:maxLines="1"
-        android:maxLength="10"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="@+id/editText"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/editText"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:ignore="LabelFor" />
 
     <TextView
         android:id="@+id/email_address"
@@ -399,24 +185,59 @@
         android:textFontWeight="300"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/editText"
-        app:layout_constraintHorizontal_bias="0.062"
+        app:layout_constraintHorizontal_bias="0.033"
         app:layout_constraintStart_toStartOf="@+id/editText"
         app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
-        android:layout_width="300dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="436dp"
-        android:background="@drawable/inputbox"
+        android:id="@+id/editext8"
         style="@style/NoUnderline"
-        android:inputType="textEmailAddress"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="436dp"
+        android:autofillHints=""
+        android:background="@drawable/inputbox"
         android:imeOptions="actionNext"
-        android:maxLines="1"
+        android:inputType="textEmailAddress"
         android:maxLength="80"
+        android:maxLines="1"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/editText"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editText"
         app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="" />
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:id="@+id/edit_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="256dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/edit_name"
+        android:textColor="#FA902D"
+        android:textFontWeight="500"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/editText"
+        app:layout_constraintEnd_toEndOf="@+id/editText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editText"
+        app:layout_constraintTop_toTopOf="@+id/editText" />
+
+    <TextView
+        android:id="@+id/edit_name2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="256dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/edit_name"
+        android:textColor="#FA902D"
+        android:textFontWeight="500"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/editText7"
+        app:layout_constraintEnd_toEndOf="@+id/editText7"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editText7"
+        app:layout_constraintTop_toTopOf="@+id/editText7" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
