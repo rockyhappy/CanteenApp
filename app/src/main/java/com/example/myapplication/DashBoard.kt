@@ -21,6 +21,7 @@ import com.example.myapplication.fragments.Breakfast
 import com.example.myapplication.fragments.Dishes_Category
 import com.example.myapplication.fragments.MainDashboard
 import com.example.myapplication.fragments.cart
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.launch
 
@@ -73,22 +74,22 @@ class DashBoard : AppCompatActivity() {
 
             }
         }
-        val bottomNavigation = findViewById<MeowBottomNavigation>(R.id.btmnav)
-
-        val homeItem = MeowBottomNavigation.Model(1, R.drawable.baseline_home_24)
-        val menu = MeowBottomNavigation.Model(2, R.drawable.baseline_restaurant_menu_24)
-        val searchItem = MeowBottomNavigation.Model(3, R.drawable.baseline_bookmark_border_24)
-        val profileItem = MeowBottomNavigation.Model(4, R.drawable.baseline_shopping_cart_24)
-        val settingsItem = MeowBottomNavigation.Model(5, R.drawable.ic_profile)
-
-
-
-        bottomNavigation.add(homeItem)
-        bottomNavigation.add(menu)
-        bottomNavigation.add(searchItem)
-        bottomNavigation.add(profileItem)
-        bottomNavigation.add(settingsItem)
-        bottomNavigation.show(1, true)
+//        val bottomNavigation = findViewById<MeowBottomNavigation>(R.id.btmnav)
+//
+//        val homeItem = MeowBottomNavigation.Model(1, R.drawable.baseline_home_24)
+//        val menu = MeowBottomNavigation.Model(2, R.drawable.baseline_restaurant_menu_24)
+//        val searchItem = MeowBottomNavigation.Model(3, R.drawable.baseline_bookmark_border_24)
+//        val profileItem = MeowBottomNavigation.Model(4, R.drawable.baseline_shopping_cart_24)
+//        val settingsItem = MeowBottomNavigation.Model(5, R.drawable.ic_profile)
+//
+//
+//
+//        bottomNavigation.add(homeItem)
+//        bottomNavigation.add(menu)
+//        bottomNavigation.add(searchItem)
+//        bottomNavigation.add(profileItem)
+//        bottomNavigation.add(settingsItem)
+//        bottomNavigation.show(1, true)
 
 
         //val topAppBar: Toolbar = findViewById(R.id.topAppBar)
@@ -143,38 +144,107 @@ class DashBoard : AppCompatActivity() {
         /**
          * This is working when the item  is not selected
          */
-        bottomNavigation.setOnClickMenuListener { item ->
+//        bottomNavigation.setOnClickMenuListener { item ->
+//
+//            when (item.id) {
+//                1 -> {
+//                    supportFragmentManager.popBackStack()
+//                    supportFragmentManager.beginTransaction().apply {
+//                        replace(R.id.flFragment, MainDashboard())
+//                        commit()
+//                        }
+//                    }
+//
+//                2 -> {
+//
+//                        supportFragmentManager.popBackStack()
+//                        supportFragmentManager.beginTransaction().apply {
+//                        replace(R.id.flFragment, Dishes_Category())
+//                        commit()
+//
+//                        }
+//                }
+//                3 -> {
+//
+//                }
+//                4 -> {
+//
+//                    supportFragmentManager.popBackStack()
+//                    supportFragmentManager.beginTransaction().apply {
+//                        replace(R.id.flFragment, cart())
+//                        commit()
+//                    }
+//                }
+//                5 -> {
+//                    lifecycleScope.launch {
+//                        try{
+//                            save("token","null")
+//                            startActivity(Intent(this@DashBoard, Login::class.java))
+//                            finish()
+//                        }catch (e:Exception){ }finally {}
+//                    }
+//
+//                }
+//            }
+//        }
+        /**
+         * This is working when the item  is selected and then we are re-selecting the same item
+         */
+//        bottomNavigation.setOnReselectListener {item ->
+//            when (item.id) {
+//                1 -> {
+//                    supportFragmentManager.popBackStack()
+//                    supportFragmentManager.beginTransaction().apply {
+//                        replace(R.id.flFragment, MainDashboard())
+//                        commit()
+//                    }
+//                }
+//                2 -> {
+//                    // Handle the "Search" tab selection
+//
+//                    supportFragmentManager.popBackStack()
+//                    supportFragmentManager.beginTransaction().apply {
+//                        replace(R.id.flFragment, Dishes_Category())
+//                        commit()
+//
+//                    }
+//                }
+//                3 -> {
+//                    // Handle the "Profile" tab selection
+//                }
+//                4 -> {
+//                    // Handle the "Settings" tab selection
+//
+//                }
+//            }
+//        }
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
-            when (item.id) {
-                1 -> {
-                    supportFragmentManager.popBackStack()
-                    supportFragmentManager.beginTransaction().apply {
-                        replace(R.id.flFragment, MainDashboard())
-                        commit()
-                        }
-                    }
-
-                2 -> {
-
-                        supportFragmentManager.popBackStack()
-                        supportFragmentManager.beginTransaction().apply {
-                        replace(R.id.flFragment, Dishes_Category())
-                        commit()
-
-                        }
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.action_home -> {
+                    // Handle home action
+                    supportFragmentManager.beginTransaction().replace(R.id.flFragment, MainDashboard()).commit()
+                    true
                 }
-                3 -> {
-
+                R.id.action_menu -> {
+                    // Handle menu action
+                    supportFragmentManager.beginTransaction().replace(R.id.flFragment, Dishes_Category()).commit()
+                    true
                 }
-                4 -> {
-
-                    supportFragmentManager.popBackStack()
-                    supportFragmentManager.beginTransaction().apply {
-                        replace(R.id.flFragment, cart())
-                        commit()
-                    }
+                R.id.action_search -> {
+                    // Handle search action
+                    // Add your logic for handling search
+                    true
                 }
-                5 -> {
+                R.id.action_cart -> {
+                    // Handle cart action
+                    supportFragmentManager.beginTransaction().replace(R.id.flFragment, cart()).commit()
+                    true
+                }
+                R.id.action_profile -> {
+                    // Handle profile action
+                    // Add your logic for handling profile
                     lifecycleScope.launch {
                         try{
                             save("token","null")
@@ -182,39 +252,9 @@ class DashBoard : AppCompatActivity() {
                             finish()
                         }catch (e:Exception){ }finally {}
                     }
-
+                    true
                 }
-            }
-        }
-        /**
-         * This is working when the item  is selected and then we are re-selecting the same item
-         */
-        bottomNavigation.setOnReselectListener {item ->
-            when (item.id) {
-                1 -> {
-                    supportFragmentManager.popBackStack()
-                    supportFragmentManager.beginTransaction().apply {
-                        replace(R.id.flFragment, MainDashboard())
-                        commit()
-                    }
-                }
-                2 -> {
-                    // Handle the "Search" tab selection
-
-                    supportFragmentManager.popBackStack()
-                    supportFragmentManager.beginTransaction().apply {
-                        replace(R.id.flFragment, Dishes_Category())
-                        commit()
-
-                    }
-                }
-                3 -> {
-                    // Handle the "Profile" tab selection
-                }
-                4 -> {
-                    // Handle the "Settings" tab selection
-
-                }
+                else -> false
             }
         }
 

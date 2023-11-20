@@ -25,6 +25,7 @@ import com.example.myapplication.RvModel2
 import com.example.myapplication.SpaceItemDecoration
 import com.example.myapplication.addCartItemsRequest
 import com.example.myapplication.addToCartRequest
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
 
 class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2.OnCartClickListener,RvAdapter2.OnWishClickListener{
@@ -49,9 +50,19 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
 
 
         val receivedData = arguments?.getString("key").toString()
+
         //showToast(receivedData)
         val tittle=view.findViewById<TextView>(R.id.tittle)
         tittle.text=receivedData.toString()
+
+        /**
+         * This is the code for the back button
+         */
+        val backButton: FloatingActionButton =view.findViewById(R.id.backButton)
+        backButton.setOnClickListener{
+            parentFragmentManager.popBackStack()
+
+        }
 
         lifecycleScope.launch {
             try {
@@ -134,7 +145,7 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
     }
 
     override fun onWishClick(name: Long) {
-        showToast(name.toString())
+        //showToast(name.toString())
 //        val bundle =Bundle()
 //        bundle.putString("id",name.toString())
 //        val passing =ShowItem()
@@ -143,6 +154,8 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
 //        fragmentTransaction.replace(R.id.flFragment, passing)
 //        fragmentTransaction.addToBackStack(null)
 //        fragmentTransaction.commit()
+
+
 
     }
     private fun showCustomProgressDialog() {

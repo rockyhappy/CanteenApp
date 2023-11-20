@@ -21,6 +21,7 @@ import com.example.myapplication.RetrofitInstance2
 import com.example.myapplication.RvAdapter
 import com.example.myapplication.RvAdapterSearch
 import com.example.myapplication.RvModel
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
 
 class SearchFilter : Fragment(R.layout.fragment_search_filter) , RvAdapterSearch.OnItemClickListener {
@@ -68,6 +69,11 @@ class SearchFilter : Fragment(R.layout.fragment_search_filter) , RvAdapterSearch
             finally {
                 dismissCustomProgressDialog()
             }
+        }
+
+        val backButton: FloatingActionButton =view.findViewById(R.id.backButton)
+        backButton.setOnClickListener{
+            parentFragmentManager.popBackStack()
         }
 
 
