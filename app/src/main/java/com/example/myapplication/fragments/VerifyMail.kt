@@ -1,5 +1,6 @@
 package com.example.myapplication.fragments
 
+import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -40,7 +41,7 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
 
 
     private lateinit var dataStore: DataStore<Preferences>
-
+    private var dialog: Dialog? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dataStore = requireContext().createDataStore(name = "user")
@@ -113,6 +114,7 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
         val container = view.findViewById<ConstraintLayout>(R.id.Container)
 
         resendBtn.setOnClickListener {
+            showCustomProgressDialog()
             lifecycleScope.launch{
                 try {
 
@@ -134,6 +136,9 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
                 {
                     showToast("Connection Error")
                 }
+                finally {
+                    dismissCustomProgressDialog()
+                }
             }
             resendBtn.isEnabled=false
             startTimer()
@@ -150,7 +155,8 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
             button.isEnabled = false
             container.isEnabled=false
             container.isFocusable = false
-            progressBar.visibility = View.VISIBLE
+//            progressBar.visibility = View.VISIBLE
+            showCustomProgressDialog()
             var otp : String=editText1.text.toString()
             otp=otp+editText2.text.toString()
             otp=otp+editText3.text.toString()
@@ -168,16 +174,12 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
                     if (response.isSuccessful) {
                         //showToast(otp)
                         //if(response.body()?.token.toString()!="OTP Expired" || response.body()?.token.toString()!="Incorrect OTP"||response.body()?.token.toString()!="No OTP generated"){
-                        if (response.body()?.token.toString()=="Otp Verified Successfully") {
+                        //if (response.body()?.token.toString()=="Otp Verified Successfully") {
                             save("token", response.body()?.token.toString())
                             val fragmentTransaction = parentFragmentManager.beginTransaction()
                             fragmentTransaction.replace(R.id.flFragment, NewPassword())
                             fragmentTransaction.addToBackStack(null)
                             fragmentTransaction.commit()
-                        } else {
-                            val incorrectOtp = view.findViewById<TextView>(R.id.incorrectOtp)
-                            incorrectOtp.text = response.body()?.token.toString()
-                        }
                     } else {
                         showToast("Please Retry")
                     }
@@ -192,8 +194,8 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
                     button.isEnabled = true
                     container.isEnabled=true
                     container.isFocusable = true
-                    progressBar.visibility = View.GONE
-
+//                    progressBar.visibility = View.GONE
+                    dismissCustomProgressDialog()
                 }
             }
             }
@@ -208,6 +210,20 @@ class VerifyMail : Fragment(R.layout.fragment_verify_mail) {
         dataStore.edit{temp ->
             temp[dataStoreKey]=value
         }
+    }
+    private fun showCustomProgressDialog() {
+        dialog = Dialog(requireContext())
+        dialog?.setContentView(R.layout.custom_dialog_loading)
+        dialog?.setCancelable(false)
+
+        val window = dialog?.window
+        window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        dialog?.show()
+    }
+    private fun dismissCustomProgressDialog() {
+        dialog?.dismiss()
+        dialog = null
     }
 }
 

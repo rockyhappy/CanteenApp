@@ -175,6 +175,13 @@ class DashBoard : AppCompatActivity() {
                     }
                 }
                 5 -> {
+                    lifecycleScope.launch {
+                        try{
+                            save("token","null")
+                            startActivity(Intent(this@DashBoard, Login::class.java))
+                            finish()
+                        }catch (e:Exception){ }finally {}
+                    }
 
                 }
             }
@@ -206,6 +213,7 @@ class DashBoard : AppCompatActivity() {
                 }
                 4 -> {
                     // Handle the "Settings" tab selection
+
                 }
             }
         }
