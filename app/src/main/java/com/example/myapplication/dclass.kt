@@ -147,3 +147,12 @@ data class DeleteCartItemRequest(
 data class TotalBillResponse(
     val totalBill: Double
 )
+
+data class addWishlistRequest(
+    val userEmail:String,
+    val foodId : String
+)
+
+data class addWishlistResponse(
+    val message: String
+)

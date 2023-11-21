@@ -25,6 +25,8 @@ import com.example.myapplication.RvModel2
 import com.example.myapplication.SpaceItemDecoration
 import com.example.myapplication.addCartItemsRequest
 import com.example.myapplication.addToCartRequest
+import com.example.myapplication.addWishlistRequest
+import com.example.myapplication.readFromDataStore
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
 
@@ -145,17 +147,30 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
     }
 
     override fun onWishClick(name: Long) {
-        //showToast(name.toString())
-//        val bundle =Bundle()
-//        bundle.putString("id",name.toString())
-//        val passing =ShowItem()
-//        passing.arguments=bundle
-//        val fragmentTransaction = parentFragmentManager.beginTransaction()
-//        fragmentTransaction.replace(R.id.flFragment, passing)
-//        fragmentTransaction.addToBackStack(null)
-//        fragmentTransaction.commit()
 
 
+
+    lifecycleScope.launch {
+        try {
+            val email= readFromDataStore(dataStore,"email")
+            val request =addWishlistRequest(
+                userEmail = email.toString(),
+                foodId = name.toString()
+            )
+            val response= RetrofitInstance2.getApiServiceWithToken(dataStore).addWishList(request)
+            if(response.isSuccessful)
+            {
+                Log.d("Testing","Item Added to the list")
+            }
+            else{
+                Log.d("Testing","Failed to add")
+            }
+        }catch (e: Exception){
+                Log.d("Testing", "This is catch block")
+        }finally{
+
+        }
+    }
 
     }
     private fun showCustomProgressDialog() {

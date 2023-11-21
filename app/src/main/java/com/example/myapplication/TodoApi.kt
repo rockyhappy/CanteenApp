@@ -56,4 +56,7 @@ interface ApiService {
 
     @GET("api/v1/cart/total-bill")
     suspend fun getTotalBill(): Double
+
+    @POST("api/v1/wishlist/add")
+    suspend fun addWishList(@Body request : addWishlistRequest) : Response<addWishlistResponse>
 }
