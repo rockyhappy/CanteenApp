@@ -115,8 +115,9 @@ class wishlist : Fragment() ,RvAdapterWishlist.OnCartClickListener,RvAdapterWish
         lifecycleScope.launch{
             try{
                 showCustomProgressDialog()
+                val email= readFromDataStore(dataStore,"email")
                 val request= deleteFromWishlistRequest(
-                    email= readFromDataStore(dataStore,"email")!!,
+                    email= email.toString(),
                     foodId = name.toString()
                 )
                 val response = RetrofitInstance2.getApiServiceWithToken(dataStore).deleteFromWishlist(request)
@@ -130,10 +131,43 @@ class wishlist : Fragment() ,RvAdapterWishlist.OnCartClickListener,RvAdapterWish
                 showToast("Connection Error")
             }finally{
                 dismissCustomProgressDialog()
+                wishlistReload()
             }
         }
     }
 
+    fun wishlistReload(){
+        lifecycleScope.launch {
+            try {
+
+                showCustomProgressDialog()
+
+                val response = RetrofitInstance2.getApiServiceWithToken(dataStore).getWishlist()
+                if (response.isSuccessful) {
+                    Log.d("Testing",response.body().toString())
+                    Log.d("Testing", "Successful response: ${response.body()}")
+                    val foodItemList: List<FoodItemWishlist>? = response.body()
+                    if (foodItemList != null) {
+                        rvadapter.updateData(foodItemList)
+                    } else {
+                        showToast("Empty or null response body received from the server.")
+                    }
+                    //rvadapter.updateData(foodItemList)
+                } else {
+                    // Handle the error
+                    Log.d("Testing",response.body().toString())
+                    Log.d("Testing", "Response code: ${response.code()}, Response body: ${response.body()}")
+                }
+            } catch (e: Exception) {
+                // Handle network or other exceptions
+                Log.d("Testing","Network Error")
+                Log.e("Testing", "Network Error: ${e.message}", e)
+            }
+            finally {
+                dismissCustomProgressDialog()
+            }
+        }
+    }
     override fun onItemClick(name: Long) {
         val bundle =Bundle()
         bundle.putString("id",name.toString())

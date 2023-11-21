@@ -39,8 +39,7 @@ class RvAdapterWishlist(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        var profile = holder.view.findViewById<ImageView>(R.id.imageView1)
-        var name = holder.view.findViewById<TextView>(R.id.textView1)
+        var profile = holder.view.findViewById<ImageView>(R.id.imageview1)
         var price = holder.view.findViewById<TextView>(R.id.price)
         val itemName=holder.view.findViewById<TextView>(R.id.title)
         val ingredient=holder.view.findViewById<TextView>(R.id.ingredients)
@@ -48,18 +47,19 @@ class RvAdapterWishlist(
 
 
         val item = dataList[position]
-//        name.text = item.name
-//        price.text=item.price.toString()
+        Glide.with(context)
+            .load("https://i.postimg.cc/xTMVqcLJ/Break-fast.png")
+            .apply(
+                RequestOptions()
+                    .placeholder(R.drawable.baseline_person_24)
+                    .error(R.drawable.baseline_home_24)
+            )
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(profile)
+        itemName.text=item.name
+        ingredient.text=item.ingredients.toString()
+        price.text="₹"+item.price.toString()+ "  |"
 
-//        Glide.with(context)
-//            .load("https://i.postimg.cc/xTMVqcLJ/Break-fast.png")
-//            .apply(
-//                RequestOptions()
-//                    .placeholder(R.drawable.baseline_person_24)
-//                    .error(R.drawable.baseline_home_24)
-//            )
-//            .diskCacheStrategy(DiskCacheStrategy.ALL)
-//            .into(profile)
 
 
         holder.cart.setOnClickListener {
