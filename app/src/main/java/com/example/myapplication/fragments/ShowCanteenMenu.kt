@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.datastore.core.DataStore
@@ -49,7 +50,13 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
         val spaceHeight = resources.getDimensionPixelSize(R.dimen.space_50dp)
 //        val itemDecoration = SpaceItemDecoration(spaceHeight)
 //        recyclerView.addItemDecoration(itemDecoration)
-
+        val filter= view.findViewById<Button>(R.id.filter)
+        filter.setOnClickListener {
+            val fragmentTransaction = parentFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.flFragment, SearchFilter())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
 
         val receivedData = arguments?.getString("key").toString()
 
@@ -152,6 +159,7 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
 
     lifecycleScope.launch {
         try {
+            showCustomProgressDialog()
             val email= readFromDataStore(dataStore,"email")
             val request =addWishlistRequest(
                 userEmail = email.toString(),
@@ -168,7 +176,7 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
         }catch (e: Exception){
                 Log.d("Testing", "This is catch block")
         }finally{
-
+            dismissCustomProgressDialog()
         }
     }
 
