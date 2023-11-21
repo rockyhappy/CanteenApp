@@ -53,7 +53,7 @@ object RetrofitInstance2 {
 
 
         val authInterceptor = AuthInterceptor(jwtToken)
-        val timeout = 60L // Adjust this value as needed
+        val timeout = 120L // Adjust this value as needed
         val client = OkHttpClient.Builder()
             .addInterceptor(authInterceptor)
             .connectTimeout(timeout, TimeUnit.SECONDS)

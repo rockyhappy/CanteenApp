@@ -22,6 +22,8 @@ import com.example.myapplication.R
 import com.example.myapplication.RetrofitInstance2
 import com.example.myapplication.RvAdapter2
 import com.example.myapplication.RvModel2
+import com.example.myapplication.addCartItemsRequest
+import com.example.myapplication.deleteFromWishlistRequest
 import com.example.myapplication.getWishlistRequest
 import com.example.myapplication.readFromDataStore
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -85,15 +87,63 @@ class wishlist : Fragment() ,RvAdapterWishlist.OnCartClickListener,RvAdapterWish
     }
 
     override fun onCartClick(name: Long) {
-        TODO("Not yet implemented")
+        lifecycleScope.launch {
+            try{
+                showCustomProgressDialog()
+                val request= addCartItemsRequest(
+                    foodId = name,
+                    quantity = "1"
+                )
+                val response = RetrofitInstance2.getApiServiceWithToken(dataStore).addCartItems(request)
+                if(response.isSuccessful)
+                {
+                    showToast(response.body()?.message.toString())
+                    Log.d("ResponseCart",response.body()?.message.toString())
+                }
+
+            }catch (e:Exception){
+                showToast("Connection Error")
+            }finally{
+                dismissCustomProgressDialog()
+            }
+
+
+        }
     }
 
     override fun onWishClick(name: Long) {
-        TODO("Not yet implemented")
+        lifecycleScope.launch{
+            try{
+                showCustomProgressDialog()
+                val request= deleteFromWishlistRequest(
+                    email= readFromDataStore(dataStore,"email")!!,
+                    foodId = name.toString()
+                )
+                val response = RetrofitInstance2.getApiServiceWithToken(dataStore).deleteFromWishlist(request)
+                if(response.isSuccessful)
+                {
+                    showToast(response.body()?.message.toString())
+                    Log.d("ResponseCart",response.body()?.message.toString())
+                }
+
+            }catch (e:Exception){
+                showToast("Connection Error")
+            }finally{
+                dismissCustomProgressDialog()
+            }
+        }
     }
 
     override fun onItemClick(name: Long) {
-        TODO("Not yet implemented")
+        val bundle =Bundle()
+        bundle.putString("id",name.toString())
+        val passing =ShowItem()
+        passing.arguments=bundle
+        val fragmentTransaction = parentFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.flFragment, passing)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
+        //showToast(name.toString())
     }
     private fun showCustomProgressDialog() {
         dialog = Dialog(requireContext())

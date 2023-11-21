@@ -99,7 +99,9 @@ data class FoodItem(
     val price: Double,
     val canteenId: Long,
     val foodImage: String,
-    val description: String
+    val description: String,
+    val ingredients: List<String>,
+    val ingredientImageList: List<String>
 )
 
 data class addCartItemsRequest(
@@ -171,4 +173,10 @@ data class FoodItemWishlist(
     val description: String,
     val ingredients: List<String>,  // You might need to adjust the type based on the actual data
     val ingredientImageList: List<String>  // You might need to adjust the type based on the actual data
+)
+
+
+data class deleteFromWishlistRequest(
+    val email :String,
+    val foodId :String
 )
