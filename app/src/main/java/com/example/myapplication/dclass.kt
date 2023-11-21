@@ -156,3 +156,19 @@ data class addWishlistRequest(
 data class addWishlistResponse(
     val message: String
 )
+
+data class getWishlistRequest(
+    val email: String
+)
+
+data class FoodItemWishlist(
+    val id: Long,
+    val name: String,
+    val category: String,
+    val price: Double,
+    val canteenId: Long,
+    val foodImage: String,
+    val description: String,
+    val ingredients: List<String>,  // You might need to adjust the type based on the actual data
+    val ingredientImageList: List<String>  // You might need to adjust the type based on the actual data
+)

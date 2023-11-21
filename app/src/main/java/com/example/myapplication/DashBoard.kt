@@ -21,6 +21,7 @@ import com.example.myapplication.fragments.Breakfast
 import com.example.myapplication.fragments.Dishes_Category
 import com.example.myapplication.fragments.MainDashboard
 import com.example.myapplication.fragments.cart
+import com.example.myapplication.fragments.wishlist
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.launch
@@ -234,6 +235,7 @@ class DashBoard : AppCompatActivity() {
                 }
                 R.id.action_search -> {
                     // Handle search action
+                    supportFragmentManager.beginTransaction().replace(R.id.flFragment, wishlist()).commit()
                     // Add your logic for handling search
                     true
                 }

@@ -59,4 +59,7 @@ interface ApiService {
 
     @POST("api/v1/wishlist/add")
     suspend fun addWishList(@Body request : addWishlistRequest) : Response<addWishlistResponse>
+
+    @GET("/api/v1/wishlist/get")
+    suspend fun getWishlist() : Response<List<FoodItemWishlist>>
 }
