@@ -52,6 +52,7 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
 //        recyclerView.addItemDecoration(itemDecoration)
         val filter= view.findViewById<Button>(R.id.filter)
         filter.setOnClickListener {
+            Log.d("Testing","click search")
             val fragmentTransaction = parentFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.flFragment, SearchFilter())
             fragmentTransaction.addToBackStack(null)
