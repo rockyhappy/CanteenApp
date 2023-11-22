@@ -141,7 +141,7 @@ data class CouponCodeRequest(
     val couponCode: String
 )
 data class DeleteCartItemResponse(
-    val errorMessage: String?
+    val message: String?
 )
 data class DeleteCartItemRequest(
     val cartItemId: String

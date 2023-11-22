@@ -51,7 +51,7 @@ interface ApiService {
     @POST("api/v1/cart/calculateDiscountedPrice")
     suspend fun calculateDiscountedPrice(@Body couponCodeRequest: CouponCodeRequest): Response<DiscountedPriceResponse>
 
-    @DELETE("api/v1/cart/delete-cart-item")
+    @POST("api/v1/cart/delete-cart-item")
     suspend fun deleteCartItem(@Body request: DeleteCartItemRequest): Response<DeleteCartItemResponse>
 
     @GET("api/v1/cart/total-bill")
