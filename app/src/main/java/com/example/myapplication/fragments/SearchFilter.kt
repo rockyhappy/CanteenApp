@@ -197,37 +197,96 @@ class SearchFilter : Fragment(R.layout.fragment_search_filter) , RvAdapterSearch
             }
         }
         val star1=view.findViewById<Button>(R.id.star1)
+        val star4=view.findViewById<Button>(R.id.star4)
+        val star2=view.findViewById<Button>(R.id.star2)
+        val star3=view.findViewById<Button>(R.id.star3)
         var star1Clicked=false
+        var star4Clicked=false
+        var star2Clicked=false
+        var star3Clicked=false
         star1.setOnClickListener {
             if(star1Clicked){
                 star1Clicked=false
                 star1.setTextColor(getResources().getColor(R.color.grey))
                 star1.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
+                star4Clicked=false
+                star4.setTextColor(getResources().getColor(R.color.grey))
+                star4.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
+                star2Clicked=false
+                star2.setTextColor(getResources().getColor(R.color.grey))
+                star2.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
+                star1Clicked=false
+                star1.setTextColor(getResources().getColor(R.color.grey))
+                star1.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
+                star3Clicked=false
+                star3.setTextColor(getResources().getColor(R.color.grey))
+                star3.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
+
             }
             else{
                 star1Clicked=true
                 star1.setTextColor(getResources().getColor(R.color.primary_color))
                 star1.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border2)
+                star4Clicked=false
+                star4.setTextColor(getResources().getColor(R.color.grey))
+                star4.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
+                star2Clicked=false
+                star2.setTextColor(getResources().getColor(R.color.grey))
+                star2.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
+
+                star3Clicked=false
+                star3.setTextColor(getResources().getColor(R.color.grey))
+                star3.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
             }
         }
-        val star2=view.findViewById<Button>(R.id.star2)
-        var star2Clicked=false
+
+
         star2.setOnClickListener {
             if(star2Clicked){
                 star2Clicked=false
                 star2.setTextColor(getResources().getColor(R.color.grey))
                 star2.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
+                star4Clicked=false
+                star4.setTextColor(getResources().getColor(R.color.grey))
+                star4.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
+                star1Clicked=false
+                star1.setTextColor(getResources().getColor(R.color.grey))
+                star1.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
+                star3Clicked=false
+                star3.setTextColor(getResources().getColor(R.color.grey))
+                star3.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
             }
             else{
                 star2Clicked=true
                 star2.setTextColor(getResources().getColor(R.color.primary_color))
                 star2.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border2)
+                star1Clicked=false
+                star1.setTextColor(getResources().getColor(R.color.grey))
+                star1.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
+                star3Clicked=false
+                star3.setTextColor(getResources().getColor(R.color.grey))
+                star3.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
+                star4Clicked=false
+                star4.setTextColor(getResources().getColor(R.color.grey))
+                star4.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
             }
         }
-        val star3=view.findViewById<Button>(R.id.star3)
-        var star3Clicked=false
+
+
         star3.setOnClickListener {
             if(star3Clicked){
+                star3Clicked=false
+                star3.setTextColor(getResources().getColor(R.color.grey))
+                star3.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
+                star4Clicked=false
+                star4.setTextColor(getResources().getColor(R.color.grey))
+                star4.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
+                star2Clicked=false
+                star2.setTextColor(getResources().getColor(R.color.grey))
+                star2.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
+                star1Clicked=false
+                star1.setTextColor(getResources().getColor(R.color.grey))
+                star1.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
                 star3Clicked=false
                 star3.setTextColor(getResources().getColor(R.color.grey))
                 star3.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
@@ -236,20 +295,46 @@ class SearchFilter : Fragment(R.layout.fragment_search_filter) , RvAdapterSearch
                 star3Clicked=true
                 star3.setTextColor(getResources().getColor(R.color.primary_color))
                 star3.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border2)
+                star4.setTextColor(getResources().getColor(R.color.grey))
+                star4.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
+                star2Clicked=false
+                star2.setTextColor(getResources().getColor(R.color.grey))
+                star2.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
+                star1Clicked=false
+                star1.setTextColor(getResources().getColor(R.color.grey))
+                star1.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
             }
         }
-        val star4=view.findViewById<Button>(R.id.star4)
-        var star4Clicked=false
+
+
         star4.setOnClickListener {
             if(star4Clicked){
                 star4Clicked=false
                 star4.setTextColor(getResources().getColor(R.color.grey))
                 star4.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
+                star2Clicked=false
+                star2.setTextColor(getResources().getColor(R.color.grey))
+                star2.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
+                star1Clicked=false
+                star1.setTextColor(getResources().getColor(R.color.grey))
+                star1.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
+                star3Clicked=false
+                star3.setTextColor(getResources().getColor(R.color.grey))
+                star3.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
             }
             else{
                 star4Clicked=true
                 star4.setTextColor(getResources().getColor(R.color.primary_color))
                 star4.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border2)
+                star2Clicked=false
+                star2.setTextColor(getResources().getColor(R.color.grey))
+                star2.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
+                star1Clicked=false
+                star1.setTextColor(getResources().getColor(R.color.grey))
+                star1.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
+                star3Clicked=false
+                star3.setTextColor(getResources().getColor(R.color.grey))
+                star3.background= ContextCompat.getDrawable(requireContext(), R.drawable.rounded_border)
             }
         }
 

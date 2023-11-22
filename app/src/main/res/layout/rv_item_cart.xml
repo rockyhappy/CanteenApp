@@ -182,6 +182,7 @@
             android:layout_width="32dp"
             android:layout_height="match_parent"
             android:text="1"
+            android:textColor="@color/white"
             android:gravity="center"/>
         <ImageButton
             android:id="@+id/plus"

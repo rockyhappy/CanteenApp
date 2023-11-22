@@ -47,6 +47,8 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
         recyclerView = view.findViewById<RecyclerView>(R.id.rvi)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 1, GridLayoutManager.VERTICAL, false)
         recyclerView.adapter = rvadapter
+
+
         val filter= view.findViewById<Button>(R.id.filter)
         filter.setOnClickListener {
             Log.d("Testing","click search")

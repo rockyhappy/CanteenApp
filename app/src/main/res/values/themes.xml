@@ -19,6 +19,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.DayNight">
         <item name="android:statusBarColor">@color/primary_color</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
 

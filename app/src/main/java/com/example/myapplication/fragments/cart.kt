@@ -30,6 +30,7 @@ import com.example.myapplication.RetrofitInstance2
 import com.example.myapplication.RvAdapter2
 import com.example.myapplication.RvAdapterCart
 import com.example.myapplication.TotalBillResponse
+import com.example.myapplication.addCartItemsRequest
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.razorpay.Checkout
@@ -45,7 +46,7 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
     private lateinit var rvadapter : RvAdapterCart
     private lateinit var dataStore: DataStore<Preferences>
     private var dialog: Dialog? = null
-
+    private  var totalAmount:Double=0.0
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Checkout.preload(context)
@@ -78,6 +79,8 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
                     val foodItemList: List<FoodItemCart>? = response.body()
                     if (foodItemList != null) {
                         rvadapter.updateData(foodItemList)
+                         totalAmount = calculateTotalAmount(foodItemList)
+                        subTotal.text = totalAmount.toString()
                     } else {
                         showToast("Empty or null response body received from the server.")
                     }
@@ -89,17 +92,6 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
                 showToast("Catch Block")
             }finally{
                 dismissCustomProgressDialog()
-                try {
-                    showCustomProgressDialog()
-                    val bill=RetrofitInstance2.getApiServiceWithToken(dataStore).getTotalBill()
-                    subTotal.text=bill.toString()
-                }catch (e: Exception){
-                    showToast("Connection Error")
-                }finally {
-                    dismissCustomProgressDialog()
-                }
-
-
             }
 
         }
@@ -128,12 +120,126 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
         return view
     }
 
-    override fun onPlusClick(name: Long) {
-
+    override fun onPlusClick(name: Long , price : Int ) {
+        val v= view?.findViewById<TextView>(R.id.quantity)
+//        showToast(v?.text.toString())
+        var quantity =v?.text.toString().toLong()
+        lifecycleScope.launch{
+            try {
+                showCustomProgressDialog()
+                val request = addCartItemsRequest(
+                    foodId = name,
+                    quantity = (quantity+1).toString()
+                )
+                val response = RetrofitInstance2.getApiServiceWithToken(dataStore).addCartItems(request)
+                Log.d("response",response.toString())
+                if(response.isSuccessful){
+                    v?.text=(quantity+1).toString()
+                    totalAmount+=price
+                    val subTotal = view?.findViewById<TextView>(R.id.subtotal)
+                    subTotal?.text = totalAmount.toString()
+                }else{
+                    showToast("Retry")
+                }
+            }catch (e:Exception){
+                showToast("Error occured")
+            }finally {
+                showToast("this is finally block konsa block,... finally block")
+                dismissCustomProgressDialog()
+            }
+        }
     }
 
     override fun onMinusClick(name: Long) {
+        val v= view?.findViewById<TextView>(R.id.quantity)
+//        showToast(v?.text.toString())
+        var quantity =v?.text.toString().toLong()
+        if(v?.text.toString().toInt()==0){
+            val request = DeleteCartItemRequest(cartItemId = name.toString())
+            lifecycleScope.launch {
+                try {
+                    showCustomProgressDialog()
 
+                    val response = RetrofitInstance2.getApiServiceWithToken(dataStore).deleteCartItem(request)
+
+                    if (response.isSuccessful) {
+                        showToast("Item deleted successfully")
+                        val position = rvadapter.dataList.indexOfFirst{ it.id == name }
+                        rvadapter.removeItem(position)
+                        rvadapter.updateData(rvadapter.dataList)
+                    } else {
+                        showToast("Failed to delete item. Code: ${response.code()}")
+                    }
+                } catch (e: Exception) {
+                    showToast("An error occurred: ${e.message}")
+                } finally {
+                    dismissCustomProgressDialog()
+                    //now the item has been deleted but the datalist is not updated
+                    try{
+                        showCustomProgressDialog()
+                        val response = RetrofitInstance2.getApiServiceWithToken(dataStore).getCart()
+                        if (response.isSuccessful) {
+                            val foodItemList: List<FoodItemCart>? = response.body()
+                            if (foodItemList != null) {
+                                rvadapter.updateData(foodItemList)
+                            } else {
+                                showToast("Empty or null response body received from the server.")
+                            }
+                        } else {
+                            showToast("Failed to retrieve data. Code: ${response.code()}")
+                        }
+                    }catch (e: Exception)
+                    {
+                        showToast("Catch Block")
+                    }finally{
+                        dismissCustomProgressDialog()
+                        try {
+                            showCustomProgressDialog()
+                            val bill=RetrofitInstance2.getApiServiceWithToken(dataStore).getTotalBill()
+                            val subTotal = view?.findViewById<TextView>(R.id.subtotal)
+                            subTotal?.text=bill.toString()
+                        }catch (e: Exception){
+                            showToast("Connection Error")
+                        }finally {
+                            dismissCustomProgressDialog()
+                        }
+                    }
+                }
+            }
+        }else
+        {
+            lifecycleScope.launch{
+                try {
+                    showCustomProgressDialog()
+                    val request = addCartItemsRequest(
+                        foodId = name,
+                        quantity = (quantity-1).toString()
+                    )
+                    val response = RetrofitInstance2.getApiServiceWithToken(dataStore).addCartItems(request)
+                    Log.d("response",response.toString())
+                    if(response.isSuccessful){
+                        v?.text=(quantity-1).toString()
+                    }else{
+                        showToast("Retry")
+                    }
+                }catch (e:Exception){
+                    showToast("Error occured")
+                }finally {
+                    dismissCustomProgressDialog()
+                    try {
+                        showCustomProgressDialog()
+                        val bill=RetrofitInstance2.getApiServiceWithToken(dataStore).getTotalBill()
+                        val subTotal = view?.findViewById<TextView>(R.id.subtotal)
+                        subTotal?.text=bill.toString()
+                    }catch (e: Exception){
+                        showToast("Connection Error")
+                    }finally {
+
+                    dismissCustomProgressDialog()
+                    }
+                }
+            }
+        }
     }
 
 
@@ -363,6 +469,7 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
     }
 
 
+
     /**
      * This is to implement RazorPay
      */
@@ -373,7 +480,7 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
         options.put("description", "Payment for items in the cart")
         options.put("image", "YOUR_APP_LOGO_URL")
         options.put("currency", "INR")
-        options.put("amount", "100000")  // Amount in paise (80 rupees * 100)
+        options.put("amount", "20000")  // Amount in paise (80 rupees * 100)
         options.put("theme.color", "#FFFA902D")  // Optional, set the theme color
 
         // Open Razorpay checkout activity
@@ -398,5 +505,11 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
         // Handle payment failure
         showToast("Payment Failed. Code: $code, Response: $response")
     }
-
+    private fun calculateTotalAmount(foodItemList: List<FoodItemCart>): Double {
+        var totalAmount = 0.0
+        for (foodItem in foodItemList) {
+            totalAmount += foodItem.quantity * foodItem.price
+        }
+        return totalAmount
+    }
 }
