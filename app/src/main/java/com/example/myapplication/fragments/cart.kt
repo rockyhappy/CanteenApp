@@ -3,6 +3,7 @@ package com.example.myapplication.fragments
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -38,7 +39,7 @@ import org.json.JSONObject
 import org.w3c.dom.Text
 
 class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnItemClickListener,
-    PaymentResultListener {
+    PaymentResultListener,RvAdapterCart.OnQuantityDecreaseListener,RvAdapterCart.OnQuantityIncreaseListener {
     val check = Checkout()
     private lateinit var recyclerView: RecyclerView
     private lateinit var rvadapter : RvAdapterCart
@@ -51,7 +52,7 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
 
         // Initialize Razorpay
         Checkout.preload(requireContext())
-        check.setKeyID("rzp_test_AORXCaj7c5I5QR")
+        check.setKeyID("rzp_test_2sIcIwphd64DGF")
     }
 
 
@@ -65,7 +66,7 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
         val subTotal = view.findViewById<TextView>(R.id.subtotal)
         val discount=view.findViewById<TextView>(R.id.discount)
         val total =view.findViewById<TextView>(R.id.total)
-        rvadapter = RvAdapterCart(ArrayList(), requireContext(), this,this)
+        rvadapter = RvAdapterCart(ArrayList(), requireContext(), this,this,this,this)
         recyclerView = view.findViewById<RecyclerView>(R.id.rvi)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 1, GridLayoutManager.VERTICAL, false)
         recyclerView.adapter = rvadapter
@@ -126,6 +127,16 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
         }
         return view
     }
+
+    override fun onPlusClick(name: Long) {
+
+    }
+
+    override fun onMinusClick(name: Long) {
+
+    }
+
+
     override fun onItemClick(name: Long) {
         //this is the code for the show Item
         val bundle =Bundle()
@@ -160,7 +171,6 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
             } finally {
                 dismissCustomProgressDialog()
                 //now the item has been deleted but the datalist is not updated
-
                 try{
                     showCustomProgressDialog()
                     val response = RetrofitInstance2.getApiServiceWithToken(dataStore).getCart()
@@ -231,7 +241,7 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
 
     }
     private fun showToast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 
     private fun showCustomProgressDialog() {
@@ -363,7 +373,7 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
         options.put("description", "Payment for items in the cart")
         options.put("image", "YOUR_APP_LOGO_URL")
         options.put("currency", "INR")
-        options.put("amount", "8000")  // Amount in paise (80 rupees * 100)
+        options.put("amount", "100000")  // Amount in paise (80 rupees * 100)
         options.put("theme.color", "#FFFA902D")  // Optional, set the theme color
 
         // Open Razorpay checkout activity
@@ -376,8 +386,12 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
     }
 
     override fun onPaymentSuccess(razorpayPaymentId: String?) {
-        // Handle payment success
-        showToast("Payment Successful. Razorpay ID: $razorpayPaymentId")
+
+        Log.d("RazorPay",razorpayPaymentId.toString())
+        showToast("$razorpayPaymentId")
+        Handler().postDelayed({
+            showToast("$razorpayPaymentId")
+        }, 3000)
     }
 
     override fun onPaymentError(code: Int, response: String?) {

@@ -14,6 +14,7 @@ import com.bumptech.glide.request.RequestOptions
 import android.graphics.Rect
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
@@ -48,7 +49,6 @@ class RvAdapter(
 
         val item = dataList[position]
         name.text = item.name
-        //residence.text = item.descriptionn
 
         Glide.with(context)
             .load("https://i.postimg.cc/Vkt4HFqH/726617d5b82c0367ff5faadb547da306.png")
@@ -139,6 +139,7 @@ class RvAdapter2(
             cartClickListener.onCartClick(item.id)
         }
         holder.wish.setOnClickListener {
+            holder.wish.setImageResource(R.drawable.heart_filled)
             wishClickListener.onWishClick(item.id)
         }
 
@@ -200,11 +201,16 @@ class RvAdapterCart(
     var dataList: ArrayList<FoodItemCart>,
     var context : Context,
     private val itemClickListener: OnItemClickListener,
-    private val itemDeleteListener: OnDeleteClickListener
+    private val itemDeleteListener: OnDeleteClickListener,
+    private val quantityIncreaseListener: RvAdapterCart.OnQuantityIncreaseListener,
+    private val quantityDecreaseListener: RvAdapterCart.OnQuantityDecreaseListener
 ): RecyclerView.Adapter<RvAdapterCart.MyViewHolder>() {
     private var selectedPosition: Int = 0
     inner class MyViewHolder(var view : View) : RecyclerView.ViewHolder(view){
         val delete =view.findViewById<ImageView>(R.id.delete)
+        val qunatity=view.findViewById<TextView>(R.id.quantity)
+        val minus=view.findViewById<ImageButton>(R.id.minus)
+        val plus=view.findViewById<ImageButton>(R.id.plus)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -237,6 +243,12 @@ class RvAdapterCart(
             .into(profile)
 
 
+        holder.plus.setOnClickListener {
+            quantityIncreaseListener.onPlusClick(item.id)
+        }
+        holder.minus.setOnClickListener {
+            quantityDecreaseListener.onMinusClick(item.id)
+        }
         holder.delete.setOnClickListener {
             itemDeleteListener.onDeleteClick(item.id)
         }
@@ -261,6 +273,12 @@ class RvAdapterCart(
         fun onDeleteClick(name: Long)
     }
 
+    interface OnQuantityDecreaseListener {
+        fun onMinusClick(name: Long)
+    }
+    interface OnQuantityIncreaseListener {
+        fun onPlusClick(name: Long)
+    }
     fun removeItem(position: Int) {
         if (position in 0 until dataList.size) {
             dataList.removeAt(position)

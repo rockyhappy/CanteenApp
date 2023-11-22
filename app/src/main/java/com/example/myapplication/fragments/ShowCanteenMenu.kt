@@ -47,9 +47,6 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
         recyclerView = view.findViewById<RecyclerView>(R.id.rvi)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 1, GridLayoutManager.VERTICAL, false)
         recyclerView.adapter = rvadapter
-        val spaceHeight = resources.getDimensionPixelSize(R.dimen.space_50dp)
-//        val itemDecoration = SpaceItemDecoration(spaceHeight)
-//        recyclerView.addItemDecoration(itemDecoration)
         val filter= view.findViewById<Button>(R.id.filter)
         filter.setOnClickListener {
             Log.d("Testing","click search")
@@ -61,7 +58,6 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
 
         val receivedData = arguments?.getString("key").toString()
 
-        //showToast(receivedData)
         val tittle=view.findViewById<TextView>(R.id.tittle)
         tittle.text=receivedData.toString()
 
@@ -80,7 +76,6 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
                 showCustomProgressDialog()
                 val request=GetFoodByCanteenRequest(
                     name =receivedData.toString()
-                    //name ="Sarthak ki dukaan"
                 )
                 val response = RetrofitInstance2.getApiServiceWithToken(dataStore).getCanteenFood(request)
                 if (response.isSuccessful) {
@@ -88,7 +83,6 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
                     Log.d("Testing", "Successful response: ${response.body()}")
                     val canteenItems = response.body()?.foodItems.orEmpty()
 
-                    // Convert CanteenItem objects to RvModel objects
                     val dataList = canteenItems.map { canteenItem ->
                         RvModel2(canteenItem.category, canteenItem.name, canteenItem.price.toString(), canteenItem.id)
                     }
@@ -124,9 +118,6 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
         fragmentTransaction.replace(R.id.flFragment, passing)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
-        //showToast(name.toString())
-
-
     }
 
     override fun onCartClick(name: Long) {

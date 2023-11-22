@@ -3,6 +3,8 @@ package com.example.myapplication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -24,10 +26,11 @@ import com.example.myapplication.fragments.cart
 import com.example.myapplication.fragments.wishlist
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import com.razorpay.PaymentResultListener
 import kotlinx.coroutines.launch
 
 
-class DashBoard : AppCompatActivity() {
+class DashBoard : AppCompatActivity(), PaymentResultListener {
     lateinit var toggle: ActionBarDrawerToggle
     private lateinit var binding: ActivityDashBoardBinding
     private lateinit var dataStore: DataStore<Preferences>
@@ -281,5 +284,20 @@ class DashBoard : AppCompatActivity() {
         dataStore.edit{temp ->
             temp[dataStoreKey]=value
         }
+    }
+
+    override fun onPaymentSuccess(razorpayPaymentId: String?) {
+
+        /**
+         * Payment Gateway razorPaymentId
+         */
+        Log.d("RazorPay",razorpayPaymentId.toString())
+        showToast("$razorpayPaymentId")
+
+    }
+
+    override fun onPaymentError(code: Int, response: String?) {
+        // Handle payment failure
+        showToast("Payment Failed. Code: $code, Response: $response")
     }
 }
