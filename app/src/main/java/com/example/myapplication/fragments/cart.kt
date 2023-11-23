@@ -84,7 +84,7 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
                     if (foodItemList != null) {
                         rvadapter.updateData(foodItemList)
                          totalAmount = calculateTotalAmount(foodItemList)
-                        subTotal.text = totalAmount.toString()
+                        subTotal.text = "₹"+totalAmount.toString()
                     } else {
                         showToast("Empty or null response body received from the server.")
                     }
@@ -151,7 +151,7 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
                     v?.text=(quantity+1).toString()
                     totalAmount+=price
                     val subTotal = view?.findViewById<TextView>(R.id.subtotal)
-                    subTotal?.text = totalAmount.toString()
+                    subTotal?.text = "₹"+totalAmount.toString()
                 }else{
                     showToast("Retry")
                 }
@@ -301,7 +301,7 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
                             rvadapter.updateData(foodItemList)
                             totalAmount = calculateTotalAmount(foodItemList)
                             val subTotal = view?.findViewById<TextView>(R.id.subtotal)
-                            subTotal?.text = totalAmount.toString()
+                            subTotal?.text = "₹"+totalAmount.toString()
 
                         } else {
                             showToast("Empty or null response body received from the server.")

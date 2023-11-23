@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -23,6 +25,7 @@ import com.example.myapplication.RvAdapter2
 import com.example.myapplication.RvModel
 import com.example.myapplication.RvModel2
 import com.example.myapplication.addCartItemsRequest
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
 
 
@@ -44,6 +47,26 @@ class ShowCategoryMenu : Fragment(), RvAdapter2.OnItemClickListener,RvAdapter2.O
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 1, GridLayoutManager.VERTICAL, false)
         recyclerView.adapter = rvadapter
         val receivedData= arguments?.getString("key2")
+
+        val tittle=view.findViewById<TextView>(R.id.tittle)
+        tittle.text=receivedData.toString()
+        /**
+         * This is the code for the back button
+         */
+        val backButton: FloatingActionButton =view.findViewById(R.id.backButton)
+        backButton.setOnClickListener{
+            parentFragmentManager.popBackStack()
+
+        }
+
+        val filter= view.findViewById<Button>(R.id.filter)
+        filter.setOnClickListener {
+            val fragmentTransaction = parentFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.flFragment, SearchFilter())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
+
         lifecycleScope.launch {
             try {
 
@@ -53,6 +76,7 @@ class ShowCategoryMenu : Fragment(), RvAdapter2.OnItemClickListener,RvAdapter2.O
                     //name ="Sarthak ki dukaan"
                 )
                 val response = RetrofitInstance2.getApiServiceWithToken(dataStore).getCategoryFood(request)
+                Log.d("category",response.toString())
                 if (response.isSuccessful) {
                     Log.d("Testing",response.body().toString())
                     Log.d("Testing", "Successful response: ${response.body()}")
