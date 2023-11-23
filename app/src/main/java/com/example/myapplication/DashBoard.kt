@@ -292,7 +292,23 @@ class DashBoard : AppCompatActivity(), PaymentResultListener {
          * Payment Gateway razorPaymentId
          */
         Log.d("RazorPay",razorpayPaymentId.toString())
-        showToast("$razorpayPaymentId")
+        val totalAmount=cart.totalAmount
+        lifecycleScope.launch {
+            val request=PaymentInfo2(
+                paymentId = razorpayPaymentId.toString(),
+                amount = totalAmount
+            )
+            val response=RetrofitInstance2.getApiServiceWithToken(dataStore).capturePayment(request)
+            if(response.isSuccessful)
+            {
+                showToast("Order in prepration")
+            }
+            else {
+                showToast("Payment not verified")
+            }
+        }
+
+        //showToast("$razorpayPaymentId")
 
     }
 

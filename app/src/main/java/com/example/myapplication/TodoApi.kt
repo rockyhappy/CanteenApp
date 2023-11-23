@@ -65,4 +65,11 @@ interface ApiService {
 
     @POST("api/v1/wishlist/delete")
     suspend fun deleteFromWishlist(@Body request:deleteFromWishlistRequest) :Response<addWishlistResponse>
+
+
+    @POST("api/v1/payments/create-order")
+    suspend fun paymentCreateOrder(@Body request: PaymentInfo) : Response<Order>
+
+    @POST("api/v1/payments/capture-payment")
+    suspend fun capturePayment(@Body request: PaymentInfo2) :Response<Payment>
 }
