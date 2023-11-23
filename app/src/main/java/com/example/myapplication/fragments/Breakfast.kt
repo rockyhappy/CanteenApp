@@ -51,7 +51,7 @@ class Breakfast : Fragment(), RvAdapter.OnItemClickListener {
 
         val view = inflater.inflate(R.layout.fragment_breakfast, container, false)
         rvadapter = RvAdapter(ArrayList(), requireContext(), this)
-        recyclerView = view.findViewById<RecyclerView>(R.id.rvid)
+        recyclerView = view.findViewById(R.id.rvid)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 1, GridLayoutManager.VERTICAL, false)
         recyclerView.adapter = rvadapter
         lifecycleScope.launch {

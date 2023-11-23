@@ -60,7 +60,7 @@ class SplashScreen : AppCompatActivity() {
                     }
                 }
             }catch (e: Exception){
-               startActivity(Intent(this@SplashScreen,DashBoard::class.java))
+               startActivity(Intent(this@SplashScreen,Login::class.java))
                 finish()
             }
 

@@ -1,0 +1,20 @@
+<svg width="36" height="38" viewBox="0 0 36 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="mingcute:settings-6-line">
+<g clip-path="url(#clip0_657_951)">
+<g id="Group 7">
+<path id="Vector 3" d="M6 12H30" stroke="#787878" stroke-width="1.5" stroke-linecap="round"/>
+<path id="Vector 5" d="M6 26H30" stroke="#787878" stroke-width="1.5" stroke-linecap="round"/>
+<path id="Vector 4" d="M6 19H30" stroke="#787878" stroke-width="1.5" stroke-linecap="round"/>
+<circle id="Ellipse 37" cx="24" cy="12" r="3" fill="#FA902D"/>
+<circle id="Ellipse 38" cx="24" cy="26" r="3" fill="#FA902D"/>
+<circle id="Ellipse 39" cx="12" cy="19" r="3" fill="#FA902D"/>
+</g>
+</g>
+<rect x="0.5" y="0.5" width="35" height="37" rx="5.5" stroke="#D9D9D9"/>
+</g>
+<defs>
+<clipPath id="clip0_657_951">
+<rect width="36" height="38" rx="6" fill="white"/>
+</clipPath>
+</defs>
+</svg>

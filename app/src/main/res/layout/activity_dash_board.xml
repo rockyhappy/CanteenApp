@@ -63,30 +63,40 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
 
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent">
 
     </FrameLayout>
 
-    <com.etebarian.meowbottomnavigation.MeowBottomNavigation
-        android:id="@+id/btmnav"
+<!--    <com.etebarian.meowbottomnavigation.MeowBottomNavigation-->
+<!--        android:id="@+id/btmnav"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:mbn_defaultIconColor="@color/semiblack"-->
+<!--        app:mbn_selectedIconColor="@color/primary_color"-->
+<!--        app:mbn_circleColor="@color/white"-->
+<!--        app:mbn_backgroundBottomColor="@color/white"-->
+<!--        app:mbn_countBackgroundColor="@android:color/white"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        />-->
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:backgroundTint="@color/white"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:mbn_defaultIconColor="@color/semiblack"
-        app:mbn_selectedIconColor="@color/primary_color"
-        app:mbn_circleColor="@color/white"
-        app:mbn_backgroundBottomColor="@color/white"
-        app:mbn_countBackgroundColor="@android:color/white"
-        android:background="@android:color/transparent"
-        />
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:menu="@menu/menu_bottom_nav" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView

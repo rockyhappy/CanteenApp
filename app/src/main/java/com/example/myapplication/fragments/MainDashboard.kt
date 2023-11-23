@@ -1,6 +1,7 @@
 package com.example.myapplication.fragments
 
 import android.app.Dialog
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.cardview.widget.CardView
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -24,6 +26,8 @@ import com.example.myapplication.RetrofitInstance2
 import com.example.myapplication.RvAdapter
 import com.example.myapplication.RvModel
 import kotlinx.coroutines.launch
+import android.speech.RecognizerIntent
+
 
 class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnItemClickListener {
     private lateinit var recyclerView: RecyclerView
@@ -186,6 +190,42 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
             fragmentTransaction.commit()
 
         }
+
+
+        /**
+         * This is the code for the search view
+         */
+        val searchView = view.findViewById<SearchView>(R.id.searchView)
+
+        searchView.queryHint = "What would you like to eat?"
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                // Handle the submission of the query
+                showToast(query.toString())
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // Handle changes to the query text
+                showToast(newText.toString())
+                return true
+            }
+        })
+
+        searchView.setOnSuggestionListener(object : SearchView.OnSuggestionListener {
+            override fun onSuggestionSelect(position: Int): Boolean {
+                // Handle suggestion selection
+                showToast(position.toString())
+                return true
+            }
+
+            override fun onSuggestionClick(position: Int): Boolean {
+                // Handle suggestion click
+                showToast(position.toString())
+                return true
+            }
+        })
 
 
 
