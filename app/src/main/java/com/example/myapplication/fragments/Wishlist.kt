@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -40,9 +41,13 @@ class wishlist : Fragment() ,RvAdapterWishlist.OnCartClickListener,RvAdapterWish
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
         dataStore = requireContext().createDataStore(name = "user")
         // Inflate the layout for this fragment
         val view=inflater.inflate(R.layout.fragment_wishlist, container, false)
+        val empty=view.findViewById<ImageView>(R.id.empty)
+        empty.visibility=View.GONE
         rvadapter = RvAdapterWishlist(ArrayList(), requireContext(), this,this,this)
         recyclerView = view.findViewById<RecyclerView>(R.id.rvi)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
@@ -64,6 +69,8 @@ class wishlist : Fragment() ,RvAdapterWishlist.OnCartClickListener,RvAdapterWish
                     val foodItemList: List<FoodItemWishlist>? = response.body()
                     if (foodItemList != null) {
                         rvadapter.updateData(foodItemList)
+
+                        empty.visibility=View.GONE
                     } else {
                         showToast("Empty or null response body received from the server.")
                     }
@@ -104,6 +111,7 @@ class wishlist : Fragment() ,RvAdapterWishlist.OnCartClickListener,RvAdapterWish
             }catch (e:Exception){
                 showToast("Connection Error")
             }finally{
+
                 dismissCustomProgressDialog()
             }
 

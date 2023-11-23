@@ -83,6 +83,8 @@
             android:imeOptions="actionNext"
             android:maxLines="1"
             android:maxLength="50"
+            android:singleLine="true"
+            android:inputType="text"
             android:textColor="@color/black"
             android:textColorHint="@color/grey"
             android:digits="qwertyuiopasdfghjklzxcvbnm 1234567890 QWERTYUIOPASDFGHJKLZXCVBNM"
@@ -114,6 +116,8 @@
             android:hint="User@gmail.com"
             android:imeOptions="actionNext"
             android:maxLines="1"
+            android:singleLine="true"
+            android:inputType="text"
             android:maxLength="50"
             android:textColor="@color/black"
             android:textColorHint="@color/grey" />
