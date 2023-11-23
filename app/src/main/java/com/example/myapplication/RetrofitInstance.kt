@@ -7,6 +7,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -49,10 +50,17 @@ object RetrofitInstance2 {
     private const val BASE_URL = "https://brunchbliss.onrender.com"
 
     private fun createApiService(jwtToken: String): ApiService {
+
+
         val authInterceptor = AuthInterceptor(jwtToken)
+        val timeout = 120L // Adjust this value as needed
         val client = OkHttpClient.Builder()
             .addInterceptor(authInterceptor)
+            .connectTimeout(timeout, TimeUnit.SECONDS)
+            .readTimeout(timeout, TimeUnit.SECONDS)
+            .writeTimeout(timeout, TimeUnit.SECONDS)
             .build()
+
 
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -65,7 +73,7 @@ object RetrofitInstance2 {
     // Function to get the JWT token from DataStore
     suspend fun getApiServiceWithToken(dataStore: DataStore<Preferences>): ApiService {
         val jwtToken = readFromDataStore(dataStore, "token").toString()
-        //val jwtToken="eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYWNAZ21haWwuY29tIiwiaWF0IjoxNjk5ODIwMjA5LCJleHAiOjE3MDAzNDU4MDl9.mDye2dvdzzzo2X52rsaq4Vf86xBQVcjJ8hWSPHh-Z0o"
+        //val jwtToken= "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJHYXJlZWJAZ21haWwuY29tIiwiaWF0IjoxNzAwNTAxNTQ1LCJleHAiOjE3MDEwMjcxNDV9.qWroHL5QaRMKBFJIPbt7vh6fUK4_n4AjfkPS0HA0ykw"
         return createApiService(jwtToken)
     }
 }

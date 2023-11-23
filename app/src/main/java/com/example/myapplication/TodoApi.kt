@@ -2,6 +2,7 @@ package com.example.myapplication
 import com.example.myapplication.fragments.ForgotPassward
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -45,5 +46,30 @@ interface ApiService {
     suspend fun addCartItems(@Body request: addCartItemsRequest) : Response<addCartItemsResponse>
 
     @GET("api/v1/cart/get-cart-items")
-    suspend fun getCart() :Response<getCartResponse>
+    suspend fun getCart() :Response<List<FoodItemCart>>
+
+    @POST("api/v1/cart/calculateDiscountedPrice")
+    suspend fun calculateDiscountedPrice(@Body couponCodeRequest: CouponCodeRequest): Response<DiscountedPriceResponse>
+
+    @POST("api/v1/cart/delete-cart-item")
+    suspend fun deleteCartItem(@Body request: DeleteCartItemRequest): Response<DeleteCartItemResponse>
+
+    @GET("api/v1/cart/total-bill")
+    suspend fun getTotalBill(): Double
+
+    @POST("api/v1/wishlist/add")
+    suspend fun addWishList(@Body request : addWishlistRequest) : Response<addWishlistResponse>
+
+    @GET("api/v1/wishlist/get")
+    suspend fun getWishlist() : Response<List<FoodItemWishlist>>
+
+    @POST("api/v1/wishlist/delete")
+    suspend fun deleteFromWishlist(@Body request:deleteFromWishlistRequest) :Response<addWishlistResponse>
+
+
+    @POST("api/v1/payments/create-order")
+    suspend fun paymentCreateOrder(@Body request: PaymentInfo) : Response<Order>
+
+    @POST("api/v1/payments/capture-payment")
+    suspend fun capturePayment(@Body request: PaymentInfo2) :Response<Payment>
 }

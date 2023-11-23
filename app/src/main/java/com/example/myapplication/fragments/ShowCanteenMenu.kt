@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -22,9 +24,14 @@ import com.example.myapplication.RvAdapter2
 import com.example.myapplication.RvModel
 import com.example.myapplication.RvModel2
 import com.example.myapplication.SpaceItemDecoration
+import com.example.myapplication.addCartItemsRequest
+import com.example.myapplication.addToCartRequest
+import com.example.myapplication.addWishlistRequest
+import com.example.myapplication.readFromDataStore
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
 
-class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener{
+class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2.OnCartClickListener,RvAdapter2.OnWishClickListener{
     private lateinit var recyclerView: RecyclerView
     private lateinit var rvadapter : RvAdapter2
     private lateinit var dataStore: DataStore<Preferences>
@@ -36,24 +43,41 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener{
         dataStore = requireContext().createDataStore(name = "user")
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_show_canteen_menu, container, false)
-        rvadapter = RvAdapter2(ArrayList(), requireContext(), this)
+        rvadapter = RvAdapter2(ArrayList(), requireContext(), this,this,this)
         recyclerView = view.findViewById<RecyclerView>(R.id.rvi)
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 4, GridLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 1, GridLayoutManager.VERTICAL, false)
         recyclerView.adapter = rvadapter
-        val spaceHeight = resources.getDimensionPixelSize(R.dimen.space_50dp)
-        val itemDecoration = SpaceItemDecoration(spaceHeight)
-        recyclerView.addItemDecoration(itemDecoration)
 
+
+        val filter= view.findViewById<Button>(R.id.filter)
+        filter.setOnClickListener {
+            Log.d("Testing","click search")
+            val fragmentTransaction = parentFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.flFragment, SearchFilter())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
 
         val receivedData = arguments?.getString("key").toString()
-        showToast(receivedData)
+
+        val tittle=view.findViewById<TextView>(R.id.tittle)
+        tittle.text=receivedData.toString()
+
+        /**
+         * This is the code for the back button
+         */
+        val backButton: FloatingActionButton =view.findViewById(R.id.backButton)
+        backButton.setOnClickListener{
+            parentFragmentManager.popBackStack()
+
+        }
+
         lifecycleScope.launch {
             try {
 
                 showCustomProgressDialog()
                 val request=GetFoodByCanteenRequest(
                     name =receivedData.toString()
-                    //name ="Sarthak ki dukaan"
                 )
                 val response = RetrofitInstance2.getApiServiceWithToken(dataStore).getCanteenFood(request)
                 if (response.isSuccessful) {
@@ -61,7 +85,6 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener{
                     Log.d("Testing", "Successful response: ${response.body()}")
                     val canteenItems = response.body()?.foodItems.orEmpty()
 
-                    // Convert CanteenItem objects to RvModel objects
                     val dataList = canteenItems.map { canteenItem ->
                         RvModel2(canteenItem.category, canteenItem.name, canteenItem.price.toString(), canteenItem.id)
                     }
@@ -81,8 +104,6 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener{
             }
         }
 
-
-
         return view;
     }
     private fun showToast(message: String) {
@@ -99,8 +120,59 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener{
         fragmentTransaction.replace(R.id.flFragment, passing)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
-        //showToast(name.toString())
+    }
 
+    override fun onCartClick(name: Long) {
+       lifecycleScope.launch {
+           try{
+               showCustomProgressDialog()
+               val request= addCartItemsRequest(
+                   foodId = name,
+                   quantity = "1"
+               )
+               val response = RetrofitInstance2.getApiServiceWithToken(dataStore).addCartItems(request)
+               if(response.isSuccessful)
+               {
+                   showToast(response.body()?.message.toString())
+                   Log.d("ResponseCart",response.body()?.message.toString())
+               }
+
+           }catch (e:Exception){
+               showToast("Connection Error")
+           }finally{
+               dismissCustomProgressDialog()
+           }
+
+
+       }
+    }
+
+    override fun onWishClick(name: Long) {
+
+
+
+    lifecycleScope.launch {
+        try {
+            showCustomProgressDialog()
+            val email= readFromDataStore(dataStore,"email")
+            val request =addWishlistRequest(
+                userEmail = email.toString(),
+                foodId = name.toString()
+            )
+            val response= RetrofitInstance2.getApiServiceWithToken(dataStore).addWishList(request)
+            if(response.isSuccessful)
+            {
+                Log.d("Testing","Item Added to the list")
+            }
+            else{
+                Log.d("Testing","Failed to add")
+            }
+        }catch (e: Exception){
+                Log.d("Testing", "This is catch block")
+        }finally{
+            dismissCustomProgressDialog()
+        }
+    }
 
     }
     private fun showCustomProgressDialog() {

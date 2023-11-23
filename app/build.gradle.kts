@@ -81,4 +81,11 @@ dependencies {
 
     //for glide
     implementation ("com.github.bumptech.glide:recyclerview-integration:4.14.2")
+
+    //For number picker
+    implementation("com.github.travijuu:numberpicker:1.0.7")
+
+    //For RazorPay
+    implementation("com.razorpay:checkout:1.6.36")
+
 }

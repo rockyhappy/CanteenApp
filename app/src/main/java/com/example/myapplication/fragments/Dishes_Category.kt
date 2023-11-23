@@ -5,8 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import com.example.myapplication.R
+import com.google.android.material.card.MaterialCardView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class Dishes_Category : Fragment() {
@@ -19,7 +23,27 @@ class Dishes_Category : Fragment() {
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_dishes__category, container, false)
 
+
+        val filter= view.findViewById<Button>(R.id.filter)
+        filter.setOnClickListener {
+            val fragmentTransaction = parentFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.flFragment, SearchFilter())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
+
+        val backButton: FloatingActionButton =view.findViewById(R.id.backButton)
+        backButton.setOnClickListener{
+            parentFragmentManager.popBackStack()
+
+        }
+
+
+
         val lunch1= view.findViewById<CardView>(R.id.cardView1)
+
+        //val newOutlineColor = ContextCompat.getColor(requireContext(), R.drawable.round_corner)
+        //lunch1.setBackgroundResource(R.drawable.primary_color_layout)
         lunch1.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("key2","LUNCH")

@@ -22,10 +22,11 @@ import com.example.myapplication.RvAdapter
 import com.example.myapplication.RvAdapter2
 import com.example.myapplication.RvModel
 import com.example.myapplication.RvModel2
+import com.example.myapplication.addCartItemsRequest
 import kotlinx.coroutines.launch
 
 
-class ShowCategoryMenu : Fragment(), RvAdapter2.OnItemClickListener {
+class ShowCategoryMenu : Fragment(), RvAdapter2.OnItemClickListener,RvAdapter2.OnCartClickListener,RvAdapter2.OnWishClickListener {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var rvadapter : RvAdapter2
@@ -38,9 +39,9 @@ class ShowCategoryMenu : Fragment(), RvAdapter2.OnItemClickListener {
         dataStore = requireContext().createDataStore(name = "user")
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_show_category_menu, container, false)
-        rvadapter = RvAdapter2(ArrayList(), requireContext(), this)
+        rvadapter = RvAdapter2(ArrayList(), requireContext(), this,this,this)
         recyclerView = view.findViewById<RecyclerView>(R.id.rvi)
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 4, GridLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 1, GridLayoutManager.VERTICAL, false)
         recyclerView.adapter = rvadapter
         val receivedData= arguments?.getString("key2")
         lifecycleScope.launch {
@@ -95,6 +96,43 @@ class ShowCategoryMenu : Fragment(), RvAdapter2.OnItemClickListener {
         fragmentTransaction.replace(R.id.flFragment, passing)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
+
+    }
+    override fun onCartClick(name: Long) {
+        lifecycleScope.launch {
+            try{
+                showCustomProgressDialog()
+                val request= addCartItemsRequest(
+                    foodId = name,
+                    quantity = "1"
+                )
+                val response = RetrofitInstance2.getApiServiceWithToken(dataStore).addCartItems(request)
+                if(response.isSuccessful)
+                {
+                    showToast(response.body()?.message.toString())
+                    Log.d("ResponseCart",response.body()?.message.toString())
+                }
+
+            }catch (e:Exception){
+                showToast("Connection Error")
+            }finally{
+                dismissCustomProgressDialog()
+            }
+
+
+        }
+    }
+
+    override fun onWishClick(name: Long) {
+//        showToast(name.toString())
+//        val bundle =Bundle()
+//        bundle.putString("id",name.toString())
+//        val passing =ShowItem()
+//        passing.arguments=bundle
+//        val fragmentTransaction = parentFragmentManager.beginTransaction()
+//        fragmentTransaction.replace(R.id.flFragment, passing)
+//        fragmentTransaction.addToBackStack(null)
+//        fragmentTransaction.commit()
 
     }
     private fun showCustomProgressDialog() {
