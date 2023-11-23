@@ -14,6 +14,7 @@ import com.bumptech.glide.request.RequestOptions
 import android.graphics.Rect
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
@@ -48,7 +49,6 @@ class RvAdapter(
 
         val item = dataList[position]
         name.text = item.name
-        //residence.text = item.descriptionn
 
         Glide.with(context)
             .load("https://i.postimg.cc/Vkt4HFqH/726617d5b82c0367ff5faadb547da306.png")
@@ -139,6 +139,7 @@ class RvAdapter2(
             cartClickListener.onCartClick(item.id)
         }
         holder.wish.setOnClickListener {
+            holder.wish.setImageResource(R.drawable.heart_filled)
             wishClickListener.onWishClick(item.id)
         }
 
@@ -200,11 +201,16 @@ class RvAdapterCart(
     var dataList: ArrayList<FoodItemCart>,
     var context : Context,
     private val itemClickListener: OnItemClickListener,
-    private val itemDeleteListener: OnDeleteClickListener
+    private val itemDeleteListener: OnDeleteClickListener,
+    private val quantityIncreaseListener: RvAdapterCart.OnQuantityIncreaseListener,
+    private val quantityDecreaseListener: RvAdapterCart.OnQuantityDecreaseListener
 ): RecyclerView.Adapter<RvAdapterCart.MyViewHolder>() {
     private var selectedPosition: Int = 0
     inner class MyViewHolder(var view : View) : RecyclerView.ViewHolder(view){
         val delete =view.findViewById<ImageView>(R.id.delete)
+        val qunatity=view.findViewById<TextView>(R.id.quantity)
+        val minus=view.findViewById<ImageButton>(R.id.minus)
+        val plus=view.findViewById<ImageButton>(R.id.plus)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -237,6 +243,12 @@ class RvAdapterCart(
             .into(profile)
 
 
+        holder.plus.setOnClickListener {
+            quantityIncreaseListener.onPlusClick(item.id, item.price.toInt())
+        }
+        holder.minus.setOnClickListener {
+            quantityDecreaseListener.onMinusClick(item.id)
+        }
         holder.delete.setOnClickListener {
             itemDeleteListener.onDeleteClick(item.id)
         }
@@ -261,6 +273,12 @@ class RvAdapterCart(
         fun onDeleteClick(name: Long)
     }
 
+    interface OnQuantityDecreaseListener {
+        fun onMinusClick(name: Long)
+    }
+    interface OnQuantityIncreaseListener {
+        fun onPlusClick(name: Long,quantity:Int)
+    }
     fun removeItem(position: Int) {
         if (position in 0 until dataList.size) {
             dataList.removeAt(position)
@@ -269,10 +287,11 @@ class RvAdapterCart(
     }
 
     fun updateData(newDataList: List<FoodItemCart>) {
-        val diffResult = DiffUtil.calculateDiff(FoodItemCartDiffCallback(dataList, newDataList))
+        //val diffResult = DiffUtil.calculateDiff(FoodItemCartDiffCallback(dataList, newDataList))
         dataList.clear()
         dataList.addAll(newDataList)
-        diffResult.dispatchUpdatesTo(this)
+        //diffResult.dispatchUpdatesTo(this)
+        notifyDataSetChanged()
     }
     fun setSelectedPosition(position: Int) {
         selectedPosition = position
@@ -327,36 +346,36 @@ class RvAdapterSearch(
         val item = dataList[position]
         holder.name.text = item.name
 
-//        if (holder.adapterPosition == selectedPosition) {
-//            holder.name.setTextColor(ContextCompat.getColor(context, R.color.primary_color))
-//            holder.name.background = ContextCompat.getDrawable(context, R.drawable.rounded_border2)
-//        } else {
-//            holder.name.setTextColor(ContextCompat.getColor(context, R.color.grey))
-//            holder.name.background = ContextCompat.getDrawable(context, R.drawable.rounded_border)
-//        }
+        if (holder.adapterPosition == selectedPosition) {
+            holder.name.setTextColor(ContextCompat.getColor(context, R.color.primary_color))
+            holder.name.background = ContextCompat.getDrawable(context, R.drawable.rounded_border2)
+        } else {
+            holder.name.setTextColor(ContextCompat.getColor(context, R.color.grey))
+            holder.name.background = ContextCompat.getDrawable(context, R.drawable.rounded_border)
+        }
 
         holder.name.setOnClickListener {
             selectedPosition = holder.adapterPosition
-            if (holder.adapterPosition == selectedPosition) {
-                holder.name.setTextColor(ContextCompat.getColor(context, R.color.primary_color))
-                holder.name.background = ContextCompat.getDrawable(context, R.drawable.rounded_border2)
-            } else {
-                holder.name.setTextColor(ContextCompat.getColor(context, R.color.grey))
-                holder.name.background = ContextCompat.getDrawable(context, R.drawable.rounded_border)
-            }
+//            if (holder.adapterPosition == selectedPosition) {
+//                holder.name.setTextColor(ContextCompat.getColor(context, R.color.primary_color))
+//                holder.name.background = ContextCompat.getDrawable(context, R.drawable.rounded_border2)
+//            } else {
+//                holder.name.setTextColor(ContextCompat.getColor(context, R.color.grey))
+//                holder.name.background = ContextCompat.getDrawable(context, R.drawable.rounded_border)
+//            }
             notifyDataSetChanged()
             itemClickListener.onItemClick(item.name)
         }
 
         holder.view.setOnClickListener {
             selectedPosition = holder.adapterPosition
-            if (holder.adapterPosition == selectedPosition) {
-                holder.name.setTextColor(ContextCompat.getColor(context, R.color.primary_color))
-                holder.name.background = ContextCompat.getDrawable(context, R.drawable.rounded_border2)
-            } else {
-                holder.name.setTextColor(ContextCompat.getColor(context, R.color.grey))
-                holder.name.background = ContextCompat.getDrawable(context, R.drawable.rounded_border)
-            }
+//            if (holder.adapterPosition == selectedPosition) {
+//                holder.name.setTextColor(ContextCompat.getColor(context, R.color.primary_color))
+//                holder.name.background = ContextCompat.getDrawable(context, R.drawable.rounded_border2)
+//            } else {
+//                holder.name.setTextColor(ContextCompat.getColor(context, R.color.grey))
+//                holder.name.background = ContextCompat.getDrawable(context, R.drawable.rounded_border)
+//            }
             notifyDataSetChanged()
             Log.d("RvAdapterSearch", "Item clicked: ${item.name}")
             itemClickListener.onItemClick(item.name)

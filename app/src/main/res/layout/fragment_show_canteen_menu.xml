@@ -73,6 +73,7 @@
         />
 
     <Button
+        android:id="@+id/filter"
         android:layout_width="42dp"
         android:layout_height="48dp"
         android:layout_marginTop="100dp"
@@ -86,12 +87,13 @@
         android:id="@+id/rvi"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="70dp"
         android:layout_marginTop="180dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

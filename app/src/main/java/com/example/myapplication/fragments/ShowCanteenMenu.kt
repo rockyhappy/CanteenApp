@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.datastore.core.DataStore
@@ -25,6 +26,9 @@ import com.example.myapplication.RvModel2
 import com.example.myapplication.SpaceItemDecoration
 import com.example.myapplication.addCartItemsRequest
 import com.example.myapplication.addToCartRequest
+import com.example.myapplication.addWishlistRequest
+import com.example.myapplication.readFromDataStore
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
 
 class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2.OnCartClickListener,RvAdapter2.OnWishClickListener{
@@ -43,15 +47,30 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
         recyclerView = view.findViewById<RecyclerView>(R.id.rvi)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 1, GridLayoutManager.VERTICAL, false)
         recyclerView.adapter = rvadapter
-        val spaceHeight = resources.getDimensionPixelSize(R.dimen.space_50dp)
-//        val itemDecoration = SpaceItemDecoration(spaceHeight)
-//        recyclerView.addItemDecoration(itemDecoration)
 
+
+        val filter= view.findViewById<Button>(R.id.filter)
+        filter.setOnClickListener {
+            Log.d("Testing","click search")
+            val fragmentTransaction = parentFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.flFragment, SearchFilter())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
 
         val receivedData = arguments?.getString("key").toString()
-        //showToast(receivedData)
+
         val tittle=view.findViewById<TextView>(R.id.tittle)
         tittle.text=receivedData.toString()
+
+        /**
+         * This is the code for the back button
+         */
+        val backButton: FloatingActionButton =view.findViewById(R.id.backButton)
+        backButton.setOnClickListener{
+            parentFragmentManager.popBackStack()
+
+        }
 
         lifecycleScope.launch {
             try {
@@ -59,7 +78,6 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
                 showCustomProgressDialog()
                 val request=GetFoodByCanteenRequest(
                     name =receivedData.toString()
-                    //name ="Sarthak ki dukaan"
                 )
                 val response = RetrofitInstance2.getApiServiceWithToken(dataStore).getCanteenFood(request)
                 if (response.isSuccessful) {
@@ -67,7 +85,6 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
                     Log.d("Testing", "Successful response: ${response.body()}")
                     val canteenItems = response.body()?.foodItems.orEmpty()
 
-                    // Convert CanteenItem objects to RvModel objects
                     val dataList = canteenItems.map { canteenItem ->
                         RvModel2(canteenItem.category, canteenItem.name, canteenItem.price.toString(), canteenItem.id)
                     }
@@ -103,9 +120,6 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
         fragmentTransaction.replace(R.id.flFragment, passing)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
-        //showToast(name.toString())
-
-
     }
 
     override fun onCartClick(name: Long) {
@@ -134,15 +148,31 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
     }
 
     override fun onWishClick(name: Long) {
-        showToast(name.toString())
-//        val bundle =Bundle()
-//        bundle.putString("id",name.toString())
-//        val passing =ShowItem()
-//        passing.arguments=bundle
-//        val fragmentTransaction = parentFragmentManager.beginTransaction()
-//        fragmentTransaction.replace(R.id.flFragment, passing)
-//        fragmentTransaction.addToBackStack(null)
-//        fragmentTransaction.commit()
+
+
+
+    lifecycleScope.launch {
+        try {
+            showCustomProgressDialog()
+            val email= readFromDataStore(dataStore,"email")
+            val request =addWishlistRequest(
+                userEmail = email.toString(),
+                foodId = name.toString()
+            )
+            val response= RetrofitInstance2.getApiServiceWithToken(dataStore).addWishList(request)
+            if(response.isSuccessful)
+            {
+                Log.d("Testing","Item Added to the list")
+            }
+            else{
+                Log.d("Testing","Failed to add")
+            }
+        }catch (e: Exception){
+                Log.d("Testing", "This is catch block")
+        }finally{
+            dismissCustomProgressDialog()
+        }
+    }
 
     }
     private fun showCustomProgressDialog() {

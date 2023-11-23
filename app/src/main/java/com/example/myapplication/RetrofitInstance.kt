@@ -53,7 +53,7 @@ object RetrofitInstance2 {
 
 
         val authInterceptor = AuthInterceptor(jwtToken)
-        val timeout = 30L // Adjust this value as needed
+        val timeout = 120L // Adjust this value as needed
         val client = OkHttpClient.Builder()
             .addInterceptor(authInterceptor)
             .connectTimeout(timeout, TimeUnit.SECONDS)
@@ -72,8 +72,8 @@ object RetrofitInstance2 {
 
     // Function to get the JWT token from DataStore
     suspend fun getApiServiceWithToken(dataStore: DataStore<Preferences>): ApiService {
-        //val jwtToken = readFromDataStore(dataStore, "token").toString()
-        val jwtToken= "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYWNAZ21haWwuY29tIiwiaWF0IjoxNzAwMzMxMjEyLCJleHAiOjE3MDA4NTY4MTJ9.KluAQX4fH8M_L08s4VDyC6nP3Bnf64gyY596BzJ_8EM"
+        val jwtToken = readFromDataStore(dataStore, "token").toString()
+        //val jwtToken= "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJHYXJlZWJAZ21haWwuY29tIiwiaWF0IjoxNzAwNTAxNTQ1LCJleHAiOjE3MDEwMjcxNDV9.qWroHL5QaRMKBFJIPbt7vh6fUK4_n4AjfkPS0HA0ykw"
         return createApiService(jwtToken)
     }
 }

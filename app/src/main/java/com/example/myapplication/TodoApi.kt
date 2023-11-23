@@ -51,9 +51,25 @@ interface ApiService {
     @POST("api/v1/cart/calculateDiscountedPrice")
     suspend fun calculateDiscountedPrice(@Body couponCodeRequest: CouponCodeRequest): Response<DiscountedPriceResponse>
 
-    @DELETE("api/v1/cart/delete-cart-item")
+    @POST("api/v1/cart/delete-cart-item")
     suspend fun deleteCartItem(@Body request: DeleteCartItemRequest): Response<DeleteCartItemResponse>
 
     @GET("api/v1/cart/total-bill")
     suspend fun getTotalBill(): Double
+
+    @POST("api/v1/wishlist/add")
+    suspend fun addWishList(@Body request : addWishlistRequest) : Response<addWishlistResponse>
+
+    @GET("api/v1/wishlist/get")
+    suspend fun getWishlist() : Response<List<FoodItemWishlist>>
+
+    @POST("api/v1/wishlist/delete")
+    suspend fun deleteFromWishlist(@Body request:deleteFromWishlistRequest) :Response<addWishlistResponse>
+
+
+    @POST("api/v1/payments/create-order")
+    suspend fun paymentCreateOrder(@Body request: PaymentInfo) : Response<Order>
+
+    @POST("api/v1/payments/capture-payment")
+    suspend fun capturePayment(@Body request: PaymentInfo2) :Response<Payment>
 }

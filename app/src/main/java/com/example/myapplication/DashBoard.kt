@@ -3,6 +3,8 @@ package com.example.myapplication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -21,11 +23,14 @@ import com.example.myapplication.fragments.Breakfast
 import com.example.myapplication.fragments.Dishes_Category
 import com.example.myapplication.fragments.MainDashboard
 import com.example.myapplication.fragments.cart
+import com.example.myapplication.fragments.wishlist
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import com.razorpay.PaymentResultListener
 import kotlinx.coroutines.launch
 
 
-class DashBoard : AppCompatActivity() {
+class DashBoard : AppCompatActivity(), PaymentResultListener {
     lateinit var toggle: ActionBarDrawerToggle
     private lateinit var binding: ActivityDashBoardBinding
     private lateinit var dataStore: DataStore<Preferences>
@@ -73,22 +78,22 @@ class DashBoard : AppCompatActivity() {
 
             }
         }
-        val bottomNavigation = findViewById<MeowBottomNavigation>(R.id.btmnav)
-
-        val homeItem = MeowBottomNavigation.Model(1, R.drawable.baseline_home_24)
-        val menu = MeowBottomNavigation.Model(2, R.drawable.baseline_restaurant_menu_24)
-        val searchItem = MeowBottomNavigation.Model(3, R.drawable.baseline_bookmark_border_24)
-        val profileItem = MeowBottomNavigation.Model(4, R.drawable.baseline_shopping_cart_24)
-        val settingsItem = MeowBottomNavigation.Model(5, R.drawable.ic_profile)
-
-
-
-        bottomNavigation.add(homeItem)
-        bottomNavigation.add(menu)
-        bottomNavigation.add(searchItem)
-        bottomNavigation.add(profileItem)
-        bottomNavigation.add(settingsItem)
-        bottomNavigation.show(1, true)
+//        val bottomNavigation = findViewById<MeowBottomNavigation>(R.id.btmnav)
+//
+//        val homeItem = MeowBottomNavigation.Model(1, R.drawable.baseline_home_24)
+//        val menu = MeowBottomNavigation.Model(2, R.drawable.baseline_restaurant_menu_24)
+//        val searchItem = MeowBottomNavigation.Model(3, R.drawable.baseline_bookmark_border_24)
+//        val profileItem = MeowBottomNavigation.Model(4, R.drawable.baseline_shopping_cart_24)
+//        val settingsItem = MeowBottomNavigation.Model(5, R.drawable.ic_profile)
+//
+//
+//
+//        bottomNavigation.add(homeItem)
+//        bottomNavigation.add(menu)
+//        bottomNavigation.add(searchItem)
+//        bottomNavigation.add(profileItem)
+//        bottomNavigation.add(settingsItem)
+//        bottomNavigation.show(1, true)
 
 
         //val topAppBar: Toolbar = findViewById(R.id.topAppBar)
@@ -143,70 +148,118 @@ class DashBoard : AppCompatActivity() {
         /**
          * This is working when the item  is not selected
          */
-        bottomNavigation.setOnClickMenuListener { item ->
-
-            when (item.id) {
-                1 -> {
-                    supportFragmentManager.popBackStack()
-                    supportFragmentManager.beginTransaction().apply {
-                        replace(R.id.flFragment, MainDashboard())
-                        commit()
-                        }
-                    }
-
-                2 -> {
-
-                        supportFragmentManager.popBackStack()
-                        supportFragmentManager.beginTransaction().apply {
-                        replace(R.id.flFragment, Dishes_Category())
-                        commit()
-
-                        }
-                }
-                3 -> {
-
-                }
-                4 -> {
-
-                    supportFragmentManager.popBackStack()
-                    supportFragmentManager.beginTransaction().apply {
-                        replace(R.id.flFragment, cart())
-                        commit()
-                    }
-                }
-                5 -> {
-
-                }
-            }
-        }
+//        bottomNavigation.setOnClickMenuListener { item ->
+//
+//            when (item.id) {
+//                1 -> {
+//                    supportFragmentManager.popBackStack()
+//                    supportFragmentManager.beginTransaction().apply {
+//                        replace(R.id.flFragment, MainDashboard())
+//                        commit()
+//                        }
+//                    }
+//
+//                2 -> {
+//
+//                        supportFragmentManager.popBackStack()
+//                        supportFragmentManager.beginTransaction().apply {
+//                        replace(R.id.flFragment, Dishes_Category())
+//                        commit()
+//
+//                        }
+//                }
+//                3 -> {
+//
+//                }
+//                4 -> {
+//
+//                    supportFragmentManager.popBackStack()
+//                    supportFragmentManager.beginTransaction().apply {
+//                        replace(R.id.flFragment, cart())
+//                        commit()
+//                    }
+//                }
+//                5 -> {
+//                    lifecycleScope.launch {
+//                        try{
+//                            save("token","null")
+//                            startActivity(Intent(this@DashBoard, Login::class.java))
+//                            finish()
+//                        }catch (e:Exception){ }finally {}
+//                    }
+//
+//                }
+//            }
+//        }
         /**
          * This is working when the item  is selected and then we are re-selecting the same item
          */
-        bottomNavigation.setOnReselectListener {item ->
-            when (item.id) {
-                1 -> {
-                    supportFragmentManager.popBackStack()
-                    supportFragmentManager.beginTransaction().apply {
-                        replace(R.id.flFragment, MainDashboard())
-                        commit()
-                    }
-                }
-                2 -> {
-                    // Handle the "Search" tab selection
+//        bottomNavigation.setOnReselectListener {item ->
+//            when (item.id) {
+//                1 -> {
+//                    supportFragmentManager.popBackStack()
+//                    supportFragmentManager.beginTransaction().apply {
+//                        replace(R.id.flFragment, MainDashboard())
+//                        commit()
+//                    }
+//                }
+//                2 -> {
+//                    // Handle the "Search" tab selection
+//
+//                    supportFragmentManager.popBackStack()
+//                    supportFragmentManager.beginTransaction().apply {
+//                        replace(R.id.flFragment, Dishes_Category())
+//                        commit()
+//
+//                    }
+//                }
+//                3 -> {
+//                    // Handle the "Profile" tab selection
+//                }
+//                4 -> {
+//                    // Handle the "Settings" tab selection
+//
+//                }
+//            }
+//        }
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
-                    supportFragmentManager.popBackStack()
-                    supportFragmentManager.beginTransaction().apply {
-                        replace(R.id.flFragment, Dishes_Category())
-                        commit()
-
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.action_home -> {
+                    // Handle home action
+                    supportFragmentManager.beginTransaction().replace(R.id.flFragment, MainDashboard()).commit()
+                    true
+                }
+                R.id.action_menu -> {
+                    // Handle menu action
+                    supportFragmentManager.beginTransaction().replace(R.id.flFragment, Dishes_Category()).commit()
+                    true
+                }
+                R.id.action_search -> {
+                    // Handle search action
+                    supportFragmentManager.beginTransaction().replace(R.id.flFragment, wishlist()).commit()
+                    // Add your logic for handling search
+                    true
+                }
+                R.id.action_cart -> {
+                    // Handle cart action
+                    supportFragmentManager.beginTransaction().replace(R.id.flFragment, cart()).commit()
+                    true
+                }
+                R.id.action_profile -> {
+                    // Handle profile action
+                    // Add your logic for handling profile
+                    lifecycleScope.launch {
+                        try{
+                            save("token","null")
+                            startActivity(Intent(this@DashBoard, Login::class.java))
+                            finish()
+                        }catch (e:Exception){ }finally {}
                     }
+                    true
                 }
-                3 -> {
-                    // Handle the "Profile" tab selection
-                }
-                4 -> {
-                    // Handle the "Settings" tab selection
-                }
+                else -> false
             }
         }
 
@@ -231,5 +284,36 @@ class DashBoard : AppCompatActivity() {
         dataStore.edit{temp ->
             temp[dataStoreKey]=value
         }
+    }
+
+    override fun onPaymentSuccess(razorpayPaymentId: String?) {
+
+        /**
+         * Payment Gateway razorPaymentId
+         */
+        Log.d("RazorPay",razorpayPaymentId.toString())
+        val totalAmount=cart.totalAmount
+        lifecycleScope.launch {
+            val request=PaymentInfo2(
+                paymentId = razorpayPaymentId.toString(),
+                amount = totalAmount
+            )
+            val response=RetrofitInstance2.getApiServiceWithToken(dataStore).capturePayment(request)
+            if(response.isSuccessful)
+            {
+                showToast("Order in prepration")
+            }
+            else {
+                showToast("Payment not verified")
+            }
+        }
+
+        //showToast("$razorpayPaymentId")
+
+    }
+
+    override fun onPaymentError(code: Int, response: String?) {
+        // Handle payment failure
+        showToast("Payment Failed. Code: $code, Response: $response")
     }
 }

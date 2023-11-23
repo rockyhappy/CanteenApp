@@ -1,5 +1,6 @@
 package com.example.myapplication.fragments
 
+import android.app.Dialog
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -31,6 +32,7 @@ import kotlinx.coroutines.launch
 class ForgotPassward : Fragment(R.layout.fragment_forgot_passward) {
 
     private lateinit var dataStore: DataStore<Preferences>
+    private var dialog: Dialog? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,7 +54,8 @@ class ForgotPassward : Fragment(R.layout.fragment_forgot_passward) {
             button.isEnabled = false
             container.isEnabled=false
             container.isFocusable = false
-            progressBar.visibility = View.VISIBLE
+//            progressBar.visibility = View.VISIBLE
+            showCustomProgressDialog()
             var Email=collection.text.toString()
             Email=Email.trim()
 
@@ -80,7 +83,8 @@ class ForgotPassward : Fragment(R.layout.fragment_forgot_passward) {
                 button.isEnabled = true
                 container.isEnabled=true
                 container.isFocusable = true
-                progressBar.visibility = View.GONE
+//                progressBar.visibility = View.GONE
+                dismissCustomProgressDialog()
             }
 
             if(!flag)
@@ -93,17 +97,19 @@ class ForgotPassward : Fragment(R.layout.fragment_forgot_passward) {
                         val response = RetrofitInstance.apiService.ForgotPassward(forgotPasswordRequest)
                         Log.d("error", response.body().toString())
                         if (response.isSuccessful) {
-                            if (response.body()?.token.toString() == "Check your email for OTP") {
                                 dataStore = context?.createDataStore(name = "user")!!
                                 save("Email", Email)
                                 val fragmentTransaction = parentFragmentManager.beginTransaction()
                                 fragmentTransaction.replace(R.id.flFragment, VerifyMail())
                                 fragmentTransaction.addToBackStack(null)
                                 fragmentTransaction.commit()
-                            } else {
-                                showToast("User already Exists")
-                            }
                         }
+                        else {
+                            userMailIncorrect.text ="Invalid Credentials"
+                            val text1: TextInputLayout = view.findViewById(R.id.textInputLayout)
+                            text1.setBackgroundResource(R.drawable.button_layout)
+                        }
+
                     }catch(e : Exception)
                     {
                         showToast("Connection Error")
@@ -112,7 +118,8 @@ class ForgotPassward : Fragment(R.layout.fragment_forgot_passward) {
                         button.isEnabled = true
                         container.isEnabled=true
                         container.isFocusable = true
-                        progressBar.visibility = View.GONE
+//                        progressBar.visibility = View.GONE
+                        dismissCustomProgressDialog()
                     }
                     //Log.d("API Error", "Response code: ${response.code()}, Message: ${response.message()}")
                 }
@@ -149,5 +156,20 @@ class ForgotPassward : Fragment(R.layout.fragment_forgot_passward) {
         dataStore.edit{temp ->
             temp[dataStoreKey]=value
         }
+    }
+
+    private fun showCustomProgressDialog() {
+        dialog = Dialog(requireContext())
+        dialog?.setContentView(R.layout.custom_dialog_loading)
+        dialog?.setCancelable(false)
+
+        val window = dialog?.window
+        window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        dialog?.show()
+    }
+    private fun dismissCustomProgressDialog() {
+        dialog?.dismiss()
+        dialog = null
     }
 }
