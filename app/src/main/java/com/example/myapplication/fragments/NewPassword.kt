@@ -1,5 +1,6 @@
 package com.example.myapplication.fragments
 
+import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -30,7 +31,7 @@ import java.util.regex.Pattern
 class NewPassword : Fragment(R.layout.fragment_new_password) {
 
     private lateinit var dataStore: DataStore<Preferences>
-
+    private var dialog: Dialog? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dataStore = requireContext().createDataStore(name = "user")
@@ -60,7 +61,7 @@ class NewPassword : Fragment(R.layout.fragment_new_password) {
             button.isEnabled = false
             container.isEnabled=false
             container.isFocusable = false
-            progressBar.visibility = View.VISIBLE
+            showCustomProgressDialog()
 
 
             var collection : TextInputEditText =view.findViewById(R.id.passkey)
@@ -110,7 +111,7 @@ class NewPassword : Fragment(R.layout.fragment_new_password) {
                 button.isEnabled = true
                 container.isEnabled=true
                 container.isFocusable = true
-                progressBar.visibility = View.GONE
+                dismissCustomProgressDialog()
             }
 
             if(!flag)
@@ -125,14 +126,10 @@ class NewPassword : Fragment(R.layout.fragment_new_password) {
                         val response=RetrofitInstance.apiService.ResetPassword(resetPasswordRequest)
                         Log.d("error", response.body().toString())
                         if (response.isSuccessful) {
-                            if (response.body()?.token.toString()=="Password has been reset Successfully") {
                                 val fragmentTransaction = parentFragmentManager.beginTransaction()
                                 fragmentTransaction.replace(R.id.flFragment, WellDone())
                                 fragmentTransaction.addToBackStack(null)
                                 fragmentTransaction.commit()
-                            } else {
-                                showToast("User already Exists")
-                            }
                         }
                     }catch (e:Exception)
                     {
@@ -142,7 +139,7 @@ class NewPassword : Fragment(R.layout.fragment_new_password) {
                         button.isEnabled = true
                         container.isEnabled=true
                         container.isFocusable = true
-                        progressBar.visibility = View.GONE
+                        dismissCustomProgressDialog()
                     }
                 }
 
@@ -151,7 +148,7 @@ class NewPassword : Fragment(R.layout.fragment_new_password) {
                 button.isEnabled = true
                 container.isEnabled=true
                 container.isFocusable = true
-                progressBar.visibility = View.GONE
+                dismissCustomProgressDialog()
             }
         }
 
@@ -177,4 +174,19 @@ class NewPassword : Fragment(R.layout.fragment_new_password) {
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
+    private fun showCustomProgressDialog() {
+        dialog = Dialog(requireContext())
+        dialog?.setContentView(R.layout.custom_dialog_loading)
+        dialog?.setCancelable(false)
+
+        val window = dialog?.window
+        window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        dialog?.show()
+    }
+    private fun dismissCustomProgressDialog() {
+        dialog?.dismiss()
+        dialog = null
+    }
+
 }
