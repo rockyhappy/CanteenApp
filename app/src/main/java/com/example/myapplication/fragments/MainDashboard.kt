@@ -60,7 +60,7 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
             updateRecyclerView(sharedViewModel.canteenItems.value!!)
         }
 
-    val fullCategory = view.findViewById<TextView>(R.id.fullCategory)
+        val fullCategory = view.findViewById<TextView>(R.id.fullCategory)
         fullCategory.setOnClickListener {
             val fragmentTransaction = parentFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.flFragment, Dishes_Category())
@@ -289,8 +289,6 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
         rvadapter.updateData(dataList)
     }
 
-
-    // Assuming you have a function to observe the data in your SharedViewModel
     private fun observeCanteenItems() {
         sharedViewModel.canteenItems.observe(viewLifecycleOwner, Observer { canteenItems ->
             if (canteenItems.isNullOrEmpty()) {
