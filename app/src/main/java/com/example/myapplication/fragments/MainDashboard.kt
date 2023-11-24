@@ -27,6 +27,7 @@ import com.example.myapplication.RvAdapter
 import com.example.myapplication.RvModel
 import kotlinx.coroutines.launch
 import android.speech.RecognizerIntent
+import android.widget.ProgressBar
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -41,6 +42,7 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
     private lateinit var dataStore: DataStore<Preferences>
     private var dialog: Dialog? = null
     private  val sharedViewModel: SharedViewModel  by activityViewModels()
+    private lateinit var progressBar: ProgressBar
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,10 +55,12 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
         recyclerView.adapter = rvadapter
         val pagerSnapHelper = PagerSnapHelper()
         pagerSnapHelper.attachToRecyclerView(recyclerView)
-
+        progressBar = view.findViewById(R.id.progressBar)
         if (sharedViewModel.canteenItems.value.isNullOrEmpty()) {
+            showProgressBar()
             fetchDataFromApi()
         } else {
+            hideProgressBar()
             updateRecyclerView(sharedViewModel.canteenItems.value!!)
         }
 
@@ -257,7 +261,7 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
         // Use lifecycleScope instead of viewModelScope
         lifecycleScope.launch {
             try {
-                showCustomProgressDialog()
+                //showCustomProgressDialog()
                 val response = RetrofitInstance2.getApiServiceWithToken(dataStore).getCanteens()
                 if (response.isSuccessful) {
                     Log.d("Testing", response.body().toString())
@@ -277,7 +281,8 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
                 Log.d("Testing", "Network Error")
                 Log.e("Testing", "Network Error: ${e.message}", e)
             } finally {
-                dismissCustomProgressDialog()
+                //dismissCustomProgressDialog()
+                hideProgressBar()
             }
         }
     }
@@ -305,7 +310,13 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
         observeCanteenItems()
     }
 
+    private fun showProgressBar() {
+        progressBar.visibility = View.VISIBLE
+    }
 
+    private fun hideProgressBar() {
+        progressBar.visibility = View.GONE
+    }
 
 }
 

@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.datastore.core.DataStore
@@ -42,6 +43,7 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
     private lateinit var dataStore: DataStore<Preferences>
     private var dialog: Dialog? = null
     private  val canteenViewModel: CanteenMenuViewModel by  activityViewModels()
+    private lateinit var progressBar: ProgressBar
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -76,10 +78,12 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
         backButton.setOnClickListener{
             parentFragmentManager.popBackStack()
         }
-
+        progressBar = view.findViewById(R.id.progressBar)
         if (canteenViewModel.getCanteenItems(receivedData).isNullOrEmpty()) {
+            showProgressBar()
             fetchDataFromApi()
         } else {
+            hideProgressBar()
             updateCanteenRecyclerView(canteenViewModel.getCanteenItems(receivedData)!!)
         }
 
@@ -132,7 +136,7 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
 
     lifecycleScope.launch {
         try {
-            showCustomProgressDialog()
+            //showCustomProgressDialog()
             val email= readFromDataStore(dataStore,"email")
             val request =addWishlistRequest(
                 userEmail = email.toString(),
@@ -149,7 +153,7 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
         }catch (e: Exception){
                 Log.d("Testing", "This is catch block")
         }finally{
-            dismissCustomProgressDialog()
+            //dismissCustomProgressDialog()
         }
     }
 
@@ -171,7 +175,7 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
     private fun fetchDataFromApi() {
         lifecycleScope.launch {
             try {
-                showCustomProgressDialog()
+                //showCustomProgressDialog()
                 val receivedData = arguments?.getString("key").toString()
                 val request = GetFoodByCanteenRequest(
                     name = receivedData
@@ -192,15 +196,37 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
                 Log.d("Testing", "Network Error")
                 Log.e("Testing", "Network Error: ${e.message}", e)
             } finally {
-                dismissCustomProgressDialog()
+                //dismissCustomProgressDialog()
+                hideProgressBar()
             }
         }
     }
     private fun updateCanteenRecyclerView(canteenItems: List<FoodItem>) {
         val dataList = canteenItems.map { canteenItem ->
-            RvModel2(canteenItem.category, canteenItem.name, canteenItem.price.toString(), canteenItem.id)
+            FoodItem(
+                id = canteenItem.id,
+                name = canteenItem.name,
+                category = canteenItem.category,
+                price = canteenItem.price,
+                canteenId = canteenItem.canteenId,
+                foodImage = canteenItem.foodImage,
+                description = canteenItem.description,
+                averageRating = canteenItem.averageRating,
+                isInWishlist = canteenItem.isInWishlist,
+                isInCart = canteenItem.isInCart,
+                ingredients = canteenItem.ingredients,
+                ingredientImageList = canteenItem.ingredientImageList
+            )
         }
         rvadapter.updateData(dataList)
     }
 
+
+    private fun showProgressBar() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    private fun hideProgressBar() {
+        progressBar.visibility = View.GONE
+    }
 }

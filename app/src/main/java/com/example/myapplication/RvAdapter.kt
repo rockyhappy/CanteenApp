@@ -2,6 +2,8 @@ package com.example.myapplication
 
 import android.app.PendingIntent.getActivity
 import android.content.Context
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -94,7 +96,7 @@ class RvAdapter(
  * This is the recycler view adapter for the showing of items
  */
 class RvAdapter2(
-    var dataList: ArrayList<RvModel2>,
+    var dataList: ArrayList<FoodItem>,
     var context : Context,
     private val itemClickListener: OnItemClickListener,
     private val cartClickListener: OnCartClickListener,
@@ -123,7 +125,7 @@ class RvAdapter2(
 
         val item = dataList[position]
         name.text = item.name
-        residence.text = item.price
+        residence.text = item.price.toString()
 
         Glide.with(context)
             .load("https://i.postimg.cc/xTMVqcLJ/Break-fast.png")
@@ -135,12 +137,25 @@ class RvAdapter2(
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(profile)
 
+
         holder.cart.setOnClickListener {
             cartClickListener.onCartClick(item.id)
         }
-        holder.wish.setOnClickListener {
+        if(item.isInWishlist)
+        {
             holder.wish.setImageResource(R.drawable.heart_filled)
+        }
+        if(item.isInCart)
+        {
+            holder.cart.isEnabled=false
+            holder.cart.setBackgroundResource(R.drawable.baseline_home_24)
+            holder.cart.isEnabled=true
+        }
+        holder.wish.setOnClickListener {
+            holder.wish.setColorFilter(Color.TRANSPARENT, PorterDuff.Mode.SRC_IN)
+            holder.wish.isEnabled=false
             wishClickListener.onWishClick(item.id)
+            holder.wish.isEnabled=true
         }
 
         holder.view.setOnClickListener {
@@ -165,7 +180,7 @@ class RvAdapter2(
     interface OnWishClickListener {
         fun onWishClick(name: Long)
     }
-    fun updateData(newDataList: List<RvModel2>) {
+    fun updateData(newDataList: List<FoodItem>) {
         dataList.clear()
         dataList.addAll(newDataList)
         notifyDataSetChanged()

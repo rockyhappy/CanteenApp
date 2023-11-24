@@ -179,10 +179,27 @@ class ShowCategoryMenu : Fragment(), RvAdapter2.OnItemClickListener,RvAdapter2.O
             }
         }
     }
+
+
     private fun updateCategoryRecyclerView(canteenItems: List<FoodItem>) {
         val dataList = canteenItems.map { canteenItem ->
-            RvModel2(canteenItem.category, canteenItem.name, canteenItem.price.toString(), canteenItem.id)
+            FoodItem(
+                id = canteenItem.id,
+                name = canteenItem.name,
+                category = canteenItem.category,
+                price = canteenItem.price,
+                canteenId = canteenItem.canteenId,
+                foodImage = canteenItem.foodImage,
+                description = canteenItem.description,
+                averageRating = canteenItem.averageRating,
+                isInWishlist = canteenItem.isInWishlist,
+                isInCart = canteenItem.isInCart,
+                ingredients = canteenItem.ingredients,
+                ingredientImageList = canteenItem.ingredientImageList
+            )
         }
         rvadapter.updateData(dataList)
     }
+
+
 }

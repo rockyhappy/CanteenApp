@@ -100,6 +100,9 @@ data class FoodItem(
     val canteenId: Long,
     val foodImage: String,
     val description: String,
+    val averageRating: Double,
+    val isInWishlist: Boolean,
+    val isInCart: Boolean,
     val ingredients: List<String>,
     val ingredientImageList: List<String>
 )
@@ -171,8 +174,8 @@ data class FoodItemWishlist(
     val canteenId: Long,
     val foodImage: String,
     val description: String,
-    val ingredients: List<String>,  // You might need to adjust the type based on the actual data
-    val ingredientImageList: List<String>  // You might need to adjust the type based on the actual data
+    val ingredients: List<String>,
+    val ingredientImageList: List<String>
 )
 
 
@@ -193,7 +196,7 @@ data class Order(
     val receipt: String,
     val id: String,
     val entity: String,
-    val offer_id: String?,  // Nullable since it can be null in the JSON
+    val offer_id: String?,
     val status: String,
     val attempts: Int
 )

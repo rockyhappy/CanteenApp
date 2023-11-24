@@ -66,45 +66,6 @@ class ShowItem : Fragment() {
         }
 
 
-
-//        lifecycleScope.launch{
-//            try{
-//                showCustomProgressDialog()
-//                val response = RetrofitInstance2.getApiServiceWithToken(dataStore).getFoodDetail(receivedData.toString())
-//                Log.d("response",response.toString())
-//                if(response.isSuccessful)
-//                {
-//                    Glide.with(requireContext())
-//                        .load("https://i.postimg.cc/xTMVqcLJ/Break-fast.png")
-//                        .apply(
-//                            RequestOptions()
-//                                .placeholder(R.drawable.baseline_person_24)
-//                                .error(R.drawable.baseline_home_24)
-//                        )
-//                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                        .into(mainImage)
-//                    heading1.text=response.body()?.name
-//                    price.text=response.body()?.price.toString()
-//                    description.text=response.body()?.description.toString()
-//                    textview1.text=response.body()!!.ingredients[0].toString()
-//                    textview2.text=response.body()!!.ingredients[1].toString()
-//                    textview3.text=response.body()!!.ingredients[2].toString()
-//                }
-//                else {
-//                    showToast("Error")
-//                    Log.d("Error",response.body().toString())
-//                }
-//            }catch(e: Exception){
-//                showToast("Error")
-//
-//            }finally {
-//                showToast("workDone")
-//                dismissCustomProgressDialog()
-//            }
-//        }
-
-
-
         val wish = view.findViewById<ImageView>(R.id.wish)
         wish.setOnClickListener {
             wish.setImageResource(R.drawable.heart_filled)
