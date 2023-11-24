@@ -77,43 +77,11 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
             parentFragmentManager.popBackStack()
         }
 
-
-        if (canteenViewModel.canteenItems.value.isNullOrEmpty()) {
+        if (canteenViewModel.getCanteenItems(receivedData).isNullOrEmpty()) {
             fetchDataFromApi()
         } else {
-            updateCanteenRecyclerView(canteenViewModel.canteenItems.value!!)
+            updateCanteenRecyclerView(canteenViewModel.getCanteenItems(receivedData)!!)
         }
-//        lifecycleScope.launch {
-//            try {
-//
-//                showCustomProgressDialog()
-//                val request=GetFoodByCanteenRequest(
-//                    name =receivedData.toString()
-//                )
-//                val response = RetrofitInstance2.getApiServiceWithToken(dataStore).getCanteenFood(request)
-//                if (response.isSuccessful) {
-//                    Log.d("Testing",response.body().toString())
-//                    Log.d("Testing", "Successful response: ${response.body()}")
-//                    val canteenItems = response.body()?.foodItems.orEmpty()
-//
-//                    val dataList = canteenItems.map { canteenItem ->
-//                        RvModel2(canteenItem.category, canteenItem.name, canteenItem.price.toString(), canteenItem.id)
-//                    }
-//                    rvadapter.updateData(dataList)
-//                } else {
-//                    // Handle the error
-//                    Log.d("Testing",response.body().toString())
-//                    Log.d("Testing", "Response code: ${response.code()}, Response body: ${response.body()}")
-//                }
-//            } catch (e: Exception) {
-//                // Handle network or other exceptions
-//                Log.d("Testing","Network Error")
-//                Log.e("Testing", "Network Error: ${e.message}", e)
-//            }
-//            finally {
-//                dismissCustomProgressDialog()
-//            }
-//        }
 
         return view;
     }
@@ -213,9 +181,7 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
                     Log.d("Testing", response.body().toString())
                     Log.d("Testing", "Successful response: ${response.body()}")
                     val canteenItems = response.body()?.foodItems.orEmpty()
-
-                    // Update ViewModel
-                    canteenViewModel.setCanteenItems(canteenItems)
+                    canteenViewModel.setCanteenItems(receivedData, canteenItems)
                     updateCanteenRecyclerView(canteenItems)
 
                 } else {
