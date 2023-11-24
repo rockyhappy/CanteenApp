@@ -78,31 +78,10 @@ class DashBoard : AppCompatActivity(), PaymentResultListener {
 
             }
         }
-//        val bottomNavigation = findViewById<MeowBottomNavigation>(R.id.btmnav)
-//
-//        val homeItem = MeowBottomNavigation.Model(1, R.drawable.baseline_home_24)
-//        val menu = MeowBottomNavigation.Model(2, R.drawable.baseline_restaurant_menu_24)
-//        val searchItem = MeowBottomNavigation.Model(3, R.drawable.baseline_bookmark_border_24)
-//        val profileItem = MeowBottomNavigation.Model(4, R.drawable.baseline_shopping_cart_24)
-//        val settingsItem = MeowBottomNavigation.Model(5, R.drawable.ic_profile)
-//
-//
-//
-//        bottomNavigation.add(homeItem)
-//        bottomNavigation.add(menu)
-//        bottomNavigation.add(searchItem)
-//        bottomNavigation.add(profileItem)
-//        bottomNavigation.add(settingsItem)
-//        bottomNavigation.show(1, true)
 
-
-        //val topAppBar: Toolbar = findViewById(R.id.topAppBar)
-        //setSupportActionBar(topAppBar)
-        //supportActionBar?.title=""
 
         var drawerLayout : DrawerLayout = findViewById(R.id.drawerLayout)
         toggle = ActionBarDrawerToggle(this@DashBoard, drawerLayout, R.string.open, R.string.close)
-        //toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white))
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
@@ -145,83 +124,7 @@ class DashBoard : AppCompatActivity(), PaymentResultListener {
             true
         }
 
-        /**
-         * This is working when the item  is not selected
-         */
-//        bottomNavigation.setOnClickMenuListener { item ->
-//
-//            when (item.id) {
-//                1 -> {
-//                    supportFragmentManager.popBackStack()
-//                    supportFragmentManager.beginTransaction().apply {
-//                        replace(R.id.flFragment, MainDashboard())
-//                        commit()
-//                        }
-//                    }
-//
-//                2 -> {
-//
-//                        supportFragmentManager.popBackStack()
-//                        supportFragmentManager.beginTransaction().apply {
-//                        replace(R.id.flFragment, Dishes_Category())
-//                        commit()
-//
-//                        }
-//                }
-//                3 -> {
-//
-//                }
-//                4 -> {
-//
-//                    supportFragmentManager.popBackStack()
-//                    supportFragmentManager.beginTransaction().apply {
-//                        replace(R.id.flFragment, cart())
-//                        commit()
-//                    }
-//                }
-//                5 -> {
-//                    lifecycleScope.launch {
-//                        try{
-//                            save("token","null")
-//                            startActivity(Intent(this@DashBoard, Login::class.java))
-//                            finish()
-//                        }catch (e:Exception){ }finally {}
-//                    }
-//
-//                }
-//            }
-//        }
-        /**
-         * This is working when the item  is selected and then we are re-selecting the same item
-         */
-//        bottomNavigation.setOnReselectListener {item ->
-//            when (item.id) {
-//                1 -> {
-//                    supportFragmentManager.popBackStack()
-//                    supportFragmentManager.beginTransaction().apply {
-//                        replace(R.id.flFragment, MainDashboard())
-//                        commit()
-//                    }
-//                }
-//                2 -> {
-//                    // Handle the "Search" tab selection
-//
-//                    supportFragmentManager.popBackStack()
-//                    supportFragmentManager.beginTransaction().apply {
-//                        replace(R.id.flFragment, Dishes_Category())
-//                        commit()
-//
-//                    }
-//                }
-//                3 -> {
-//                    // Handle the "Profile" tab selection
-//                }
-//                4 -> {
-//                    // Handle the "Settings" tab selection
-//
-//                }
-//            }
-//        }
+
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
         bottomNavigationView.setOnItemSelectedListener { item ->

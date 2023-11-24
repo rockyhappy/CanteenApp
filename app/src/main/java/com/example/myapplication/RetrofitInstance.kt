@@ -47,7 +47,7 @@ class AuthInterceptor(private val jwtToken: String) : Interceptor {
  */
 
 object RetrofitInstance2 {
-    private const val BASE_URL = "https://brunchbliss.onrender.com"
+    private const val BASE_URL = "https://brunchbliss.onrender.com/"
 
     private fun createApiService(jwtToken: String): ApiService {
 

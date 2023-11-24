@@ -14,15 +14,18 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.preferencesKey
 import androidx.datastore.preferences.createDataStore
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.caverock.androidsvg.SVG
 import com.caverock.androidsvg.SVGImageView
+import com.example.myapplication.ViewModel.SharedViewModel
 import kotlinx.coroutines.launch
 
 
 class SplashScreen : AppCompatActivity() {
     private lateinit var dataStore: DataStore<Preferences>
     private var dialog: Dialog? = null
+    private lateinit var sharedViewModel: SharedViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -31,6 +34,7 @@ class SplashScreen : AppCompatActivity() {
         val svg = SVG.getFromResource(resources, R.raw.b)
         svgImageView.setSVG(svg)
         dataStore = createDataStore(name = "user")
+        sharedViewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
         lifecycleScope.launch {
             try {
                 val token = readFromDataStore(dataStore, "token" ).toString()
@@ -43,10 +47,8 @@ class SplashScreen : AppCompatActivity() {
                 else {
 
                     //over here i can add an api to check that if the added token is verified or not
-
                     val response = RetrofitInstance2.getApiServiceWithToken(dataStore).getCanteens()
                     if (response.isSuccessful) {
-                        //save("token","eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoaWlAZ21haWwuY29tIiwiaWF0IjoxNjk5Njc5MzEyLCJleHAiOjE3MDAyMDQ5MTJ9.ZzThEiZSZOdNV1asVfxpEAiCijknUVx_QurAM4xSy0s")
                         val intent= Intent(this@SplashScreen,DashBoard::class.java)
                         startActivity(intent)
                         finish()
@@ -60,7 +62,8 @@ class SplashScreen : AppCompatActivity() {
                     }
                 }
             }catch (e: Exception){
-               startActivity(Intent(this@SplashScreen,Login::class.java))
+               //startActivity(Intent(this@SplashScreen,Login::class.java))
+                showToast("Services are down")
                 finish()
             }
 

@@ -87,4 +87,7 @@ dependencies {
     //For RazorPay
     implementation("com.razorpay:checkout:1.6.36")
 
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
+
+
 }

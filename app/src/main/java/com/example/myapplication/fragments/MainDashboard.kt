@@ -27,6 +27,12 @@ import com.example.myapplication.RvAdapter
 import com.example.myapplication.RvModel
 import kotlinx.coroutines.launch
 import android.speech.RecognizerIntent
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.example.myapplication.CanteenItem
+import com.example.myapplication.ViewModel.SharedViewModel
+import androidx.lifecycle.viewModelScope
 
 
 class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnItemClickListener {
@@ -34,6 +40,7 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
     private lateinit var rvadapter : RvAdapter
     private lateinit var dataStore: DataStore<Preferences>
     private var dialog: Dialog? = null
+    private  val sharedViewModel: SharedViewModel  by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,35 +53,14 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
         recyclerView.adapter = rvadapter
         val pagerSnapHelper = PagerSnapHelper()
         pagerSnapHelper.attachToRecyclerView(recyclerView)
-        lifecycleScope.launch {
-            try {
-                showCustomProgressDialog()
-                val response = RetrofitInstance2.getApiServiceWithToken(dataStore).getCanteens()
-                if (response.isSuccessful) {
-                    Log.d("Testing",response.body().toString())
-                    Log.d("Testing", "Successful response: ${response.body()}")
-                    val canteenItems = response.body()?.canteenItems.orEmpty()
 
-                    // Convert CanteenItem objects to RvModel objects
-                    val dataList = canteenItems.map { canteenItem ->
-                        RvModel(canteenItem.canteenImage, canteenItem.name, canteenItem.description)
-                    }
-                    rvadapter.updateData(dataList)
-                } else {
-                    // Handle the error
-                    Log.d("Testing",response.body().toString())
-                    Log.d("Testing", "Response code: ${response.code()}, Response body: ${response.body()}")
-                }
-            } catch (e: Exception) {
-                // Handle network or other exceptions
-                Log.d("Testing","Network Error")
-                Log.e("Testing", "Network Error: ${e.message}", e)
-            }
-            finally {
-                dismissCustomProgressDialog()
-            }
+        if (sharedViewModel.canteenItems.value.isNullOrEmpty()) {
+            fetchDataFromApi()
+        } else {
+            updateRecyclerView(sharedViewModel.canteenItems.value!!)
         }
-        val fullCategory = view.findViewById<TextView>(R.id.fullCategory)
+
+    val fullCategory = view.findViewById<TextView>(R.id.fullCategory)
         fullCategory.setOnClickListener {
             val fragmentTransaction = parentFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.flFragment, Dishes_Category())
@@ -266,6 +252,62 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
         dialog?.dismiss()
         dialog = null
     }
+
+    private fun fetchDataFromApi() {
+        // Use lifecycleScope instead of viewModelScope
+        lifecycleScope.launch {
+            try {
+                showCustomProgressDialog()
+                val response = RetrofitInstance2.getApiServiceWithToken(dataStore).getCanteens()
+                if (response.isSuccessful) {
+                    Log.d("Testing", response.body().toString())
+                    Log.d("Testing", "Successful response: ${response.body()}")
+                    val canteenItems = response.body()?.canteenItems.orEmpty()
+                    sharedViewModel.setCanteenItems(canteenItems)
+                } else {
+                    // Handle the error
+                    Log.d("Testing", response.body().toString())
+                    Log.d(
+                        "Testing",
+                        "Response code: ${response.code()}, Response body: ${response.body()}"
+                    )
+                }
+            } catch (e: Exception) {
+                // Handle network or other exceptions
+                Log.d("Testing", "Network Error")
+                Log.e("Testing", "Network Error: ${e.message}", e)
+            } finally {
+                dismissCustomProgressDialog()
+            }
+        }
+    }
+
+    private fun updateRecyclerView(canteenItems: List<CanteenItem>) {
+        val dataList = canteenItems.map { canteenItem ->
+            RvModel(canteenItem.canteenImage, canteenItem.name, canteenItem.description)
+        }
+        rvadapter.updateData(dataList)
+    }
+
+
+    // Assuming you have a function to observe the data in your SharedViewModel
+    private fun observeCanteenItems() {
+        sharedViewModel.canteenItems.observe(viewLifecycleOwner, Observer { canteenItems ->
+            if (canteenItems.isNullOrEmpty()) {
+                fetchDataFromApi()
+            } else {
+                updateRecyclerView(canteenItems)
+            }
+        })
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        dataStore = requireContext().createDataStore(name = "user")
+        observeCanteenItems()
+    }
+
+
 
 }
 
