@@ -34,6 +34,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.CanteenItem
 import com.example.myapplication.ViewModel.SharedViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.myapplication.PaymentInfo2
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 
 
 class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnItemClickListener {
@@ -43,6 +49,7 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
     private var dialog: Dialog? = null
     private  val sharedViewModel: SharedViewModel  by activityViewModels()
     private lateinit var progressBar: ProgressBar
+    private var searchJob: Job? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -191,14 +198,31 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                // Handle the submission of the query
-                showToast(query.toString())
+
+
+                lifecycleScope.launch {
+                    try{
+                        val response = RetrofitInstance2.getApiServiceWithToken(dataStore).submitFormData(
+                            canteenId = 1234567898,
+                            foodName = query.orEmpty(),
+                            category = null,
+                            lowPrice = 0.0,
+                            highPrice = 500.0,
+                            veg = true,
+                            rating = 3.5
+                        )
+                    }catch(e: Exception){
+
+                    }finally{
+
+                    }
+                }
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                // Handle changes to the query text
-                showToast(newText.toString())
+
+
                 return true
             }
         })

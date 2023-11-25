@@ -103,9 +103,14 @@ data class FoodItem(
     val averageRating: Double,
     val isInWishlist: Boolean,
     val isInCart: Boolean,
+    val noOfRatings: Int?,
+    val veg: Boolean,
     val ingredients: List<String>,
     val ingredientImageList: List<String>
 )
+
+
+
 
 data class addCartItemsRequest(
     val foodId: Long,
@@ -213,27 +218,27 @@ data class Payment(
     val created_at: Long,
     val amount_refunded: Int,
     val bank: String,
-    val error_reason: String?, // Nullable since it can be null in the JSON
-    val error_description: String?, // Nullable since it can be null in the JSON
+    val error_reason: String?,
+    val error_description: String?,
     val acquirer_data: AcquirerData,
     val captured: Boolean,
     val contact: String,
-    val invoice_id: String?, // Nullable since it can be null in the JSON
+    val invoice_id: String?,
     val currency: String,
     val id: String,
     val international: Boolean,
     val email: String,
     val amount: Int,
-    val refund_status: String?, // Nullable since it can be null in the JSON
-    val wallet: String?, // Nullable since it can be null in the JSON
+    val refund_status: String?,
+    val wallet: String?,
     val method: String,
-    val vpa: String?, // Nullable since it can be null in the JSON
-    val error_source: String?, // Nullable since it can be null in the JSON
-    val error_step: String?, // Nullable since it can be null in the JSON
+    val vpa: String?,
+    val error_source: String?,
+    val error_step: String?,
     val tax: Int,
-    val card_id: String?, // Nullable since it can be null in the JSON
-    val error_code: String?, // Nullable since it can be null in the JSON
-    val order_id: String?, // Nullable since it can be null in the JSON
+    val card_id: String?,
+    val error_code: String?,
+    val order_id: String?,
     val entity: String,
     val status: String
 )

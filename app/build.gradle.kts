@@ -89,5 +89,11 @@ dependencies {
 
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
 
+    implementation ("com.journeyapps:zxing-android-embedded:4.2.0")
+
+    implementation ("com.google.zxing:core:3.5.0")
+    implementation ("com.github.yuriy-budiyev:code-scanner:2.3.0")
+
+
 
 }

@@ -3,12 +3,10 @@ package com.example.myapplication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -17,11 +15,12 @@ import androidx.datastore.preferences.core.preferencesKey
 import androidx.datastore.preferences.createDataStore
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.lifecycleScope
-import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.example.myapplication.databinding.ActivityDashBoardBinding
 import com.example.myapplication.fragments.Breakfast
 import com.example.myapplication.fragments.Dishes_Category
 import com.example.myapplication.fragments.MainDashboard
+import com.example.myapplication.fragments.QRcode
+import com.example.myapplication.FragmentsSeller.Scanner
 import com.example.myapplication.fragments.cart
 import com.example.myapplication.fragments.wishlist
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -151,15 +150,17 @@ class DashBoard : AppCompatActivity(), PaymentResultListener {
                     true
                 }
                 R.id.action_profile -> {
-                    // Handle profile action
-                    // Add your logic for handling profile
-                    lifecycleScope.launch {
-                        try{
-                            save("token","null")
-                            startActivity(Intent(this@DashBoard, Login::class.java))
-                            finish()
-                        }catch (e:Exception){ }finally {}
-                    }
+
+                    supportFragmentManager.beginTransaction().replace(R.id.flFragment, Scanner()).commit()
+
+
+//                    lifecycleScope.launch {
+//                        try{
+//                            save("token","null")
+//                            startActivity(Intent(this@DashBoard, Login::class.java))
+//                            finish()
+//                        }catch (e:Exception){ }finally {}
+//                    }
                     true
                 }
                 else -> false
@@ -204,7 +205,17 @@ class DashBoard : AppCompatActivity(), PaymentResultListener {
             val response=RetrofitInstance2.getApiServiceWithToken(dataStore).capturePayment(request)
             if(response.isSuccessful)
             {
+                val bundle=Bundle()
+                bundle.putString("key1",razorpayPaymentId.toString())
+                val passing=QRcode()
+                passing.arguments=bundle
                 showToast("Order in prepration")
+                supportFragmentManager.popBackStack()
+                supportFragmentManager.beginTransaction().apply {
+                    replace(R.id.flFragment, passing)
+                    commit()
+            }
+
             }
             else {
                 showToast("Payment not verified")

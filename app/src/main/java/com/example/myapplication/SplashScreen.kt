@@ -35,6 +35,8 @@ class SplashScreen : AppCompatActivity() {
         svgImageView.setSVG(svg)
         dataStore = createDataStore(name = "user")
         sharedViewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
+
+//        startActivity(Intent(this@SplashScreen,DashboardSeller::class.java))
         lifecycleScope.launch {
             try {
                 val token = readFromDataStore(dataStore, "token" ).toString()

@@ -194,9 +194,12 @@ class ShowCategoryMenu : Fragment(), RvAdapter2.OnItemClickListener,RvAdapter2.O
                 averageRating = canteenItem.averageRating,
                 isInWishlist = canteenItem.isInWishlist,
                 isInCart = canteenItem.isInCart,
+                noOfRatings = canteenItem.noOfRatings,
+                veg = canteenItem.veg,
                 ingredients = canteenItem.ingredients,
                 ingredientImageList = canteenItem.ingredientImageList
             )
+
         }
         rvadapter.updateData(dataList)
     }
