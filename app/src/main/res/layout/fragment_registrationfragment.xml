@@ -189,7 +189,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_sign"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
@@ -197,7 +197,7 @@
         android:background="@drawable/round_corner"
         android:elevation="5dp"
         android:fontFamily="@font/roboto"
-        android:text="Sign Up"
+        android:text="@string/button_sign"
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"

@@ -172,6 +172,7 @@ Hello Rachit,
     <string name="referPageHeading">Refer and Earn</string>
     <string name="refer_content">Invite your friends to join and get the reward as soon as your friend first order placed</string>
     <string name="refrral">Your Referral Code</string>
+    <string name="button_sign">Sign Up</string>
 
 
 </resources>
