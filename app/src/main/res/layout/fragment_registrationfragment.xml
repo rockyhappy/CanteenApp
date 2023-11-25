@@ -74,12 +74,12 @@
         app:startIconTint="@color/grey">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/email"
+            android:id="@+id/full_name"
             style="@style/NoUnderline"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/roboto"
-            android:hint="Full Name"
+            android:hint="@string/full_name"
             android:imeOptions="actionNext"
             android:maxLines="1"
             android:maxLength="50"
@@ -179,7 +179,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/roboto"
-            android:hint="Confirm Password"
+            android:hint="@string/passkey2"
             android:maxLength="50"
             android:inputType="textPassword"
             android:textColor="@color/grey"

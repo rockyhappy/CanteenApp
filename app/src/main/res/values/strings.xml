@@ -175,6 +175,8 @@ Hello Rachit,
     <string name="button_sign">Sign Up</string>
     <string name="email2">User@gmail.com</string>
     <string name="passkey">New Password</string>
+    <string name="passkey2">Confirm Password</string>
+    <string name="full_name">Full Name</string>
 
 
 </resources>
