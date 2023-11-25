@@ -14,7 +14,7 @@
 
     <string name="option">Already have an Account ? <font color="#FA902D"><u>Sign In</u></font></string>
 
-    <string name="option2">By signing up, you agree to our<font color="#FA902D"><b>Terms of Service</b></font> and <font color="#FA902D"><b>Privacy Policy</b></font></string>
+    <string name="option2">By signing up, you agree to our <font color="#FA902D"><b>Terms of Service</b></font> and <font color="#FA902D"><b>Privacy Policy</b></font></string>
 
     <string name="button2">Go to Home</string>
 
@@ -177,6 +177,7 @@ Hello Rachit,
     <string name="passkey">New Password</string>
     <string name="passkey2">Confirm Password</string>
     <string name="full_name">Full Name</string>
+    <string name="register_heading">Register</string>
 
 
 </resources>
