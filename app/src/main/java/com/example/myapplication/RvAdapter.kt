@@ -65,7 +65,7 @@ class RvAdapter(
 
 
         holder.view.setOnClickListener {
-            itemClickListener.onItemClick(item.name)
+            itemClickListener.onItemClickCanteen(item.name)
         }
 //        if (position == selectedPosition) {
 //            dotImageView.setBackgroundResource(R.drawable.dot_selected)
@@ -77,7 +77,7 @@ class RvAdapter(
      * This is for the click in the recycler view
      */
     interface OnItemClickListener {
-        fun onItemClick(name: String)
+        fun onItemClickCanteen(name: String)
     }
 
 

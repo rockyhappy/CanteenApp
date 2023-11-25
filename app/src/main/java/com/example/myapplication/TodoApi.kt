@@ -80,7 +80,7 @@ interface ApiService {
     @FormUrlEncoded
     @POST("api/v1/user/search")
     fun submitFormData(
-        @Field("canteenId") canteenId: Long,
+        @Field("canteenId") canteenId: Long?,
         @Field("foodName") foodName: String?,
         @Field("category") category: String?,
         @Field("lowPrice") lowPrice: Double?,

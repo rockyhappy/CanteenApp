@@ -30,14 +30,14 @@ class QRcode : Fragment() {
         val qrCodeImageView=view.findViewById<ImageView>(R.id.qrCodeImageView)
         val receivedData= arguments?.getString("key1").toString()
         showToast(receivedData)
-        qrCodeImageView.setImageBitmap(getQrCodeBitmap("","sorry sorry"))
+        qrCodeImageView.setImageBitmap(getQrCodeBitmap(receivedData,"hi"))
         return view
     }
 
     fun getQrCodeBitmap(ssid: String, password: String): Bitmap {
         val size = 512 //pixels
-        val qrCodeContent = "WIFI:S:$ssid;T:WPA;P:$password;;"
-        val hints = hashMapOf<EncodeHintType, Int>().also { it[EncodeHintType.MARGIN] = 1 } // Make the QR code buffer border narrower
+        val qrCodeContent = ssid
+        val hints = hashMapOf<EncodeHintType, Int>().also { it[EncodeHintType.MARGIN] = 1 }
         val bits = QRCodeWriter().encode(qrCodeContent, BarcodeFormat.QR_CODE, size, size)
         return Bitmap.createBitmap(size, size, Bitmap.Config.RGB_565).also {
             for (x in 0 until size) {
