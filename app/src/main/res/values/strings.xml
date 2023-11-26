@@ -110,7 +110,19 @@ Menu
     <string name="order_has_b">
 Order has been verified!
 </string>
+    <string name="recent">
+Recent
+</string>
+    <string name="mark_all_as">
+Mark all as read
+</string>
 
+    <string name="firstname_l">
+FirstName LastName
+</string>
+    <string name="jan_12_2023">
+Nov 12, 2023 at 11:23PM
+</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris

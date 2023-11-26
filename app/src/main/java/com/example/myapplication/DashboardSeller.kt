@@ -7,6 +7,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.myapplication.FragmentsSeller.NotificationSeller
+import com.example.myapplication.FragmentsSeller.OrderSeller
+import com.example.myapplication.FragmentsSeller.PaymentSeller
 import com.example.myapplication.FragmentsSeller.Scanner
 import com.example.myapplication.databinding.ActivityDashBoardBinding
 import com.example.myapplication.databinding.ActivityDashboardSellerBinding
@@ -29,11 +32,11 @@ class DashboardSeller : AppCompatActivity() {
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.action_home -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.flFragment, MainDashboard()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.flFragment, NotificationSeller()).commit()
                     true
                 }
                 R.id.action_menu -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.flFragment, Dishes_Category()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.flFragment, OrderSeller()).commit()
                     true
                 }
                 R.id.action_search -> {
@@ -41,7 +44,7 @@ class DashboardSeller : AppCompatActivity() {
                     true
                 }
                 R.id.action_profile -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.flFragment, Scanner()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.flFragment, PaymentSeller()).commit()
                     true
                 }
                 else -> false
