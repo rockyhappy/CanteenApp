@@ -11,8 +11,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.caverock.androidsvg.SVG
+import com.caverock.androidsvg.SVGImageView
 import com.journeyapps.barcodescanner.BarcodeCallback
 import com.journeyapps.barcodescanner.DecoratedBarcodeView
 import com.google.zxing.Result
@@ -26,31 +29,28 @@ class Scanner : Fragment() {
     private val integrator by lazy {
         IntentIntegrator.forSupportFragment(this)
     }
+    private lateinit var svgImageView2: SVGImageView
+    private lateinit var scanButton: TextView
+    private lateinit var verified :TextView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_scanner, container, false)
 
+        svgImageView2 = view.findViewById(R.id.svgImageView2)
+        val svg2 = SVG.getFromResource(resources, R.raw.qr)
+        svgImageView2.setSVG(svg2)
+        verified=view.findViewById(R.id.verified)
 
 
         return view
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val scanButton: Button = view.findViewById(R.id.scanButton)
+        scanButton = view.findViewById(R.id.scanButton)
         integrator.setOrientationLocked(true)
-        // Set a click listener for the button
-//        scanButton.setOnClickListener {
-//            val intent = Intent(context, CaptureActivity::class.java)
-//            intent.putExtra("SCAN_MODE", "QR_CODE_MODE") // You can customize this based on your needs
-//            startActivityForResult(intent, 123)
-//        }
-//        val scanButton: Button = view.findViewById(R.id.scanButton)
-
-        // Set a click listener for the button
         scanButton.setOnClickListener {
-            // Start the scan
             integrator.initiateScan()
         }
 
@@ -58,15 +58,14 @@ class Scanner : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
-        // Handle the scan result
         if (resultCode == Activity.RESULT_OK) {
             val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
             if (result != null) {
-                // Get the QR code content
                 val content = result.contents
-
-                // Display the QR code content
+                val newSvg = SVG.getFromResource(resources, R.raw.verified_order)
+                svgImageView2.setSVG(newSvg)
+                verified.visibility=View.VISIBLE
+                scanButton.text="Go To Home Page >"
                 Toast.makeText(context, content, Toast.LENGTH_LONG).show()
             }
         }

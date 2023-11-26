@@ -61,4 +61,16 @@
         <item name="colorControlNormal">@color/grey</item>
         <item name="colorControlActivated">@color/primary_color</item>
     </style>
+
+    <style name="scan_the_qr">
+        <item name="android:textSize">12sp</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:textColor">#F5A62E</item>
+    </style>
+
+    <style name="order_has_b">
+        <item name="android:textSize">24sp</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="android:textColor">#46474B</item>
+    </style>
 </resources>

@@ -35,42 +35,41 @@ class SplashScreen : AppCompatActivity() {
         svgImageView.setSVG(svg)
         dataStore = createDataStore(name = "user")
         sharedViewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
-
-//        startActivity(Intent(this@SplashScreen,DashboardSeller::class.java))
-        lifecycleScope.launch {
-            try {
-                val token = readFromDataStore(dataStore, "token" ).toString()
-                if (token == "null")
-                {
-                    val intent= Intent(this@SplashScreen,Login::class.java)
-                    startActivity(intent)
-                    finish()
-                }
-                else {
-
-                    //over here i can add an api to check that if the added token is verified or not
-                    val response = RetrofitInstance2.getApiServiceWithToken(dataStore).getCanteens()
-                    if (response.isSuccessful) {
-                        val intent= Intent(this@SplashScreen,DashBoard::class.java)
-                        startActivity(intent)
-                        finish()
-
-                    } else {
-                        val intent= Intent(this@SplashScreen,Login::class.java)
-                        startActivity(intent)
-                        finish()
-                        Log.d("Testing",response.body().toString())
-                        Log.d("Testing", "Response code: ${response.code()}, Response body: ${response.body()}")
-                    }
-                }
-            }catch (e: Exception){
-               //startActivity(Intent(this@SplashScreen,Login::class.java))
-                showToast("Services are down")
-                finish()
-            }
-
-
-        }
+        startActivity(Intent(this@SplashScreen,DashboardSeller::class.java))
+//        lifecycleScope.launch {
+//            try {
+//                val token = readFromDataStore(dataStore, "token" ).toString()
+//                if (token == "null")
+//                {
+//                    val intent= Intent(this@SplashScreen,Login::class.java)
+//                    startActivity(intent)
+//                    finish()
+//                }
+//                else {
+//
+//                    //over here i can add an api to check that if the added token is verified or not
+//                    val response = RetrofitInstance2.getApiServiceWithToken(dataStore).getCanteens()
+//                    if (response.isSuccessful) {
+//                        val intent= Intent(this@SplashScreen,DashBoard::class.java)
+//                        startActivity(intent)
+//                        finish()
+//
+//                    } else {
+//                        val intent= Intent(this@SplashScreen,Login::class.java)
+//                        startActivity(intent)
+//                        finish()
+//                        Log.d("Testing",response.body().toString())
+//                        Log.d("Testing", "Response code: ${response.code()}, Response body: ${response.body()}")
+//                    }
+//                }
+//            }catch (e: Exception){
+//               //startActivity(Intent(this@SplashScreen,Login::class.java))
+//                showToast("Services are down")
+//                finish()
+//            }
+//
+//
+//        }
     }
     private fun showToast(message: String) {
         Toast.makeText(this@SplashScreen, message, Toast.LENGTH_SHORT).show()

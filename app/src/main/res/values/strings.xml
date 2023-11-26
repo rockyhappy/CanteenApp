@@ -104,6 +104,13 @@ Menu
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="scan_the_qr">
+        <B>Scan the QR code generated in customer phone</B></string>
+
+    <string name="order_has_b">
+Order has been verified!
+</string>
+
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
