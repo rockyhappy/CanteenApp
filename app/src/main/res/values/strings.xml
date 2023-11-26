@@ -131,7 +131,7 @@
     <string name="help_support"><![CDATA[Help & Support]]></string>
     <string name="rate_us">Rate us</string>
     <string name="log_out">Log out</string>
-    <string name="transaction_main">Transaction</string>
+
     <string name="favourite">Favourite</string>
     <string name="subscription_main">Subscription</string>
     <string name="todoedit">TODO</string>
@@ -178,6 +178,7 @@ Hello Rachit,
     <string name="passkey2">Confirm Password</string>
     <string name="full_name">Full Name</string>
     <string name="register_heading">Register</string>
+    <string name="text_fav">Favourite</string>
 
 
 </resources>

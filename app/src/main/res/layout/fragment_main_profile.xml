@@ -495,11 +495,11 @@
                 android:contentDescription="@string/todomainprofile" />
 
             <TextView
-                android:id="@id/transaction_main"
+                android:id="@+id/get_transaction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
-                android:text="@string/transaction_main"
+                android:text="Transaction"
                 android:textAlignment="center"
                 android:textColor="#46474B"
                 android:textFontWeight="400"
@@ -545,11 +545,11 @@
                 app:layout_constraintVertical_bias="0.363" />
 
             <TextView
-                android:id="@id/favourite_main"
+                android:id="@+id/text_fav"
+                android:text="@string/text_fav"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
-                android:text="@string/favourite"
                 android:textAlignment="center"
                 android:textColor="#46474B"
                 android:textFontWeight="400"
