@@ -511,6 +511,13 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
         requireView().findViewById<TextView>(R.id.category).visibility=View.VISIBLE
         requireView().findViewById<TextView>(R.id.textView10).visibility=View.VISIBLE
     }
+    fun String.limitTo8Characters(): String {
+        return if (length > 8) {
+            substring(0, 8) + ".."
+        } else {
+            this
+        }
+    }
 
 }
 
