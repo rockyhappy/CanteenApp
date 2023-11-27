@@ -216,7 +216,7 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
                             if (response.body()?.token.toString() == "null" && response.code().toString()=="200") {
                                 dataStore = context?.createDataStore(name = "user")!!
                                 save("Email", Email)
-                                save("fullname", UserName)
+                                save("username", UserName)
                                 save ("role",role)
                                 val fragmentTransaction = parentFragmentManager.beginTransaction()
                                 fragmentTransaction.replace(

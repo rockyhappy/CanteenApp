@@ -7,20 +7,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.createDataStore
 import androidx.lifecycle.findViewTreeViewModelStoreOwner
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.fragments.Dishes_Category
+import com.example.myapplication.readFromDataStore
 import com.example.myapplication.sellerAdapter.PaymentAdapter
 import com.example.myapplication.sellerAdapter.orderAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.launch
 
 class MainDashboardSeller : Fragment() ,PaymentAdapter.OnItemClickListener,orderAdapter.OnItemClickListener{
     private lateinit var recyclerView: RecyclerView
     private lateinit var rvadapter : PaymentAdapter
-
+    private lateinit var dataStore: DataStore<Preferences>
     private lateinit var recyclerViewOrder: RecyclerView
     private lateinit var rvadapterOrder : orderAdapter
     override fun onCreateView(
@@ -29,6 +35,11 @@ class MainDashboardSeller : Fragment() ,PaymentAdapter.OnItemClickListener,order
     ): View? {
         // Inflate the layout for this fragment
         val view=inflater.inflate(R.layout.fragment_main_dashboard_seller, container, false)
+        dataStore = requireContext().createDataStore(name = "user")
+        val hello = view.findViewById<TextView>(R.id.hello)
+        lifecycleScope.launch {
+            hello.text="Hello"+ readFromDataStore(dataStore,"username")
+        }
 
         rvadapter = PaymentAdapter(arrayListOf(1,2,3,4,5), requireContext(), this)
         recyclerView = view.findViewById(R.id.rvid)
