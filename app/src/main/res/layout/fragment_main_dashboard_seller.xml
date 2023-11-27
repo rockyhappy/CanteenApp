@@ -14,7 +14,7 @@
     tools:context=".FragmentsSeller.MainDashboardSeller">
 
     <TextView
-        android:id="@+id/hello_rachi"
+        android:id="@+id/hello"
         style="@style/hello_rachi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

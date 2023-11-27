@@ -86,6 +86,11 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
             updateRecyclerView(sharedViewModel.canteenItems.value!!)
         }
 
+        val hello = view.findViewById<TextView>(R.id.hello)
+        lifecycleScope.launch {
+            hello.text= "Hello"+readFromDataStore(dataStore,"username")
+        }
+
         val notification=view.findViewById<ImageView>(R.id.imageView6)
         notification.setOnClickListener {
             lifecycleScope.launch {
