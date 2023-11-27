@@ -58,7 +58,7 @@ class RvAdapterWishlist(
             .into(profile)
         itemName.text=item.name
         ingredient.text=item.ingredients.toString()
-        price.text="₹"+item.price.toString()+ "  |"
+        price.text="₹"+item.price.toInt().toString()+ " |"
 
 
 

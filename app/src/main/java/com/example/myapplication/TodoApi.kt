@@ -1,8 +1,11 @@
 package com.example.myapplication
 import com.example.myapplication.fragments.ForgotPassward
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -72,4 +75,23 @@ interface ApiService {
 
     @POST("api/v1/payments/capture-payment")
     suspend fun capturePayment(@Body request: PaymentInfo2) :Response<Payment>
+
+
+    @FormUrlEncoded
+    @POST("api/v1/user/search")
+    fun submitFormData(
+        @Field("canteenId") canteenId: Long?,
+        @Field("foodName") foodName: String?,
+        @Field("category") category: String?,
+        @Field("lowPrice") lowPrice: Double?,
+        @Field("highPrice") highPrice: Double?,
+        @Field("veg") veg: Boolean?,
+        @Field("rating") rating: Double?,
+    ): Call<List<FoodItem>>
+
+    @GET("api/v1/qrCode/generate")
+    suspend fun qrGenerate() : String?
+
+    @POST("api/v1/qrCode/validate")
+    suspend fun qrScanner(@Body request :addCartItemsResponse): String
 }

@@ -57,7 +57,6 @@
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:layout_marginTop="90dp"
-        android:src="@drawable/basic"
         android:scaleType="centerCrop"
         android:layout_marginHorizontal="22dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -232,17 +231,17 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="0dp"
             />
+
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="BreakFast"
-            android:textColor="@color/grey"
-            android:fontFamily="@font/roboto"
-            android:layout_marginTop="100dp"
-            android:textSize="12sp"
             android:layout_gravity="center_horizontal"
-            />
+            android:layout_marginTop="100dp"
+            android:fontFamily="@font/roboto"
+            android:text="ingredient1"
+            android:textColor="@color/grey"
+            android:textSize="12sp" />
 
     </androidx.cardview.widget.CardView>
 
@@ -264,17 +263,17 @@
             android:layout_height="100dp"
             android:src="@drawable/lunch"
             android:layout_gravity="center_horizontal"/>
+
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="lunch"
-            android:textColor="@color/grey"
-            android:fontFamily="@font/roboto"
-            android:layout_marginTop="100dp"
-            android:textSize="12sp"
             android:layout_gravity="center_horizontal"
-            />
+            android:layout_marginTop="100dp"
+            android:fontFamily="@font/roboto"
+            android:text="ingredient2"
+            android:textColor="@color/grey"
+            android:textSize="12sp" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -296,17 +295,17 @@
             android:layout_height="100dp"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/dinner" />
+
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dinner"
-            android:textColor="@color/grey"
-            android:fontFamily="@font/roboto"
-            android:layout_marginTop="100dp"
-            android:textSize="12sp"
             android:layout_gravity="center_horizontal"
-            />
+            android:layout_marginTop="100dp"
+            android:fontFamily="@font/roboto"
+            android:text="ingredient3"
+            android:textColor="@color/grey"
+            android:textSize="12sp" />
     </androidx.cardview.widget.CardView>
 
 
@@ -415,9 +414,20 @@
         android:gravity="top"
         android:textColor="#46474B"
         android:textSize="19sp"
-        android:layout_marginTop="960dp"
+        android:layout_marginTop="860dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

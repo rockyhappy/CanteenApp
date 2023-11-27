@@ -40,7 +40,7 @@ class Dishes_Category : Fragment() {
 
 
 
-        val lunch1= view.findViewById<CardView>(R.id.cardView1)
+        val lunch1= view.findViewById<CardView>(R.id.cardView2)
 
         //val newOutlineColor = ContextCompat.getColor(requireContext(), R.drawable.round_corner)
         //lunch1.setBackgroundResource(R.drawable.primary_color_layout)
@@ -55,7 +55,7 @@ class Dishes_Category : Fragment() {
             fragmentTransaction.commit()
 
         }
-        val breakfast= view.findViewById<CardView>(R.id.cardView2)
+        val breakfast= view.findViewById<CardView>(R.id.cardView1)
         breakfast.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("key2","BREAKFAST")
@@ -67,7 +67,7 @@ class Dishes_Category : Fragment() {
             fragmentTransaction.commit()
 
         }
-        val chinese= view.findViewById<CardView>(R.id.cardView3)
+        val chinese= view.findViewById<CardView>(R.id.cardView4)
         chinese.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("key2","CHINESE")
@@ -79,7 +79,7 @@ class Dishes_Category : Fragment() {
             fragmentTransaction.commit()
 
         }
-        val dinner= view.findViewById<CardView>(R.id.cardView4)
+        val dinner= view.findViewById<CardView>(R.id.cardView3)
         dinner.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("key2","DINNER")

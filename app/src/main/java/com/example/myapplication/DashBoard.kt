@@ -3,12 +3,10 @@ package com.example.myapplication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -17,11 +15,12 @@ import androidx.datastore.preferences.core.preferencesKey
 import androidx.datastore.preferences.createDataStore
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.lifecycleScope
-import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.example.myapplication.databinding.ActivityDashBoardBinding
 import com.example.myapplication.fragments.Breakfast
 import com.example.myapplication.fragments.Dishes_Category
 import com.example.myapplication.fragments.MainDashboard
+import com.example.myapplication.fragments.QRcode
+import com.example.myapplication.FragmentsSeller.Scanner
 import com.example.myapplication.fragments.cart
 import com.example.myapplication.fragments.wishlist
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -78,31 +77,10 @@ class DashBoard : AppCompatActivity(), PaymentResultListener {
 
             }
         }
-//        val bottomNavigation = findViewById<MeowBottomNavigation>(R.id.btmnav)
-//
-//        val homeItem = MeowBottomNavigation.Model(1, R.drawable.baseline_home_24)
-//        val menu = MeowBottomNavigation.Model(2, R.drawable.baseline_restaurant_menu_24)
-//        val searchItem = MeowBottomNavigation.Model(3, R.drawable.baseline_bookmark_border_24)
-//        val profileItem = MeowBottomNavigation.Model(4, R.drawable.baseline_shopping_cart_24)
-//        val settingsItem = MeowBottomNavigation.Model(5, R.drawable.ic_profile)
-//
-//
-//
-//        bottomNavigation.add(homeItem)
-//        bottomNavigation.add(menu)
-//        bottomNavigation.add(searchItem)
-//        bottomNavigation.add(profileItem)
-//        bottomNavigation.add(settingsItem)
-//        bottomNavigation.show(1, true)
 
-
-        //val topAppBar: Toolbar = findViewById(R.id.topAppBar)
-        //setSupportActionBar(topAppBar)
-        //supportActionBar?.title=""
 
         var drawerLayout : DrawerLayout = findViewById(R.id.drawerLayout)
         toggle = ActionBarDrawerToggle(this@DashBoard, drawerLayout, R.string.open, R.string.close)
-        //toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white))
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
@@ -145,83 +123,7 @@ class DashBoard : AppCompatActivity(), PaymentResultListener {
             true
         }
 
-        /**
-         * This is working when the item  is not selected
-         */
-//        bottomNavigation.setOnClickMenuListener { item ->
-//
-//            when (item.id) {
-//                1 -> {
-//                    supportFragmentManager.popBackStack()
-//                    supportFragmentManager.beginTransaction().apply {
-//                        replace(R.id.flFragment, MainDashboard())
-//                        commit()
-//                        }
-//                    }
-//
-//                2 -> {
-//
-//                        supportFragmentManager.popBackStack()
-//                        supportFragmentManager.beginTransaction().apply {
-//                        replace(R.id.flFragment, Dishes_Category())
-//                        commit()
-//
-//                        }
-//                }
-//                3 -> {
-//
-//                }
-//                4 -> {
-//
-//                    supportFragmentManager.popBackStack()
-//                    supportFragmentManager.beginTransaction().apply {
-//                        replace(R.id.flFragment, cart())
-//                        commit()
-//                    }
-//                }
-//                5 -> {
-//                    lifecycleScope.launch {
-//                        try{
-//                            save("token","null")
-//                            startActivity(Intent(this@DashBoard, Login::class.java))
-//                            finish()
-//                        }catch (e:Exception){ }finally {}
-//                    }
-//
-//                }
-//            }
-//        }
-        /**
-         * This is working when the item  is selected and then we are re-selecting the same item
-         */
-//        bottomNavigation.setOnReselectListener {item ->
-//            when (item.id) {
-//                1 -> {
-//                    supportFragmentManager.popBackStack()
-//                    supportFragmentManager.beginTransaction().apply {
-//                        replace(R.id.flFragment, MainDashboard())
-//                        commit()
-//                    }
-//                }
-//                2 -> {
-//                    // Handle the "Search" tab selection
-//
-//                    supportFragmentManager.popBackStack()
-//                    supportFragmentManager.beginTransaction().apply {
-//                        replace(R.id.flFragment, Dishes_Category())
-//                        commit()
-//
-//                    }
-//                }
-//                3 -> {
-//                    // Handle the "Profile" tab selection
-//                }
-//                4 -> {
-//                    // Handle the "Settings" tab selection
-//
-//                }
-//            }
-//        }
+
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
         bottomNavigationView.setOnItemSelectedListener { item ->
@@ -248,8 +150,10 @@ class DashBoard : AppCompatActivity(), PaymentResultListener {
                     true
                 }
                 R.id.action_profile -> {
-                    // Handle profile action
-                    // Add your logic for handling profile
+
+                    supportFragmentManager.beginTransaction().replace(R.id.flFragment, Scanner()).commit()
+
+
                     lifecycleScope.launch {
                         try{
                             save("token","null")
@@ -294,18 +198,59 @@ class DashBoard : AppCompatActivity(), PaymentResultListener {
         Log.d("RazorPay",razorpayPaymentId.toString())
         val totalAmount=cart.totalAmount
         lifecycleScope.launch {
-            val request=PaymentInfo2(
-                paymentId = razorpayPaymentId.toString(),
-                amount = totalAmount
-            )
-            val response=RetrofitInstance2.getApiServiceWithToken(dataStore).capturePayment(request)
-            if(response.isSuccessful)
+            try {
+                val request=PaymentInfo2(
+                    paymentId = razorpayPaymentId.toString(),
+                    amount = totalAmount
+                )
+                val response=RetrofitInstance2.getApiServiceWithToken(dataStore).capturePayment(request)
+                if(response.isSuccessful)
+                {
+                    showToast("Order in Process")
+                    save("qr",razorpayPaymentId.toString())
+                    val bundle = Bundle()
+                    bundle.putString("key1", razorpayPaymentId.toString())
+                    val passing = QRcode()
+                    passing.arguments = bundle
+                    showToast("Order in prepration")
+                    supportFragmentManager.popBackStack()
+                    supportFragmentManager.beginTransaction().apply {
+                        replace(R.id.flFragment, passing)
+                        commit()
+                    }
+                }
+                else {
+                    showToast("Payment not verified")
+                }
+            }catch(e: Exception)
             {
-                showToast("Order in prepration")
+
             }
-            else {
-                showToast("Payment not verified")
+            finally {
+                try {
+                    val qr=RetrofitInstance2.getApiServiceWithToken(dataStore).qrGenerate()
+                    if(qr!=null) {
+                        save("qr",qr)
+                        Log.d("test",qr)
+                        val bundle = Bundle()
+                        bundle.putString("key1", qr)
+                        val passing = QRcode()
+                        passing.arguments = bundle
+                        showToast("Order in prepration")
+                        supportFragmentManager.popBackStack()
+                        supportFragmentManager.beginTransaction().apply {
+                            replace(R.id.flFragment, passing)
+                            commit()
+                        }
+                    }
+                }catch (e :Exception){
+
+                }finally{
+
+                }
             }
+
+
         }
 
         //showToast("$razorpayPaymentId")
@@ -314,6 +259,6 @@ class DashBoard : AppCompatActivity(), PaymentResultListener {
 
     override fun onPaymentError(code: Int, response: String?) {
         // Handle payment failure
-        showToast("Payment Failed. Code: $code, Response: $response")
+        //showToast("Payment Failed. Code: $code, Response: $response")
     }
 }
