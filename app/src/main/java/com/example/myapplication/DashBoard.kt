@@ -205,21 +205,27 @@ class DashBoard : AppCompatActivity(), PaymentResultListener {
             val response=RetrofitInstance2.getApiServiceWithToken(dataStore).capturePayment(request)
             if(response.isSuccessful)
             {
-                val bundle=Bundle()
-                bundle.putString("key1",razorpayPaymentId.toString())
-                val passing=QRcode()
-                passing.arguments=bundle
-                showToast("Order in prepration")
-                supportFragmentManager.popBackStack()
-                supportFragmentManager.beginTransaction().apply {
-                    replace(R.id.flFragment, passing)
-                    commit()
-            }
+                val qr=RetrofitInstance2.getApiServiceWithToken(dataStore).qrGenerate()
+
+                if(qr!=null) {
+                    save("qr",qr)
+                    val bundle = Bundle()
+                    bundle.putString("key1", qr)
+                    val passing = QRcode()
+                    passing.arguments = bundle
+                    showToast("Order in prepration")
+                    supportFragmentManager.popBackStack()
+                    supportFragmentManager.beginTransaction().apply {
+                        replace(R.id.flFragment, passing)
+                        commit()
+                    }
+                }
 
             }
             else {
                 showToast("Payment not verified")
             }
+
         }
 
         //showToast("$razorpayPaymentId")
@@ -228,6 +234,6 @@ class DashBoard : AppCompatActivity(), PaymentResultListener {
 
     override fun onPaymentError(code: Int, response: String?) {
         // Handle payment failure
-        showToast("Payment Failed. Code: $code, Response: $response")
+        //showToast("Payment Failed. Code: $code, Response: $response")
     }
 }

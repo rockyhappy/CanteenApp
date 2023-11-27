@@ -176,7 +176,7 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
                     showToast("Retry")
                 }
             }catch (e:Exception){
-                showToast("Error occured")
+                //showToast("Error occured")
             }finally {
 
                 //dismissCustomProgressDialog()

@@ -10,6 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.createDataStore
 import androidx.fragment.app.Fragment
 import com.example.myapplication.R
 import com.google.zxing.BarcodeFormat
@@ -20,11 +23,16 @@ import com.journeyapps.barcodescanner.BarcodeEncoder
 
 
 class QRcode : Fragment() {
-
+    private lateinit var dataStore: DataStore<Preferences>
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        dataStore = requireContext().createDataStore(name = "user")
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
         val view =inflater.inflate(R.layout.fragment_q_rcode, container, false)
         val qrCodeImageView=view.findViewById<ImageView>(R.id.qrCodeImageView)

@@ -88,4 +88,10 @@ interface ApiService {
         @Field("veg") veg: Boolean?,
         @Field("rating") rating: Double?,
     ): Call<List<FoodItem>>
+
+    @GET("api/v1/qrCode/generate")
+    suspend fun qrGenerate() : String?
+
+    @POST("api/v1/qrCode/validate")
+    suspend fun qrScanner(@Body request :addCartItemsResponse): String
 }

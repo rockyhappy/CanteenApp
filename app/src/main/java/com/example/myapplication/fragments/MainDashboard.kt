@@ -27,6 +27,7 @@ import com.example.myapplication.RvAdapter
 import com.example.myapplication.RvModel
 import kotlinx.coroutines.launch
 import android.speech.RecognizerIntent
+import android.text.TextUtils.replace
 import android.widget.HorizontalScrollView
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -40,6 +41,7 @@ import com.example.myapplication.FoodItem
 import com.example.myapplication.PaymentInfo2
 import com.example.myapplication.RvAdapter2
 import com.example.myapplication.addCartItemsRequest
+import com.example.myapplication.readFromDataStore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -82,6 +84,23 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
         } else {
             hideProgressBar()
             updateRecyclerView(sharedViewModel.canteenItems.value!!)
+        }
+
+        val notification=view.findViewById<ImageView>(R.id.imageView6)
+        notification.setOnClickListener {
+            lifecycleScope.launch {
+                val qr= readFromDataStore(dataStore,"qr")
+                val bundle = Bundle()
+                bundle.putString("key1", qr)
+                val passing = QRcode()
+                passing.arguments = bundle
+                showToast("Order in prepration")
+                parentFragmentManager.popBackStack()
+                parentFragmentManager.beginTransaction().apply {
+                    replace(R.id.flFragment, passing)
+                    commit()}
+            }
+
         }
 
         val fullCategory = view.findViewById<TextView>(R.id.fullCategory)

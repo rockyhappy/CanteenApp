@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -193,6 +194,9 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
             /**
              * this is the code for the original api
              */
+            val check = view.findViewById<CheckBox>(R.id.checkBox)
+            var role="USER"
+            if(check.isChecked)role="ADMIN"
             if(!flag) {
 
                 showCustomProgressDialog()
@@ -201,7 +205,7 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
                     fullName=UserName,
                     email=Email,
                     password=password1,
-                    role="USER"
+                    role=role
                 )
                 lifecycleScope.launch {
                     try {
@@ -213,7 +217,7 @@ class Registrationfragment : Fragment(R.layout.fragment_registrationfragment) {
                                 dataStore = context?.createDataStore(name = "user")!!
                                 save("Email", Email)
                                 save("fullname", UserName)
-
+                                save ("role",role)
                                 val fragmentTransaction = parentFragmentManager.beginTransaction()
                                 fragmentTransaction.replace(
                                     R.id.flFragment,
