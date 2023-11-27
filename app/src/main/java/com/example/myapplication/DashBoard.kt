@@ -198,19 +198,18 @@ class DashBoard : AppCompatActivity(), PaymentResultListener {
         Log.d("RazorPay",razorpayPaymentId.toString())
         val totalAmount=cart.totalAmount
         lifecycleScope.launch {
-            val request=PaymentInfo2(
-                paymentId = razorpayPaymentId.toString(),
-                amount = totalAmount
-            )
-            val response=RetrofitInstance2.getApiServiceWithToken(dataStore).capturePayment(request)
-            if(response.isSuccessful)
-            {
-                val qr=RetrofitInstance2.getApiServiceWithToken(dataStore).qrGenerate()
-
-                if(qr!=null) {
-                    save("qr",qr)
+            try {
+                val request=PaymentInfo2(
+                    paymentId = razorpayPaymentId.toString(),
+                    amount = totalAmount
+                )
+                val response=RetrofitInstance2.getApiServiceWithToken(dataStore).capturePayment(request)
+                if(response.isSuccessful)
+                {
+                    showToast("Order in Process")
+                    save("qr",razorpayPaymentId.toString())
                     val bundle = Bundle()
-                    bundle.putString("key1", qr)
+                    bundle.putString("key1", razorpayPaymentId.toString())
                     val passing = QRcode()
                     passing.arguments = bundle
                     showToast("Order in prepration")
@@ -220,11 +219,37 @@ class DashBoard : AppCompatActivity(), PaymentResultListener {
                         commit()
                     }
                 }
+                else {
+                    showToast("Payment not verified")
+                }
+            }catch(e: Exception)
+            {
 
             }
-            else {
-                showToast("Payment not verified")
+            finally {
+                try {
+                    val qr=RetrofitInstance2.getApiServiceWithToken(dataStore).qrGenerate()
+                    if(qr!=null) {
+                        save("qr",qr)
+                        Log.d("test",qr)
+                        val bundle = Bundle()
+                        bundle.putString("key1", qr)
+                        val passing = QRcode()
+                        passing.arguments = bundle
+                        showToast("Order in prepration")
+                        supportFragmentManager.popBackStack()
+                        supportFragmentManager.beginTransaction().apply {
+                            replace(R.id.flFragment, passing)
+                            commit()
+                        }
+                    }
+                }catch (e :Exception){
+
+                }finally{
+
+                }
             }
+
 
         }
 

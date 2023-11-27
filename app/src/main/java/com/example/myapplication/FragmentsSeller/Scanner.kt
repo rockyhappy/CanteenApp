@@ -76,16 +76,17 @@ class Scanner : Fragment() {
                 svgImageView2.setSVG(newSvg)
                 verified.visibility=View.VISIBLE
                 scanButton.text="Go To Home Page >"
+                showToast(content)
                 //Toast.makeText(context, content, Toast.LENGTH_LONG).show()
 
-                lifecycleScope.launch{
-                    val request=addCartItemsResponse(message = content.toString())
-                    val response=RetrofitInstance2.getApiServiceWithToken(dataStore).qrScanner(request)
-                    if(response=="QR Code is valid")
-                        showToast("User Verified")
-                    else
-                        showToast("User Not Verified")
-                }
+//                lifecycleScope.launch{
+//                    val request=addCartItemsResponse(message = content.toString())
+//                    val response=RetrofitInstance2.getApiServiceWithToken(dataStore).qrScanner(request)
+//                    if(response=="QR Code is valid")
+//                        showToast("User Verified")
+//                    else
+//                        showToast("User Not Verified")
+//                }
             }
         }
     }

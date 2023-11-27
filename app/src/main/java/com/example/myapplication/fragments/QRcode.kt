@@ -37,7 +37,7 @@ class QRcode : Fragment() {
         val view =inflater.inflate(R.layout.fragment_q_rcode, container, false)
         val qrCodeImageView=view.findViewById<ImageView>(R.id.qrCodeImageView)
         val receivedData= arguments?.getString("key1").toString()
-        showToast(receivedData)
+        //showToast(receivedData)
         qrCodeImageView.setImageBitmap(getQrCodeBitmap(receivedData,"hi"))
         return view
     }
