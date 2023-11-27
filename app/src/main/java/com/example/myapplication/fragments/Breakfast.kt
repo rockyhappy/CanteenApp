@@ -90,7 +90,7 @@ class Breakfast : Fragment(), RvAdapter.OnItemClickListener {
     }
 
 
-    override fun onItemClick(name: String) {
+    override fun onItemClickCanteen(name: String) {
         showToast(name)
 
     }

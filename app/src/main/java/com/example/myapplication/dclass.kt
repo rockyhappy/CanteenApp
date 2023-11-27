@@ -13,7 +13,9 @@ data class SignUpRequest(
 )
 data class LoginResponse(
     val token: String,
-    val message: String
+    val message: String,
+    val name:String,
+    val hasRole:String
 )
 
 data class LoginRequest(
@@ -103,9 +105,17 @@ data class FoodItem(
     val canteenId: Long,
     val foodImage: String,
     val description: String,
+    val averageRating: Double,
+    val isInWishlist: Boolean,
+    val isInCart: Boolean,
+    val noOfRatings: Int?,
+    val veg: Boolean,
     val ingredients: List<String>,
     val ingredientImageList: List<String>
 )
+
+
+
 
 data class addCartItemsRequest(
     val foodId: Long,
@@ -120,7 +130,8 @@ data class getCartResponse(
     val id: Long,
     val foodItemName: String,
     val quantity: Int,
-    val price: Double
+    val price: Double,
+    val averageRating: Double
 )
 
 data class addToCartRequest(
@@ -133,7 +144,9 @@ data class FoodItemCart(
     val foodItemName: String,
     val quantity: Int,
     val price: Double,
-    val canteenId: Long
+    val canteenId: Long,
+    val averageRating: Double,
+    val foodItemId :Long
 )
 
 data class DiscountedPriceResponse(
@@ -174,8 +187,8 @@ data class FoodItemWishlist(
     val canteenId: Long,
     val foodImage: String,
     val description: String,
-    val ingredients: List<String>,  // You might need to adjust the type based on the actual data
-    val ingredientImageList: List<String>  // You might need to adjust the type based on the actual data
+    val ingredients: List<String>,
+    val ingredientImageList: List<String>
 )
 
 
@@ -196,7 +209,7 @@ data class Order(
     val receipt: String,
     val id: String,
     val entity: String,
-    val offer_id: String?,  // Nullable since it can be null in the JSON
+    val offer_id: String?,
     val status: String,
     val attempts: Int
 )
@@ -213,27 +226,27 @@ data class Payment(
     val created_at: Long,
     val amount_refunded: Int,
     val bank: String,
-    val error_reason: String?, // Nullable since it can be null in the JSON
-    val error_description: String?, // Nullable since it can be null in the JSON
+    val error_reason: String?,
+    val error_description: String?,
     val acquirer_data: AcquirerData,
     val captured: Boolean,
     val contact: String,
-    val invoice_id: String?, // Nullable since it can be null in the JSON
+    val invoice_id: String?,
     val currency: String,
     val id: String,
     val international: Boolean,
     val email: String,
     val amount: Int,
-    val refund_status: String?, // Nullable since it can be null in the JSON
-    val wallet: String?, // Nullable since it can be null in the JSON
+    val refund_status: String?,
+    val wallet: String?,
     val method: String,
-    val vpa: String?, // Nullable since it can be null in the JSON
-    val error_source: String?, // Nullable since it can be null in the JSON
-    val error_step: String?, // Nullable since it can be null in the JSON
+    val vpa: String?,
+    val error_source: String?,
+    val error_step: String?,
     val tax: Int,
-    val card_id: String?, // Nullable since it can be null in the JSON
-    val error_code: String?, // Nullable since it can be null in the JSON
-    val order_id: String?, // Nullable since it can be null in the JSON
+    val card_id: String?,
+    val error_code: String?,
+    val order_id: String?,
     val entity: String,
     val status: String
 )

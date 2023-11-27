@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.datastore.core.DataStore
@@ -36,6 +37,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import org.w3c.dom.Text
@@ -47,6 +49,9 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
     private lateinit var rvadapter : RvAdapterCart
     private lateinit var dataStore: DataStore<Preferences>
     private var dialog: Dialog? = null
+    private lateinit var progressBar: ProgressBar
+    private var apiCallJob: Job? = null
+    private var food:List<FoodItemCart> = emptyList()
     companion object{
         var totalAmount:Double=0.0
     }
@@ -67,23 +72,31 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
     ): View? {
         val view= inflater.inflate(R.layout.fragment_cart, container, false)
         dataStore = requireContext().createDataStore(name = "user")
-
         val subTotal = view.findViewById<TextView>(R.id.subtotal)
         val discount=view.findViewById<TextView>(R.id.discount)
         val total =view.findViewById<TextView>(R.id.total)
         rvadapter = RvAdapterCart(ArrayList(), requireContext(), this,this,this,this)
-        recyclerView = view.findViewById<RecyclerView>(R.id.rvi)
+        recyclerView = view.findViewById(R.id.rvi)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 1, GridLayoutManager.VERTICAL, false)
         recyclerView.adapter = rvadapter
+        progressBar=view.findViewById(R.id.progressBar2)
+        val apply = view.findViewById<Button>(R.id.apply)
+        val add = view.findViewById<TextView>(R.id.add)
+        val cart=view.findViewById<Button>(R.id.cart)
         lifecycleScope.launch{
+
+            apply.isEnabled=false
+            cart.isEnabled=false
+            add.isEnabled=false
+            progressBar.visibility=View.VISIBLE
             try{
-                showCustomProgressDialog()
                 val response = RetrofitInstance2.getApiServiceWithToken(dataStore).getCart()
                 if (response.isSuccessful) {
                     val foodItemList: List<FoodItemCart>? = response.body()
                     if (foodItemList != null) {
                         rvadapter.updateData(foodItemList)
                          totalAmount = calculateTotalAmount(foodItemList)
+                        food=foodItemList
                         subTotal.text = "₹"+totalAmount.toString()
                     } else {
                         showToast("Empty or null response body received from the server.")
@@ -93,9 +106,13 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
                 }
             }catch (e: Exception)
             {
-                showToast("Catch Block")
+                //showToast("Catch Block")
             }finally{
-                dismissCustomProgressDialog()
+                progressBar.visibility=View.GONE
+                //dismissCustomProgressDialog()
+                apply.isEnabled=true
+                cart.isEnabled=true
+                add.isEnabled=true
             }
 
         }
@@ -103,7 +120,7 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
         Checkout.preload(requireContext())
 
 
-        val cart=view.findViewById<Button>(R.id.cart)
+
         cart.setOnClickListener {
             showToast("Redirecting To Payment")
 
@@ -119,7 +136,6 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
             startRazorpayPayment()
         }
 
-        val add = view.findViewById<TextView>(R.id.add)
         add.setOnClickListener {
             val fragmentTransaction = parentFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.flFragment, Dishes_Category())
@@ -127,129 +143,148 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
             fragmentTransaction.commit()
         }
 
-        val apply = view.findViewById<Button>(R.id.apply)
         apply.setOnClickListener {
             showApplyDialog()
         }
         return view
     }
 
-    override fun onPlusClick(name: Long , price : Int ) {
-        val v= view?.findViewById<TextView>(R.id.quantity)
+    override fun onPlusClick(position :Int,name: Long , price : Double ) {
+        val v= requireView().findViewById<TextView>(R.id.quantity)
 //        showToast(v?.text.toString())
         var quantity =v?.text.toString().toLong()
-        lifecycleScope.launch{
+//        ++quantity
+        v?.text=quantity.toString()
+        totalAmount+=price
+        val subTotal = view?.findViewById<TextView>(R.id.subtotal)
+        subTotal?.text= "₹"+totalAmount.toString()
+        apiCallJob?.cancel()
+        apiCallJob= lifecycleScope.launch{
             try {
-                showCustomProgressDialog()
+                //showCustomProgressDialog()
                 val request = addCartItemsRequest(
                     foodId = name,
-                    quantity = (quantity+1).toString()
+                    quantity = (quantity).toString()
                 )
                 val response = RetrofitInstance2.getApiServiceWithToken(dataStore).addCartItems(request)
                 Log.d("response",response.toString())
                 if(response.isSuccessful){
-                    v?.text=(quantity+1).toString()
-                    totalAmount+=price
+                    v?.text=(quantity).toString()
                     val subTotal = view?.findViewById<TextView>(R.id.subtotal)
                     subTotal?.text = "₹"+totalAmount.toString()
                 }else{
                     showToast("Retry")
                 }
             }catch (e:Exception){
-                showToast("Error occured")
+                //showToast("Error occured")
             }finally {
 
-                dismissCustomProgressDialog()
+                //dismissCustomProgressDialog()
             }
         }
     }
 
-    override fun onMinusClick(name: Long) {
+    override fun onMinusClick(position :Int,name: Long , price:Double,quan:Int) {
         val v= view?.findViewById<TextView>(R.id.quantity)
 //        showToast(v?.text.toString())
         var quantity =v?.text.toString().toLong()
-        if(v?.text.toString().toInt()==0){
-            val request = DeleteCartItemRequest(cartItemId = name.toString())
-            lifecycleScope.launch {
-                try {
-                    showCustomProgressDialog()
-
-                    val response = RetrofitInstance2.getApiServiceWithToken(dataStore).deleteCartItem(request)
-
-                    if (response.isSuccessful) {
-                        showToast("Item deleted successfully")
-                        val position = rvadapter.dataList.indexOfFirst{ it.id == name }
-                        rvadapter.removeItem(position)
-                        rvadapter.updateData(rvadapter.dataList)
-                    } else {
-                        showToast("Failed to delete item. Code: ${response.code()}")
-                    }
-                } catch (e: Exception) {
-                    showToast("An error occurred: ${e.message}")
-                } finally {
-                    dismissCustomProgressDialog()
-                    //now the item has been deleted but the datalist is not updated
-                    try{
-                        showCustomProgressDialog()
-                        val response = RetrofitInstance2.getApiServiceWithToken(dataStore).getCart()
-                        if (response.isSuccessful) {
-                            val foodItemList: List<FoodItemCart>? = response.body()
-                            if (foodItemList != null) {
-                                rvadapter.updateData(foodItemList)
-                            } else {
-                                showToast("Empty or null response body received from the server.")
-                            }
-                        } else {
-                            showToast("Failed to retrieve data. Code: ${response.code()}")
-                        }
-                    }catch (e: Exception)
-                    {
-                        showToast("Catch Block")
-                    }finally{
-                        dismissCustomProgressDialog()
-                        try {
-                            showCustomProgressDialog()
-                            val bill=RetrofitInstance2.getApiServiceWithToken(dataStore).getTotalBill()
-                            val subTotal = view?.findViewById<TextView>(R.id.subtotal)
-                            subTotal?.text=bill.toString()
-                        }catch (e: Exception){
-                            showToast("Connection Error")
-                        }finally {
-                            dismissCustomProgressDialog()
-                        }
-                    }
-                }
-            }
+        if(quan==1)
+        {
+            totalAmount+=price
+        }
+        if(v?.text.toString().toInt()==1){
+            return
+//            val request = DeleteCartItemRequest(cartItemId = name.toString())
+//            apiCallJob?.cancel()
+//            apiCallJob=lifecycleScope.launch {
+//                try {
+//                    //showCustomProgressDialog()
+//
+//                    val response = RetrofitInstance2.getApiServiceWithToken(dataStore).deleteCartItem(request)
+//
+//                    if (response.isSuccessful) {
+//                        showToast("Item deleted successfully")
+//                        val position = rvadapter.dataList.indexOfFirst{ it.id == name }
+//                        rvadapter.removeItem(position)
+//                        rvadapter.updateData(rvadapter.dataList)
+//                    } else {
+//                        showToast("Failed to delete item. Code: ${response.code()}")
+//                    }
+//                } catch (e: Exception) {
+//                    showToast("An error occurred: ${e.message}")
+//                } finally {
+//                    //dismissCustomProgressDialog()
+//                    //now the item has been deleted but the datalist is not updated
+//                    try{
+//                        //showCustomProgressDialog()
+//                        val response = RetrofitInstance2.getApiServiceWithToken(dataStore).getCart()
+//                        if (response.isSuccessful) {
+//                            val foodItemList: List<FoodItemCart>? = response.body()
+//                            if (foodItemList != null) {
+//                                rvadapter.updateData(foodItemList)
+//                            } else {
+//                                showToast("Empty or null response body received from the server.")
+//                            }
+//                        } else {
+//                            showToast("Failed to retrieve data. Code: ${response.code()}")
+//                        }
+//                    }catch (e: Exception)
+//                    {
+//                        showToast("Catch Block")
+//                    }finally{
+//                        //dismissCustomProgressDialog()
+//                        try {
+//                            //showCustomProgressDialog()
+//                            val bill=RetrofitInstance2.getApiServiceWithToken(dataStore).getTotalBill()
+//                            val subTotal = view?.findViewById<TextView>(R.id.subtotal)
+//                            subTotal?.text=bill.toString()
+//                        }catch (e: Exception){
+//                            showToast("Connection Error")
+//                        }finally {
+//                            //dismissCustomProgressDialog()
+//                        }
+//                    }
+//                }
+//            }
         }else
         {
-            lifecycleScope.launch{
+            //--quantity
+            v?.text=quantity.toString()
+
+            //totalAmount=calculateTotalAmount(foodItemList =food )
+            totalAmount-=price
+            val subTotal = view?.findViewById<TextView>(R.id.subtotal)
+            subTotal?.text="₹"+ totalAmount.toString()
+            apiCallJob?.cancel()
+            apiCallJob=lifecycleScope.launch{
                 try {
-                    showCustomProgressDialog()
+                    //showCustomProgressDialog()
                     val request = addCartItemsRequest(
                         foodId = name,
-                        quantity = (quantity-1).toString()
+                        quantity = (quantity).toString()
                     )
                     val response = RetrofitInstance2.getApiServiceWithToken(dataStore).addCartItems(request)
                     Log.d("response",response.toString())
                     if(response.isSuccessful){
-                        v?.text=(quantity-1).toString()
+                        v?.text=(quantity).toString()
                     }else{
                         showToast("Retry")
                     }
                 }catch (e:Exception){
-                    showToast("Error occured")
+                    //showToast("Error occured")
                 }finally {
-                    dismissCustomProgressDialog()
+                    //dismissCustomProgressDialog()
                     try {
-                        showCustomProgressDialog()
+                        //showCustomProgressDialog()
                         val bill=RetrofitInstance2.getApiServiceWithToken(dataStore).getTotalBill()
                         val subTotal = view?.findViewById<TextView>(R.id.subtotal)
-                        subTotal?.text=bill.toString()
+                        subTotal?.text="₹"+ totalAmount.toString()
                     }catch (e: Exception){
-                        showToast("Connection Error")
+                        //showToast("Connection Error")
                     }finally {
-
-                    dismissCustomProgressDialog()
+                        val subTotal = view?.findViewById<TextView>(R.id.subtotal)
+                        subTotal?.text= "₹"+totalAmount.toString()
+                    //dismissCustomProgressDialog()
                     }
                 }
             }
@@ -448,26 +483,6 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
             val response = RetrofitInstance2.getApiServiceWithToken(dataStore)
                 .getTotalBill()
             total?.text=response.toString()
-
-
-
-//            if (response.isSuccessful) {
-//                val totalBillResponse: TotalBillResponse? = response.body()
-//
-//                if (totalBillResponse != null) {
-//                    // Now you have the 'totalBill', you can use it as needed.
-//                    val totalBill = totalBillResponse.totalBill
-//                    total?.text=totalBill.toString()
-//                    showToast("Total Bill: $totalBill")
-//                    totalBill
-//                } else {
-//                    showToast("Empty or null response body received from the server.")
-//                    null
-//                }
-//            } else {
-//                showToast("Failed to get total bill. Code: ${response.code()}")
-//                null
-//            }
             null
         } catch (e: Exception) {
             showToast("An error occurred: ${e.message}")
@@ -518,7 +533,7 @@ class cart : Fragment() ,RvAdapterCart.OnDeleteClickListener,RvAdapterCart.OnIte
     private fun calculateTotalAmount(foodItemList: List<FoodItemCart>): Double {
         var totalAmount = 0.0
         for (foodItem in foodItemList) {
-            totalAmount += foodItem.quantity * foodItem.price
+            totalAmount += foodItem.quantity* foodItem.price
         }
         return totalAmount
     }
