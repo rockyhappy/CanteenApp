@@ -33,8 +33,10 @@ import com.example.myapplication.ViewModel.CanteenMenuViewModel
 import com.example.myapplication.addCartItemsRequest
 import com.example.myapplication.addToCartRequest
 import com.example.myapplication.addWishlistRequest
+import com.example.myapplication.deleteFromWishlistRequest
 import com.example.myapplication.readFromDataStore
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2.OnCartClickListener,RvAdapter2.OnWishClickListener{
@@ -44,6 +46,8 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
     private var dialog: Dialog? = null
     private  val canteenViewModel: CanteenMenuViewModel by  activityViewModels()
     private lateinit var progressBar: ProgressBar
+    private var apiCallJob: Job? = null
+    private var apiCallJobWish: Job? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -105,58 +109,95 @@ class ShowCanteenMenu : Fragment() , RvAdapter2.OnItemClickListener , RvAdapter2
         fragmentTransaction.commit()
     }
 
-    override fun onCartClick(name: Long) {
-       lifecycleScope.launch {
-           try{
-               showCustomProgressDialog()
-               val request= addCartItemsRequest(
-                   foodId = name,
-                   quantity = "1"
-               )
-               val response = RetrofitInstance2.getApiServiceWithToken(dataStore).addCartItems(request)
-               if(response.isSuccessful)
-               {
-                   showToast(response.body()?.message.toString())
-                   Log.d("ResponseCart",response.body()?.message.toString())
-               }
+    override fun onCartClick(name: Long, isIn: Boolean) {
+        apiCallJob?.cancel()
+        if(isIn==false)
+        {
+            apiCallJob?.cancel()
+            apiCallJob = lifecycleScope.launch {
+                try{
+                    //showCustomProgressDialog()
+                    val request= addCartItemsRequest(
+                        foodId = name,
+                        quantity = "1"
+                    )
+                    val response = RetrofitInstance2.getApiServiceWithToken(dataStore).addCartItems(request)
+                    if(response.isSuccessful)
+                    {
+                        showToast(response.body()?.message.toString())
+                        Log.d("ResponseCart",response.body()?.message.toString())
+                    }
 
-           }catch (e:Exception){
-               showToast("Connection Error")
-           }finally{
-               dismissCustomProgressDialog()
-           }
-
-
-       }
-    }
-
-    override fun onWishClick(name: Long) {
+                }catch (e:Exception){
+                    //showToast("Connection Error")
+                }finally{
+                    //dismissCustomProgressDialog()
+                }
 
 
-
-    lifecycleScope.launch {
-        try {
-            //showCustomProgressDialog()
-            val email= readFromDataStore(dataStore,"email")
-            val request =addWishlistRequest(
-                userEmail = email.toString(),
-                foodId = name.toString()
-            )
-            val response= RetrofitInstance2.getApiServiceWithToken(dataStore).addWishList(request)
-            if(response.isSuccessful)
-            {
-                Log.d("Testing","Item Added to the list")
             }
-            else{
-                Log.d("Testing","Failed to add")
-            }
-        }catch (e: Exception){
-                Log.d("Testing", "This is catch block")
-        }finally{
-            //dismissCustomProgressDialog()
         }
+        else
+        {
+            val fragmentTransaction = parentFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.flFragment, cart())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
+
     }
 
+    override fun onWishClick(name: Long, isIn: Boolean) {
+        apiCallJobWish?.cancel()
+        if(!isIn)
+        {
+            lifecycleScope.launch {
+                try {
+                    //showCustomProgressDialog()
+                    val email= readFromDataStore(dataStore,"email")
+                    val request =addWishlistRequest(
+                        userEmail = email.toString(),
+                        foodId = name.toString()
+                    )
+                    val response= RetrofitInstance2.getApiServiceWithToken(dataStore).addWishList(request)
+                    if(response.isSuccessful)
+                    {
+                        Log.d("Testing","Item Added to the list")
+                    }
+                    else{
+                        Log.d("Testing","Failed to add")
+                    }
+                }catch (e: Exception){
+                    Log.d("Testing", "This is catch block")
+                }finally{
+                    //dismissCustomProgressDialog()
+                }
+            }
+        }
+        else{
+            lifecycleScope.launch{
+                try{
+                    //showCustomProgressDialog()
+                    val email= readFromDataStore(dataStore,"email")
+                    val request= deleteFromWishlistRequest(
+                        email= email.toString(),
+                        foodId = name.toString()
+                    )
+                    val response = RetrofitInstance2.getApiServiceWithToken(dataStore).deleteFromWishlist(request)
+                    if(response.isSuccessful)
+                    {
+                        showToast(response.body()?.message.toString())
+                        Log.d("ResponseCart",response.body()?.message.toString())
+                    }
+
+                }catch (e:Exception){
+                    showToast("Connection Error")
+                }finally{
+                    //dismissCustomProgressDialog()
+                    //wishlistReload()
+                }
+            }
+        }
     }
     private fun showCustomProgressDialog() {
         dialog = Dialog(requireContext())

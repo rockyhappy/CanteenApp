@@ -61,7 +61,6 @@ class ShowCategoryMenu : Fragment(), RvAdapter2.OnItemClickListener,RvAdapter2.O
         val backButton: FloatingActionButton =view.findViewById(R.id.backButton)
         backButton.setOnClickListener{
             parentFragmentManager.popBackStack()
-
         }
 
         val filter= view.findViewById<Button>(R.id.filter)
@@ -98,7 +97,7 @@ class ShowCategoryMenu : Fragment(), RvAdapter2.OnItemClickListener,RvAdapter2.O
         fragmentTransaction.commit()
 
     }
-    override fun onCartClick(name: Long) {
+    override fun onCartClick(name: Long,isIn :Boolean) {
         lifecycleScope.launch {
             try{
                 showCustomProgressDialog()
@@ -123,7 +122,7 @@ class ShowCategoryMenu : Fragment(), RvAdapter2.OnItemClickListener,RvAdapter2.O
         }
     }
 
-    override fun onWishClick(name: Long) {
+    override fun onWishClick(name: Long ,isIn: Boolean) {
 //        showToast(name.toString())
 //        val bundle =Bundle()
 //        bundle.putString("id",name.toString())

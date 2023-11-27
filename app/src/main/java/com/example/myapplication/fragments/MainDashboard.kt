@@ -62,7 +62,7 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
     private lateinit var recyclerViewSearch: RecyclerView
     private lateinit var rvadapterSearch : RvAdapter2
     private lateinit var searchProgressBar: ProgressBar
-
+    private var apiCallJob: Job? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -271,8 +271,8 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
 
 
             override fun onQueryTextChange(query: String?): Boolean {
-                recyclerViewSearch.visibility=View.VISIBLE
                 if (!query.isNullOrEmpty()) {
+                    recyclerViewSearch.visibility=View.VISIBLE
                     searchJob?.cancel()  // Cancel the previous job if it's still running
                     searchJob = lifecycleScope.launch {
                         try {
@@ -434,32 +434,68 @@ class MainDashboard : Fragment(R.layout.fragment_main_dashboard) , RvAdapter.OnI
         fragmentTransaction.commit()
 
     }
-    override fun onCartClick(name: Long) {
-        lifecycleScope.launch {
-            try{
-                showCustomProgressDialog()
-                val request= addCartItemsRequest(
-                    foodId = name,
-                    quantity = "1"
-                )
-                val response = RetrofitInstance2.getApiServiceWithToken(dataStore).addCartItems(request)
-                if(response.isSuccessful)
-                {
-                    showToast(response.body()?.message.toString())
-                    Log.d("ResponseCart",response.body()?.message.toString())
+//    override fun onCartClick(name: Long,isIn :Boolean) {
+//        lifecycleScope.launch {
+//            try{
+//                showCustomProgressDialog()
+//                val request= addCartItemsRequest(
+//                    foodId = name,
+//                    quantity = "1"
+//                )
+//                val response = RetrofitInstance2.getApiServiceWithToken(dataStore).addCartItems(request)
+//                if(response.isSuccessful)
+//                {
+//                    showToast(response.body()?.message.toString())
+//                    Log.d("ResponseCart",response.body()?.message.toString())
+//                }
+//
+//            }catch (e:Exception){
+//                showToast("Connection Error")
+//            }finally{
+//                dismissCustomProgressDialog()
+//            }
+//
+//
+//        }
+//    }
+    override fun onCartClick(name: Long, isIn: Boolean) {
+        apiCallJob?.cancel()
+        if(isIn==false)
+        {
+            apiCallJob?.cancel()
+            apiCallJob = lifecycleScope.launch {
+                try{
+                    //showCustomProgressDialog()
+                    val request= addCartItemsRequest(
+                        foodId = name,
+                        quantity = "1"
+                    )
+                    val response = RetrofitInstance2.getApiServiceWithToken(dataStore).addCartItems(request)
+                    if(response.isSuccessful)
+                    {
+                        showToast(response.body()?.message.toString())
+                        Log.d("ResponseCart",response.body()?.message.toString())
+                    }
+
+                }catch (e:Exception){
+                    //showToast("Connection Error")
+                }finally{
+                    //dismissCustomProgressDialog()
                 }
 
-            }catch (e:Exception){
-                showToast("Connection Error")
-            }finally{
-                dismissCustomProgressDialog()
+
             }
-
-
         }
-    }
+        else
+        {
+            val fragmentTransaction = parentFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.flFragment, cart())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
 
-    override fun onWishClick(name: Long) {
+    }
+    override fun onWishClick(name: Long,isIn: Boolean) {
 //        showToast(name.toString())
 //        val bundle =Bundle()
 //        bundle.putString("id",name.toString())

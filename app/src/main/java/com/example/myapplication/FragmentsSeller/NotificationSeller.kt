@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.RvAdapter
 import com.example.myapplication.sellerAdapter.notificationAdapter
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class NotificationSeller : Fragment(), notificationAdapter.OnItemClickListener {
@@ -27,6 +28,10 @@ class NotificationSeller : Fragment(), notificationAdapter.OnItemClickListener {
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = rvadapter
 
+        val backButton: FloatingActionButton =view.findViewById(R.id.backButton)
+        backButton.setOnClickListener{
+            parentFragmentManager.popBackStack()
+        }
 
         return view
     }

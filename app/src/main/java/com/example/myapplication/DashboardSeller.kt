@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.myapplication.FragmentsSeller.MainDashboardSeller
 import com.example.myapplication.FragmentsSeller.NotificationSeller
 import com.example.myapplication.FragmentsSeller.OrderSeller
 import com.example.myapplication.FragmentsSeller.PaymentSeller
@@ -27,12 +28,19 @@ class DashboardSeller : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding= ActivityDashboardSellerBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.flFragment, MainDashboardSeller())
+            commit()
+        }
+
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.action_home -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.flFragment, NotificationSeller()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.flFragment, MainDashboardSeller()).commit()
                     true
                 }
                 R.id.action_menu -> {

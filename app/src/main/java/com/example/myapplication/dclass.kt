@@ -13,7 +13,9 @@ data class SignUpRequest(
 )
 data class LoginResponse(
     val token: String,
-    val message: String
+    val message: String,
+    val name:String,
+    val hasRole:String
 )
 
 data class LoginRequest(
@@ -125,7 +127,8 @@ data class getCartResponse(
     val id: Long,
     val foodItemName: String,
     val quantity: Int,
-    val price: Double
+    val price: Double,
+    val averageRating: Double
 )
 
 data class addToCartRequest(
@@ -138,7 +141,9 @@ data class FoodItemCart(
     val foodItemName: String,
     val quantity: Int,
     val price: Double,
-    val canteenId: Long
+    val canteenId: Long,
+    val averageRating: Double,
+    val foodItemId :Long
 )
 
 data class DiscountedPriceResponse(

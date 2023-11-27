@@ -92,4 +92,9 @@
         <item name="android:textSize">10sp</item>
         <item name="android:textColor">#858FA3</item>
     </style>
+
+    <style name="transaction">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#46474B</item>
+    </style>
 </resources>

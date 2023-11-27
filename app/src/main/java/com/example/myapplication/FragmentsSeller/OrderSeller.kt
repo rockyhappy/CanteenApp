@@ -11,6 +11,7 @@ import com.example.myapplication.R
 import com.example.myapplication.RvAdapter
 import com.example.myapplication.sellerAdapter.notificationAdapter
 import com.example.myapplication.sellerAdapter.orderAdapter
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class OrderSeller : Fragment(), orderAdapter.OnItemClickListener {
@@ -28,6 +29,10 @@ class OrderSeller : Fragment(), orderAdapter.OnItemClickListener {
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = rvadapter
 
+        val backButton: FloatingActionButton =view.findViewById(R.id.backButton)
+        backButton.setOnClickListener{
+            parentFragmentManager.popBackStack()
+        }
 
         return view
     }

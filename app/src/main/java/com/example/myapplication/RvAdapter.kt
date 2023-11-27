@@ -17,6 +17,7 @@ import android.graphics.Rect
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.RatingBar
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
@@ -121,12 +122,14 @@ class RvAdapter2(
         var profile = holder.view.findViewById<ImageView>(R.id.imageView1)
         var name = holder.view.findViewById<TextView>(R.id.textView1)
         var residence = holder.view.findViewById<TextView>(R.id.price)
-
+        var rate=holder.view.findViewById<RatingBar>(R.id.rate)
+        var ratings=holder.view.findViewById<TextView>(R.id.ratings)
 
         val item = dataList[position]
         name.text = item.name
         residence.text = item.price.toString()
-
+        rate.rating=item.averageRating.toFloat()
+        ratings.text="("+item.noOfRatings+" ratings)"
         Glide.with(context)
             .load("https://i.postimg.cc/xTMVqcLJ/Break-fast.png")
             .apply(
@@ -139,7 +142,8 @@ class RvAdapter2(
 
 
         holder.cart.setOnClickListener {
-            cartClickListener.onCartClick(item.id)
+            cartClickListener.onCartClick(item.id,false)
+            //holder.cart.text="GoTo"
         }
         if(item.isInWishlist)
         {
@@ -147,14 +151,17 @@ class RvAdapter2(
         }
         if(item.isInCart)
         {
-            holder.cart.isEnabled=false
-            holder.cart.setBackgroundResource(R.drawable.baseline_home_24)
-            holder.cart.isEnabled=true
+            //holder.cart.isEnabled=false
+            holder.cart.text="GoTo"
+            holder.cart.setOnClickListener {
+                cartClickListener.onCartClick(item.id,true)
+            }
+            //holder.cart.isEnabled=true
         }
         holder.wish.setOnClickListener {
-            holder.wish.setColorFilter(Color.TRANSPARENT, PorterDuff.Mode.SRC_IN)
+            //holder.wish.setColorFilter(Color.TRANSPARENT, PorterDuff.Mode.SRC_IN)
             holder.wish.isEnabled=false
-            wishClickListener.onWishClick(item.id)
+            wishClickListener.onWishClick(item.id, item.isInWishlist)
             holder.wish.isEnabled=true
         }
 
@@ -175,10 +182,10 @@ class RvAdapter2(
         fun onItemClick(name: Long)
     }
     interface OnCartClickListener {
-        fun onCartClick(name: Long)
+        fun onCartClick(name: Long,isIn :Boolean)
     }
     interface OnWishClickListener {
-        fun onWishClick(name: Long)
+        fun onWishClick(name: Long,isIn: Boolean)
     }
     fun updateData(newDataList: List<FoodItem>) {
         dataList.clear()
@@ -226,6 +233,7 @@ class RvAdapterCart(
         val qunatity=view.findViewById<TextView>(R.id.quantity)
         val minus=view.findViewById<ImageButton>(R.id.minus)
         val plus=view.findViewById<ImageButton>(R.id.plus)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -241,12 +249,12 @@ class RvAdapterCart(
         var profile = holder.view.findViewById<ImageView>(R.id.imageView1)
         var name = holder.view.findViewById<TextView>(R.id.textView1)
         var residence = holder.view.findViewById<TextView>(R.id.price)
+        var quantity =holder.view.findViewById<TextView>(R.id.quantity)
 
-
-        val item = dataList[position]
+        var item = dataList[position]
         name.text = item.foodItemName
         residence.text=item.price.toString()
-
+        quantity.text=item.quantity.toString()
         Glide.with(context)
             .load("https://i.postimg.cc/xTMVqcLJ/Break-fast.png")
             .apply(
@@ -259,17 +267,19 @@ class RvAdapterCart(
 
 
         holder.plus.setOnClickListener {
-            quantityIncreaseListener.onPlusClick(item.id, item.price.toInt())
+            quantityIncreaseListener.onPlusClick(position ,item.foodItemId, item.price.toDouble())
+            increaseQuantity(position)
         }
         holder.minus.setOnClickListener {
-            quantityDecreaseListener.onMinusClick(item.id)
+            quantityDecreaseListener.onMinusClick(position,item.foodItemId,item.price.toDouble(),item.quantity)
+            decreaseQuantity(position)
         }
         holder.delete.setOnClickListener {
-            itemDeleteListener.onDeleteClick(item.id)
+            itemDeleteListener.onDeleteClick(item.foodItemId)
         }
 
         holder.view.setOnClickListener {
-            itemClickListener.onItemClick(item.id)
+            itemClickListener.onItemClick(item.foodItemId)
         }
         if (position == selectedPosition) {
             //holder.dotImageView.setBackgroundResource(R.drawable.dot_selected)
@@ -278,6 +288,27 @@ class RvAdapterCart(
         }
 
     }
+
+    fun increaseQuantity(position: Int) {
+        if (position in 0 until dataList.size) {
+            val currentItem = dataList[position]
+            val updatedItem = currentItem.copy(quantity = currentItem.quantity + 1)
+            dataList[position] = updatedItem
+            notifyItemChanged(position)
+        }
+    }
+
+    fun decreaseQuantity(position: Int) {
+        if (position in 0 until dataList.size) {
+            val currentItem = dataList[position]
+            if (currentItem.quantity > 1) {
+                val updatedItem = currentItem.copy(quantity = currentItem.quantity - 1)
+                dataList[position] = updatedItem
+                notifyItemChanged(position)
+            }
+        }
+    }
+
     /**
      * This is for the click in the recycler view
      */
@@ -289,10 +320,10 @@ class RvAdapterCart(
     }
 
     interface OnQuantityDecreaseListener {
-        fun onMinusClick(name: Long)
+        fun onMinusClick(position:Int,name: Long,quanti :Double, quantity: Int)
     }
     interface OnQuantityIncreaseListener {
-        fun onPlusClick(name: Long,quantity:Int)
+        fun onPlusClick(position:Int,name: Long,quantity:Double)
     }
     fun removeItem(position: Int) {
         if (position in 0 until dataList.size) {
@@ -303,8 +334,13 @@ class RvAdapterCart(
 
     fun updateData(newDataList: List<FoodItemCart>) {
         //val diffResult = DiffUtil.calculateDiff(FoodItemCartDiffCallback(dataList, newDataList))
-        dataList.clear()
-        dataList.addAll(newDataList)
+
+        dataList?.let {
+            // Update your adapter data here
+            dataList.clear()
+            dataList.addAll(newDataList)
+        }
+
         //diffResult.dispatchUpdatesTo(this)
         notifyDataSetChanged()
     }

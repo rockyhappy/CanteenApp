@@ -23,6 +23,7 @@ import androidx.lifecycle.lifecycleScope
 import com.caverock.androidsvg.SVG
 import com.caverock.androidsvg.SVGImageView
 import com.example.myapplication.DashBoard
+import com.example.myapplication.DashboardSeller
 import com.example.myapplication.LoginRequest
 import com.example.myapplication.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -135,11 +136,21 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                         if (response.isSuccessful) {
                             if (response.body()?.token.toString().length >= 30) {
                                 save("token", response.body()?.token.toString())
-                                startActivity(Intent(requireActivity(), DashBoard::class.java))
-                                requireActivity().finish()
+                                save("username",response.body()?.name.toString())
+                                save("role",response.body()?.hasRole.toString())
+                                if(response.body()?.hasRole.toString()=="USER")
+                                {
+                                    startActivity(Intent(requireActivity(), DashBoard::class.java))
+                                    requireActivity().finish()
+                                }
+                                else
+                                {
+                                    startActivity(Intent(requireActivity(), DashboardSeller::class.java))
+                                    requireActivity().finish()
+                                }
+
                             } else {
-                                val incorrectOtp =
-                                    view.findViewById<TextView>(R.id.passwordIncorrect1)
+                                val incorrectOtp =view.findViewById<TextView>(R.id.passwordIncorrect1)
                                 incorrectOtp.text = response.body()?.token.toString()
                             }
                         } else {

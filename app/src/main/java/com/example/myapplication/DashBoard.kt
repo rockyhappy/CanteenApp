@@ -154,13 +154,13 @@ class DashBoard : AppCompatActivity(), PaymentResultListener {
                     supportFragmentManager.beginTransaction().replace(R.id.flFragment, Scanner()).commit()
 
 
-//                    lifecycleScope.launch {
-//                        try{
-//                            save("token","null")
-//                            startActivity(Intent(this@DashBoard, Login::class.java))
-//                            finish()
-//                        }catch (e:Exception){ }finally {}
-//                    }
+                    lifecycleScope.launch {
+                        try{
+                            save("token","null")
+                            startActivity(Intent(this@DashBoard, Login::class.java))
+                            finish()
+                        }catch (e:Exception){ }finally {}
+                    }
                     true
                 }
                 else -> false
