@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -36,6 +37,7 @@ class wishlist : Fragment() ,RvAdapterWishlist.OnCartClickListener,RvAdapterWish
     private lateinit var rvadapter : RvAdapterWishlist
     private lateinit var dataStore: DataStore<Preferences>
     private var dialog: Dialog? = null
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,16 +54,17 @@ class wishlist : Fragment() ,RvAdapterWishlist.OnCartClickListener,RvAdapterWish
         recyclerView = view.findViewById<RecyclerView>(R.id.rvi)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
         recyclerView.adapter = rvadapter
-
+        progressBar=view.findViewById(R.id.progress)
         val backButton: FloatingActionButton =view.findViewById(R.id.backButton)
         backButton.setOnClickListener{
             parentFragmentManager.popBackStack()
         }
+
         lifecycleScope.launch {
             try {
 
-                showCustomProgressDialog()
-
+                //showCustomProgressDialog()
+                showProgressBar()
                 val response = RetrofitInstance2.getApiServiceWithToken(dataStore).getWishlist()
                 if (response.isSuccessful) {
                     Log.d("Testing",response.body().toString())
@@ -86,7 +89,8 @@ class wishlist : Fragment() ,RvAdapterWishlist.OnCartClickListener,RvAdapterWish
                 Log.e("Testing", "Network Error: ${e.message}", e)
             }
             finally {
-                dismissCustomProgressDialog()
+                //dismissCustomProgressDialog()
+                hideProgressBar()
             }
         }
 
@@ -203,5 +207,12 @@ class wishlist : Fragment() ,RvAdapterWishlist.OnCartClickListener,RvAdapterWish
     }
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+    private fun showProgressBar() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    private fun hideProgressBar() {
+        progressBar.visibility = View.GONE
     }
 }
