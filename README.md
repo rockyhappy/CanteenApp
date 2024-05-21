@@ -67,9 +67,16 @@ Brunch Bliss is a sophisticated Android application designed to streamline the d
 
 ### Vendor Side Screens
 <!-- Add screenshots for dynamic menu management, order management, and refund button here -->
-<img src="path/to/dynamic_menu_screenshot.png" alt="Dynamic Menu Management Screen" width="250">
-<img src="path/to/order_management_screenshot.png" alt="Order Management Screen" width="250">
-<img src="path/to/refund_button_screenshot.png" alt="Refund Button Screen" width="250">
+
+<img src="https://github.com/rockyhappy/CanteenApp/assets/115190222/de38f339-d1ea-4e3a-9ee8-14ae01775f11" alt="Dynamic Menu Management Screen" width="150">
+<img src="https://github.com/rockyhappy/CanteenApp/assets/115190222/a1d2b7e4-cec0-4755-a7f2-f9ded3b0b33d" alt="Order Management Screen" width="150">
+<img src="https://github.com/rockyhappy/CanteenApp/assets/115190222/0b30959d-71b8-4fed-a341-5b43ced56ae7" alt="Refund Button Screen" width="150">
+<img src="https://github.com/rockyhappy/CanteenApp/assets/115190222/2f2fd514-4236-4540-acc8-41730b74b5c3" alt="Dynamic Menu Management Screen" width="150">
+<img src="https://github.com/rockyhappy/CanteenApp/assets/115190222/00c3c7e2-d862-4f43-8636-5e8d642f85ed" alt="Order Management Screen" width="150">
+<img src="https://github.com/rockyhappy/CanteenApp/assets/115190222/006e8f6d-b7e1-46a7-97ea-5509057dbe10" alt="Refund Button Screen" width="150">
+<img src="https://github.com/rockyhappy/CanteenApp/assets/115190222/e12d2f9a-4bf6-4d74-b8bd-35a294eab5be" alt="Dynamic Menu Management Screen" width="150">
+<img src="https://github.com/rockyhappy/CanteenApp/assets/115190222/725d8cab-d557-43ce-a95a-f4eeebe303d9" alt="Order Management Screen" width="150">
+<img src="https://github.com/rockyhappy/CanteenApp/assets/115190222/ff6e8a2f-4b84-4178-8dfd-0828df0adbc8" alt="Refund Button Screen" width="150">
 
 ## Dependencies
 Brunch Bliss relies on the following key dependencies:
